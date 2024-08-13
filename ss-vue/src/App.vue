@@ -22,7 +22,7 @@ html,body {
   width: 100%;
   height: 100%;
   scroll-behavior: smooth;
-  background-color: white;
+  background-color: rgb(255, 255, 255);
 }
 
 ::-webkit-scrollbar {

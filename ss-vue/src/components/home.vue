@@ -2,12 +2,16 @@
 
   import SiteHeader from './header/header.vue';
   import SiteFooter from './footer/footer.vue';
+  import TopBar from './homeUnit/topBar.vue';
+import MainPanel from './homeUnit/mainPanel.vue';
 
   export default {
     name: 'HomePage',
     components: {
       SiteHeader,
-      SiteFooter
+      SiteFooter,
+      MainPanel,
+      TopBar,
     }
   };
 
@@ -18,6 +22,8 @@
 
   <SiteHeader/> 
   <main>
+    <TopBar/>
+    <MainPanel/>
   </main>
   <SiteFooter/>
   
@@ -28,11 +34,15 @@
 
   main {
     width: 100%;
-    height: 90vh;
     font-family: var(--text-font-family);
     font-optical-sizing: var(--text-font-optical-sizing);
     font-weight: var(--text-font-weight);
     font-style: var(--text-font-style);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 4rem;
   }
 
 </style>
