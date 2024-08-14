@@ -3,14 +3,14 @@
   import SiteHeader from './header/header.vue';
   import SiteFooter from './footer/footer.vue';
   import TopBar from './homeUnit/topBar.vue';
-import MainPanel from './homeUnit/mainPanel.vue';
+  import EmailPanel from './homeUnit/emailPanel.vue';
 
   export default {
     name: 'HomePage',
     components: {
       SiteHeader,
       SiteFooter,
-      MainPanel,
+      EmailPanel,
       TopBar,
     }
   };
@@ -23,7 +23,7 @@ import MainPanel from './homeUnit/mainPanel.vue';
   <SiteHeader/> 
   <main>
     <TopBar/>
-    <MainPanel/>
+    <EmailPanel/>
   </main>
   <SiteFooter/>
   

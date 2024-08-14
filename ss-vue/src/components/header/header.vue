@@ -115,8 +115,8 @@ header {
   font-size: clamp(18px, 2vw, 24px);
 }
 .rightPanel img {
-  width: 64px;
-  height: 64px;
+  width: 34px;
+  height: 34px;
   border-radius: 40px;
   border: 1px solid rgba(0, 0, 0, 0.774);
 }

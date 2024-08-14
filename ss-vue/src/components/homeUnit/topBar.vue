@@ -1,46 +1,77 @@
 <template>
-  <div class="topBar">
+  <header class="topBar">
+    <video class="background-video" :src="video.video" muted autoplay loop></video>
     <div class="text">
       <h1>Unleash Your Fandom</h1>
       <h2>Discover Exclusive Anime & Manga Art at Soul Swap</h2>
     </div>
-  </div>
+  </header>
 </template>
 
 <script>
-  export default {
-    name: 'TopBar'
+export default {
+  name: 'TopBar',
+  data() {
+    return {
+      video: {
+        video: 'video/video.mp4'
+      }
+    };
   }
+}
 </script>
 
 <style scoped>
-  .topBar {
-    width: 80%;
-    height: 35vh;
-    background:linear-gradient(to top, #3a7bd5, #3a6073);
-    border-radius: 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 1rem ;
-  }
-  .text {
-    width: 70%;
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
-    gap: 1rem ;
-  } 
-  .text h1 {
-    font-size: clamp(24px, 2vw, 44px);
-    font-weight: lighter;
-    color: white;
-  }
-  .text h2 {
-    color: white;
-    font-weight: lighter;
-  }
+.topBar {
+  width: 80%;
+  height: 35vh;
+  position: relative; 
+  border-radius: 1.5rem;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  animation: opacity 1s ease-in-out forwards;
+}
+
+.background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.text {
+  width: 45%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.text h1 {
+  font-size: clamp(24px, 2vw, 44px);
+  font-weight: lighter;
+  color: white;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 2rem;
+}
+
+.text h2 {
+  color: white;
+  font-weight: lighter;
+  text-align: center;
+}
+
 </style>

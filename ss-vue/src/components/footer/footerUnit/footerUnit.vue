@@ -1,7 +1,7 @@
 <template>
   <FooterContainer>
       <h2>Soul Swap</h2>
-      <h4>Discover the perfect balance between style and sustainability with Soul Swap, your one-stop shop for ethical and eco-friendly fashion.</h4>
+      <h5>Discover the perfect balance between style and sustainability with Soul Swap, your one-stop shop for ethical and eco-friendly fashion.</h5>
     </FooterContainer>
     <FooterContainer>
       <h2>Quick Links</h2>
@@ -18,7 +18,7 @@
       </div>
     </FooterContainer>
     <FooterContainer>
-      <h4>© 2024 Soul Swap. All rights reserved.</h4>
+      <h5>© 2024 Soul Swap. All rights reserved.</h5>
     </FooterContainer>
     <FooterContainer>
       <h3 @click="scrollToTop">Back to top</h3>
