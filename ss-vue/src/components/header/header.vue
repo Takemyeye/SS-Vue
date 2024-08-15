@@ -17,7 +17,6 @@
       <div class="rightPanel">
         <router-link v-if="!user" :to="{ name: 'Register' }" class="user">
           <font-awesome-icon icon="user" />
-          <h2>Sign In</h2>
         </router-link>
         <div v-else class="avatar">
           <img :src="avatarUrl" alt="User Avatar" />
@@ -126,7 +125,7 @@ header {
   justify-content: center;
   flex-direction: row;
   gap: 1rem;
-  font-size: 34px;
+  font-size: 28px;
 }
 h1 {
   font-family: "Gilda Display", serif;

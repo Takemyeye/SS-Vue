@@ -26,7 +26,6 @@ export default {
   align-items: center;
   justify-content: space-evenly;
   flex-direction: row;
-  font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
   animation: opacity 2s ease-in-out forwards;
 }
 

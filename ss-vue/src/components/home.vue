@@ -4,10 +4,12 @@
   import SiteFooter from './footer/footer.vue';
   import TopBar from './homeUnit/topBar.vue';
   import EmailPanel from './homeUnit/emailPanel.vue';
+  import FeaturedPanel from './homeUnit/featured.vue';
 
   export default {
     name: 'HomePage',
     components: {
+      FeaturedPanel,
       SiteHeader,
       SiteFooter,
       EmailPanel,
@@ -23,6 +25,7 @@
   <SiteHeader/> 
   <main>
     <TopBar/>
+    <FeaturedPanel/>
     <EmailPanel/>
   </main>
   <SiteFooter/>

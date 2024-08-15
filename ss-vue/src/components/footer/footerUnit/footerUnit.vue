@@ -46,7 +46,6 @@ export default {
 
 <style scoped>
 
-
 h2 {
   font-size: clamp(20px, 2vw, 24px);
   font-family: "Gilda Display", serif;
