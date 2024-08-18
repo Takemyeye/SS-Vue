@@ -12,7 +12,9 @@
           <h3>About</h3>
         </router-link>
         <h3>Blog</h3>
-        <h3>All Art</h3>
+        <router-link :to="{ name: 'Shop' }">
+          <h3>All Art</h3>
+        </router-link>
       </div>
       <div class="rightPanel">
         <router-link v-if="!user" :to="{ name: 'Register' }" class="user">
