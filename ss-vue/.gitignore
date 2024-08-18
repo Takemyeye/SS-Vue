@@ -1,11 +1,16 @@
+# Ignore environment files
+.env
+.env.local
+.env.*.local
+.env.development.local
+.env.production.local
+.env.test.local
+.env.staging.local
+
+# Other common patterns to ignore
 .DS_Store
 node_modules
 /dist
-
-
-# local env files
-.env.local
-.env.*.local
 
 # Log files
 npm-debug.log*
