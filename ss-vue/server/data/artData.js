@@ -1,30 +1,29 @@
-// artData.js
 const artData = { 
   jujutsuKaisen: [
-    { id: 1, title: 'Yuji Itadori', image: 'JJK1.jpg', price: 18 },
-    { id: 2, title: 'Yuji Itadori', image: 'art/JJK2.jpg', price: 15 },
-    { id: 3, title: 'Yuji Itadori', image: 'art/JJK4.jpg', price: 15 },
-    { id: 4, title: 'Gojo Satoru', image: 'art/JJK3', price: 15 },
-    { id: 5, title: 'Gojo Satoru', image: 'art/JJK5', price: 10 },
-    { id: 6, title: 'Ryomen Sukuna', image: 'art/JJK7', price: 12 },
-    { id: 7, title: 'Ryomen Sukuna', image: 'art/JJK11', price: 18 },
-    { id: 8, title: 'Choso', image: 'art/JJK12', price: 18 },
-    { id: 9, title: 'Todo Yaoi', image: 'art/JJK8', price: 18 },
-    { id: 10, title: 'Okkotsu Yuta', image: 'art/JJK9', price: 15 },
-    { id: 11, title: 'Yuji Itadori', image: 'art/JJK10', price: 10 },
-    { id: 12, title: 'Okkotsu Yuta ', image: 'art/JJK13', price: 10 },
-    { id: 13, title: 'Gojo Satoru', image: 'art/JJK14', price: 18 },
+    { id: 1, title: 'Yuji Itadori', image: 'JJK1.jpg', price: 18, subtitle: 'Yuji Itadori from Jujutsu Kaisen' },
+    { id: 2, title: 'Yuji Itadori', image: 'JJK2.jpg', price: 15, subtitle: 'Yuji Itadori from Jujutsu Kaisen' },
+    { id: 3, title: 'Yuji Itadori', image: 'JJK4.jpg', price: 15, subtitle: 'Yuji Itadori from Jujutsu Kaisen' },
+    { id: 4, title: 'Gojo Satoru', image: 'JJK3.jpg', price: 15, subtitle: 'Gojo Satoru from Jujutsu Kaisen' },
+    { id: 5, title: 'Gojo Satoru', image: 'JJK5.jpg', price: 10, subtitle: 'Gojo Satoru from Jujutsu Kaisen' },
+    { id: 6, title: 'Ryomen Sukuna', image: 'JJK7.jpg', price: 12, subtitle: 'Ryomen Sukuna from Jujutsu Kaisen' },
+    { id: 7, title: 'Ryomen Sukuna', image: 'JJK11.jpg', price: 18, subtitle: 'Ryomen Sukuna from Jujutsu Kaisen' },
+    { id: 8, title: 'Choso', image: 'JJK12.jpg', price: 18, subtitle: 'Choso from Jujutsu Kaisen' },
+    { id: 9, title: 'Todo Yaoi', image: 'JJK8.jpg', price: 18, subtitle: 'Todo Yaoi from Jujutsu Kaisen' },
+    { id: 10, title: 'Okkotsu Yuta', image: 'JJK9.jpg', price: 15, subtitle: 'Okkotsu Yuta from Jujutsu Kaisen' },
+    { id: 11, title: 'Yuji Itadori', image: 'JJK10.jpg', price: 10, subtitle: 'Yuji Itadori from Jujutsu Kaisen' },
+    { id: 12, title: 'Okkotsu Yuta', image: 'JJK13.jpg', price: 10, subtitle: 'Okkotsu Yuta from Jujutsu Kaisen' },
+    { id: 13, title: 'Gojo Satoru', image: 'JJK14.jpg', price: 18, subtitle: 'Gojo Satoru from Jujutsu Kaisen' },
   ],
   callOfNight: [
-    { id: 1, title: 'Ko Yamori', image: 'art/CON1', price: 10 },
-    { id: 1, title: 'Ko Yamori', image: 'art/CON2', price: 15 },
-    { id: 1, title: 'Ko Yamori', image: 'art/CON3', price: 18 },
+    { id: 1, title: 'Ko Yamori', image: 'CON1.jpg', price: 10, subtitle: 'Ko Yamori from Call of Night' },
+    { id: 2, title: 'Ko Yamori', image: 'CON2.jpg', price: 15, subtitle: 'Ko Yamori from Call of Night' },
+    { id: 3, title: 'Ko Yamori', image: 'CON3.jpg', price: 18, subtitle: 'Ko Yamori from Call of Night' },
   ],
   mha: [
-    { id: 1, title: 'Deku', image: 'art/MHA1', price: 10 },
+    { id: 1, title: 'Deku', image: 'MHA1.jpg', price: 10, subtitle: 'Deku from My Hero Academia' },
   ],
   sd: [
-    { id: 1, title: 'Старичок', image: 'art/SD1', price: 10 },
+    { id: 1, title: 'Старичок', image: 'SD1.jpg', price: 10, subtitle: 'Старичок from Sacamoto Day' },
   ],
   all: []
 };
@@ -34,6 +33,7 @@ artData.all = [
   ...artData.jujutsuKaisen,
   ...artData.callOfNight,
   ...artData.mha,
+  ...artData.sd,
 ];
 
 module.exports = artData;

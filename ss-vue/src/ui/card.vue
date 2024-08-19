@@ -6,7 +6,10 @@
         <h4>{{ title }}</h4>
         <h5>{{ subtitle }}</h5>
       </div>
-      <UiButton buttonText="Shop Now"/>
+      <UiButton 
+      :showText="showT"
+      :buttonText="btn" 
+      :showIcon="showI" />
     </div>
   </div>
 </template>
@@ -35,6 +38,18 @@ export default {
     subtitle: {
       type: String,
       required: true
+    },
+    btn: {
+      type: String,
+      required: true
+    },
+    showT: {
+      type: Boolean,
+      default: true
+    },
+    showI: {
+      type: Boolean,
+      default: false
     }
   }
 }
@@ -43,6 +58,7 @@ export default {
 <style scoped>
 .card {
   width: 420px;
+  height: 370px;
   font-optical-sizing: var(--text-font-optical-sizing);
   font-family: var(--text-font-family);
   font-weight: var(--text-font-weight);
@@ -57,7 +73,8 @@ export default {
   gap: 1rem;
 }
 img {
-  width: 100%;
+  width: 420px;
+  height: 320px;
   border-radius: 6px;
   object-fit: contain;
 }
@@ -68,8 +85,8 @@ img {
   justify-content: space-between;
   flex-direction: row;
 }
-  h4 {
-    font-weight: bold;
-    color: var(--color-black);
-  } 
+h4 {
+  font-weight: bold;
+  color: var(--color-black);
+}
 </style>

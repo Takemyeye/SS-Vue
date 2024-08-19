@@ -4,19 +4,25 @@
       src="art/MHA1.JPG" 
       alt="Pencil Drawings" 
       title="Pencil Drawings" 
-      subtitle="Explore the subtle beauty of pencil sketches"/>
+      subtitle="Explore the subtle beauty of pencil sketches"
+      btn="Shop Now"
+      :show="false" />
       
     <UiCard 
       src="art/JJK12.JPG" 
       alt="Ink and Marker Art" 
       title="Ink and Marker Art" 
-      subtitle="Detailed illustrations with ink and markers"/>
+      subtitle="Detailed illustrations with ink and markers"
+      btn="Shop Now"
+      :show="false" />
 
     <UiCard 
       src="art/CON2.JPG" 
       alt="Colored Artwork" 
       title="Colored Artwork" 
-      subtitle="Vibrant and colorful creations"/>
+      subtitle="Vibrant and colorful creations"
+      btn="Shop Now"
+      :show="false" />
   </div>
 </template>
 

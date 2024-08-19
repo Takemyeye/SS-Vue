@@ -1,10 +1,17 @@
 <template>
   <div>
     <SiteHeader />
-     <div class="shop">
-      <div v-for="image in images" :key="image" class="image-item">
-        <img :src="`/art/${image}`" :alt="image" />
-      </div>
+    <div class="shop">
+      <UiCard
+        v-for="image in images"
+        :key="image.id"
+        :src="`/art/${image.image}`"
+        :alt="image.title"
+        :title="image.title"
+        :subtitle="image.subtitle"
+        :btn="`${image.price} €`"
+        :showT="false"
+        :showI="true" />
     </div>
     <SiteFooter />
   </div>
@@ -13,12 +20,14 @@
 <script>
 import SiteHeader from '@/components/header/header.vue';
 import SiteFooter from '@/components/footer/footer.vue';
+import UiCard from '@/ui/card.vue';
 
 export default {
   name: 'ArtShop',
   components: {
     SiteHeader,
     SiteFooter,
+    UiCard
   },
   data() {
     return {
@@ -36,6 +45,7 @@ export default {
           throw new Error('Network response was not ok');
         }
         const data = await response.json();
+        console.log('Fetched images:', data);
         this.images = data;
       } catch (error) {
         console.error('Error fetching images:', error);
@@ -52,18 +62,24 @@ export default {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto;
+  justify-items: center;
   gap: 1rem;
+  animation: opacity 4s ease forwards;
 }
 
 .image-item {
+  width: 420px;
+  height: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: hidden;
+  border-radius: 12px;
 }
 
 .image-item img {
   width: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .image-info {
