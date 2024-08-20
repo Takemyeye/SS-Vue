@@ -48,8 +48,9 @@ h2 {
 }
 
 h3,h5 {
+  font-size: clamp(12px, 2vw, 14px);
   color: var(--color-000);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 h4 {
@@ -88,6 +89,21 @@ a {
   }
   100% {
     opacity: 1;
+  }
+}
+
+@keyframes toBottom {
+  0% {
+    transform: translateY(-200px);
+    opacity: 0;
+  }
+  80% {
+    transform: translateY(-200px);
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

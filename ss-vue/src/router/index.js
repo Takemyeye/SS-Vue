@@ -3,7 +3,7 @@ import AuthComponent from '@/components/auth/authComponent.vue';
 import HomePage from '@/components/home.vue';
 import AboutPage from '@/components/about.vue';
 import RegisterPage from '@/private/register.vue';
-import ArtShop from '@/components/store/shop.vue'
+import ArtShop from '@/components/store/shop.vue';
 
 const routes = [
   {
@@ -29,7 +29,7 @@ const routes = [
   {
     path: '/', 
     component: AuthComponent
-  }
+  },
 ];
 
 const router = createRouter({

@@ -1,5 +1,16 @@
-<script>
+<template>
 
+  <SiteHeader/> 
+  <main>
+    <TopBar/>
+    <FeaturedPanel/>
+    <EmailPanel/>
+  </main>
+  <SiteFooter/>
+  
+</template>
+
+<script>
   import SiteHeader from './header/header.vue';
   import SiteFooter from './footer/footer.vue';
   import TopBar from './homeUnit/topBar.vue';
@@ -18,20 +29,6 @@
   };
 
 </script>
-
-
-<template>
-
-  <SiteHeader/> 
-  <main>
-    <TopBar/>
-    <FeaturedPanel/>
-    <EmailPanel/>
-  </main>
-  <SiteFooter/>
-  
-</template>
-
 
 <style>
 

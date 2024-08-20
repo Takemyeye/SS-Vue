@@ -1,88 +1,66 @@
 <template>
   <div>
     <SiteHeader />
-    <div class="shop">
-      <UiCard
-        v-for="image in images"
-        :key="image.id"
-        :src="`/art/${image.image}`"
-        :alt="image.title"
-        :title="image.title"
-        :subtitle="image.subtitle"
-        :btn="`${image.price} €`"
-        :showT="false"
-        :showI="true" />
+    <div class="store">
+      <TopBar/>
+      <CatalogBlock @category-selected="handleCategorySelected"/>
+      <AllArt v-show="activeCategory === 'All'"/>
+      <JjkArt v-show="activeCategory === 'JJK'"/>
+      <FfArt v-show="activeCategory === 'FF'"/>
+      <CallOfNightArt v-show="activeCategory === 'CON'"/>
+      <MhaArt v-show="activeCategory === 'MHA'"/>
+      <SdArt v-show="activeCategory === 'SD'"/>
     </div>
     <SiteFooter />
   </div>
 </template>
 
 <script>
+import CallOfNightArt from './shopUnit/CallOfNightArt.vue';
 import SiteHeader from '@/components/header/header.vue';
 import SiteFooter from '@/components/footer/footer.vue';
-import UiCard from '@/ui/card.vue';
+import TopBar from '@/components/homeUnit/topBar.vue';
+import CatalogBlock from './shopUnit/catalog.vue';
+import FfArt from './shopUnit/fireForce.vue';
+import AllArt from './shopUnit/allArt.vue';
+import JjkArt from './shopUnit/jjkArt.vue';
+import MhaArt from './shopUnit/mhaArt.vue';
+import SdArt from './shopUnit/sdArt.vue';
 
 export default {
   name: 'ArtShop',
   components: {
     SiteHeader,
+    TopBar,
+    CatalogBlock,
+    AllArt,
+    JjkArt,
+    FfArt,
+    CallOfNightArt,
+    MhaArt,
+    SdArt,
     SiteFooter,
-    UiCard
   },
   data() {
     return {
-      images: [],
+      activeCategory: 'All' 
     };
   },
-  created() {
-    this.fetchImages();
-  },
   methods: {
-    async fetchImages() {
-      try {
-        const response = await fetch('/api/images');
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        console.log('Fetched images:', data);
-        this.images = data;
-      } catch (error) {
-        console.error('Error fetching images:', error);
-      }
+    handleCategorySelected(category) {
+      this.activeCategory = category;
     }
   }
 }
 </script>
 
 <style scoped>
-.shop {
-  width: 100%;
-  min-height: 90vh;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: auto;
-  justify-items: center;
-  gap: 1rem;
-  animation: opacity 4s ease forwards;
-}
-
-.image-item {
-  width: 420px;
-  height: 300px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  overflow: hidden;
-  border-radius: 12px;
-}
-
-.image-item img {
-  width: 100%;
-  object-fit: contain;
-}
-
-.image-info {
-  text-align: center;
-}
+  .store {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+  }
 </style>

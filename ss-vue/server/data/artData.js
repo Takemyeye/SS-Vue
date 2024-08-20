@@ -1,5 +1,5 @@
 const artData = { 
-  jujutsuKaisen: [
+  jujutsukaisen: [
     { id: 1, title: 'Yuji Itadori', image: 'JJK1.jpg', price: 18, subtitle: 'Yuji Itadori from Jujutsu Kaisen' },
     { id: 2, title: 'Yuji Itadori', image: 'JJK2.jpg', price: 15, subtitle: 'Yuji Itadori from Jujutsu Kaisen' },
     { id: 3, title: 'Yuji Itadori', image: 'JJK4.jpg', price: 15, subtitle: 'Yuji Itadori from Jujutsu Kaisen' },
@@ -19,19 +19,23 @@ const artData = {
     { id: 2, title: 'Ko Yamori', image: 'CON2.jpg', price: 15, subtitle: 'Ko Yamori from Call of Night' },
     { id: 3, title: 'Ko Yamori', image: 'CON3.jpg', price: 18, subtitle: 'Ko Yamori from Call of Night' },
   ],
+  fireForce: [
+    { id: 1, title: 'Benimaru', image: 'FFB.jpg', price: 18, subtitle: 'Benimaru  from fire Force' },
+  ],
   mha: [
     { id: 1, title: 'Deku', image: 'MHA1.jpg', price: 10, subtitle: 'Deku from My Hero Academia' },
   ],
   sd: [
-    { id: 1, title: 'Старичок', image: 'SD1.jpg', price: 10, subtitle: 'Старичок from Sacamoto Day' },
+    { id: 1, title: 'Takamura', image: 'SD1.jpg', price: 10, subtitle: 'Takamura from Sacamoto Days' },
   ],
   all: []
 };
 
 // Динамическое объединение массивов
 artData.all = [
-  ...artData.jujutsuKaisen,
+  ...artData.jujutsukaisen,
   ...artData.callOfNight,
+  ...artData.fireForce,
   ...artData.mha,
   ...artData.sd,
 ];

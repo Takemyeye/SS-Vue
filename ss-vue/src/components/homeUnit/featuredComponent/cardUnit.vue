@@ -4,7 +4,7 @@
       src="art/MHA1.JPG" 
       alt="Pencil Drawings" 
       title="Pencil Drawings" 
-      subtitle="Explore the subtle beauty of pencil sketches"
+      subtitle="Beauty of pencil sketches"
       btn="Shop Now"
       :show="false" />
       
