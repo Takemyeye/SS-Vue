@@ -25,7 +25,7 @@
           <div v-if="isDropdownOpen" class="dropdown">
             <h5>Profile</h5>
             <h5>Settings</h5>
-            <h5>Logout</h5>
+            <h5 @click="logout">Logout</h5>
           </div>
         </div>
         <h3><font-awesome-icon icon="heart" style="color: #d55858;" /></h3>
@@ -43,7 +43,7 @@ import auth from '@/private/auth';
 export default {
   name: 'SiteHeader',
   setup() {
-    const { user, getUserFromCode } = auth;
+    const { user, getUserFromCode, logout } = auth;
     const isDropdownOpen = ref(false);
 
     const avatarUrl = computed(() => {
@@ -71,6 +71,7 @@ export default {
       avatarUrl,
       isDropdownOpen,
       toggleDropdown,
+      logout,
     };
   },
 };
@@ -164,29 +165,30 @@ h1 {
 .dropdown {
   position: absolute;
   top: 40px;
-  right: 0;
-  padding: 4px 1rem;
+  left: -1.5rem;
+  padding: 4px;
   min-width: 200px;
   background-color: white;
   border: 1px solid #0000004d;
-  border-radius: 12px;
+  border-radius: 6px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   z-index: 1000;
   display: flex;
   align-items: start;
   justify-content: center;
   flex-direction: column;
-  gap: 1rem;
+  gap: 8px;
 }
 .dropdown h5 {
   width: 100%;
   padding: 4px 0;
-  border-radius: 8px;
-  transition: 0.5s ease;
+  border-radius: 2px;
+  transition: 0.1s ease-in-out;
   text-align: center
 }
 .dropdown h5:hover {
-  background-color: #00000060;
+  background-color: black;
+  color: white;
 }
 .dropdown a {
   padding: 10px;
