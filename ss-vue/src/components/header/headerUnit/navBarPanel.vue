@@ -12,7 +12,11 @@
       </div>
     </div>
     <h3><font-awesome-icon icon="heart" style="color: #d55858;" /></h3>
-    <h3><font-awesome-icon icon="cart-shopping" /></h3>
+    <router-link :to="{ name: 'Cart' }">
+      <h3>
+        <font-awesome-icon icon="cart-shopping" />
+      </h3>
+    </router-link>
   </div>
 </template>
 
