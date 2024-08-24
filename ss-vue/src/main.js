@@ -19,6 +19,7 @@ library.add(
   faGoogle,
   faGithub,
   faDiscord,
+  faHouse,
 );
 
 const app = createApp(App);

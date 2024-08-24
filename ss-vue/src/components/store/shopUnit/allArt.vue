@@ -9,7 +9,7 @@
       :subtitle="image.subtitle"
       :btn="`${image.price} €`"
       :showT="false"
-      :showI="true" />
+      :showIcon="true" />
   </div>
 </template>
 

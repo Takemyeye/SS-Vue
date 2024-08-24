@@ -4,9 +4,11 @@ import HomePage from '@/components/home.vue';
 import AboutPage from '@/components/about.vue';
 import RegisterPage from '@/private/register.vue';
 import ArtShop from '@/components/store/shop.vue';
-import CartShoping from '@/components/cartShop/cart.vue'
+import CartShoping from '@/components/cartShop/cart.vue';
+import NotFound from '@/components/404/NotFound.vue';
 
 const routes = [
+
   {
     path: '/',
     name: 'Home',
@@ -31,6 +33,10 @@ const routes = [
     path: '/cart',
     name: 'Cart',
     component: CartShoping,
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    component: NotFound,
   },
   {
     path: '/', 

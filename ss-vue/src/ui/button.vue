@@ -1,5 +1,8 @@
 <template>
   <button>
+    <h3 v-if="showHouse">
+      <font-awesome-icon icon="house" />
+    </h3>
     <h3 v-if="showText">{{ buttonText }}</h3>
     <h3 v-if="showIcon">
       <font-awesome-icon icon="cart-plus" />
@@ -21,6 +24,10 @@ export default {
       default: ''
     },
     showIcon: {
+      type: Boolean,
+      default: false
+    },
+    showHouse: {
       type: Boolean,
       default: false
     },
