@@ -1,13 +1,13 @@
 <template>
      <div class="notFound">
         <div class="text">
-            <h1>
+            <div>
                 <span class="delay delay1">4</span> 
                 <span class="delay delay2">0</span>
                 <span class="delay delay3">4</span> 
                 - Soul Not Found
-            </h1>
-            <h5>Oops! It seems the soul you\'re looking for has slipped into another dimension.</h5>
+            </div>
+            <h5>Oops! It seems the soul you're looking for has slipped into another dimension.</h5>
         </div>
         <router-link :to="{ name: 'Home' }" class="delaybtn delay3">
             <UiButton
@@ -47,7 +47,8 @@ export default {
         align-items: center;
         justify-content: center;
         flex-direction: column;
-        gap: 8px
+        gap: 8px;
+        font-size: clamp(20px, 2vw, 40px);
     }
     .delay {
         animation: fadeInUp 2s ease-in-out forwards;

@@ -37,7 +37,6 @@ export default {
           throw new Error('Network response was not ok');
         }
         const data = await response.json();
-        console.log('Fetched JJK images:', data);
         this.images = data;
       } catch (error) {
         console.error('Error fetching JJK images:', error);
@@ -49,14 +48,6 @@ export default {
 
 <style scoped>
   .shop {
-    width: 100%;
-    min-height: 90vh;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: auto;
-    justify-items: center;
-    padding-bottom: 5rem; 
     animation: opacity 2.5s ease forwards;
-    gap: 1rem;
   }
 </style>

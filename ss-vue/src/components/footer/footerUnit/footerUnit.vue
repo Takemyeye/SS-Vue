@@ -1,7 +1,7 @@
 <template>
   <FooterContainer>
       <h2>Soul Swap</h2>
-      <h5>Discover the perfect balance between style and sustainability with Soul Swap, your one-stop shop for ethical and eco-friendly fashion.</h5>
+      <h5>Discover the perfect balance between style with Soul Swap, your one-stop shop for ethical and eco-friendly fashion.</h5>
     </FooterContainer>
     <FooterContainer>
       <h2>Quick Links</h2>

@@ -1,11 +1,11 @@
 <template>
-  <header class="topBar">
+  <div class="topBar">
     <video class="background-video" :src="video.video" muted autoplay loop></video>
     <div class="text">
       <h1>Unleash Your Fandom</h1>
       <h2>Discover Exclusive Anime & Manga Art at Soul Swap</h2>
     </div>
-  </header>
+  </div>
 </template>
 
 <script>
@@ -73,5 +73,13 @@ export default {
   font-weight: lighter;
   text-align: center;
 }
-
+@media all and (max-width: 768px) {
+  .text {
+    width: 80%;
+  }
+  .topBar {
+    width: 90%;
+    height: 30vh;
+  }
+}
 </style>

@@ -116,4 +116,17 @@ h5 {
 .active ~ .slider-background {
   z-index: -1;
 }
+
+@media all and (max-width: 900px) {
+  .settings {
+    width: 50%;
+    gap: 8px;
+  }
+}
+@media all and (max-width: 768px) {
+  .settings {
+    width: 90%;
+    gap: 8px;
+  }
+}
 </style>

@@ -47,7 +47,7 @@ h2 {
   font-size: clamp(18px, 2vw, 22px);
 }
 
-h3,h5 {
+h5 {
   font-size: clamp(12px, 2vw, 14px);
   color: var(--color-000);
   font-weight: 500;
@@ -61,7 +61,9 @@ h4 {
 
 h3 {
   position: relative;
-  font-size: clamp(16px, 2vw, 18px);
+  font-size: clamp(14px, 2vw, 18px);
+  color: var(--color-000);
+  font-weight: 500;
 }
 a {
   color: inherit;

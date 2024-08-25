@@ -39,5 +39,9 @@ export default {
     text-align: center;
     gap: 8px;
   }
-
+@media all and (max-width: 768px) {
+  .text {
+    width: 80%;
+  }
+}
 </style>

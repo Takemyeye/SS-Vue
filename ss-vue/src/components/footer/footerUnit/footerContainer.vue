@@ -20,4 +20,14 @@ export default {
   gap: 1rem;
 }
 
+@media all and (max-width: 1024px) {
+  .container {
+    max-width: 250px;
+  }
+}
+@media all and (max-width: 768px) {
+  .container {
+    max-width: 150px;
+  }
+}
 </style>

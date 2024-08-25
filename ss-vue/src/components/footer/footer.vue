@@ -21,12 +21,11 @@ footer {
   height: 25vh;
   display: grid;
   justify-items: center;
-  align-items: center;
+  align-items: start;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: auto;
   font-family: var(--text-font-family);
   font-weight: var(--text-font-weight);
   font-style: var(--text-font-style);
-  padding-bottom: 2rem;
 }
 </style>

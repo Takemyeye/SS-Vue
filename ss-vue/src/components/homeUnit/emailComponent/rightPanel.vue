@@ -26,7 +26,7 @@ import UiButton from '@/ui/button.vue';
 <style scoped>
   .rightPanel {
     width: 35%;
-    height: 90%;
+    height: 50%;
     border-radius: 1rem;
     display: flex;
     align-items: center;
@@ -63,4 +63,10 @@ import UiButton from '@/ui/button.vue';
     bottom: -2px; 
     left: 0;
   }
+
+@media all and (max-width: 768px) {
+  .rightPanel {
+    width: 70%;
+  }
+}
 </style>

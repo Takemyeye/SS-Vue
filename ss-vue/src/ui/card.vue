@@ -57,8 +57,8 @@ export default {
 
 <style scoped>
 .card {
-  width: 420px;
-  height: 370px;
+  width: 320px;
+  max-height: 370px;
   font-optical-sizing: var(--text-font-optical-sizing);
   font-family: var(--text-font-family);
   font-weight: var(--text-font-weight);
@@ -73,8 +73,8 @@ export default {
   gap: 1rem;
 }
 img {
-  width: 420px;
-  height: 320px;
+  width: 100%;
+  max-height: 230px;
   border-radius: 6px;
   object-fit: contain;
 }
@@ -88,5 +88,14 @@ img {
 h4 {
   font-weight: bold;
   color: var(--color-black);
+}
+@media all and (max-width: 900px) {
+  .card {
+    width: 240px;
+    max-height: 270px;
+  }
+  img {
+    max-height: 175px;
+  }
 }
 </style>

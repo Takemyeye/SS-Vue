@@ -29,4 +29,10 @@ export default {
   animation: opacity 2s ease-in-out forwards;
 }
 
+@media all and (max-width: 768px) {
+  .emailPanel {
+    flex-direction: column;
+    height: 100vh;
+  }
+}
 </style>

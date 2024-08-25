@@ -1,20 +1,20 @@
 <template>
   <SiteHeader/>
   <CartBlock/>
-  <SiteFooter/>
+  <CartPrice/>
 </template>
 
 <script>
 import SiteHeader from '@/components/header/header.vue'
-import SiteFooter from '@/components/footer/footer.vue'
 import CartBlock from './cartUnit/cartBlock.vue';
+import CartPrice from './cartUnit/cartPrice.vue'
 
   export default {
     name: 'CartShoping',
     components: {
       SiteHeader,
-      SiteFooter,
       CartBlock,
+      CartPrice,
     }
   }
 </script>

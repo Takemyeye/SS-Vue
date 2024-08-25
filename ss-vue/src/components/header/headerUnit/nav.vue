@@ -1,21 +1,43 @@
 <template>
-   <div class="navigation">
-        <router-link :to="{ name: 'Home' }">
-          <h3>Home</h3>
-        </router-link>
-        <router-link :to="{ name: 'About' }">
-          <h3>About</h3>
-        </router-link>
-        <h3>Blog</h3>
-        <router-link :to="{ name: 'Shop' }">
-          <h3>All Art</h3>
-        </router-link>
-      </div>
+   <div class="navigation" v-if="isDesktop">
+      <router-link :to="{ name: 'Home' }">
+        <h3>Home</h3>
+      </router-link>
+      <router-link :to="{ name: 'About' }">
+        <h3>About</h3>
+      </router-link>
+      <h3>Blog</h3>
+      <router-link :to="{ name: 'Shop' }">
+        <h3>All Art</h3>
+      </router-link>
+    </div>
 </template>
 
 <script>
   export default {
-    name: 'NavBar'
+    name: 'NavBar',
+
+  data() {
+    return {
+      windowWidth: window.innerWidth
+    };
+  },
+  computed: {
+    isDesktop() {
+      return this.windowWidth > 640;
+    }
+  },
+  mounted() {
+    window.addEventListener('resize', this.handleResize);
+  },
+  beforeUnmount() {
+    window.removeEventListener('resize', this.handleResize);
+  },
+  methods: {
+    handleResize() {
+      this.windowWidth = window.innerWidth;
+    }
+  }
   }
 </script>
 
