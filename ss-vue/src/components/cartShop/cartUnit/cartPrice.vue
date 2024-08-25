@@ -28,7 +28,7 @@ export default {
   methods: {
     async fetchCartPrice() {
       try {
-        const response = await fetch('/api/cart');
+        const response = await fetch('http://localhost:3000/api/cart');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -40,7 +40,7 @@ export default {
     },
     async clearCart() {
       try {
-        const response = await fetch('/api/cart/clear', {
+        const response = await fetch('http://localhost:3000/api/cart/clear', {
           method: 'POST',
         });
         if (!response.ok) {

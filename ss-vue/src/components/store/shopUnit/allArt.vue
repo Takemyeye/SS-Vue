@@ -34,7 +34,7 @@ export default {
   methods: {
     async fetchImages() {
       try {
-        const response = await fetch('/api/images');
+        const response = await fetch('http://localhost:3000/api/images');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -46,7 +46,7 @@ export default {
     },
     async addToCart(image) {
       try {
-        const response = await fetch('/api/cart/add', {
+        const response = await fetch('http://localhost:3000/api/cart/add', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

@@ -1,10 +1,18 @@
 const express = require('express');
 const path = require('path');
+const cors = require('cors'); // Импортируем cors
 const imageRoutes = require('./imageRoutes');
 const cartRoutes = require('./cartRoutes');
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+// Настройка CORS
+app.use(cors({
+  origin: '*',
+  methods: ['*'],
+  allowedHeaders: ['*'],
+}));
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../dist')));

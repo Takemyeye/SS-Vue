@@ -32,7 +32,7 @@ export default {
   methods: {
     async fetchImages() {
       try {
-        const response = await fetch('/api/images?category=callOfNight');
+        const response = await fetch('http://localhost:3000/api/images?category=callOfNight');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
