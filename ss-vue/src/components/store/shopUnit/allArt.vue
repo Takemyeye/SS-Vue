@@ -9,7 +9,9 @@
       :subtitle="image.subtitle"
       :btn="`${image.price} €`"
       :showT="false"
-      :showI="true" />
+      :showI="true"
+      @click="addToCart(image)"
+    />
   </div>
 </template>
 
@@ -41,7 +43,31 @@ export default {
       } catch (error) {
         console.error('Error fetching images:', error);
       }
-    }
+    },
+    async addToCart(image) {
+      try {
+        const response = await fetch('/api/cart/add', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            id: image.id,
+            price: image.price,
+            title: image.title,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        console.log('Item added to cart:', data);
+      } catch (error) {
+        console.error('Error adding item to cart:', error);
+      }
+    },
   }
 }
 </script>

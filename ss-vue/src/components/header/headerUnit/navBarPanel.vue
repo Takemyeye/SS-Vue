@@ -11,7 +11,7 @@
         <h5 @click="logout">Logout</h5>
       </div>
     </div>
-    <h3><font-awesome-icon icon="heart" style="color: #d55858;" /></h3>
+    <h3 v-if="user"><font-awesome-icon icon="heart" style="color: #d55858;" /></h3>
     <router-link :to="{ name: 'Cart' }">
       <h3>
         <font-awesome-icon icon="cart-shopping" />

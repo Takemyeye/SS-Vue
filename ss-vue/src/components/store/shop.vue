@@ -2,14 +2,14 @@
   <div>
     <SiteHeader />
     <div class="store">
-      <TopBar/>
-      <CatalogBlock @category-selected="handleCategorySelected"/>
-      <AllArt v-show="activeCategory === 'All'"/>
-      <JjkArt v-show="activeCategory === 'JJK'"/>
-      <FfArt v-show="activeCategory === 'FF'"/>
-      <CallOfNightArt v-show="activeCategory === 'CON'"/>
-      <MhaArt v-show="activeCategory === 'MHA'"/>
-      <SdArt v-show="activeCategory === 'SD'"/>
+      <TopBar />
+      <CatalogBlock @category-selected="handleCategorySelected" />
+      <AllArt v-if="activeCategory === 'All'" />
+      <JjkArt v-if="activeCategory === 'JJK'" />
+      <FfArt v-if="activeCategory === 'FF'" />
+      <CallOfNightArt v-if="activeCategory === 'CON'" />
+      <MhaArt v-if="activeCategory === 'MHA'" />
+      <SdArt v-if="activeCategory === 'SD'" />
     </div>
     <SiteFooter />
   </div>
@@ -43,24 +43,28 @@ export default {
   },
   data() {
     return {
-      activeCategory: 'All' 
+      activeCategory: 'All',
     };
   },
   methods: {
     handleCategorySelected(category) {
       this.activeCategory = category;
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style scoped>
-  .store {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 1rem;
-  }
+.store {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-family: var(--text-font-family);
+  font-optical-sizing: var(--text-font-optical-sizing);
+  font-weight: var(--text-font-weight);
+  font-style: var(--text-font-style);
+  gap: 1rem;
+}
 </style>
