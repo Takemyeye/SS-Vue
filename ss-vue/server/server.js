@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const cors = require('cors'); // Импортируем cors
+const cors = require('cors'); 
 const imageRoutes = require('./imageRoutes');
 const cartRoutes = require('./cartRoutes');
 
