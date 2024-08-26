@@ -62,8 +62,6 @@ export default {
           throw new Error('Network response was not ok');
         }
 
-        const data = await response.json();
-        console.log('Item added to cart:', data);
       } catch (error) {
         console.error('Error adding item to cart:', error);
       }
@@ -82,7 +80,7 @@ export default {
   justify-items: center;
   padding-bottom: 5rem; 
   gap: 1rem;
-  animation: opacity 3s ease forwards;
+  animation: opacity 0.7s ease forwards;
 }
 
 @media all and (max-width: 1810px) {
