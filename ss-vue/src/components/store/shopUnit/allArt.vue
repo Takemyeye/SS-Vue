@@ -10,8 +10,7 @@
       :btn="`${image.price} €`"
       :showT="false"
       :showI="true"
-      @click="addToCart(image)"
-    />
+      @click="addToCart(image)"/>
   </div>
 </template>
 
@@ -61,7 +60,6 @@ export default {
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
-
       } catch (error) {
         console.error('Error adding item to cart:', error);
       }

@@ -20,7 +20,7 @@ router.get('/cart', (req, res) => {
 
 router.post('/cart/clear', (req, res) => {
   cart = []; // Очищаем корзину
-  res.status(200).json({ message: 'Cart cleared' });
+  res.status(200).json( 'Cart cleared' );
 });
 
 module.exports = router;
