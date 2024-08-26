@@ -5,60 +5,67 @@
       :key="item.id"
       :src="`/art/${item.image}`"
       :alt="item.title"
-      :title="`${item.title}`"
+      :title="`${item.price} €`"
       :subtitle="item.subtitle"
+      :btn="'Remove'"
       :showT="false"
       :showI="true"
+      @click="removeFromCart(item.id)"
     />
+    <div class="total">
+      Total: {{ totalPrice }} €
+    </div>
   </div>
 </template>
 
 <script>
-import UiCard from '@/ui/card.vue'
+import UiCard from '@/ui/card.vue';
+import { getCart, clearCart } from '@/services/cartService';
 
 export default {
   name: 'CartBlock',
   components: {
-    UiCard
+    UiCard,
   },
   data() {
     return {
       cartItems: [],
     };
   },
+  computed: {
+    totalPrice() {
+      return this.cartItems.reduce((sum, item) => sum + item.price, 0);
+    },
+  },
   created() {
-    this.fetchCartItems();
+    this.loadCartItems();
   },
   methods: {
-    async fetchCartItems() {
-      try {
-        const response = await fetch('http://localhost:3000/api/cart');
-        if (!response.ok) {
-          throw new Error('Ошибка сети');
-        }
-        const data = await response.json();
-        this.cartItems = data.items;
-      } catch (error) {
-        console.error('Ошибка при получении данных корзины:', error);
-      }
+    loadCartItems() {
+      this.cartItems = getCart();
+    },
+    removeFromCart(id) {
+      this.cartItems = this.cartItems.filter(item => item.id !== id);
+      localStorage.setItem('cart', JSON.stringify(this.cartItems));
+    },
+    clearCart() {
+      clearCart();
+      this.cartItems = [];
     },
   },
 };
 </script>
 
-<style scoped>
+<style>
 .cart {
-  width: 100%;
-  height: 80vh;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: auto;
+  width: 80%;
+  margin: 0 auto;
 }
-.cartItem {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 8px;
+
+.total {
+  text-align: right;
+  margin-top: 20px;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 </style>
