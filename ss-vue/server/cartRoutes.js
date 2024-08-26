@@ -4,10 +4,9 @@ const router = express.Router();
 let cart = []; 
 
 router.post('/cart/add', (req, res) => {
-  const { id, price, title } = req.body;
-  if (id && price && title) {
-    cart.push({ id, price, title });
-    res.status(200).json({ message: 'Item added to cart', cart });
+  const { id, price, title, subtitle, image } = req.body;
+  if (id && price && title && subtitle && image) {
+    cart.push({ id, price, title, subtitle, image });
   } else {
     res.status(400).json({ message: 'Invalid item data' });
   }

@@ -10,17 +10,19 @@
       :btn="`${image.price} €`"
       :showT="false"
       :showI="true"
-      @click="addToCart(image)"/>
+      @click="addToCart(image)"
+    />
   </div>
 </template>
 
 <script>
 import UiCard from '@/ui/card.vue';
+import { addToCart } from '@/services/cartService';
 
 export default {
   name: 'AllArt',
   components: {
-    UiCard
+    UiCard,
   },
   data() {
     return {
@@ -43,32 +45,14 @@ export default {
         console.error('Error fetching images:', error);
       }
     },
-    async addToCart(image) {
-      try {
-        const response = await fetch('http://localhost:3000/api/cart/add', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            id: image.id,
-            price: image.price,
-            title: image.title,
-          }),
-        });
-
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-      } catch (error) {
-        console.error('Error adding item to cart:', error);
-      }
+    addToCart(image) {
+      addToCart(image); 
     },
-  }
-}
+  },
+};
 </script>
 
-<style >
+<style>
 .shop {
   width: 80%;
   min-height: 90vh;
@@ -76,20 +60,19 @@ export default {
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto;
   justify-items: center;
-  padding-bottom: 5rem; 
+  padding-bottom: 5rem;
   gap: 1rem;
   animation: opacity 0.7s ease forwards;
 }
 
 @media all and (max-width: 1810px) {
-  .shop  {
+  .shop {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 @media all and (max-width: 1370px) {
-  .shop  {
+  .shop {
     grid-template-columns: repeat(2, 1fr);
   }
 }
-
 </style>
