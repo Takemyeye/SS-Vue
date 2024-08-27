@@ -5,7 +5,7 @@
       :key="item.id"
       :src="`/art/${item.image}`"
       :alt="item.title"
-      :title="`${item.price} €`"
+      :title="`${item.title} `"
       :subtitle="item.subtitle"
       :btn="'Remove'"
       :showT="true"

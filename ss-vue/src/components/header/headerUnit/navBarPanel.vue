@@ -13,56 +13,70 @@
     </div>
     <h3 v-if="user"><font-awesome-icon icon="heart" style="color: #d55858;" /></h3>
     <router-link :to="{ name: 'Cart' }">
-      <h3>
+      <div class="cartIcon">
         <font-awesome-icon icon="cart-shopping" />
-      </h3>
+        <div class="circle">{{ cartItemsCount }}</div>
+      </div>
     </router-link>
   </div>
 </template>
 
 <script>
 import { ref, computed, onMounted } from 'vue';
+import { useCartStore } from '@/services/cart'; 
 import auth from '@/private/auth';
-  export default {
-    name: 'RightPanelNavBar',
+
+export default {
+  name: 'RightPanelNavBar',
+
+  setup() {
+    const { user, getUserFromCode, logout } = auth;
+    const isDropdownOpen = ref(false);
     
-    setup() {
-      const { user, getUserFromCode, logout } = auth;
-      const isDropdownOpen = ref(false);
+    const cartStore = useCartStore();
+    
+    // Загрузка данных из localStorage при монтировании компонента
+    onMounted(() => {
+      cartStore.loadFromLocalStorage();
 
-      const avatarUrl = computed(() => {
-        if (user.value && user.value.avatar) {
-          return `https://cdn.discordapp.com/avatars/${user.value.id}/${user.value.avatar}.png`;
-        }
-        return '';
+      const queryParameters = new URLSearchParams(window.location.search);
+      const code = queryParameters.get('code');
+
+      if (code && !user.value) {
+        getUserFromCode(code);
+      }
+
+      window.addEventListener('storage', () => {
+        cartStore.loadFromLocalStorage();
       });
+    });
 
-      const toggleDropdown = () => {
-        isDropdownOpen.value = !isDropdownOpen.value;
-      };
+    const cartItemsCount = computed(() => cartStore.itemCount);
+    const avatarUrl = computed(() => {
+      if (user.value && user.value.avatar) {
+        return `https://cdn.discordapp.com/avatars/${user.value.id}/${user.value.avatar}.png`;
+      }
+      return '';
+    });
 
-      onMounted(() => {
-        const queryParameters = new URLSearchParams(window.location.search);
-        const code = queryParameters.get('code');
+    const toggleDropdown = () => {
+      isDropdownOpen.value = !isDropdownOpen.value;
+    };
 
-        if (code && !user.value) {
-          getUserFromCode(code);
-        }
-      });
-
-      return {
-        user,
-        avatarUrl,
-        isDropdownOpen,
-        toggleDropdown,
-        logout,
-      };
-    },
-  }
+    return {
+      user,
+      avatarUrl,
+      isDropdownOpen,
+      toggleDropdown,
+      logout,
+      cartItemsCount,
+    };
+  },
+}
 </script>
 
 <style scoped>
-
+/* Стили остались без изменений */
 .rightPanel {
   display: flex;
   align-items: center;
@@ -145,5 +159,29 @@ h1 {
 
 .dropdown a:hover {
   background-color: #f0f0f0;
+}
+.cartIcon {
+  position: relative;
+  font-size: clamp(18px, 2vw, 22px);
+  color: var(--color-000);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+}
+.circle {
+  border-radius: 25px;
+  background-color: rgba(39, 123, 248, 0.74);
+  color: white;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  width: 16px;
+  height: 16px;
+  right: 0;
+  top: 0;
 }
 </style>

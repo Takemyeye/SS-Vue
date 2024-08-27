@@ -86,6 +86,9 @@ img {
   justify-content: space-between;
   flex-direction: row;
 }
+.cardText {
+  max-width: 200px;
+}
 h4 {
   font-weight: bold;
   color: var(--color-black);
