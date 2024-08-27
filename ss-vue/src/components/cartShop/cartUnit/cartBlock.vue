@@ -8,13 +8,13 @@
       :title="`${item.price} €`"
       :subtitle="item.subtitle"
       :btn="'Remove'"
-      :showT="false"
-      :showI="true"
+      :showT="true"
+      :showI="false"
       @click="removeFromCart(item.id)"
     />
-    <div class="total">
-      Total: {{ totalPrice }} €
-    </div>
+  </div>
+  <div class="total">
+    <h1>Total: {{ totalPrice }} €</h1>
   </div>
 </template>
 
@@ -59,13 +59,16 @@ export default {
 <style>
 .cart {
   width: 80%;
-  margin: 0 auto;
+  min-height: 80vh;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
 }
 
 .total {
-  text-align: right;
-  margin-top: 20px;
-  font-size: 1.5rem;
+  width: 100%;
+  height: 10vh;
+  text-align: center;
   font-weight: bold;
 }
 </style>

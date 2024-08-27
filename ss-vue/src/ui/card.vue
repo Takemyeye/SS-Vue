@@ -9,7 +9,8 @@
       <UiButton 
       :showText="showT"
       :buttonText="btn" 
-      :showIcon="showI" />
+      :showIcon="showI" 
+      />
     </div>
   </div>
 </template>
