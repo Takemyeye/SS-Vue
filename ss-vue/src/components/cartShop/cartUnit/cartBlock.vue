@@ -10,7 +10,7 @@
       :btn="'Remove'"
       :showT="true"
       :showI="false"
-      @click="removeFromCart(item.id)"
+      @click="removeItemFromCart(item.id)"
     />
   </div>
   <div class="total">
@@ -20,37 +20,27 @@
 
 <script>
 import UiCard from '@/ui/card.vue';
-import { getCart, clearCart } from '@/services/cartService';
+import { cartState, removeFromCart, clearCart } from '@/services/activeContext';
 
 export default {
   name: 'CartBlock',
   components: {
     UiCard,
   },
-  data() {
-    return {
-      cartItems: [],
-    };
-  },
   computed: {
-    totalPrice() {
-      return this.cartItems.reduce((sum, item) => sum + item.price, 0);
+    cartItems() {
+      return cartState.cartItems;
     },
-  },
-  created() {
-    this.loadCartItems();
+    totalPrice() {
+      return cartState.cartItems.reduce((sum, item) => sum + item.price, 0);
+    },
   },
   methods: {
-    loadCartItems() {
-      this.cartItems = getCart();
-    },
-    removeFromCart(id) {
-      this.cartItems = this.cartItems.filter(item => item.id !== id);
-      localStorage.setItem('cart', JSON.stringify(this.cartItems));
+    removeItemFromCart(id) {
+      removeFromCart(id);
     },
     clearCart() {
       clearCart();
-      this.cartItems = [];
     },
   },
 };

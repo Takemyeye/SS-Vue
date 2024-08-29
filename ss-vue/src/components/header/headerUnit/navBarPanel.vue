@@ -15,16 +15,16 @@
     <router-link :to="{ name: 'Cart' }">
       <div class="cartIcon">
         <font-awesome-icon icon="cart-shopping" />
-        <div class="circle">{{ cartItemsCount }}</div>
+        <div class="circle" v-if="cartItemsCount >= 1">{{ cartItemsCount }}</div>
       </div>
     </router-link>
   </div>
 </template>
 
 <script>
-import { ref, computed, onMounted } from 'vue';
-import { useCartStore } from '@/services/cart'; 
 import auth from '@/private/auth';
+import { ref, computed, onMounted } from 'vue';
+import { cartState } from '@/services/activeContext';
 
 export default {
   name: 'RightPanelNavBar',
@@ -32,26 +32,17 @@ export default {
   setup() {
     const { user, getUserFromCode, logout } = auth;
     const isDropdownOpen = ref(false);
-    
-    const cartStore = useCartStore();
-    
-    // Загрузка данных из localStorage при монтировании компонента
-    onMounted(() => {
-      cartStore.loadFromLocalStorage();
 
+    onMounted(() => {
       const queryParameters = new URLSearchParams(window.location.search);
       const code = queryParameters.get('code');
 
       if (code && !user.value) {
         getUserFromCode(code);
       }
-
-      window.addEventListener('storage', () => {
-        cartStore.loadFromLocalStorage();
-      });
     });
 
-    const cartItemsCount = computed(() => cartStore.itemCount);
+    const cartItemsCount = computed(() => cartState.totalItems);
     const avatarUrl = computed(() => {
       if (user.value && user.value.avatar) {
         return `https://cdn.discordapp.com/avatars/${user.value.id}/${user.value.avatar}.png`;
@@ -69,14 +60,14 @@ export default {
       isDropdownOpen,
       toggleDropdown,
       logout,
-      cartItemsCount,
+      cartItemsCount, 
     };
   },
-}
+};
 </script>
 
+
 <style scoped>
-/* Стили остались без изменений */
 .rightPanel {
   display: flex;
   align-items: center;

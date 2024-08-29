@@ -17,7 +17,7 @@
 
 <script>
 import UiCard from '@/ui/card.vue';
-import { addToCart } from '@/services/cartService'; 
+import { addToCart } from '@/services/activeContext'; 
 
 
 export default {

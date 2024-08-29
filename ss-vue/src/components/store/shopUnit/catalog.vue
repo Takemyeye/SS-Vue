@@ -67,7 +67,7 @@ export default {
   align-items: center;
   justify-content: center;
   position: relative;
-  animation: toBottom 2s ease forwards;
+  animation: opacity 1s ease forwards;
 }
 
 .settings {

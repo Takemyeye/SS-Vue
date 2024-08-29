@@ -9,24 +9,37 @@
       :subtitle="image.subtitle"
       :btn="`${image.price} €`"
       :showT="false"
-      :showI="true "
-      @click="addToCart(image)"
+      :showI="true"
+      @click="handleCardClick(image)"
     />
+    <UiBaner 
+      v-if="showBanner"
+      :src="selectedImageSrc"
+      :alt="selectedImageAlt"
+      :title="selectedImageTitle"
+      :added="`Added To Cart`"/> 
   </div>
 </template>
 
 <script>
+import { addToCart } from '@/services/activeContext';
 import UiCard from '@/ui/card.vue';
-import { addToCart } from '@/services/cartService';
+import UiBaner from '@/ui/baner.vue';
 
 export default {
   name: 'AllArt',
   components: {
     UiCard,
+    UiBaner,
   },
   data() {
     return {
       images: [],
+      showBanner: false,
+      selectedImageSrc: '',
+      selectedImageAlt: '', 
+      selectedImageTitle: '', 
+      bannerTimeout: null,
     };
   },
   created() {
@@ -44,6 +57,20 @@ export default {
       } catch (error) {
         console.error('Error fetching images:', error);
       }
+    },
+    handleCardClick(image) {
+      this.addToCart(image);
+      this.selectedImageSrc = `/art/${image.image}`; 
+      this.selectedImageAlt = image.title; 
+      this.selectedImageTitle = image.title; 
+
+      this.showBanner = true
+      if (this.bannerTimeout) {
+        clearTimeout(this.bannerTimeout); 
+      }
+      this.bannerTimeout = setTimeout(() => {
+        this.showBanner = false; 
+      }, 5000);
     },
     addToCart(image) {
       addToCart(image); 
