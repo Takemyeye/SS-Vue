@@ -35,8 +35,7 @@ export default {
   flex-direction: row;
   padding-bottom: 2rem;
   gap: 1rem;
-  animation: opacity 1s ease forwards;
-}
+  animation: fadeInUp 0.5s ease-in-out forwards;}
 h3 {
   font-family: "Gilda Display", serif;
     font-weight: 600;

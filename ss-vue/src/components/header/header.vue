@@ -28,12 +28,17 @@ export default {
 header {
   width: 100%;
   height: 10vh;
+  position: sticky;
+  left: 0;
+  top: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: var(--text-font-family);
   font-weight: var(--text-font-weight);
   font-style: var(--text-font-style);
+  background-color: rgb(255, 255, 255);
+    z-index: 10;
 }
 
 .container {

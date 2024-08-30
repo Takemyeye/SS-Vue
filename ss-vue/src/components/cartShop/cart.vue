@@ -1,6 +1,8 @@
 <template>
-  <SiteHeader/>
-  <CartBlock/>
+  <div class="cart">
+    <SiteHeader/>
+    <CartBlock/>
+  </div>
 </template>
 
 <script>
@@ -15,3 +17,17 @@ import CartBlock from './cartUnit/cartBlock.vue';
     }
   }
 </script>
+
+<style scoped>
+  .cart {
+    width: 100%;
+    font-family: var(--text-font-family);
+    font-optical-sizing: var(--text-font-optical-sizing);
+    font-weight: var(--text-font-weight);
+    font-style: var(--text-font-style);
+    display: block;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+</style>

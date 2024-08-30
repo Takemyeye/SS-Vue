@@ -56,7 +56,7 @@ h5 {
 h4 {
   color: var(--color-000);
   font-weight: 500;
-  font-size: clamp(16px, 2vw, 18px);
+  font-size: clamp(12px, 2vw, 16px);
 }
 
 h3 {

@@ -26,6 +26,7 @@ export default {
   width: 80%;
   height: 35vh;
   position: relative; 
+  margin-top: 1.5rem;
   border-radius: 1.5rem;
   overflow: hidden;
   display: flex;

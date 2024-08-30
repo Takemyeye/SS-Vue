@@ -65,12 +65,13 @@ export default {
 <style scoped>
 .catalog {
   width: 100%;
-  height: 10vh;
+  height: 5vh;
+  padding: 8px 0;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  animation: opacity 1s ease forwards;
+  animation: fadeInUp 0.5s ease-in-out forwards;
 }
 
 .settings {
