@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import UiCard from '@/ui/card.vue';
 import { cartState, removeFromCart, clearCart } from '@/services/activeContext';
+import UiCard from '@/ui/card.vue';
 
 export default {
   name: 'CartBlock',

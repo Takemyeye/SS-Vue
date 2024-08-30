@@ -1,10 +1,7 @@
 <template>
   <div class="catalog">
     <div class="settings">
-      <div 
-        class="slider-background" 
-        :style="sliderStyle"
-      ></div>
+      <div class="slider-background" :style="sliderStyle"></div>
       <h3>Catalog:</h3>
       <h5 
         v-for="(category, index) in categories" 
@@ -25,7 +22,7 @@ export default {
   data() {
     return {
       selectedCategory: 'All',
-      categories: ['All', 'JJK', 'FF','MHA', 'CON', 'SD'],
+      categories: ['All', 'JJK', 'FF', 'MHA', 'CON', 'SD'],
       sliderPosition: 0,
       sliderWidth: 0
     };
@@ -43,17 +40,23 @@ export default {
       this.selectedCategory = category;
       this.$emit('category-selected', category);
 
-      const selectedElement = this.$refs[`category-${index}`][0];
-      this.sliderPosition = selectedElement.offsetLeft;
-      this.sliderWidth = selectedElement.offsetWidth;
+      this.$nextTick(() => {
+        const selectedElement = this.$refs[`category-${index}`];
+        if (selectedElement) {
+          this.sliderPosition = selectedElement[0].offsetLeft;
+          this.sliderWidth = selectedElement[0].offsetWidth;
+        }
+      });
     }
   },
   mounted() {
     this.$nextTick(() => {
       const initialIndex = this.categories.indexOf(this.selectedCategory);
-      const initialElement = this.$refs[`category-${initialIndex}`][0];
-      this.sliderPosition = initialElement.offsetLeft;
-      this.sliderWidth = initialElement.offsetWidth;
+      const initialElement = this.$refs[`category-${initialIndex}`];
+      if (initialElement) {
+        this.sliderPosition = initialElement[0].offsetLeft;
+        this.sliderWidth = initialElement[0].offsetWidth;
+      }
     });
   }
 };
@@ -113,10 +116,6 @@ h5 {
   color: white;
 }
 
-.active ~ .slider-background {
-  z-index: -1;
-}
-
 @media all and (max-width: 900px) {
   .settings {
     width: 50%;
@@ -125,7 +124,13 @@ h5 {
 }
 @media all and (max-width: 768px) {
   .settings {
-    width: 90%;
+    width: 60%;
+    gap: 8px;
+  }
+}
+@media all and (max-width: 500px) {
+  .settings {
+    width: 100%;
     gap: 8px;
   }
 }

@@ -1,40 +1,47 @@
 <template>
-  <div class="shop">
-    <UiCard
-      v-for="image in images"
-      :key="image.id"
-      :src="`/art/${image.image}`"
-      :alt="image.title"
-      :title="`${image.price} €`"
-      :subtitle="image.subtitle"
-      :btn="`${image.price} €`"
-      :showT="false"
-      :showI="true"
-      @click="handleCardClick(image)"
-    />
-    <UiBaner 
-      v-if="showBanner"
-      :src="selectedImageSrc"
-      :alt="selectedImageAlt"
-      :title="selectedImageTitle"
-      :added="`Added To Cart`"/> 
+  <div>
+    <SearchBar @search="filterImages" />
+    <div class="shop">
+      <UiCard
+        v-for="image in filteredImages"
+        :key="image.id"
+        :src="`/art/${image.image}`"
+        :alt="image.title"
+        :title="`${image.price} €`"
+        :subtitle="image.subtitle"
+        :btn="`${image.price} €`"
+        :showT="false"
+        :showI="true"
+        @click="handleCardClick(image)"
+      />
+      <UiBaner 
+        v-if="showBanner"
+        :src="selectedImageSrc"
+        :alt="selectedImageAlt"
+        :title="selectedImageTitle"
+        :added="`Added To Cart`"
+      /> 
+    </div>
   </div>
 </template>
 
 <script>
 import { addToCart } from '@/services/activeContext';
-import UiCard from '@/ui/card.vue';
+import SearchBar from './searchBar.vue';
 import UiBaner from '@/ui/baner.vue';
+import UiCard from '@/ui/card.vue';
 
 export default {
   name: 'AllArt',
   components: {
     UiCard,
     UiBaner,
+    SearchBar
   },
   data() {
     return {
       images: [],
+      filteredImages: [],
       showBanner: false,
       selectedImageSrc: '',
       selectedImageAlt: '', 
@@ -54,17 +61,28 @@ export default {
         }
         const data = await response.json();
         this.images = data;
+        this.filteredImages = data; 
       } catch (error) {
         console.error('Error fetching images:', error);
       }
     },
+    filterImages(query) {
+      this.filteredImages = this.images.filter(image => {
+        const title = image.title ? image.title.toLowerCase() : ''; 
+        const titleAnime = image.titleAnime ? image.titleAnime.toLowerCase() : ''; 
+        return title.includes(query.toLowerCase()) || titleAnime.includes(query.toLowerCase());
+      });
+    },
     handleCardClick(image) {
-      this.addToCart(image);
+      addToCart(image); 
+      this.showBannerForImage(image);
+    },
+    showBannerForImage(image) {
       this.selectedImageSrc = `/art/${image.image}`; 
       this.selectedImageAlt = image.title; 
       this.selectedImageTitle = image.title; 
 
-      this.showBanner = true
+      this.showBanner = true;
       if (this.bannerTimeout) {
         clearTimeout(this.bannerTimeout); 
       }
@@ -72,14 +90,11 @@ export default {
         this.showBanner = false; 
       }, 5000);
     },
-    addToCart(image) {
-      addToCart(image); 
-    },
   },
 };
 </script>
 
-<style>
+<style >
 .shop {
   width: 80%;
   min-height: 90vh;
@@ -88,7 +103,7 @@ export default {
   grid-template-rows: auto;
   justify-items: center;
   padding-bottom: 5rem;
-  gap: 1rem;
+  gap: 1rem; 
   animation: opacity 0.7s ease forwards;
 }
 
@@ -102,4 +117,11 @@ export default {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+@media all and (max-width: 600px) {
+  .shop {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
 </style>
+

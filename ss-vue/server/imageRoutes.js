@@ -14,7 +14,8 @@ const category = req.query.category;
         title: item.title,
         image: item.image,
         price: item.price,
-        subtitle: item.subtitle
+        subtitle: item.subtitle,
+        titleAnime: item.titleAnime
       }));
     } else {
       images = artData.all.map(item => ({
@@ -22,7 +23,8 @@ const category = req.query.category;
         title: item.title,
         image: item.image,
         price: item.price,
-        subtitle: item.subtitle
+        subtitle: item.subtitle,
+        titleAnime: item.titleAnime
       }));
     }
     

@@ -37,18 +37,18 @@ html,body {
 }
 
 h1 {
-  font-size: clamp(20px, 2vw, 40px);
+  font-size: clamp(18px, 2vw, 40px);
   color: var(--color-001);
   font-weight: 500;
 }
 
 h2 {
   color: var(--color-001);
-  font-size: clamp(18px, 2vw, 22px);
+  font-size: clamp(16px, 2vw, 22px);
 }
 
 h5 {
-  font-size: clamp(12px, 2vw, 14px);
+  font-size: clamp(10px, 2vw, 14px);
   color: var(--color-000);
   font-weight: 500;
 }
@@ -61,7 +61,7 @@ h4 {
 
 h3 {
   position: relative;
-  font-size: clamp(14px, 2vw, 18px);
+  font-size: clamp(12px, 2vw, 18px);
   color: var(--color-000);
   font-weight: 500;
 }
