@@ -1,16 +1,23 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import AuthComponent from '@/components/auth/authComponent.vue';
-import HomePage from '@/components/home.vue';
-import AboutPage from '@/components/about.vue';
-import RegisterPage from '@/private/register.vue';
-import ArtShop from '@/components/store/shop.vue';
 import CartShoping from '@/components/cartShop/cart.vue';
 import NotFound from '@/components/404/NotFound.vue';
+import AdminPanel from '@/admin/admin.vue';
+import RegisterPage from '@/private/register.vue';
+import ArtShop from '@/components/store/shop.vue';
+import AboutPage from '@/components/about.vue';
+import HomePage from '@/components/home.vue';
 
-// Функция для проверки аутентификации
+const ADMIN_ID = process.env.VUE_APP_ADMIN_ID;
+
 const isAuthenticated = () => {
-  // Проверяем, есть ли данные пользователя в localStorage
-  return !!localStorage.getItem('user'); // Вернет true, если данные пользователя есть, и false, если их нет
+  return !!localStorage.getItem('user'); 
+};
+
+const isAdmin = () => {
+  const user = JSON.parse(localStorage.getItem('user'));
+
+  return user && user.id === ADMIN_ID;
 };
 
 const routes = [
@@ -26,6 +33,12 @@ const routes = [
   },
   { path: '/:pathMatch(.*)*', component: NotFound },
   { path: '/', component: AuthComponent },
+  { 
+    path: '/admin', 
+    name: 'Admin', 
+    component: AdminPanel,
+    meta: { requiresAdmin: true }
+  }
 ];
 
 const router = createRouter({
@@ -34,9 +47,14 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
+
   if (to.meta.requiresAuth && !isAuthenticated()) {
     next({ path: '/register' }); 
-  } else {
+  } 
+  else if (to.meta.requiresAdmin && !isAdmin()) {
+    next({ path: '/' });
+  } 
+  else {
     next();
   }
 });
