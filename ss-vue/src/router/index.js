@@ -7,46 +7,38 @@ import ArtShop from '@/components/store/shop.vue';
 import CartShoping from '@/components/cartShop/cart.vue';
 import NotFound from '@/components/404/NotFound.vue';
 
-const routes = [
+// Функция для проверки аутентификации
+const isAuthenticated = () => {
+  // Проверяем, есть ли данные пользователя в localStorage
+  return !!localStorage.getItem('user'); // Вернет true, если данные пользователя есть, и false, если их нет
+};
 
-  {
-    path: '/',
-    name: 'Home',
-    component: HomePage,
-  },
-  {
-    path: '/shop',
-    name: 'Shop',
-    component: ArtShop,
-  },
-  {
-    path: '/about',
-    name: 'About',
-    component: AboutPage,
-  },
-  {
-    path: '/register',
-    name: 'Register',
-    component: RegisterPage,
-  },
+const routes = [
+  { path: '/', name: 'Home', component: HomePage },
+  { path: '/shop', name: 'Shop', component: ArtShop },
+  { path: '/about', name: 'About', component: AboutPage },
+  { path: '/register', name: 'Register', component: RegisterPage },
   {
     path: '/cart',
     name: 'Cart',
     component: CartShoping,
+    meta: { requiresAuth: true }, 
   },
-  {
-    path: '/:pathMatch(.*)*',
-    component: NotFound,
-  },
-  {
-    path: '/', 
-    component: AuthComponent
-  },
+  { path: '/:pathMatch(.*)*', component: NotFound },
+  { path: '/', component: AuthComponent },
 ];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth && !isAuthenticated()) {
+    next({ path: '/register' }); 
+  } else {
+    next();
+  }
 });
 
 export default router;
