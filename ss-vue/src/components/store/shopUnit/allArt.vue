@@ -96,7 +96,7 @@ export default {
 
 <style >
 .shop {
-  width: 80%;
+  width: 100%;
   min-height: 90vh;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
