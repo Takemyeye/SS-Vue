@@ -11,6 +11,8 @@
         <UiBlock title="Total Revenue" number="0"/>
       </div>
       <div class="data">
+        <h2>User</h2>
+        <UserCard userName="userName" userEmail="userEmail" />
 
       </div>
     </div>
@@ -36,17 +38,21 @@ export default {
 
   .admin {
     width: 100%;
-    min-height: 90vh;
+    min-height: calc(90vh - 1px);
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-direction: row;
+    font-family: var(--text-font-family);
+    font-optical-sizing: var(--text-font-optical-sizing);
+    font-weight: var(--text-font-weight);
+    font-style: var(--text-font-style);
   }
 
   .left-panel {
     width: 15%;
     min-width: 200px;
-    min-height: 90vh;
+    min-height: calc(90vh - 1px);
     display: flex;
     align-items: center;
     justify-content: start;
@@ -56,7 +62,7 @@ export default {
 
   .admin-panel {
     width: 75%;
-    min-height: 90vh;
+    min-height: calc(90vh - 1px);
     display: flex;
     align-items: center;
     justify-content: start;
@@ -66,11 +72,11 @@ export default {
 
   .container {
     width: 90%;
-    height: 160px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: auto;
-    justify-items: center;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
     position: relative;
     top: 2rem;
   }
@@ -85,6 +91,7 @@ export default {
     gap: 1rem;
     border: 1px solid rgba(0, 0, 0, 0.315);
     border-radius: 8px;
+    padding: 1rem 0;
   }
-  
+
 </style>

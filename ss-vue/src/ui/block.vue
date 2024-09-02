@@ -1,7 +1,7 @@
 <template>
   <div class="block">
-    <h1>{{ title }}</h1>
-    <h4>{{ number }}</h4>
+    <h2>{{ title }}</h2>
+    <h2>{{ number }}</h2>
   </div>
 </template>
 
@@ -33,7 +33,7 @@
     border: 1px solid rgba(0, 0, 0, 0.315);
     border-radius: 8px;
   }
-  h1, h4 {
+  h1, h2 {
     width: 100%;
   }
 </style>

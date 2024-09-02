@@ -2,7 +2,7 @@
   <div class="user-card">
     <img :src="userAvatar" alt="" />
     <h5>{{ userName }}</h5>
-    <h5> {{ userMail }}</h5>
+    <h5> {{ userEmail }}</h5>
   </div>
 </template>
 
@@ -18,7 +18,7 @@ export default {
       type: String, 
       default: '',
     },
-    userMail: {
+    userEmail: {
       type: String,
       default: '',
     }
@@ -28,15 +28,16 @@ export default {
 
 <style scoped>
   .user-card {
-    width: 90%;
+    width: 80%;
     height: 50px;
     position: relative;
     border-radius: 8px;
     border: 1px solid rgba(0, 0, 0, 0.315);
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-direction: row;
+    padding: 0 8px;
     top: 1rem;
   }
   img {
