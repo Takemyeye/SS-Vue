@@ -3,6 +3,7 @@ const path = require('path');
 const cors = require('cors'); 
 const imageRoutes = require('./imageRoutes');
 const cartRoutes = require('./cartRoutes');
+const userRoutes = require('./userRoutes'); 
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -19,6 +20,7 @@ app.use('/art', express.static(path.join(__dirname, '../dist/art')));
 
 app.use('/api', imageRoutes);
 app.use('/api', cartRoutes);
+app.use('/api', userRoutes); 
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/index.html'));
@@ -27,6 +29,7 @@ app.get('*', (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
+;
 
 /*
 ctypto

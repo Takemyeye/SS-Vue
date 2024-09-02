@@ -26,3 +26,7 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+# Components
+userRoutes.js
+users.json
