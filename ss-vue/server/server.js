@@ -29,18 +29,3 @@ app.get('*', (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
-;
-
-/*
-ctypto
-
-Токен для crypto
-
-const logins = {
-  'token': {
-
-  }
-}
-
-logis[k] 
-*/

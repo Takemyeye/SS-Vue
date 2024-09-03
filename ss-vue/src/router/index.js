@@ -8,16 +8,16 @@ import ArtShop from '@/components/store/shop.vue';
 import AboutPage from '@/components/about.vue';
 import HomePage from '@/components/home.vue';
 
-const ADMIN_ID = process.env.VUE_APP_ADMIN_ID;
+const ADMIN_TOKEN = process.env.VUE_APP_ADMIN_TOKEN;
 
 const isAuthenticated = () => {
   return !!localStorage.getItem('user'); 
 };
 
 const isAdmin = () => {
-  const user = JSON.parse(localStorage.getItem('user'));
+  const token = localStorage.getItem('token');
 
-  return user && user.id === ADMIN_ID;
+  return token === ADMIN_TOKEN;
 };
 
 const routes = [
