@@ -4,12 +4,12 @@
     <div class="store">
       <TopBar />
       <CatalogBlock @category-selected="handleCategorySelected" />
-      <AllArt v-show="activeCategory === 'All'"/>
-      <JjkArt v-show="activeCategory === 'JJK'"/>
-      <FfArt v-show="activeCategory === 'FF'"/>
-      <CallOfNightArt v-show="activeCategory === 'CON'"/>
-      <MhaArt v-show="activeCategory === 'MHA'"/>
-      <SdArt v-show="activeCategory === 'SD'"/>
+      <AllArt v-if="activeCategory === 'All'"/>
+      <JjkArt v-if="activeCategory === 'JJK'"/>
+      <FfArt v-if="activeCategory === 'FF'"/>
+      <CallOfNightArt v-if="activeCategory === 'CON'"/>
+      <MhaArt v-if="activeCategory === 'MHA'"/>
+      <SdArt v-if="activeCategory === 'SD'"/>
     </div>
     <SiteFooter />
   </div>
