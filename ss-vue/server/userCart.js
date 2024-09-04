@@ -26,22 +26,25 @@ const writeOrdersToFile = (orders) => {
 };
 
 router.post('/userCart', (req, res) => {
-  const { token, cartItems, totalPrice, country } = req.body; 
-  
+  const { token, cartItems, totalPrice, country } = req.body;
+
   if (!token) {
     return res.status(400).json({ message: 'Token is required' });
   }
 
-  if (!token || !country || !cartItems || !totalPrice) {
+  if (!country || !cartItems || !totalPrice) {
     return res.status(400).json({ error: 'Missing required fields' });
   }
-  const newOrder = { cartItems, totalPrice, token, country }; 
-  let orders = readOrdersFromFile();
 
+  const createdAt = new Date().toISOString(); // Добавляем дату и время создания заказа
+
+  const newOrder = { token, country, cartItems, totalPrice, createdAt };
+
+  let orders = readOrdersFromFile();
   orders.push(newOrder);
   writeOrdersToFile(orders);
 
-  res.status(201).json({ message: 'Order processed successfully' });
+  res.status(201).json({ message: 'Order processed successfully', order: newOrder });
 });
 
 module.exports = router;

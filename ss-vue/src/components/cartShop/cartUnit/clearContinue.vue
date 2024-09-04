@@ -97,6 +97,9 @@ export default {
       }
 
       const totalPrice = cartItems.reduce((sum, item) => sum + item.price, 0);
+      
+      // Получение текущей даты и времени
+      const createdAt = new Date().toISOString();
 
       try {
         const response = await fetch('http://localhost:3000/api/userCart', {
@@ -106,9 +109,10 @@ export default {
           },
           body: JSON.stringify({
             token,
-            country: this.country, // Передаем страну в запросе
+            country: this.country,
             cartItems,
             totalPrice,
+            createdAt,
           }),
         });
 
@@ -120,8 +124,8 @@ export default {
         console.log('Order processed successfully:', data);
         
         // Очистка данных
-        this.country = ''; // Сброс значения поля страны
-        this.clearCart(); // Очистить корзину после успешной обработки
+        this.country = ''; 
+        this.clearCart(); 
       } catch (error) {
         console.error('Error processing order:', error);
       }
