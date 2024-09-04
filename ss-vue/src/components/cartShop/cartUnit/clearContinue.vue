@@ -20,7 +20,12 @@
             <font-awesome-icon icon="money-bill" /> 
             Fisical Method
           </div>
-          <input type="text" class="country" placeholder="Select Your Country">
+          <input 
+            type="text" 
+            class="city" 
+            placeholder="Select Your City"
+            v-model="country"
+          />
           <UiButton buttonText="Process" @click="processOrder"/>
         </div>
         <div class="paypal">
@@ -39,7 +44,7 @@ import UiButton from '@/ui/button.vue';
 import { clearCart } from '@/services/activeContext';
 
 const getTokenFromLocalStorage = () => {
-  return localStorage.getItem('token') || null; // Получаем токен напрямую из localStorage
+  return localStorage.getItem('token') || null; 
 };
 
 export default {
@@ -51,10 +56,11 @@ export default {
     return {
       showBlock: false,
       token: null,
+      country: '',
     };
   },
   created() {
-    this.token = getTokenFromLocalStorage(); // Сохраняем токен в переменную
+    this.token = getTokenFromLocalStorage();
 
     if (!this.token) {
       console.error('Токен не найден в localStorage');
@@ -62,24 +68,31 @@ export default {
   },
   methods: {
     clearCart() {
-      clearCart(); // Используем метод clearCart из activeContext
-      localStorage.removeItem('cartItems'); // Удаляем корзину из localStorage
+      clearCart();
+      localStorage.removeItem('cartItems');
     },
     toggleBlock() {
       this.showBlock = !this.showBlock;
     },
     async processOrder() {
-      const token = localStorage.getItem('token'); // Получаем токен из localStorage
+      const token = localStorage.getItem('token');
 
       if (!token) {
         console.error('Token not found in localStorage');
         return;
       }
 
+      if (!this.country.trim()) {
+        console.error('Country field is empty. Cannot process order.');
+        alert('Please select your City before processing the order.');
+        return;
+      }
+
       const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
 
       if (cartItems.length === 0) {
-        alert('Cart is empty, WTF are you doing?');
+        console.error('Корзина пуста, не могу обработать заказ.');
+        alert('Корзина пуста. Пожалуйста, добавьте товары в корзину перед оформлением заказа.');
         return;
       }
 
@@ -89,10 +102,11 @@ export default {
         const response = await fetch('http://localhost:3000/api/userCart', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            token, // Передаем токен в теле запроса
+            token,
+            country: this.country, // Передаем страну в запросе
             cartItems,
             totalPrice,
           }),
@@ -104,7 +118,10 @@ export default {
 
         const data = await response.json();
         console.log('Order processed successfully:', data);
-        this.clearCart(); 
+        
+        // Очистка данных
+        this.country = ''; // Сброс значения поля страны
+        this.clearCart(); // Очистить корзину после успешной обработки
       } catch (error) {
         console.error('Error processing order:', error);
       }
@@ -210,7 +227,7 @@ export default {
   font-size: clamp(14px, 2vw, 18px);
 }
 
-.country {
+.city {
   border: 1px solid rgba(0, 0, 0, 0.164);
   border-radius: 6px;
   font-size: 14px;

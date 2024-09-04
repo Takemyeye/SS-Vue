@@ -26,13 +26,16 @@ const writeOrdersToFile = (orders) => {
 };
 
 router.post('/userCart', (req, res) => {
-  const { token, cartItems, totalPrice } = req.body; 
+  const { token, cartItems, totalPrice, country } = req.body; 
   
   if (!token) {
     return res.status(400).json({ message: 'Token is required' });
   }
 
-  const newOrder = { cartItems, totalPrice, token }; 
+  if (!token || !country || !cartItems || !totalPrice) {
+    return res.status(400).json({ error: 'Missing required fields' });
+  }
+  const newOrder = { cartItems, totalPrice, token, country }; 
   let orders = readOrdersFromFile();
 
   orders.push(newOrder);
