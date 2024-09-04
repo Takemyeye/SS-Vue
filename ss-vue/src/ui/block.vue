@@ -11,11 +11,12 @@
     props: {
       title: {
         type: String,
+        required: true,
         default: ''
       },
       number: {
         type: Number,
-        default: -1
+        required: true
       }
     }
   }

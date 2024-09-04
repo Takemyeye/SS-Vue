@@ -21,7 +21,7 @@
             Fisical Method
           </div>
           <input type="text" class="country" placeholder="Select Your Country">
-          <UiButton buttonText="Process"/>
+          <UiButton buttonText="Process" @click="processOrder"/>
         </div>
         <div class="paypal">
           <div class="title">
@@ -35,29 +35,77 @@
 </template>
 
 <script>
-import { clearCart } from '@/services/activeContext';
-import UiButton from '@/ui/button.vue'
+import UiButton from '@/ui/button.vue';
 
-  export default {
-    name: 'ClearContinue',
-    components: {
-      UiButton,
-    },
-    data() {
-      return {
-        showBlock: false,
-        };
-    },
-    methods: {
-    clearCart() {
-      clearCart();
-      },
-      toggleBlock() {
-      this.showBlock = !this.showBlock; 
-    },
+const getUserFromLocalStorage = () => {
+  const user = localStorage.getItem('user'); 
+  return user ? JSON.parse(user) : null;
+};
+
+export default {
+  name: 'ClearContinue',
+  components: {
+    UiButton,
+  },
+  data() {
+    return {
+      showBlock: false,
+      token: null,
+    };
+  },
+  created() {
+    const user = getUserFromLocalStorage(); 
+
+    if (user && user.token) {
+      this.token = user.token;   // Сохраняем токен в переменную
+    } else {
+      console.error('Данные пользователя не найдены в localStorage');
     }
-  }
+  },
+  methods: {
+    clearCart() {
+      localStorage.removeItem('cartItems');
+    },
+    toggleBlock() {
+      this.showBlock = !this.showBlock;
+    },
+    async processOrder() {
+      const user = getUserFromLocalStorage();
+      
+      if (!user || !user.token) {
+        console.error('User data or token not found in localStorage');
+        return;
+      }
 
+      const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+      const totalPrice = cartItems.reduce((sum, item) => sum + item.price, 0);
+
+      try {
+        const response = await fetch('http://localhost:3000/api/userCart', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${user.token}`, // Передаем токен в заголовке
+          },
+          body: JSON.stringify({
+            cartItems,
+            totalPrice,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to process order');
+        }
+
+        const data = await response.json();
+        console.log('Order processed successfully:', data);
+        localStorage.removeItem('cartItems'); // Очистить корзину после успешной обработки
+      } catch (error) {
+        console.error('Error processing order:', error);
+      }
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -134,6 +182,7 @@ import UiButton from '@/ui/button.vue'
   background-color: white;
   border-radius: 8px;
   border: 1px solid rgba(0, 0, 0, 0.164);
+  animation: fadeInUp 0.5s ease-in-out forwards;
 }
 
 .fisic, .paypal {

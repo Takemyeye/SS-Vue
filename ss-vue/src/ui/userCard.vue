@@ -1,5 +1,5 @@
 <template>
-  <div class="user-card">
+  <div class="user-card" @click="handleClick">
     <img :src="userAvatar" alt="" />
     <h5>{{ userName }}</h5>
     <h5> {{ userEmail }}</h5>
@@ -21,10 +21,20 @@ export default {
     userEmail: {
       type: String,
       default: '',
-    }
+    },
+    userId: {
+      type: String,
+      default: '',
+    },
+  },
+  methods: {
+    handleClick() {
+      this.$emit('click', this.userId);
+    },
   },
 };
 </script>
+
 
 <style scoped>
   .user-card {

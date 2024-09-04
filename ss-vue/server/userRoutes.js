@@ -2,10 +2,11 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const jwt = require('jsonwebtoken');
+const { getUserCount } = require('./userService');
 require('dotenv').config();
 
 const router = express.Router();
-const USERS_FILE = path.join(__dirname, 'users.json');
+const USERS_FILE = path.join(__dirname, 'data/users.json');
 const SECRET_KEY = process.env.SECRET_KEY;
 
 // Функция для чтения пользователей из файла
@@ -30,7 +31,7 @@ const writeUsersToFile = (users) => {
 
 // Генерация JWT токена для пользователя
 const generateToken = (user) => {
-  return jwt.sign({ id: user.id, email: user.email }, SECRET_KEY, { expiresIn: '1h' });
+  return jwt.sign({ id: user.id, email: user.email }, SECRET_KEY);
 };
 
 router.post('/user', (req, res) => {
@@ -75,6 +76,17 @@ router.get('/user', (req, res) => {
   }
 });
 
+// Получение всех пользователей
+router.get('/users', (req, res) => {
+  try {
+    const users = readUsersFromFile();
+    res.json(users);
+  } catch (err) {
+    console.error('Ошибка при получении пользователей:', err);
+    res.status(500).json({ error: 'Ошибка сервера' });
+  }
+});
+
 router.delete('/user', (req, res) => {
   const token = req.headers.authorization?.split(' ')[1];
   if (!token) {
@@ -95,6 +107,16 @@ router.delete('/user', (req, res) => {
     res.json({ message: 'Пользователь удален' });
   } catch (err) {
     return res.status(401).json({ error: 'Неверный или истекший токен' });
+  }
+});
+
+router.get('/user-count', (req, res) => {
+  try {
+    const count = getUserCount();
+    res.json({ count });
+  } catch (err) {
+    console.error('Ошибка при получении количества пользователей:', err);
+    res.status(500).json({ error: 'Ошибка сервера' });
   }
 });
 
