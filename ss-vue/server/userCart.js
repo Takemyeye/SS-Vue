@@ -25,23 +25,14 @@ const writeOrdersToFile = (orders) => {
   }
 };
 
-// Middleware для проверки токена
-const verifyToken = (req, res, next) => {
-  const authHeader = req.headers['authorization'];
-  if (!authHeader) {
-    return res.status(401).json({ message: 'Authorization header missing' });
-  }
-
-  const token = authHeader.split(' ')[1];
+router.post('/userCart', (req, res) => {
+  const { token, cartItems, totalPrice } = req.body; 
+  
   if (!token) {
-    return res.status(401).json({ message: 'Token missing' });
+    return res.status(400).json({ message: 'Token is required' });
   }
 
-  next();
-};
-
-router.post('/userCart', verifyToken, (req, res) => {
-  const newOrder = req.body;
+  const newOrder = { cartItems, totalPrice, token }; 
   let orders = readOrdersFromFile();
 
   orders.push(newOrder);

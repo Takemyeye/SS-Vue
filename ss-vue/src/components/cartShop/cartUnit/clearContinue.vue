@@ -36,10 +36,10 @@
 
 <script>
 import UiButton from '@/ui/button.vue';
+import { clearCart } from '@/services/activeContext';
 
-const getUserFromLocalStorage = () => {
-  const user = localStorage.getItem('user'); 
-  return user ? JSON.parse(user) : null;
+const getTokenFromLocalStorage = () => {
+  return localStorage.getItem('token') || null; // Получаем токен напрямую из localStorage
 };
 
 export default {
@@ -54,40 +54,45 @@ export default {
     };
   },
   created() {
-    const user = getUserFromLocalStorage(); 
+    this.token = getTokenFromLocalStorage(); // Сохраняем токен в переменную
 
-    if (user && user.token) {
-      this.token = user.token;   // Сохраняем токен в переменную
-    } else {
-      console.error('Данные пользователя не найдены в localStorage');
+    if (!this.token) {
+      console.error('Токен не найден в localStorage');
     }
   },
   methods: {
     clearCart() {
-      localStorage.removeItem('cartItems');
+      clearCart(); // Используем метод clearCart из activeContext
+      localStorage.removeItem('cartItems'); // Удаляем корзину из localStorage
     },
     toggleBlock() {
       this.showBlock = !this.showBlock;
     },
     async processOrder() {
-      const user = getUserFromLocalStorage();
-      
-      if (!user || !user.token) {
-        console.error('User data or token not found in localStorage');
+      const token = localStorage.getItem('token'); // Получаем токен из localStorage
+
+      if (!token) {
+        console.error('Token not found in localStorage');
         return;
       }
 
       const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+      if (cartItems.length === 0) {
+        alert('Cart is empty, WTF are you doing?');
+        return;
+      }
+
       const totalPrice = cartItems.reduce((sum, item) => sum + item.price, 0);
 
       try {
         const response = await fetch('http://localhost:3000/api/userCart', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${user.token}`, // Передаем токен в заголовке
+            'Content-Type': 'application/json'
           },
           body: JSON.stringify({
+            token, // Передаем токен в теле запроса
             cartItems,
             totalPrice,
           }),
@@ -99,11 +104,11 @@ export default {
 
         const data = await response.json();
         console.log('Order processed successfully:', data);
-        localStorage.removeItem('cartItems'); // Очистить корзину после успешной обработки
+        this.clearCart(); 
       } catch (error) {
         console.error('Error processing order:', error);
       }
-    },
+    }
   },
 };
 </script>

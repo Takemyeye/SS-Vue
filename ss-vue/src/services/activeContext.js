@@ -38,5 +38,5 @@ export function clearCart() {
   cartState.cartItems = [];
   updateTotalItems();
   console.log("Корзина очищена.");
-  localStorage.removeItem('cartItems');
+  localStorage.removeItem('cartItems'); // Удаляем также из localStorage
 }
