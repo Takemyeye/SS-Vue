@@ -1,16 +1,6 @@
 <template>
   <div class="cartBlock">
-    <div class="choise">
-      <h2>Your Cart</h2>
-      <div class="container">
-        <div class="continue">
-          Continue
-        </div>
-        <div class="remove" @click="clearCart">
-          Remove All
-        </div>
-      </div>
-    </div>
+    <ClearContinue/>
     <div class="cart">
       <UiCard
         v-for="item in cartItems"
@@ -32,12 +22,14 @@
 </template>
 
 <script>
-import { cartState, removeFromCart, clearCart } from '@/services/activeContext';
+import { cartState, removeFromCart } from '@/services/activeContext';
+import ClearContinue from './clearContinue.vue'
 import UiCard from '@/ui/card.vue';
 
 export default {
   name: 'CartBlock',
   components: {
+    ClearContinue,
     UiCard,
   },
   computed: {
@@ -52,9 +44,6 @@ export default {
     removeItemFromCart(id) {
       removeFromCart(id);
     },
-    clearCart() {
-      clearCart();
-    },
   },
 };
 </script>
@@ -68,54 +57,6 @@ export default {
   flex-direction: column;
 }
 
-.choise {
-  width: 100%;
-  height: 10vh;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  flex-direction: row;
-}
-
-.container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  gap: 2rem;
-}
-
-.continue, .remove {
-  min-width: 100px;
-  padding: 6px 0;
-  border-radius: 8px;
-  font-size: clamp(12px, 2vw, 14px);
-  font-weight: 500;
-  cursor: pointer;
-  transition: 0.5s ease;
-  text-align: center;
-}
-
-.continue {
-  background-color: white;
-  border-color: black;
-  color: black;
-}
-
-.continue:hover {
-  color: white;
-  background-color: black;
-}
-
-.remove {
-  color: white;
-  background-color: black;
-}
-
-.remove:hover {
-  background-color: rgb(43, 43, 43);
-}
-
 .cart {
   width: 80%;
   min-height: 70vh;
@@ -126,7 +67,7 @@ export default {
 
 .total {
   width: 100%;
-  height: 10vh;
+  height: calc(10vh - 1px);
   text-align: center;
   font-weight: bold;
 }
