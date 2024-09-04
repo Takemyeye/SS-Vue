@@ -33,14 +33,32 @@ export default {
     const { user, getUserFromCode, logout } = auth;
     const isDropdownOpen = ref(false);
 
-    onMounted(() => {
+    onMounted(async () => {
       const queryParameters = new URLSearchParams(window.location.search);
       const code = queryParameters.get('code');
 
       if (code && !user.value) {
-        getUserFromCode(code);
+        await getUserFromCode(code);
+        await fetchUser();
       }
     });
+
+    const fetchUser = async () => {
+      try {
+        const response = await fetch('/api/user', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          }
+        });
+        if (response.ok) {
+          const data = await response.json();
+          user.value = data; 
+        }
+      } catch (error) {
+        console.error('Error fetching user:', error);
+      }
+    };
 
     const cartItemsCount = computed(() => cartState.totalItems);
     const avatarUrl = computed(() => {
@@ -60,7 +78,7 @@ export default {
       isDropdownOpen,
       toggleDropdown,
       logout,
-      cartItemsCount, 
+      cartItemsCount,
     };
   },
 };

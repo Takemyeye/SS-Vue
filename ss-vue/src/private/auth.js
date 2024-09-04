@@ -13,7 +13,7 @@ const oauthClient = new Client({
 });
 
 const state = reactive({
-  user: JSON.parse(localStorage.getItem('user')) || null,
+  user: null, // Не храним пользователя в localStorage
   token: localStorage.getItem('token') || null,
 });
 
@@ -56,7 +56,7 @@ const fetchUserFromServer = async () => {
     }
 
     const user = await response.json();
-    setUser(user);
+    state.user = user; // Обновляем состояние без сохранения в localStorage
   } catch (error) {
     console.error('Ошибка при получении пользователя с сервера:', error);
   }
@@ -65,8 +65,7 @@ const fetchUserFromServer = async () => {
 // Установка пользователя и сохранение его на сервере
 const setUser = (user) => {
   state.user = user;
-  localStorage.setItem('user', JSON.stringify(user));
-  saveOrUpdateUserOnServer(user);
+  saveOrUpdateUserOnServer(user); // Отправляем данные на сервер
 };
 
 // Очистка данных пользователя на сервере
@@ -85,21 +84,17 @@ const clearUserFromServer = async () => {
   }
 };
 
-// Очистка данных пользователя и токена
 const clearUser = () => {
   state.user = null;
   state.token = null;
-  localStorage.removeItem('user');
-  localStorage.removeItem('token');
+  localStorage.removeItem('token'); 
   clearUserFromServer();
 };
 
-// Выход пользователя
 const logout = () => {
   clearUser();
 };
 
-// Получение пользователя из кода авторизации
 const getUserFromCode = async (code) => {
   try {
     const token = await oauthClient.getAccessToken(code);
@@ -114,7 +109,6 @@ const getUserFromCode = async (code) => {
   }
 };
 
-// Получаем текущего пользователя при загрузке только если токен присутствует
 if (state.token) {
   fetchUserFromServer();
 }

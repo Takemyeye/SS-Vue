@@ -2,16 +2,16 @@ import { createRouter, createWebHistory } from 'vue-router';
 import AuthComponent from '@/components/auth/authComponent.vue';
 import CartShoping from '@/components/cartShop/cart.vue';
 import NotFound from '@/components/404/NotFound.vue';
-import AdminPanel from '@/admin/admin.vue';
 import RegisterPage from '@/private/register.vue';
 import ArtShop from '@/components/store/shop.vue';
 import AboutPage from '@/components/about.vue';
 import HomePage from '@/components/home.vue';
+import AdminPanel from '@/admin/admin.vue';
 
 const ADMIN_TOKEN = process.env.VUE_APP_ADMIN_TOKEN;
 
 const isAuthenticated = () => {
-  return !!localStorage.getItem('user'); 
+  return !!localStorage.getItem('token'); 
 };
 
 const isAdmin = () => {
