@@ -1,22 +1,62 @@
+const express = require('express');
 const passport = require('passport');
-const GitHubStrategy = require('passport-github2').Strategy;
+const jwt = require('jsonwebtoken');
+const path = require('path');
+const fs = require('fs');
+require('dotenv').config();
 
-passport.use(new GitHubStrategy({
-  clientID: process.env.GITHUB_CLIENT_ID,
-  clientSecret: process.env.GITHUB_CLIENT_SECRET,
-  callbackURL: 'http://localhost:3000/api/auth/github/callback'
-},
-function(accessToken, refreshToken, profile, done) {
+const router = express.Router();
+const USERS_FILE = path.join(__dirname, '../data/users.json');
+const SECRET_KEY = process.env.SECRET_KEY;
+
+const readUsersFromFile = () => {
+  try {
+    const data = fs.readFileSync(USERS_FILE, 'utf8');
+    return JSON.parse(data || '[]');
+  } catch (err) {
+    console.error('Ошибка при чтении файла пользователей:', err);
+    return [];
+  }
+};
+
+const writeUsersToFile = (users) => {
+  try {
+    fs.writeFileSync(USERS_FILE, JSON.stringify(users, null, 2));
+  } catch (err) {
+    console.error('Ошибка при записи файла пользователей:', err);
+  }
+};
+
+const generateToken = (user) => {
+  return jwt.sign({ id: user.id, email: user.email }, SECRET_KEY, { expiresIn: '1h' });
+};
+
+router.get('/auth/github', passport.authenticate('github', { scope: ['user:email'] }));
+
+router.get('/auth/github/callback', passport.authenticate('github', { session: false }), (req, res) => {
+  let users = readUsersFromFile();
+  const user = req.user;
   
-  return done(null, profile);
-}));
+  const existingUser = users.find(u => u.id === user.id && u.email === user.email);
 
-passport.serializeUser(function(user, done) {
-  done(null, user);
+  if (!existingUser) {
+
+    const token = generateToken(user);
+
+    const newUser = {
+      id: user.id,
+      username: user.username,
+      avatar: user.avatar,
+      email: user.email,
+      token: token
+    };
+
+    users.push(newUser);
+    writeUsersToFile(users);
+    res.redirect(`http://localhost:8080?token=${token}`);
+  } else {
+    res.redirect(`http://localhost:8080?token=${existingUser.token}`);
+  }
 });
 
-passport.deserializeUser(function(obj, done) {
-  done(null, obj);
-});
-
-module.exports = passport;
+module.exports = router;
