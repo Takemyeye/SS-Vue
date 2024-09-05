@@ -33,21 +33,14 @@ export default {
     const user = ref(null);
     const isDropdownOpen = ref(false);
 
+    // Получаем токен из localStorage
+    const token = localStorage.getItem('token');
+
     const avatarUrl = computed(() => {
       if (user.value && user.value.avatar) {
-        return `${user.value.avatar}`;
+        return user.value.avatar; // Используем прямое значение, если оно есть
       }
       return ''; 
-    });
-
-    onMounted(async () => {
-      const queryParameters = new URLSearchParams(window.location.search);
-      const token = queryParameters.get('token');
-
-      if (token) {
-        localStorage.setItem('token', token);
-        await fetchUser(token);
-      }
     });
 
     const fetchUser = async (token) => {
@@ -71,6 +64,22 @@ export default {
       }
     };
 
+    onMounted(async () => {
+      // Извлекаем токен из URL
+      const queryParameters = new URLSearchParams(window.location.search);
+      const urlToken = queryParameters.get('token');
+
+      if (urlToken) {
+        // Сохраняем токен в localStorage
+        localStorage.setItem('token', urlToken);
+        // Используем токен для загрузки данных пользователя
+        await fetchUser(urlToken);
+      } else if (token) {
+        // Если токен уже есть в localStorage, загружаем данные пользователя
+        await fetchUser(token);
+      }
+    });
+
     const cartItemsCount = computed(() => cartState.totalItems);
 
     const toggleDropdown = () => {
@@ -80,6 +89,7 @@ export default {
     const logout = () => {
       auth.clearUser();
       user.value = null;
+      localStorage.removeItem('token');
     };
 
     return {

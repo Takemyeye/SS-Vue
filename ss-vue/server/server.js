@@ -4,9 +4,9 @@ const cors = require('cors');
 const passport = require('passport');
 const googleAuthRoutes = require('./googleAuth'); // Ваш новый файл для Google OAuth
 const imageRoutes = require('./imageRoutes');
+const usersRouter = require('./routes/user')
 const cartRoutes = require('./cartRoutes');
 const userCart = require('./userCart');
-const routeUser = require('./routes/user')
 require('dotenv').config();
 require('./passport-setup'); // Настройка passport для Google OAuth
 
@@ -32,8 +32,8 @@ app.use('/', googleAuthRoutes); // Используйте новый маршр�
 
 // Ваши существующие API маршруты
 app.use('/api', imageRoutes);
+app.use('/api', usersRouter);
 app.use('/api', cartRoutes);
-app.use('/api', routeUser);
 app.use('/api', userCart);
 
 // Обработка всех остальных запросов
