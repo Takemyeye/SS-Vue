@@ -18,7 +18,7 @@
             <h5>LogIn with Google</h5>
           </div>
         </a>
-        <a href="#">
+        <a :href="githubAuthUrl">
           <div class="auth auth-3">
             <font-awesome-icon icon="fa-brands fa-github" />
             <h5>LogIn with GitHub</h5>
@@ -35,6 +35,7 @@ export default {
   data() {
     return {
       googleAuthUrl: `http://localhost:3000/auth/google`,
+      githubAuthUrl: `http://localhost:3000/auth/github`,
     };
   },
 }

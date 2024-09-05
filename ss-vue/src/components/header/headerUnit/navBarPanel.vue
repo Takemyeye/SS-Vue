@@ -55,7 +55,6 @@ export default {
         if (response.ok) {
           const data = await response.json();
           user.value = data;
-          console.log('User Avatar URL:', avatarUrl.value);
         } else {
           console.error('Ошибка получения данных пользователя:', response.statusText);
         }
@@ -65,17 +64,13 @@ export default {
     };
 
     onMounted(async () => {
-      // Извлекаем токен из URL
       const queryParameters = new URLSearchParams(window.location.search);
       const urlToken = queryParameters.get('token');
 
       if (urlToken) {
-        // Сохраняем токен в localStorage
         localStorage.setItem('token', urlToken);
-        // Используем токен для загрузки данных пользователя
         await fetchUser(urlToken);
       } else if (token) {
-        // Если токен уже есть в localStorage, загружаем данные пользователя
         await fetchUser(token);
       }
     });

@@ -6,7 +6,8 @@ import ArtShop from '@/components/store/shop.vue';
 import HomePage from '@/components/home.vue';
 import AdminPanel from '@/admin/admin.vue';
 
-const ADMIN_TOKEN = process.env.VUE_APP_ADMIN_TOKEN;
+const ADMIN_TOKEN_GIT = process.env.VUE_APP_ADMIN_TOKEN_GIT;
+const ADMIN_TOKEN_GOOGLE = process.env.VUE_APP_ADMIN_TOKEN_GOOGLE;
 
 const isAuthenticated = () => {
   return !!localStorage.getItem('token'); 
@@ -14,8 +15,7 @@ const isAuthenticated = () => {
 
 const isAdmin = () => {
   const token = localStorage.getItem('token');
-
-  return token === ADMIN_TOKEN;
+  return token === ADMIN_TOKEN_GIT || token === ADMIN_TOKEN_GOOGLE;
 };
 
 const routes = [
@@ -43,7 +43,6 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-
   if (to.meta.requiresAuth && !isAuthenticated()) {
     next({ path: '/register' }); 
   } 

@@ -1,17 +1,15 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const GitHubStrategy = require('passport-github2').Strategy;
 
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
   callbackURL: '/auth/google/callback',
-  userProfileURL: 'https://www.googleapis.com/oauth2/v3/userinfo' // Обеспечивает получение более полного профиля
+  userProfileURL: 'https://www.googleapis.com/oauth2/v3/userinfo'
 },
 async (accessToken, refreshToken, profile, done) => {
-  // Профиль содержит более полную информацию о пользователе
   const { sub: id, name, email, picture, verified_email, locale } = profile._json;
-
-  // Составляем объект пользователя
   const user = {
     id,
     username: name,
@@ -19,11 +17,41 @@ async (accessToken, refreshToken, profile, done) => {
     avatar: picture,
     verified: verified_email,
     locale,
+    provider: 'google',
     token: accessToken
   };
-
-  // Передаем пользователя в req.user
   done(null, user);
+}));
+
+passport.use(new GitHubStrategy({
+  clientID: process.env.GITHUB_CLIENT_ID,
+  clientSecret: process.env.GITHUB_CLIENT_SECRET,
+  callbackURL: '/auth/github/callback',
+  scope: ['user:email'] 
+},
+async (accessToken, refreshToken, profile, done) => {
+  try {
+    const { id, username, emails, _json } = profile;
+
+    const email = (Array.isArray(emails) && emails.length > 0) ? emails[0].value : null;
+    
+    if (!email) {
+      console.error('Email не найден в профиле GitHub');
+      return done(new Error('Email не найден в профиле GitHub'));
+    }
+
+    const user = {
+      id,
+      username,
+      email,
+      avatar: _json.avatar_url,
+      provider: 'github',
+      token: accessToken
+    };
+    done(null, user);
+  } catch (err) {
+    done(err);
+  }
 }));
 
 passport.serializeUser((user, done) => {

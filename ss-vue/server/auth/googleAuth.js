@@ -34,24 +34,30 @@ const generateToken = (user) => {
   return jwt.sign({ id: user.id, email: user.email }, SECRET_KEY, { expiresIn: '1h' });
 };
 
-// Аутентификация через GitHub
-router.get('/auth/github', passport.authenticate('github', { scope: ['user:email'] }));
+// Аутентификация через Google
+router.get('/auth/google', passport.authenticate('google', {
+  scope: ['profile', 'email']
+}));
 
-router.get('/auth/github/callback', passport.authenticate('github', { session: false }), (req, res) => {
+router.get('/auth/google/callback', passport.authenticate('google', { session: false }), (req, res) => {
   let users = readUsersFromFile();
   const user = req.user;
   
+  // Измененное условие поиска: проверяем оба поля одновременно
   const existingUser = users.find(u => u.id === user.id && u.email === user.email);
 
   if (!existingUser) {
-    // Если пользователя нет в базе, создаем нового и генерируем токен
+    // Создаем токен при первой регистрации пользователя
     const token = generateToken(user);
 
+    // Создаем объект пользователя с дополнительными данными
     const newUser = {
       id: user.id,
       username: user.username,
       avatar: user.avatar,
       email: user.email,
+      verified: user.verified,
+      locale: user.locale,
       token: token
     };
 
@@ -59,8 +65,30 @@ router.get('/auth/github/callback', passport.authenticate('github', { session: f
     writeUsersToFile(users);
     res.redirect(`http://localhost:8080?token=${token}`);
   } else {
-    // Если пользователь уже существует, используем старый токен
-    res.redirect(`http://localhost:8080?token=${existingUser.token}`);
+    // Если пользователь существует, используем его токен без изменений
+    const token = existingUser.token; // Не генерируем новый токен
+    res.redirect(`http://localhost:8080?token=${token}`);
+  }
+});
+
+// Получение текущего пользователя по токену
+router.get('/api/current_user', (req, res) => {
+  const token = req.headers.authorization?.split(' ')[1];
+  if (!token) {
+    return res.status(401).json({ error: 'Токен не предоставлен' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, SECRET_KEY);
+    const users = readUsersFromFile();
+    const user = users.find(u => u.id === decoded.id && u.token === token);
+    if (!user) {
+      return res.status(404).json({ error: 'Пользователь не найден или токен неверный' });
+    }
+
+    res.json(user);
+  } catch (err) {
+    return res.status(401).json({ error: 'Неверный или истекший токен' });
   }
 });
 
