@@ -28,19 +28,15 @@ const writeUsersToFile = (users) => {
 };
 
 const generateToken = (user) => {
-  return jwt.sign({ id: user.id, email: user.email }, SECRET_KEY );
+  return jwt.sign({ id: user.id, email: user.email }, SECRET_KEY);
 };
 
-router.get('/auth/google', passport.authenticate('google', {
-  scope: ['profile', 'email']
-}));
+router.get('/auth/discord', passport.authenticate('discord', { scope: ['identify', 'email'] }));
 
-router.get('/auth/google/callback', passport.authenticate('google', { session: false }), (req, res) => {
+router.get('/auth/discord/callback', passport.authenticate('discord', { session: false }), (req, res) => {
   let users = readUsersFromFile();
   const user = req.user;
-  
-
-  const existingUser = users.find(u => u.id === user.id && u.email === user.email);
+  const existingUser = users.find(u => u.id === user.id && u.provider === user.provider);
 
   if (!existingUser) {
     const token = generateToken(user);
@@ -50,8 +46,7 @@ router.get('/auth/google/callback', passport.authenticate('google', { session: f
       username: user.username,
       avatar: user.avatar,
       email: user.email,
-      verified: user.verified,
-      locale: user.locale,
+      provider: user.provider,
       token: token
     };
 
@@ -59,28 +54,8 @@ router.get('/auth/google/callback', passport.authenticate('google', { session: f
     writeUsersToFile(users);
     res.redirect(`http://localhost:8080?token=${token}`);
   } else {
-    const token = existingUser.token; 
+    const token = generateToken(existingUser);
     res.redirect(`http://localhost:8080?token=${token}`);
-  }
-});
-
-router.get('/api/current_user', (req, res) => {
-  const token = req.headers.authorization?.split(' ')[1];
-  if (!token) {
-    return res.status(401).json({ error: 'Токен не предоставлен' });
-  }
-
-  try {
-    const decoded = jwt.verify(token, SECRET_KEY);
-    const users = readUsersFromFile();
-    const user = users.find(u => u.id === decoded.id && u.token === token);
-    if (!user) {
-      return res.status(404).json({ error: 'Пользователь не найден или токен неверный' });
-    }
-
-    res.json(user);
-  } catch (err) {
-    return res.status(401).json({ error: 'Неверный или истекший токен' });
   }
 });
 

@@ -6,7 +6,7 @@ const fs = require('fs');
 require('dotenv').config();
 
 const router = express.Router();
-const USERS_FILE = path.join(__dirname, 'data/users.json');
+const USERS_FILE = path.join(__dirname, '../data/users.json');
 const SECRET_KEY = process.env.SECRET_KEY;
 
 const readUsersFromFile = () => {
@@ -69,6 +69,34 @@ router.get('/auth/github/callback', passport.authenticate('github', { session: f
   let users = readUsersFromFile();
   const user = req.user;
   const existingUser = users.find(u => u.id === user.id && u.provider === user.provider); 
+
+  if (!existingUser) {
+    const token = generateToken(user);
+
+    const newUser = {
+      id: user.id,
+      username: user.username,
+      avatar: user.avatar,
+      email: user.email,
+      provider: user.provider, 
+      token: token
+    };
+
+    users.push(newUser);
+    writeUsersToFile(users);
+    res.redirect(`http://localhost:8080?token=${token}`);
+  } else {
+    const token = generateToken(existingUser);
+    res.redirect(`http://localhost:8080?token=${token}`);
+  }
+});
+
+router.get('/auth/discord', passport.authenticate('discord'));
+
+router.get('/auth/discord/callback', passport.authenticate('discord', { session: false }), (req, res) => {
+  let users = readUsersFromFile();
+  const user = req.user;
+  const existingUser = users.find(u => u.id === user.id && u.provider === user.provider);
 
   if (!existingUser) {
     const token = generateToken(user);

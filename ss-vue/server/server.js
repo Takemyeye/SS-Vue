@@ -1,3 +1,4 @@
+const discordAuthRoutes = require('./auth/discordAuth');
 const googleAuthRoutes = require('./auth/googleAuth');
 const githubAuthRoutes = require('./auth/githubAuth'); 
 const imageRoutes = require('./imageRoutes');
@@ -29,12 +30,13 @@ app.use(passport.initialize());
 
 app.use('/', googleAuthRoutes);
 app.use('/', githubAuthRoutes); 
+app.use('/', discordAuthRoutes);
 
 app.use('/api', imageRoutes);
 app.use('/api', usersRouter);
+app.use('/api', authRoutes);
 app.use('/api', cartRoutes);
 app.use('/api', userCart);
-app.use('/api', authRoutes);
 
 
 app.get('*', (req, res) => {

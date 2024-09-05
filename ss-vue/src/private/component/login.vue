@@ -6,7 +6,7 @@
         <h5>Sign in to your account using one of the following platforms:</h5>
       </div>
       <div class="platform">
-        <a href="#">
+        <a :href="discordAuthUrl">
           <div class="auth auth-1">
             <font-awesome-icon icon="fa-brands fa-discord" />
             <h5>LogIn with Discord</h5>
@@ -34,6 +34,7 @@ export default {
   name: 'LoginCard',
   data() {
     return {
+      discordAuthUrl: `https://discord.com/oauth2/authorize?client_id=1274555710423695472&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fauth%2Fdiscord%2Fcallback&scope=identify+email`,
       googleAuthUrl: `http://localhost:3000/auth/google`,
       githubAuthUrl: `http://localhost:3000/auth/github`,
     };

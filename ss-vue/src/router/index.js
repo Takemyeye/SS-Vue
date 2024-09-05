@@ -8,14 +8,14 @@ import AdminPanel from '@/admin/admin.vue';
 
 const ADMIN_TOKEN_GIT = process.env.VUE_APP_ADMIN_TOKEN_GIT;
 const ADMIN_TOKEN_GOOGLE = process.env.VUE_APP_ADMIN_TOKEN_GOOGLE;
-
+const ADMIN_TOKEN_DISCORD = process.env.VUE_APP_ADMIN_TOKEN_DISCORD;
 const isAuthenticated = () => {
   return !!localStorage.getItem('token'); 
 };
 
 const isAdmin = () => {
   const token = localStorage.getItem('token');
-  return token === ADMIN_TOKEN_GIT || token === ADMIN_TOKEN_GOOGLE;
+  return token === ADMIN_TOKEN_GIT || token === ADMIN_TOKEN_GOOGLE || token === ADMIN_TOKEN_DISCORD;
 };
 
 const routes = [

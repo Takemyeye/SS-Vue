@@ -1,6 +1,7 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const GitHubStrategy = require('passport-github2').Strategy;
+const DiscordStrategy = require('passport-discord').Strategy;
 
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
@@ -46,6 +47,30 @@ async (accessToken, refreshToken, profile, done) => {
       email,
       avatar: _json.avatar_url,
       provider: 'github',
+      token: accessToken
+    };
+    done(null, user);
+  } catch (err) {
+    done(err);
+  }
+}));
+
+passport.use(new DiscordStrategy({
+  clientID: process.env.DISCORD_CLIENT_ID,
+  clientSecret: process.env.DISCORD_CLIENT_SECRET,
+  callbackURL: '/auth/discord/callback',
+  scope: ['identify', 'email', 'guilds']
+},
+async (accessToken, refreshToken, profile, done) => {
+  try {
+    const { id, username, email, avatar } = profile;
+
+    const user = {
+      id,
+      username,
+      email,
+      avatar: `https://cdn.discordapp.com/avatars/${id}/${avatar}.png`,
+      provider: 'discord',
       token: accessToken
     };
     done(null, user);

@@ -33,12 +33,11 @@ export default {
     const user = ref(null);
     const isDropdownOpen = ref(false);
 
-    // Получаем токен из localStorage
     const token = localStorage.getItem('token');
 
     const avatarUrl = computed(() => {
       if (user.value && user.value.avatar) {
-        return user.value.avatar; // Используем прямое значение, если оно есть
+        return user.value.avatar; 
       }
       return ''; 
     });
