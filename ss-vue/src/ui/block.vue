@@ -1,25 +1,35 @@
 <template>
   <div class="block">
-    <h2>{{ title }}</h2>
+    <UiBadge :styleBadge="styleBadge" :title="title" />
     <h2>{{ number }}</h2>
   </div>
 </template>
 
 <script>
-  export default {
-    name: 'UiBlock',
-    props: {
-      title: {
-        type: String,
-        required: true,
-        default: ''
-      },
-      number: {
-        type: Number,
-        required: true
-      }
+import UiBadge from './badge.vue'
+
+export default {
+  name: 'UiBlock',
+  components: {
+    UiBadge,
+  },
+  props: {
+    title: {
+      type: String,
+      required: true,
+      default: ''
+    },
+    number: {
+      type: Number,
+      required: true
+    },
+    styleBadge: {
+      type: String,
+      required: true,
+      default: 'badge' 
     }
   }
+}
 </script>
 
 <style scoped>
@@ -27,14 +37,11 @@
     width: 80%;
     height: 100%;
     display: flex;
-    align-items: center;
+    align-items: start;
     justify-content: space-between;
     flex-direction: column;
     padding: 8px 12px;
     border: 1px solid rgba(0, 0, 0, 0.315);
     border-radius: 8px;
-  }
-  h1, h2 {
-    width: 100%;
   }
 </style>

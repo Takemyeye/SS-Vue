@@ -6,21 +6,31 @@
         v-for="user in users"
         :key="user.id"
         :userName="user.username"
-        :userAvatar="user.avatar "
+        :userAvatar="user.avatar"
         :userId="user.id"
         @click="handleUserClick"
       />
     </div>
     <div class="admin-panel">
       <div class="container">
-        <UiBlock :title="'Total Users'" :number="totalUsers" />
-        <UiBlock title="Active Shops" number="0"/>
-        <UiBlock title="Total Revenue" number="0"/>
+        <UiBlock 
+          :title="'Total Users'" 
+          :number="totalUsers" 
+          :styleBadge="'badge1'" />
+        <UiBlock 
+          :title="`Active Shops`" 
+          :number="0" 
+          :styleBadge="'badge2'" />
+        <UiBlock 
+          :title="`Total Revenue`" 
+          :number="0" 
+          :styleBadge="'badge3'" />
       </div>
       <DataUser :selectedUser="selectedUser" />
     </div>
   </div>
 </template>
+
 
 <script>
 import SiteHeader from '@/components/header/header.vue';
@@ -75,7 +85,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped >
   .admin {
     width: 100%;
     min-height: calc(90vh - 1px);
@@ -119,6 +129,6 @@ export default {
     flex-direction: row;
     position: relative;
     top: 2rem;
+    gap: 1rem;
   }
-
 </style>
