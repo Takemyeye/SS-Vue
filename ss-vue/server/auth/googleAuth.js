@@ -39,9 +39,11 @@ router.get('/auth/google/callback', passport.authenticate('google', { session: f
   let users = readUsersFromFile();
   const user = req.user;
   
+
   const existingUser = users.find(u => u.id === user.id && u.email === user.email);
 
   if (!existingUser) {
+    // Создаем токен при первой регистрации пользователя
     const token = generateToken(user);
 
     const newUser = {

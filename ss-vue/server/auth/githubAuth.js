@@ -19,6 +19,7 @@ const readUsersFromFile = () => {
   }
 };
 
+
 const writeUsersToFile = (users) => {
   try {
     fs.writeFileSync(USERS_FILE, JSON.stringify(users, null, 2));
@@ -27,9 +28,11 @@ const writeUsersToFile = (users) => {
   }
 };
 
+
 const generateToken = (user) => {
   return jwt.sign({ id: user.id, email: user.email }, SECRET_KEY, { expiresIn: '1h' });
 };
+
 
 router.get('/auth/github', passport.authenticate('github', { scope: ['user:email'] }));
 
@@ -55,6 +58,7 @@ router.get('/auth/github/callback', passport.authenticate('github', { session: f
     writeUsersToFile(users);
     res.redirect(`http://localhost:8080?token=${token}`);
   } else {
+
     res.redirect(`http://localhost:8080?token=${existingUser.token}`);
   }
 });
