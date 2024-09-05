@@ -22,54 +22,64 @@
 </template>
 
 <script>
-import auth from '@/private/auth';
 import { ref, computed, onMounted } from 'vue';
 import { cartState } from '@/services/activeContext';
+import auth from '@/private/auth';
 
 export default {
   name: 'RightPanelNavBar',
 
   setup() {
-    const { user, getUserFromCode, logout } = auth;
+    const user = ref(null);
     const isDropdownOpen = ref(false);
+
+    const avatarUrl = computed(() => {
+      if (user.value && user.value.avatar) {
+        return `${user.value.avatar}`;
+      }
+      return ''; 
+    });
 
     onMounted(async () => {
       const queryParameters = new URLSearchParams(window.location.search);
-      const code = queryParameters.get('code');
+      const token = queryParameters.get('token');
 
-      if (code && !user.value) {
-        await getUserFromCode(code);
-        await fetchUser();
+      if (token) {
+        localStorage.setItem('token', token);
+        await fetchUser(token);
       }
     });
 
-    const fetchUser = async () => {
+    const fetchUser = async (token) => {
       try {
-        const response = await fetch('/api/user', {
+        const response = await fetch('http://localhost:3000/api/current_user', {
           method: 'GET',
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
+            'Authorization': `Bearer ${token}`
           }
         });
+
         if (response.ok) {
           const data = await response.json();
-          user.value = data; 
+          user.value = data;
+          console.log('User Avatar URL:', avatarUrl.value);
+        } else {
+          console.error('Ошибка получения данных пользователя:', response.statusText);
         }
       } catch (error) {
-        console.error('Error fetching user:', error);
+        console.error('Ошибка при запросе пользователя:', error);
       }
     };
 
     const cartItemsCount = computed(() => cartState.totalItems);
-    const avatarUrl = computed(() => {
-      if (user.value && user.value.avatar) {
-        return `https://cdn.discordapp.com/avatars/${user.value.id}/${user.value.avatar}.png`;
-      }
-      return '';
-    });
 
     const toggleDropdown = () => {
       isDropdownOpen.value = !isDropdownOpen.value;
+    };
+
+    const logout = () => {
+      auth.clearUser();
+      user.value = null;
     };
 
     return {
@@ -83,7 +93,6 @@ export default {
   },
 };
 </script>
-
 
 <style scoped>
 .rightPanel {
@@ -192,5 +201,10 @@ h1 {
   height: 16px;
   right: 0;
   top: 0;
+}
+@media all and (max-width: 768px) {
+  .dropdown {
+    min-width: 150px;
+  }
 }
 </style>

@@ -6,13 +6,13 @@
         <h5>Sign in to your account using one of the following platforms:</h5>
       </div>
       <div class="platform">
-        <a :href="discordAuthUrl">
+        <a href="#">
           <div class="auth auth-1">
             <font-awesome-icon icon="fa-brands fa-discord" />
             <h5>LogIn with Discord</h5>
           </div>
         </a>
-        <a href="#">
+        <a :href="googleAuthUrl">
           <div class="auth auth-2">
             <font-awesome-icon icon="fa-brands fa-google" />
             <h5>LogIn with Google</h5>
@@ -30,15 +30,16 @@
 </template>
 
 <script>
-  export default {
-    name: 'LoginCard',
-    data() {
+export default {
+  name: 'LoginCard',
+  data() {
     return {
-      discordAuthUrl: `https://discord.com/oauth2/authorize?client_id=1274555710423695472&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2F&scope=email+identify+guilds`,
+      googleAuthUrl: `http://localhost:3000/auth/google`,
     };
   },
-  }
+}
 </script>
+
 
 <style scoped>
   .register {

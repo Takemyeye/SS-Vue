@@ -3,12 +3,14 @@
       <router-link :to="{ name: 'Home' }">
         <h3>Home</h3>
       </router-link>
-      <router-link :to="{ name: 'About' }">
-        <h3>About</h3>
-      </router-link>
-      <h3>Blog</h3>
+      <a href="https://www.instagram.com/takemyeyegit/">
+        <h3>Blog</h3>
+      </a>
       <router-link :to="{ name: 'Shop' }">
         <h3>All Art</h3>
+      </router-link>
+      <router-link :to="{ name: 'Cart' }">
+        <h3>Cart</h3>
       </router-link>
     </div>
 </template>

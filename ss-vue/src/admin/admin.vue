@@ -6,7 +6,7 @@
         v-for="user in users"
         :key="user.id"
         :userName="user.username"
-        :userAvatar="`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`"
+        :userAvatar="user.avatar "
         :userId="user.id"
         @click="handleUserClick"
       />
@@ -17,14 +17,14 @@
         <UiBlock title="Active Shops" number="0"/>
         <UiBlock title="Total Revenue" number="0"/>
       </div>
-      <DataUser/>
+      <DataUser :selectedUser="selectedUser" />
     </div>
   </div>
 </template>
 
 <script>
 import SiteHeader from '@/components/header/header.vue';
-import DataUser from './component/data.vue'
+import DataUser from './component/data.vue';
 import UserCard from '@/ui/userCard.vue';
 import UiBlock from '@/ui/block.vue';
 import { ref, onMounted } from 'vue';

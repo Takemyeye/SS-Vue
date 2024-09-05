@@ -1,30 +1,36 @@
 <template>
   <div class="cardUnit">
-    <UiCard 
+    <router-link :to="{ name: 'Shop' }">
+      <UiCard 
       src="art/MHA1.JPG" 
       alt="Pencil Drawings" 
       title="Pencil Drawings" 
       subtitle="Beauty of pencil sketches"
       btn="Shop"
       :show="false" />
-      
-    <UiCard 
-      v-if="isDesktop"
-      src="art/JJK12.JPG" 
-      alt="Ink and Marker Art" 
-      title="Ink and Marker Art" 
-      subtitle="Detailed illustrations with ink and markers"
-      btn="Shop"
-      :show="false" />
+    </router-link>
 
-    <UiCard 
-      v-if="isDesktop"
-      src="art/CON2.JPG" 
-      alt="Colored Artwork" 
-      title="Colored Artwork" 
-      subtitle="Vibrant and colorful creations"
-      btn="Shop"
-      :show="false" />
+    <router-link :to="{ name: 'Shop' }">
+      <UiCard 
+        v-if="isDesktop"
+        src="art/JJK12.JPG" 
+        alt="Ink and Marker Art" 
+        title="Ink and Marker Art" 
+        subtitle="Detailed illustrations with ink and markers"
+        btn="Shop"
+        :show="false" />
+    </router-link>
+
+    <router-link :to="{ name: 'Shop' }">
+      <UiCard 
+        v-if="isDesktop"
+        src="art/CON2.JPG" 
+        alt="Colored Artwork" 
+        title="Colored Artwork" 
+        subtitle="Vibrant and colorful creations"
+        btn="Shop"
+        :show="false" />
+    </router-link>
   </div>
 </template>
 

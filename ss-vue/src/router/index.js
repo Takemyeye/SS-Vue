@@ -1,10 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import AuthComponent from '@/components/auth/authComponent.vue';
 import CartShoping from '@/components/cartShop/cart.vue';
 import NotFound from '@/components/404/NotFound.vue';
 import RegisterPage from '@/private/register.vue';
 import ArtShop from '@/components/store/shop.vue';
-import AboutPage from '@/components/about.vue';
 import HomePage from '@/components/home.vue';
 import AdminPanel from '@/admin/admin.vue';
 
@@ -23,7 +21,6 @@ const isAdmin = () => {
 const routes = [
   { path: '/', name: 'Home', component: HomePage },
   { path: '/shop', name: 'Shop', component: ArtShop },
-  { path: '/about', name: 'About', component: AboutPage },
   { path: '/register', name: 'Register', component: RegisterPage },
   {
     path: '/cart',
@@ -32,7 +29,6 @@ const routes = [
     meta: { requiresAuth: true }, 
   },
   { path: '/:pathMatch(.*)*', component: NotFound },
-  { path: '/', component: AuthComponent },
   { 
     path: '/admin', 
     name: 'Admin', 
