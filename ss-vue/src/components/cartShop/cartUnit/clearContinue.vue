@@ -36,11 +36,19 @@
         </div>
       </div>
     </div>
+    <UiBaner 
+      style="position: absolute;"
+      v-if="showBanner"
+      :src="`img/verified.png`"
+      :title="`Processing Order`"
+      :text="`We will get in touch with you.`"
+    />
   </div>
 </template>
 
 <script>
 import UiButton from '@/ui/button.vue';
+import UiBaner from '@/ui/baner.vue';
 import { clearCart } from '@/services/activeContext';
 
 const getTokenFromLocalStorage = () => {
@@ -51,19 +59,22 @@ export default {
   name: 'ClearContinue',
   components: {
     UiButton,
+    UiBaner
   },
   data() {
     return {
       showBlock: false,
+      showBanner: false,
       token: null,
       country: '',
+      bannerTimeout: null
     };
   },
   created() {
     this.token = getTokenFromLocalStorage();
 
     if (!this.token) {
-      console.error('Токен не найден в localStorage');
+      console.error('Token not found in localStorage');
     }
   },
   methods: {
@@ -83,22 +94,20 @@ export default {
       }
 
       if (!this.country.trim()) {
-        console.error('Country field is empty. Cannot process order.');
-        alert('Please select your City before processing the order.');
+        console.error('City field is empty. Cannot process order.');
+        alert('Please select your city.');
         return;
       }
 
       const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
 
       if (cartItems.length === 0) {
-        console.error('Корзина пуста, не могу обработать заказ.');
-        alert('Корзина пуста. Пожалуйста, добавьте товары в корзину перед оформлением заказа.');
+        console.error('Cart is empty.');
+        alert('Your cart is empty.');
         return;
       }
 
       const totalPrice = cartItems.reduce((sum, item) => sum + item.price, 0);
-      
-      // Получение текущей даты и времени
       const createdAt = new Date().toISOString();
 
       try {
@@ -122,10 +131,20 @@ export default {
 
         const data = await response.json();
         console.log('Order processed successfully:', data);
-        
-        // Очистка данных
+
+        this.showBanner = true;
+
+        if (this.bannerTimeout) {
+          clearTimeout(this.bannerTimeout);
+        }
+
+        this.bannerTimeout = setTimeout(() => {
+          this.showBanner = false;
+        }, 5000);
+
         this.country = ''; 
         this.clearCart(); 
+        this.toggleBlock();
       } catch (error) {
         console.error('Error processing order:', error);
       }

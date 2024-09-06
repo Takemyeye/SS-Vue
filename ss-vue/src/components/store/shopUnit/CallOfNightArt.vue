@@ -93,7 +93,7 @@ export default {
 </script>
 
 <style scoped>
-.shop {
-  animation: opacity 0.7s ease forwards;
-}
+  .shop {
+    animation: opacity 0.7s ease forwards;
+  }
 </style>

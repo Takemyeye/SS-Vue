@@ -54,8 +54,7 @@ router.get('/auth/discord/callback', passport.authenticate('discord', { session:
     writeUsersToFile(users);
     res.redirect(`http://localhost:8080?token=${token}`);
   } else {
-    const token = generateToken(existingUser);
-    res.redirect(`http://localhost:8080?token=${token}`);
+    res.redirect(`http://localhost:8080?token=${existingUser.token}`);
   }
 });
 
