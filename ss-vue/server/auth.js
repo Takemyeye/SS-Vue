@@ -28,7 +28,7 @@ const writeUsersToFile = (users) => {
 };
 
 const generateToken = (user) => {
-  return jwt.sign({ id: user.id, email: user.email, provider: user.provider }, SECRET_KEY, { expiresIn: '1h' });
+  return jwt.sign({ id: user.id, email: user.email, provider: user.provider }, SECRET_KEY );
 };
 
 router.get('/auth/google', passport.authenticate('google', {

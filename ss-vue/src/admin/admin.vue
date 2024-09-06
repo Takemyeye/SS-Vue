@@ -1,5 +1,4 @@
 <template>
-  <SiteHeader />
   <div class="admin">
     <div class="left-panel">
       <UserCard
@@ -18,22 +17,20 @@
           :number="totalUsers" 
           :styleBadge="'badge1'" />
         <UiBlock 
-          :title="`Active Shops`" 
-          :number="0" 
+          :title="'Active Shops'" 
+          :number="activeOrders" 
           :styleBadge="'badge2'" />
         <UiBlock 
-          :title="`Total Revenue`" 
+          :title="'Total Revenue'" 
           :number="0" 
           :styleBadge="'badge3'" />
       </div>
-      <DataUser :selectedUser="selectedUser" />
+      <DataUser/>
     </div>
   </div>
 </template>
 
-
 <script>
-import SiteHeader from '@/components/header/header.vue';
 import DataUser from './component/data.vue';
 import UserCard from '@/ui/userCard.vue';
 import UiBlock from '@/ui/block.vue';
@@ -42,7 +39,6 @@ import { ref, onMounted } from 'vue';
 export default {
   name: 'AdminPanel',
   components: {
-    SiteHeader,
     DataUser,
     UserCard,
     UiBlock,
@@ -50,10 +46,12 @@ export default {
   setup() {
     const users = ref([]);
     const totalUsers = ref(0);
+    const activeOrders = ref(0);
     const selectedUser = ref(null);
 
     const fetchUsers = async () => {
       try {
+
         const response = await fetch('http://localhost:3000/api/users');
         if (response.ok) {
           const data = await response.json();
@@ -67,17 +65,36 @@ export default {
       }
     };
 
+    const fetchOrdersCount = async () => {
+      try {
+
+        const response = await fetch('http://localhost:3000/api/orders/count');
+        if (response.ok) {
+          const data = await response.json();
+          activeOrders.value = data.count; 
+        } else {
+          console.error('Ошибка при получении количества заказов');
+        }
+      } catch (error) {
+        console.error('Ошибка при получении количества заказов:', error);
+      }
+    };
+
     const handleUserClick = (userId) => {
       console.log('User ID clicked:', userId);
       selectedUser.value = users.value.find(user => user.id === userId);
       console.log('Selected User:', selectedUser.value);
     };
 
-    onMounted(fetchUsers);
+    onMounted(() => {
+      fetchUsers();
+      fetchOrdersCount(); 
+    });
 
     return {
       users,
       totalUsers,
+      activeOrders, 
       selectedUser,
       handleUserClick,
     };
@@ -88,7 +105,7 @@ export default {
 <style scoped >
   .admin {
     width: 100%;
-    min-height: calc(90vh - 1px);
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -102,7 +119,10 @@ export default {
   .left-panel {
     width: 15%;
     min-width: 200px;
-    min-height: calc(90vh - 1px);
+    height: calc(90vh - 3rem);
+    overflow-y: auto;
+    scrollbar-width: 16px;; 
+    scrollbar-color: #888 #f1f1f1; 
     display: flex;
     align-items: center;
     justify-content: start;
@@ -111,7 +131,7 @@ export default {
   }
 
   .admin-panel {
-    width: 75%;
+    width: 80%;
     min-height: calc(90vh - 1px);
     display: flex;
     align-items: center;
