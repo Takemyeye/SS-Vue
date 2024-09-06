@@ -7,7 +7,9 @@
       <h2>Quick Links</h2>
       <h3>About</h3>
       <h3>Contact</h3>
-      <h3>Privacy Policy</h3>
+      <router-link to="/privacy">
+        <h3>Privacy Policy</h3>
+      </router-link>
     </FooterContainer>
     <FooterContainer>
       <h2>Follow Us</h2>

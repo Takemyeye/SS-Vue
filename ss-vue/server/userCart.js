@@ -8,7 +8,6 @@ const ORDERS_FILE = path.join(__dirname, 'data/orders.json');
 const USERS_FILE = path.join(__dirname, 'data/users.json');
 const SECRET_KEY = process.env.SECRET_KEY;
 
-// Чтение заказов из файла
 const readOrdersFromFile = () => {
   try {
     const data = fs.readFileSync(ORDERS_FILE, 'utf8');
@@ -19,7 +18,6 @@ const readOrdersFromFile = () => {
   }
 };
 
-// Чтение пользователей из файла
 const readUsersFromFile = () => {
   try {
     const data = fs.readFileSync(USERS_FILE, 'utf8');
@@ -30,7 +28,6 @@ const readUsersFromFile = () => {
   }
 };
 
-// Запись заказов в файл
 const writeOrdersToFile = (orders) => {
   try {
     fs.writeFileSync(ORDERS_FILE, JSON.stringify(orders, null, 2));
@@ -39,7 +36,6 @@ const writeOrdersToFile = (orders) => {
   }
 };
 
-// Создание нового заказа
 router.post('/userCart', (req, res) => {
   const { token, cartItems, totalPrice, country } = req.body;
 
@@ -61,15 +57,12 @@ router.post('/userCart', (req, res) => {
   res.status(201).json({ message: 'Order processed successfully', order: newOrder });
 });
 
-// Получение списка всех заказов с деталями пользователей
 router.get('/orders', (req, res) => {
   try {
     const orders = readOrdersFromFile();
     const users = readUsersFromFile();
 
-    // Обогащение заказов данными пользователя
     const ordersWithUserDetails = orders.map(order => {
-      // Найти пользователя по токену
       const user = users.find(u => u.token === order.token);
 
       if (user) {
@@ -91,11 +84,30 @@ router.get('/orders', (req, res) => {
   }
 });
 
-// Получение количества активных заказов
 router.get('/orders/count', (req, res) => {
   const orders = readOrdersFromFile();
   const activeOrdersCount = orders.length;
   res.json({ count: activeOrdersCount });
 });
+
+router.delete('/orders/:token/:createdAt', (req, res) => {
+  const { token, createdAt } = req.params;
+
+  if (!token || !createdAt) {
+    return res.status(400).json({ message: 'Token and createdAt are required' });
+  }
+
+  let orders = readOrdersFromFile();
+
+  const updatedOrders = orders.filter(order => !(order.token === token && order.createdAt === createdAt));
+
+  if (orders.length === updatedOrders.length) {
+    return res.status(404).json({ message: 'Order not found' });
+  }
+
+  writeOrdersToFile(updatedOrders);
+  res.status(200).json({ message: 'Order deleted successfully' });
+});
+
 
 module.exports = router;

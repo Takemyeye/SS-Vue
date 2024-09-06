@@ -51,7 +51,6 @@ export default {
 
     const fetchUsers = async () => {
       try {
-
         const response = await fetch('http://localhost:3000/api/users');
         if (response.ok) {
           const data = await response.json();
@@ -119,7 +118,7 @@ export default {
   .left-panel {
     width: 15%;
     min-width: 200px;
-    height: calc(90vh - 3rem);
+    height: 90vh;
     overflow-y: auto;
     scrollbar-width: 16px;; 
     scrollbar-color: #888 #f1f1f1; 
@@ -132,23 +131,21 @@ export default {
 
   .admin-panel {
     width: 80%;
-    min-height: calc(90vh - 1px);
+    height: 90vh;
     display: flex;
     align-items: center;
     justify-content: start;
     flex-direction: column;
-    gap: 4rem;
+    gap: 3rem;
   }
 
   .container {
     width: 90%;
-    height: 140px;
+    min-height: 130px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: row;
-    position: relative;
-    top: 2rem;
     gap: 1rem;
   }
 </style>

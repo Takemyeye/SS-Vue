@@ -5,6 +5,7 @@ import RegisterPage from '@/private/register.vue';
 import ArtShop from '@/components/store/shop.vue';
 import HomePage from '@/components/home.vue';
 import AdminPanel from '@/admin/admin.vue';
+import PrivacyPolicy from '@/policy/privacyPolicy.vue';
 
 const ADMIN_TOKEN_GIT = process.env.VUE_APP_ADMIN_TOKEN_GIT;
 const ADMIN_TOKEN_GOOGLE = process.env.VUE_APP_ADMIN_TOKEN_GOOGLE;
@@ -22,6 +23,7 @@ const routes = [
   { path: '/', name: 'Home', component: HomePage },
   { path: '/shop', name: 'Shop', component: ArtShop },
   { path: '/register', name: 'Register', component: RegisterPage },
+  { path: '/privacy', name: 'Privacy', component: PrivacyPolicy},
   {
     path: '/cart',
     name: 'Cart',

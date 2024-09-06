@@ -4,7 +4,7 @@ import App from './App.vue';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { faHouse, faCartShopping, faHeart, faUser, faCartPlus, faMoneyBill, faCircleXmark, faClock, faCity, faImage } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faCartShopping, faHeart, faUser, faCartPlus, faMoneyBill, faCircleXmark, faClock, faCity, faImage, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { faInstagram, faTelegram, faTiktok, faGoogle, faGithub, faDiscord, faPaypal } from '@fortawesome/free-brands-svg-icons';
 
 library.add(
@@ -25,6 +25,7 @@ library.add(
   faClock,
   faCity,
   faImage,
+  faTrash
 );
 
 const app = createApp(App);

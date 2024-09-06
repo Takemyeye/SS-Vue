@@ -40,7 +40,6 @@ export default {
   .user-card {
     width: 80%;
     height: 50px;
-    position: relative;
     border-radius: 8px;
     border: 1px solid rgba(0, 0, 0, 0.315);
     display: flex;
@@ -48,7 +47,6 @@ export default {
     justify-content: space-between;
     flex-direction: row;
     padding: 0 8px;
-    top: 1rem;
   }
   img {
     width: 38px;
