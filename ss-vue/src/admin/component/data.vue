@@ -122,16 +122,4 @@ export default {
 h4 {
   text-align: center;
 }
-.unit {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  gap: 1rem;
-}
-.userAvatar {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-}
 </style>
