@@ -4,7 +4,7 @@
       <img :src="src" :alt="alt">
       <div class="text">
         <h4>{{ title }}</h4>
-        <h5>{{ added }}</h5>
+        <h5>{{ text }}</h5>
       </div>
     </div>
   </router-link>
@@ -16,7 +16,8 @@
     props: {
     src: {
       type: String,
-      required: true
+      required: true,
+      default: null
     },
     alt: {
       type: String,
@@ -26,7 +27,7 @@
       type: String,
       required: true
     },
-    added: {
+    text: {
       type: String,
       required: true
     },

@@ -18,7 +18,7 @@
         :src="selectedImageSrc"
         :alt="selectedImageAlt"
         :title="selectedImageTitle"
-        :added="`Added To Cart`"/> 
+        :text="`Added To Cart`"/> 
     </div>
   </div> 
 </template>

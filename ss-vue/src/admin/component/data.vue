@@ -1,6 +1,7 @@
 <template>
   <div class="data">
-    <h2>Orders</h2>
+    <h2 v-if="orders.length > 0">Orders</h2>
+    <h2 v-else>No orders</h2>
     <div v-for="order in orders" :key="order.createdAt" class="container">
       <OrderImage :cartItems="order.cartItems" />
       <OrderPrice :totalPrice="order.totalPrice" />
@@ -119,7 +120,5 @@ export default {
   font-size: larger;
   gap: 1rem;
 }
-h4 {
-  text-align: center;
-}
+
 </style>
