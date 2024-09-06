@@ -7,7 +7,9 @@
       <UiButton buttonText="Subscribe" />
     </div>
     <h5>We'll never share your email. Read our
-      <a href="#"> Privacy Policy .</a> 
+      <router-link to="/privacy">
+          Privacy Policy .
+      </router-link> 
     </h5>
   </div> 
 </template>

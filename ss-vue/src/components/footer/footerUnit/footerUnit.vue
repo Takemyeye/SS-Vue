@@ -5,8 +5,10 @@
     </FooterContainer>
     <FooterContainer>
       <h2>Quick Links</h2>
-      <h3>About</h3>
-      <h3>Contact</h3>
+      <router-link to="/shop">
+        <h3>Store</h3>
+      </router-link>
+      <h3>Contact Us</h3>
       <router-link to="/privacy">
         <h3>Privacy Policy</h3>
       </router-link>

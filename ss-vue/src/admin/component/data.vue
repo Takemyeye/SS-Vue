@@ -2,32 +2,14 @@
   <div class="data">
     <h2>Orders</h2>
     <div v-for="order in orders" :key="order.createdAt" class="container">
-      <div class="orderImg">
-        <font-awesome-icon icon="image" />
-        <div v-for="item in order.cartItems" :key="item.id" class="imageItem">
-          <img :src="`/art/${item.image}`" :alt="item.title" class="itemImage" />
-        </div>
-      </div>
-      <div class="Price">
-        <font-awesome-icon icon="money-bill" />
-        <h4>{{ order.totalPrice }} € </h4>
-      </div>
-      <div class="country">
-        <font-awesome-icon icon="city" />
-        <h4>{{ order.country }}</h4>
-      </div>
-      <div class="createdAt">
-        <font-awesome-icon icon="clock" />
-        <h4>{{ formatDate(order.createdAt) }}</h4>
-      </div>
-      <div class="userData">
-        <font-awesome-icon icon="user" />
-        <div class="unit">
-          <img :src="order.userAvatar" alt="AvatarUser" class="userAvatar" />
-          <h4>{{ order.userName }}</h4>
-        </div>
-        <h4>{{ order.userEmail }}</h4>
-      </div>
+      <OrderImage :cartItems="order.cartItems" />
+      <OrderPrice :totalPrice="order.totalPrice" />
+      <OrderCountry :country="order.country" />
+      <OrderDate :createdAt="order.createdAt" />
+      <OrderUser 
+        :userAvatar="order.userAvatar" 
+        :userName="order.userName" 
+        :userEmail="order.userEmail" />
       <UiBadge 
         :styleBadge="`badge4`"
         :title="`Delete`"
@@ -39,13 +21,23 @@
 </template>
 
 <script>
-import UiBadge from '@/ui/badge.vue';
 import { ref, onMounted } from 'vue';
+import UiBadge from '@/ui/badge.vue';
+import OrderImage from './unit/image.vue';
+import OrderPrice from './unit/price.vue';
+import OrderCountry from './unit/city.vue';
+import OrderDate from './unit/orderData.vue';
+import OrderUser from './unit/user.vue';
 
 export default {
   name: 'DataUser',
   components: {
     UiBadge,
+    OrderImage,
+    OrderPrice,
+    OrderCountry,
+    OrderDate,
+    OrderUser,
   },
   setup() {
     const orders = ref([]);
@@ -64,33 +56,26 @@ export default {
     };
 
     const deleteOrder = async (token, createdAt) => {
-  try {
-    const response = await fetch(`http://localhost:3000/api/orders/${token}/${createdAt}`, {
-      method: 'DELETE',
-    });
+      try {
+        const response = await fetch(`http://localhost:3000/api/orders/${token}/${createdAt}`, {
+          method: 'DELETE',
+        });
 
-    if (response.ok) {
-      orders.value = orders.value.filter(order => !(order.token === token && order.createdAt === createdAt));
-      console.log('Order deleted successfully');
-    } else {
-      console.error('Error deleting order');
-    }
-  } catch (error) {
-    console.error('Error deleting order:', error);
-  }
-};
-
-
-    const formatDate = (dateString) => {
-      const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
-      return new Date(dateString).toLocaleDateString(undefined, options);
+        if (response.ok) {
+          orders.value = orders.value.filter(order => !(order.token === token && order.createdAt === createdAt));
+          console.log('Order deleted successfully');
+        } else {
+          console.error('Error deleting order');
+        }
+      } catch (error) {
+        console.error('Error deleting order:', error);
+      }
     };
 
     onMounted(fetchOrders);
 
     return {
       orders,
-      formatDate,
       deleteOrder,
     };
   }
@@ -134,24 +119,6 @@ export default {
   font-size: larger;
   gap: 1rem;
 }
-.orderImg {
-  height: 90%;
-  width: 150px;
-  overflow-y: auto;
-  scrollbar-width: 16px;
-  scrollbar-color: rgb(34, 34, 34) black;
-}
-.imageItem {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.itemImage {
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
-  border-radius: 8px;
-}
 h4 {
   text-align: center;
 }
@@ -166,10 +133,5 @@ h4 {
   width: 42px;
   height: 42px;
   border-radius: 50%;
-}
-.btn {
-  padding: 4px 8px;
-  border: none;
-  border-radius: 8px;
 }
 </style>
