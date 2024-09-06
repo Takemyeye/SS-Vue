@@ -3,7 +3,7 @@
     <img :src="src" :alt="alt">
     <div class="container">
       <div class="cardText">
-        <h4>{{ title }}</h4>
+        <h4>{{ title }} {{ price }}</h4>
         <h5>{{ subtitle }}</h5>
       </div>
       <UiButton 
@@ -35,6 +35,11 @@ export default {
     title: {
       type: String,
       required: true
+    },
+    price: {
+      type: String,
+      required:true,
+      default: ''
     },
     subtitle: {
       type: String,
@@ -87,7 +92,7 @@ img {
   flex-direction: row;
 }
 .cardText {
-  max-width: 200px;
+  max-width: 250px;
 }
 h4 {
   font-weight: bold;

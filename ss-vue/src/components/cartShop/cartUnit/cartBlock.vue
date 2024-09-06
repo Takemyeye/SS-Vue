@@ -8,6 +8,7 @@
         :src="`/art/${item.image}`"
         :alt="item.title"
         :title="`${item.title} `"
+        :price="`${item.price} €`"
         :subtitle="item.subtitle"
         :btn="'Remove'"
         :showT="true"

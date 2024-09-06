@@ -6,8 +6,12 @@
     <div v-else class="avatar" @click="toggleDropdown">
       <img :src="avatarUrl" alt="User Avatar" />
       <div v-if="isDropdownOpen" class="dropdown">
-        <h5>Profile</h5>
-        <h5>Settings</h5>
+        <router-link to="/profile">
+          <h5>Profile</h5>
+        </router-link>
+        <router-link to="/settings">
+          <h5>Settings</h5>
+        </router-link>
         <h5 @click="logout">Logout</h5>
       </div>
     </div>
@@ -167,7 +171,7 @@ h1 {
   color: white;
 }
 .dropdown a {
-  padding: 10px;
+  width: 100%;
   text-align: center;
   text-decoration: none;
   color: #333;
