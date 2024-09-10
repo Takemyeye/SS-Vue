@@ -51,20 +51,24 @@ const handleAuthCallback = async (req, res) => {
   }
 };
 
+// Google Authentication
 router.get('/auth/google', passport.authenticate('google', {
   scope: ['profile', 'email']
 }));
 
 router.get('/auth/google/callback', passport.authenticate('google', { session: false }), handleAuthCallback);
 
+// GitHub Authentication
 router.get('/auth/github', passport.authenticate('github', { scope: ['user:email'] }));
 
 router.get('/auth/github/callback', passport.authenticate('github', { session: false }), handleAuthCallback);
 
+// Discord Authentication
 router.get('/auth/discord', passport.authenticate('discord', { scope: ['identify', 'email'] }));
 
 router.get('/auth/discord/callback', passport.authenticate('discord', { session: false }), handleAuthCallback);
 
+// Get Current User
 router.get('/api/current_user', async (req, res) => {
   const token = req.headers.authorization?.split(' ')[1];
   if (!token) {
