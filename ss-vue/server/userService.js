@@ -1,22 +1,10 @@
-const fs = require('fs');
-const path = require('path');
+const mongoose = require('mongoose');
+const User = require('./models/User'); 
 
-const USERS_FILE = path.join(__dirname, 'users.json');
-
-const readUsersFromFile = () => {
+const getUserByToken = async (token) => {
   try {
-    const data = fs.readFileSync(USERS_FILE, 'utf8');
-    return JSON.parse(data || '[]');
-  } catch (err) {
-    console.error('Ошибка при чтении файла пользователей:', err);
-    return [];
-  }
-};
-
-const getUserByToken = (token) => {
-  try {
-    const users = readUsersFromFile();
-    return users.find(u => u.token === token) || null;
+    const user = await User.findOne({ token: token });
+    return user || null;
   } catch (err) {
     console.error('Ошибка при получении пользователя по токену:', err);
     return null;

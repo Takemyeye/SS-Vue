@@ -1,74 +1,72 @@
-// routes/user.js
 const express = require('express');
-const path = require('path');
-const fs = require('fs');
+const User = require('../models/User');
 const router = express.Router();
 
-// Путь к файлу users.json
-const USERS_FILE = path.join(__dirname, '../data/users.json');
-
-// Функция для чтения пользователей из файла
-const readUsersFromFile = () => {
+router.get('/users', async (req, res) => {
   try {
-    const data = fs.readFileSync(USERS_FILE, 'utf8');
-    return JSON.parse(data || '[]');
+    const users = await User.find({});
+    res.json(users);
   } catch (err) {
-    console.error('Ошибка при чтении файла пользователей:', err);
-    return [];
+    console.error('Ошибка при получении пользователей:', err);
+    res.status(500).json({ error: 'Ошибка сервера при получении пользователей' });
   }
-};
+});
 
-// Функция для записи пользователей в файл
-const writeUsersToFile = (users) => {
+router.get('/users/:id', async (req, res) => {
   try {
-    fs.writeFileSync(USERS_FILE, JSON.stringify(users, null, 2));
+    const user = await User.findOne({ id: req.params.id });
+    if (user) {
+      res.json(user);
+    } else {
+      res.status(404).json({ error: 'Пользователь не найден' });
+    }
   } catch (err) {
-    console.error('Ошибка при записи файла пользователей:', err);
-  }
-};
-
-// Получение всех пользователей
-router.get('/users', (req, res) => {
-  const users = readUsersFromFile();
-  res.json(users);
-});
-
-// Получение пользователя по ID
-router.get('/users/:id', (req, res) => {
-  const users = readUsersFromFile();
-  const user = users.find(u => u.id === parseInt(req.params.id));
-  if (user) {
-    res.json(user);
-  } else {
-    res.status(404).json({ error: 'Пользователь не найден' });
+    console.error('Ошибка при получении пользователя:', err);
+    res.status(500).json({ error: 'Ошибка сервера при получении пользователя' });
   }
 });
 
-router.post('/users', (req, res) => {
-  const users = readUsersFromFile();
-  const newUser = req.body;
-  users.push(newUser);
-  writeUsersToFile(users);
-  res.status(201).json(newUser);
-});
-
-router.put('/users/:id', (req, res) => {
-  const users = readUsersFromFile();
-  const userIndex = users.findIndex(u => u.id === parseInt(req.params.id));
-  if (userIndex !== -1) {
-    users[userIndex] = { ...users[userIndex], ...req.body };
-    writeUsersToFile(users);
-    res.json(users[userIndex]);
-  } else {
-    res.status(404).json({ error: 'Пользователь не найден' });
+router.post('/users', async (req, res) => {
+  try {
+    const newUser = new User(req.body);
+    await newUser.save();
+    res.status(201).json(newUser);
+  } catch (err) {
+    console.error('Ошибка при создании пользователя:', err);
+    res.status(500).json({ error: 'Ошибка сервера при создании пользователя' });
   }
 });
 
-router.delete('/users/:id', (req, res) => {
-  let users = readUsersFromFile();
-  users = users.filter(u => u.id !== parseInt(req.params.id));
-  writeUsersToFile(users);
-  res.status(204).send();
+router.put('/users/:id', async (req, res) => {
+  try {
+    const user = await User.findOneAndUpdate(
+      { id: req.params.id },
+      req.body,
+      { new: true, runValidators: true }
+    );
+    if (user) {
+      res.json(user);
+    } else {
+      res.status(404).json({ error: 'Пользователь не найден' });
+    }
+  } catch (err) {
+    console.error('Ошибка при обновлении пользователя:', err);
+    res.status(500).json({ error: 'Ошибка сервера при обновлении пользователя' });
+  }
+});
+
+router.delete('/users/:id', async (req, res) => {
+  try {
+    const result = await User.deleteOne({ id: req.params.id });
+    if (result.deletedCount === 0) {
+      res.status(404).json({ error: 'Пользователь не найден' });
+    } else {
+      res.status(204).send();
+    }
+  } catch (err) {
+    console.error('Ошибка при удалении пользователя:', err);
+    res.status(500).json({ error: 'Ошибка сервера при удалении пользователя' });
+  }
 });
 
 module.exports = router;

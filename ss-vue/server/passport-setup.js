@@ -9,7 +9,7 @@ passport.use(new GoogleStrategy({
   callbackURL: '/auth/google/callback',
   userProfileURL: 'https://www.googleapis.com/oauth2/v3/userinfo'
 },
-async (accessToken, refreshToken, profile, done) => {
+async (accessToken, profile, done) => {
   const { sub: id, name, email, picture, verified_email, locale } = profile._json;
   const user = {
     id,
