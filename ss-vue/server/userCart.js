@@ -1,42 +1,13 @@
 const express = require('express');
-const fs = require('fs');
-const path = require('path');
 const jwt = require('jsonwebtoken');
+const Order = require('./models/Order');
+const User = require('./models/User');   
+require('dotenv').config();
 
 const router = express.Router();
-const ORDERS_FILE = path.join(__dirname, 'data/orders.json');
-const USERS_FILE = path.join(__dirname, 'data/users.json');
 const SECRET_KEY = process.env.SECRET_KEY;
 
-const readOrdersFromFile = () => {
-  try {
-    const data = fs.readFileSync(ORDERS_FILE, 'utf8');
-    return JSON.parse(data || '[]');
-  } catch (err) {
-    console.error('Ошибка при чтении файла заказов:', err);
-    return [];
-  }
-};
-
-const readUsersFromFile = () => {
-  try {
-    const data = fs.readFileSync(USERS_FILE, 'utf8');
-    return JSON.parse(data || '[]');
-  } catch (err) {
-    console.error('Ошибка при чтении файла пользователей:', err);
-    return [];
-  }
-};
-
-const writeOrdersToFile = (orders) => {
-  try {
-    fs.writeFileSync(ORDERS_FILE, JSON.stringify(orders, null, 2));
-  } catch (err) {
-    console.error('Ошибка при записи файла заказов:', err);
-  }
-};
-
-router.post('/userCart', (req, res) => {
+router.post('/userCart', async (req, res) => {
   const { token, cartItems, totalPrice, country } = req.body;
 
   if (!token) {
@@ -47,27 +18,33 @@ router.post('/userCart', (req, res) => {
     return res.status(400).json({ error: 'Missing required fields' });
   }
 
-  const createdAt = new Date().toISOString();
-  const newOrder = { token, country, cartItems, totalPrice, createdAt };
+  try {
+    const newOrder = new Order({
+      token,
+      country,
+      cartItems,
+      totalPrice
+    });
 
-  let orders = readOrdersFromFile();
-  orders.push(newOrder);
-  writeOrdersToFile(orders);
-
-  res.status(201).json({ message: 'Order processed successfully', order: newOrder });
+    await newOrder.save();
+    res.status(201).json({ message: 'Order processed successfully', order: newOrder });
+  } catch (err) {
+    console.error('Ошибка при создании заказа:', err);
+    res.status(500).json({ error: 'Ошибка сервера при создании заказа' });
+  }
 });
 
-router.get('/orders', (req, res) => {
+router.get('/orders', async (req, res) => {
   try {
-    const orders = readOrdersFromFile();
-    const users = readUsersFromFile();
+    const orders = await Order.find({});
+    const users = await User.find({});
 
     const ordersWithUserDetails = orders.map(order => {
       const user = users.find(u => u.token === order.token);
 
       if (user) {
         return {
-          ...order,
+          ...order.toObject(),
           userName: user.username,
           userEmail: user.email,
           userAvatar: user.avatar
@@ -84,30 +61,35 @@ router.get('/orders', (req, res) => {
   }
 });
 
-router.get('/orders/count', (req, res) => {
-  const orders = readOrdersFromFile();
-  const activeOrdersCount = orders.length;
-  res.json({ count: activeOrdersCount });
+router.get('/orders/count', async (req, res) => {
+  try {
+    const ordersCount = await Order.countDocuments({});
+    res.json({ count: ordersCount });
+  } catch (err) {
+    console.error('Ошибка при получении количества заказов:', err);
+    res.status(500).json({ error: 'Ошибка сервера при получении количества заказов' });
+  }
 });
 
-router.delete('/orders/:token/:createdAt', (req, res) => {
+router.delete('/orders/:token/:createdAt', async (req, res) => {
   const { token, createdAt } = req.params;
 
   if (!token || !createdAt) {
     return res.status(400).json({ message: 'Token and createdAt are required' });
   }
 
-  let orders = readOrdersFromFile();
+  try {
+    const result = await Order.deleteOne({ token, createdAt: new Date(createdAt) });
 
-  const updatedOrders = orders.filter(order => !(order.token === token && order.createdAt === createdAt));
+    if (result.deletedCount === 0) {
+      return res.status(404).json({ message: 'Order not found' });
+    }
 
-  if (orders.length === updatedOrders.length) {
-    return res.status(404).json({ message: 'Order not found' });
+    res.status(200).json({ message: 'Order deleted successfully' });
+  } catch (err) {
+    console.error('Ошибка при удалении заказа:', err);
+    res.status(500).json({ error: 'Ошибка сервера при удалении заказа' });
   }
-
-  writeOrdersToFile(updatedOrders);
-  res.status(200).json({ message: 'Order deleted successfully' });
 });
-
 
 module.exports = router;
