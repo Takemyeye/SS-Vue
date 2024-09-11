@@ -9,19 +9,23 @@ passport.use(new GoogleStrategy({
   callbackURL: '/auth/google/callback',
   userProfileURL: 'https://www.googleapis.com/oauth2/v3/userinfo'
 },
-async (accessToken, profile, done) => {
-  const { sub: id, name, email, picture, verified_email, locale } = profile._json;
-  const user = {
-    id,
-    username: name,
-    email,
-    avatar: picture,
-    verified: verified_email,
-    locale,
-    provider: 'google',
-    token: accessToken
-  };
-  done(null, user);
+async (accessToken, refreshToken, profile, done) => {
+  try {
+    const { sub: id, name, email, picture, verified_email, locale } = profile._json || {};
+    const user = {
+      id,
+      username: name,
+      email,
+      avatar: picture,
+      verified: verified_email,
+      locale,
+      provider: 'google',
+      token: accessToken
+    };
+    done(null, user);
+  } catch (err) {
+    done(err);
+  }
 }));
 
 passport.use(new GitHubStrategy({
