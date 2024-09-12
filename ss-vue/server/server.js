@@ -1,3 +1,4 @@
+const processOrder = require('./process/processOrder');
 const discordAuthRoutes = require('./auth/discordAuth');
 const googleAuthRoutes = require('./auth/googleAuth');
 const githubAuthRoutes = require('./auth/githubAuth');
@@ -35,6 +36,7 @@ app.use('/', googleAuthRoutes);
 app.use('/', githubAuthRoutes);
 app.use('/', discordAuthRoutes);
 
+app.use('/api', processOrder);
 app.use('/api', imageRoutes);
 app.use('/api', usersRouter);
 app.use('/api', authRoutes);

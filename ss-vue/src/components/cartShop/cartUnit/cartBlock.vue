@@ -1,13 +1,13 @@
 <template>
   <div class="cartBlock">
-    <ClearContinue/>
+    <ClearContinue />
     <div class="cart">
       <UiCard
         v-for="item in cartItems"
         :key="item.id"
         :src="`/art/${item.image}`"
         :alt="item.title"
-        :title="`${item.title} `"
+        :title="`${item.title}`"
         :price="`${item.price} €`"
         :subtitle="item.subtitle"
         :btn="'Remove'"
@@ -16,20 +16,24 @@
         @click="removeItemFromCart(item.id)"
       />
     </div>
+    <ProcesingOrder />
     <div class="total">
-      <h1>Total: {{ totalPrice }} €</h1>
+      <h1 v-if="totalPrice > 0">Total: {{ totalPrice }} €</h1>
+      <h1 v-else>No items in the cart</h1>
     </div>
   </div>
 </template>
 
 <script>
 import { cartState, removeFromCart } from '@/services/activeContext';
-import ClearContinue from './clearContinue.vue'
+import ProcesingOrder from './process.vue';
+import ClearContinue from './clearContinue.vue';
 import UiCard from '@/ui/card.vue';
 
 export default {
   name: 'CartBlock',
   components: {
+    ProcesingOrder,
     ClearContinue,
     UiCard,
   },
@@ -60,7 +64,7 @@ export default {
 
 .cart {
   width: 80%;
-  min-height: 70vh;
+  min-height: 60vh;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto;
