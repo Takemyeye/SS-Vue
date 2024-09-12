@@ -16,7 +16,7 @@ export default {
     title: {
       type: String,
       required: true,
-      default: 'Макс Лох'
+      default: ''
     }
   }
 }

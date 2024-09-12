@@ -77,6 +77,9 @@ export default {
   box-shadow: 10px 35px 30px rgba(0, 0, 0, 0.144);
   padding: 8px 1rem;
   gap: 1rem;
+  animation: apper linear;
+  animation-timeline: view();
+  animation-range: entry 0;
 }
 img {
   width: 100%;
@@ -98,6 +101,22 @@ h4 {
   font-weight: bold;
   color: var(--color-black);
 }
+
+@keyframes apper {
+  from {
+    opacity: 0;
+    scale: 0.5;
+  }
+  20% {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+
+}
+
 @media all and (max-width: 900px) {
   .card {
     width: 240px;

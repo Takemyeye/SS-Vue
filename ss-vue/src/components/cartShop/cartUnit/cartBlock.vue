@@ -16,7 +16,6 @@
         @click="removeItemFromCart(item.id)"
       />
     </div>
-    <ProcesingOrder />
     <div class="total">
       <h1 v-if="totalPrice > 0">Total: {{ totalPrice }} €</h1>
       <h1 v-else>No items in the cart</h1>
@@ -26,14 +25,12 @@
 
 <script>
 import { cartState, removeFromCart } from '@/services/activeContext';
-import ProcesingOrder from './process.vue';
 import ClearContinue from './clearContinue.vue';
 import UiCard from '@/ui/card.vue';
 
 export default {
   name: 'CartBlock',
   components: {
-    ProcesingOrder,
     ClearContinue,
     UiCard,
   },
@@ -64,7 +61,7 @@ export default {
 
 .cart {
   width: 80%;
-  min-height: 60vh;
+  min-height: 70vh;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto;

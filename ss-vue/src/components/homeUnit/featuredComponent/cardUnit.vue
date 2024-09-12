@@ -2,6 +2,7 @@
   <div class="cardUnit">
     <router-link :to="{ name: 'Shop' }">
       <UiCard 
+      style="animation: none"
       src="art/MHA1.JPG" 
       alt="Pencil Drawings" 
       title="Pencil Drawings" 
@@ -12,6 +13,7 @@
 
     <router-link :to="{ name: 'Shop' }">
       <UiCard 
+        style="animation: none"
         v-if="isDesktop"
         src="art/JJK12.JPG" 
         alt="Ink and Marker Art" 
@@ -23,6 +25,7 @@
 
     <router-link :to="{ name: 'Shop' }">
       <UiCard 
+        style="animation: none"
         v-if="isDesktop"
         src="art/CON2.JPG" 
         alt="Colored Artwork" 

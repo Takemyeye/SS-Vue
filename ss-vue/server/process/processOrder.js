@@ -1,6 +1,6 @@
+const Order = require('../models/Order'); 
 const express = require('express');
 const router = express.Router();
-const Order = require('../models/Order'); 
 
 router.get('/order', async (req, res) => {
     const authHeader = req.headers['authorization'];

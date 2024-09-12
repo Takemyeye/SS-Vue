@@ -1,6 +1,6 @@
+const artData = require('./data/artData');
 const express = require('express');
 const router = express.Router();
-const artData = require('./data/artData');
 
 router.get('/images', (req, res) => {
 const category = req.query.category;
