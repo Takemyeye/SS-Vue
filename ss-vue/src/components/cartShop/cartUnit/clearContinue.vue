@@ -31,7 +31,7 @@
         <div class="paypal">
           <div class="title">
             <font-awesome-icon icon="fa-brands fa-paypal" />
-            Paypal Method
+            PayPal Method
           </div>
         </div>
       </div>

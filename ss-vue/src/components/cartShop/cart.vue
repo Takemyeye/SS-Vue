@@ -2,16 +2,19 @@
   <div class="cart">
     <SiteHeader/>
     <CartBlock/>
+    <FooterPanel/>
   </div>
 </template>
 
 <script>
-import SiteHeader from '@/components/header/header.vue'
+import FooterPanel from '@/components/footer/footer.vue';
+import SiteHeader from '@/components/header/header.vue';
 import CartBlock from './cartUnit/cartBlock.vue';
 
   export default {
     name: 'CartShoping',
     components: {
+      FooterPanel,
       SiteHeader,
       CartBlock,
     }

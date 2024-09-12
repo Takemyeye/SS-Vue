@@ -25,6 +25,11 @@
       <h5>© 2024 Soul Swap. All rights reserved.</h5>
     </FooterContainer>
     <FooterContainer>
+      <a href="https://www.donationalerts.com/r/mellovan">
+        <h5>Support author</h5>
+      </a>  
+    </FooterContainer>
+    <FooterContainer>
       <h3 @click="scrollToTop">Back to top</h3>
     </FooterContainer>
 </template>

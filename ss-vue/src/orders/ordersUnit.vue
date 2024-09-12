@@ -130,4 +130,22 @@ h3 {
     color: black;
 }
 
+@media all and ( max-width: 1440px) {
+    .container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media all and ( max-width: 1024px) {
+    .container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media all and ( max-width: 768px) {
+    .container {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
 </style>

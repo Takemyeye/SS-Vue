@@ -2,18 +2,21 @@
     <div class="container">
         <HeaderPanel/>
         <OrdersUnit/>
+        <FootrPanel/>
     </div>
 </template>
 
 <script>
 import HeaderPanel from '@/components/header/header.vue';
 import OrdersUnit from './ordersUnit.vue';
+import FootrPanel from '@/components/footer/footer.vue'
 
 export default {
     name: 'ProcessingOrder',
     components: {
         HeaderPanel,
-        OrdersUnit
+        OrdersUnit,
+        FootrPanel
     },
 }
 </script>

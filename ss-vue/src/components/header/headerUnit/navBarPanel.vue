@@ -12,6 +12,9 @@
         <router-link to="/settings">
           <h5>Settings</h5>
         </router-link>
+        <router-link to="/orders ">
+          <h5>Orders</h5>
+        </router-link>
         <h5 @click="logout">Logout</h5>
       </div>
     </div>
