@@ -1,10 +1,10 @@
 import SettingsBlock from '@/components/settings/settings.vue';
+import ProcessingOrder from '@/components/orders/process.vue';
 import ProfileBlock from '@/components/settings/profile.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import CartShoping from '@/components/cartShop/cart.vue';
 import PrivacyPolicy from '@/policy/privacyPolicy.vue';
 import NotFound from '@/components/404/NotFound.vue';
-import ProcessingOrder from '@/orders/process.vue';
 import RegisterPage from '@/private/register.vue';
 import ArtShop from '@/components/store/shop.vue';
 import HomePage from '@/components/home.vue';

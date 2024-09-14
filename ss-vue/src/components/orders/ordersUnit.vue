@@ -1,21 +1,26 @@
 <template>
     <div class="process">
-        <template v-if="order">
-            <h1 style="padding: 2.5rem ">Orders in process</h1>
+        <template v-if="orders.length > 0">
             <div class="container">
-                <div v-for="item in order.items" :key="item.id" class="order-item">
-                    <div class="data">
-                        <div class="image">
-                            <img :src="`/art/${item.image}`" alt="Product Image" />
-                        </div>
-                        <div class="description">
-                            <UiBadge :styleBadge="`badge1`" :title="`${item.title}`" />
-                            <h5>{{ item.subtitle }}</h5>
+                <div v-for="(order, index) in orders" :key="order._id" class="order-item">
+                    <h2 style="padding: 2.5rem">Order #{{ index + 1 }}</h2>
+                    <div class="">
+                        <div v-for="item in order.cartItems" :key="item.id" class="data">
+                            <div class="image">
+                                <img :src="`/art/${item.image}`" alt="Product Image" />
+                            </div>
+                            <div class="description">
+                                <UiBadge :styleBadge="`badge1`" :title="`${item.title}`" />
+                                <h5>{{ item.subtitle }}</h5>
+                            </div>
+                            <h3>Price: ${{ item.price }}</h3>
                         </div>
                     </div>
-                    <h3>Price: ${{ item.price }}</h3>
                 </div>
             </div>
+        </template>
+        <template v-else>
+            <p>No orders found.</p>
         </template>
     </div>
 </template>
@@ -23,25 +28,25 @@
 <script>
 import UiBadge from '@/ui/badge.vue';
 
-    export default {
-        name: 'OrdersUnit',
-        components: {
-            UiBadge
-        },
-        data() {
+export default {
+    name: 'OrdersUnit',
+    components: {
+        UiBadge
+    },
+    data() {
         return {
-            order: null, 
+            orders: [],
         };
     },
     methods: {
-        fetchOrder() {
-            const token = localStorage.getItem('token'); 
+        fetchOrders() {
+            const token = localStorage.getItem('token');
             if (!token) {
                 console.error('No token found in localStorage');
                 return;
             }
 
-            fetch('http://localhost:3000/api/order', {
+            fetch('http://localhost:3000/api/orders', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -50,23 +55,22 @@ import UiBadge from '@/ui/badge.vue';
             })
             .then(response => response.json())
             .then(data => {
-                if (data && data.items && data.items.length > 0) {
-                    this.order = data;
+                if (Array.isArray(data) && data.length > 0) {
+                    this.orders = data;
                 } else {
-                    this.order = null;
+                    this.orders = [];
                 }
             })
             .catch(error => {
-                console.error('Error fetching order:', error);
-                this.order = null;
+                console.error('Error fetching orders:', error);
+                this.orders = [];
             });
         }
     },
     mounted() {
-        this.fetchOrder();
+        this.fetchOrders();
     }
-    }
-    
+}
 </script>
 
 <style scoped>
@@ -82,21 +86,21 @@ import UiBadge from '@/ui/badge.vue';
 
 .container {
     width: 80%;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
     gap: 1rem;
 }
 
 .order-item {
     box-shadow: 10px 35px 30px rgba(0, 0, 0, 0.144);    padding: 1rem;
-    width: 320px;
-    max-height: 370px;
+    width: 100%;
     padding: 8px 1rem;    
     border-radius: 1rem;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
     flex-direction: column;
     gap: 8px;
 }
@@ -114,7 +118,7 @@ import UiBadge from '@/ui/badge.vue';
 .description {
     height: 100%;
     display: flex;
-    align-items: center;
+    align-items: start;
     justify-content: start;
     flex-direction: column;
     gap: 8px;
@@ -149,3 +153,7 @@ h3 {
 }
 
 </style>
+
+<!--display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;-->
