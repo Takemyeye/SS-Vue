@@ -38,7 +38,6 @@ export default {
     },
     price: {
       type: String,
-      required:true,
       default: ''
     },
     subtitle: {
