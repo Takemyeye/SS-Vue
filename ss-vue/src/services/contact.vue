@@ -1,12 +1,18 @@
 <template>
-  <div class="contact">
+  <div class="contact" @click="toggleMessenger">
     <img :src="imgSrc" :alt="altText">
   </div>
+  <MessengBlock v-if="isMessengerOpen" @close-messenger="toggleMessenger"/>
 </template>
 
 <script>
+import MessengBlock from './messeng.vue'
+
 export default {
   name: 'ContactUs',
+  components: {
+    MessengBlock
+  },
   props: {
     imgSrc: {
       type: String,
@@ -16,8 +22,18 @@ export default {
       type: String,
       default: 'Contact Us'
     }
+  },
+  data() {
+    return {
+      isMessengerOpen: false
+    };
+  },
+  methods: {
+    toggleMessenger() {
+      this.isMessengerOpen = !this.isMessengerOpen;
+    }
   }
-  }
+}
 </script>
 
 <style scoped>

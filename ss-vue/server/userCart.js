@@ -5,7 +5,6 @@ const User = require('./models/User');
 require('dotenv').config();
 
 const router = express.Router();
-const SECRET_KEY = process.env.SECRET_KEY;
 
 router.post('/userCart', async (req, res) => {
   const { token, cartItems, totalPrice, country } = req.body;

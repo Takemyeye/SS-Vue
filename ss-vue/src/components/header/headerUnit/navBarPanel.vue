@@ -9,9 +9,6 @@
         <router-link to="/profile">
           <h5>Profile</h5>
         </router-link>
-        <router-link to="/settings">
-          <h5>Settings</h5>
-        </router-link>
         <router-link to="/orders">
           <h5>Orders</h5>
         </router-link>
@@ -68,16 +65,17 @@ export default {
     };
 
     onMounted(async () => {
-      if (!user.value && token) {
-        const queryParameters = new URLSearchParams(window.location.search);
-        const urlToken = queryParameters.get('token');
+      const queryParameters = new URLSearchParams(window.location.search);
+      const urlToken = queryParameters.get('token');
 
-        if (urlToken) {
-          localStorage.setItem('token', urlToken);
-          await fetchUser(urlToken);
-        } else {
-          await fetchUser(token);
-        }
+      if (urlToken) {
+        localStorage.setItem('token', urlToken);
+      }
+
+      const activeToken = urlToken || token;
+
+      if (!user.value && activeToken) {
+        await fetchUser(activeToken);
       }
     });
 
@@ -88,7 +86,7 @@ export default {
     };
 
     const logout = () => {
-      clearUser(); 
+      clearUser();
       localStorage.removeItem('token');
     };
 

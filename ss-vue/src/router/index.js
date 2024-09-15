@@ -1,4 +1,3 @@
-import SettingsBlock from '@/components/settings/settings.vue';
 import ProcessingOrder from '@/components/orders/process.vue';
 import ProfileBlock from '@/components/settings/profile.vue';
 import { createRouter, createWebHistory } from 'vue-router';
@@ -23,7 +22,6 @@ const isAdmin = () => {
 };
 
 const routes = [
-  { path: '/settings', name: 'Settings', component: SettingsBlock},
   { path: '/register', name: 'Register', component: RegisterPage },
   { path: '/privacy', name: 'Privacy', component: PrivacyPolicy },
   { path: '/profile', name: 'Profile', component: ProfileBlock },

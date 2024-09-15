@@ -46,7 +46,7 @@ export default {
                 return;
             }
 
-            fetch('http://localhost:3000/api/orders', {
+            fetch('http://localhost:3000/api/process', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,

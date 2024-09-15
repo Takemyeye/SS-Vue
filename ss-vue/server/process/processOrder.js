@@ -2,7 +2,7 @@ const Order = require('../models/Order');
 const express = require('express');
 const router = express.Router();
 
-router.get('/orders', async (req, res) => {
+router.get('/process', async (req, res) => {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1]; 
 
