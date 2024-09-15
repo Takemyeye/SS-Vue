@@ -101,7 +101,7 @@ export default {
     padding: 8px 1rem;    
     border-radius: 1rem;
     display: flex;
-    align-items: center;
+    align-items: start;
     justify-content: start;
     flex-direction: column;
     gap: 8px;

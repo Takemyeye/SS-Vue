@@ -1,7 +1,7 @@
 <template>
   <div class="rightPanel">
     <router-link v-if="!user" :to="{ name: 'Register' }" class="user">
-      <font-awesome-icon icon="user" />
+      <font-awesome-icon icon="user"/>
     </router-link>
     <div v-else class="avatar" @click="toggleDropdown">
       <img :src="avatarUrl" alt="User Avatar" />
@@ -18,7 +18,6 @@
         <h5 @click="logout">Logout</h5>
       </div>
     </div>
-    <h3 v-if="user"><font-awesome-icon icon="heart" style="color: #d55858;" /></h3>
     <router-link :to="{ name: 'Cart' }">
       <div class="cartIcon">
         <font-awesome-icon icon="cart-shopping" />
