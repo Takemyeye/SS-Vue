@@ -1,5 +1,5 @@
 <template>
-  <div class="contact" @click="handleClick">
+  <div class="contact">
     <img :src="imgSrc" :alt="altText">
   </div>
 </template>
@@ -16,14 +16,8 @@ export default {
       type: String,
       default: 'Contact Us'
     }
-  },
-  methods: {
-    handleClick() {
-      // Handle the click event, such as opening a contact form or sending an analytics event
-      console.log('Contact button clicked');
-    }
   }
-}
+  }
 </script>
 
 <style scoped>

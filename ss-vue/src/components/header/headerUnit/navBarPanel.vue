@@ -30,15 +30,14 @@
 <script>
 import { ref, computed, onMounted } from 'vue';
 import { cartState } from '@/services/activeContext';
-import auth from '@/private/auth';
+import useUserStore from '@/stores/userStore';
 
 export default {
   name: 'RightPanelNavBar',
 
   setup() {
-    const user = ref(null);
+    const { user, setUser, clearUser } = useUserStore();
     const isDropdownOpen = ref(false);
-
     const token = localStorage.getItem('token');
 
     const avatarUrl = computed(() => {
@@ -53,13 +52,13 @@ export default {
         const response = await fetch('http://localhost:3000/api/current_user', {
           method: 'GET',
           headers: {
-            'Authorization': `Bearer ${token}`
-          }
+            'Authorization': `Bearer ${token}`,
+          },
         });
 
         if (response.ok) {
           const data = await response.json();
-          user.value = data;
+          setUser(data);
         } else {
           console.error('Ошибка получения данных пользователя:', response.statusText);
         }
@@ -69,14 +68,16 @@ export default {
     };
 
     onMounted(async () => {
-      const queryParameters = new URLSearchParams(window.location.search);
-      const urlToken = queryParameters.get('token');
+      if (!user.value && token) {
+        const queryParameters = new URLSearchParams(window.location.search);
+        const urlToken = queryParameters.get('token');
 
-      if (urlToken) {
-        localStorage.setItem('token', urlToken);
-        await fetchUser(urlToken);
-      } else if (token) {
-        await fetchUser(token);
+        if (urlToken) {
+          localStorage.setItem('token', urlToken);
+          await fetchUser(urlToken);
+        } else {
+          await fetchUser(token);
+        }
       }
     });
 
@@ -87,8 +88,7 @@ export default {
     };
 
     const logout = () => {
-      auth.clearUser();
-      user.value = null;
+      clearUser(); 
       localStorage.removeItem('token');
     };
 
