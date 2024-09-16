@@ -3,9 +3,9 @@
     <div class="wrapper">
       <div class="container">
         <img src='img/logo.png' alt="">
-        <h3>Contact Us</h3>
+        <h3>Chat with Admin</h3>
         <div class="exit" @click="exitMessenger">
-          <font-awesome-icon icon="x"/>
+          <font-awesome-icon icon="xmark" style="font-size: 24px;" />
         </div>
       </div>
       <video src="video/video.mp4"  muted autoplay loop></video>
@@ -47,6 +47,7 @@ export default {
     padding: 8px;
     border-radius: 1rem;
     z-index: 1000;
+    animation: opacity 0.5s ease-in-out forwards;
   }
   
   .container {

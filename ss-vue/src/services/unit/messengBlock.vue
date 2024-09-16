@@ -1,41 +1,126 @@
 <template>
     <div class="messenger">
         <div class="container">
-
+            <div class="message-item" v-for="(msg, index) in messages" :key="index">
+                <div class="message-text">{{ msg }}</div>
+                <img :src="avatarUrl" alt="User Avatar" class="user-avatar" v-if="avatarUrl" />
+            </div>
         </div>
         <div class="write">
-            <img src="" alt="">
+            <img :src="avatarUrl" alt="User Avatar" v-if="avatarUrl" />
+            <textarea v-model="message" placeholder="Message..." rows="3"></textarea>
+            <button class="send-btn" @click="sendMessage">
+                <font-awesome-icon icon="paper-plane" />
+            </button>
         </div>
     </div>
 </template>
 
 <script>
-    export default {
-        name: 'MessengerBlock'
-    }
+import { ref, computed } from 'vue';
+import useUserStore from '@/stores/userStore';
+
+export default {
+    name: 'MessengerBlock',
+
+    setup() {
+        const { user } = useUserStore();
+        const message = ref('');
+        const messages = ref([]);
+
+        const avatarUrl = computed(() => {
+            return user.value && user.value.avatar ? user.value.avatar : '';
+        });
+
+        const sendMessage = () => {
+            if (message.value.trim()) {
+                messages.value.push(message.value);
+                message.value = '';
+            }
+        };
+
+        return {
+            avatarUrl,
+            message,
+            messages,
+            sendMessage,
+        };
+    },
+};
 </script>
 
 <style scoped>
-    .messenger {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-direction: column;
-    }
+.messenger {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
-    .write {
-        width: 90%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-direction: row;
-        padding: 4px 8px;
-        }
-    
-    img {
-        width: 32px;
-        height: 32px;
-    }
+.container {
+    width: 100%;
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.message-item {
+    width: 90%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+}
+
+.message-text {
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    max-width: 70%;
+}
+
+.user-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50px;
+}
+
+.write {
+    width: 95%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 4px 6px;
+}
+
+img {
+    width: 34px;
+    height: 34px;
+    border-radius: 50px;
+}
+
+textarea {
+    resize: none;
+    width: 250px;
+    padding: 4px;
+    height: 30px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.37);
+    font-size: 14px;
+}
+
+.send-btn {
+    color: white;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    background-color: black;
+    transition: 0.3s ease;
+}
+
+.send-btn:hover {
+    background-color: rgba(0, 0, 0, 0.808);
+}
 </style>

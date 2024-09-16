@@ -2,7 +2,7 @@ import { createApp } from 'vue';
 import router from './router';
 import App from './App.vue';
 
-import { faHouse, faCartShopping, faHeart, faUser, faCartPlus, faMoneyBill, faCircleXmark, faClock, faCity, faImage, faTrash, faComment, faX } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faCartShopping, faHeart, faUser, faCartPlus, faMoneyBill, faCircleXmark, faClock, faCity, faImage, faTrash, faComment, faXmark, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { faInstagram, faTelegram, faTiktok, faGoogle, faGithub, faDiscord, faPaypal } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -27,7 +27,8 @@ library.add(
   faImage,
   faTrash,
   faComment,
-  faX
+  faXmark,
+  faPaperPlane,
 );
 
 const app = createApp(App);
