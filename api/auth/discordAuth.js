@@ -11,12 +11,12 @@ const generateToken = (user) => {
   return jwt.sign({ id: user.id, email: user.email }, SECRET_KEY);
 };
 
-router.get('/auth/github', passport.authenticate('github', { scope: ['user:email'] }));
+router.get('/auth/discord', passport.authenticate('discord', { scope: ['identify', 'email'] }));
 
-router.get('/auth/github/callback', passport.authenticate('github', { session: false }), async (req, res) => {
+router.get('/auth/discord/callback', passport.authenticate('discord', { session: false }), async (req, res) => {
   const user = req.user;
   
-  const existingUser = await User.findOne({ id: user.id, email: user.email });
+  const existingUser = await User.findOne({ id: user.id, provider: user.provider });
 
   if (!existingUser) {
     const token = generateToken(user);
@@ -26,13 +26,14 @@ router.get('/auth/github/callback', passport.authenticate('github', { session: f
       username: user.username,
       avatar: user.avatar,
       email: user.email,
+      provider: user.provider,
       token: token
     });
 
     await newUser.save();
-    res.redirect(`https://soulswap.netlify.app?token=${token}`);
+    res.redirect(`http://localhost:8080?token=${token}`);
   } else {
-    res.redirect(`https://soulswap.netlify.app?token=${existingUser.token}`);
+    res.redirect(`http://localhost:8080?token=${existingUser.token}`);
   }
 });
 
