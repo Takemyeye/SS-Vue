@@ -1,6 +1,5 @@
 <template>
   <div>
-    <SearchBar @search="filterImages" />
     <div class="shop">
       <UiCard
         v-for="image in filteredImages"
@@ -27,16 +26,14 @@
 
 <script>
 import { addToCart } from '@/services/activeContext'; 
-import SearchBar from './searchBar.vue';
 import UiBaner from '@/ui/baner.vue';
 import UiCard from '@/ui/card.vue';
 
 export default {
   name: 'SdArt',
   components: {
-    SearchBar,
+    UiBaner,
     UiCard,
-    UiBaner
   },
   props: {
     images: {

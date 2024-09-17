@@ -23,12 +23,14 @@ import SiteFooter from '@/components/footer/footer.vue';
 import TopBar from '@/components/homeUnit/topBar.vue';
 import { isTokenAvailable } from '@/utils/authUtils';
 import CatalogBlock from './shopUnit/catalog.vue';
+import useImageStore from '@/stores/useImageStore';
 import ContactUs from '@/services/contact.vue';
 import FfArt from './shopUnit/fireForce.vue';
 import MhaArt from './shopUnit/mhaArt.vue';
 import AllArt from './shopUnit/allArt.vue';
 import JjkArt from './shopUnit/jjkArt.vue';
 import SdArt from './shopUnit/sdArt.vue';
+import { ref, onMounted } from 'vue';
 
 export default {
   name: 'ArtShop',
@@ -45,53 +47,27 @@ export default {
     MhaArt,
     SdArt,
   },
-  data() {
-    return {
-      activeCategory: 'All',
-      images: [],
-      filteredImages: {},
-    };
-  },
   setup() {
-    const tokenExists = (isTokenAvailable());
-    return {
-      tokenExists,
-    };
-  },
-  created() {
-    this.fetchImages();
-  },
-  methods: {
-    async fetchImages() {
-      try {
-        const response = await fetch('http://localhost:3000/api/images');
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        this.images = data;
-        this.filterImagesByCategory();
-      } catch (error) {
-        console.error('Error fetching images:', error);
+    const { filteredImages, fetchImages } = useImageStore();
+    const activeCategory = ref('All');
+    const tokenExists = isTokenAvailable();
+
+    onMounted(() => {
+      if (filteredImages.value['All'].length === 0) {
+        fetchImages();
       }
-    },
-    filterImagesByCategory() {
-      const categories = [
-        'All',
-        'Jujutsu Kaisen',
-        'Fire Force',
-        'Call of Night',
-        'My Hero Academia',
-        'Sakamoto Days'
-      ];
-      this.filteredImages = categories.reduce((acc, category) => {
-        acc[category] = this.images.filter(image => image.titleAnime === category || category === 'All');
-        return acc;
-      }, {});
-    },
-    handleCategorySelected(category) {
-      this.activeCategory = category;
-    },
+    });
+
+    const handleCategorySelected = (category) => {
+      activeCategory.value = category;
+    };
+
+    return {
+      activeCategory,
+      filteredImages,
+      tokenExists,
+      handleCategorySelected
+    };
   },
 };
 </script>
