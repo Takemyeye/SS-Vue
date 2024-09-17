@@ -59,7 +59,11 @@ export default {
 }
 
 .container {
-    width: 100%;
+    width: 95%;
+    height: 295px;
+    overflow-y: auto;
+    scrollbar-width: 12px;
+    scrollbar-color: rgb(255, 237, 237) rgb(199, 199, 199);
     flex-grow: 1;
     overflow-y: auto;
     padding: 10px;
@@ -70,11 +74,16 @@ export default {
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    padding: 8px 0;
     gap: 1rem;
 }
 
 .message-text {
-    background-color: #f1f1f1;
+    background-color: hsl(214, 59%, 15%);
+    color: hsl(210, 100%, 66%);
+    font-size: clamp(10px, 2vw, 14px);
+    padding: 4px 8px;
+    font-weight: lighter;
     border-radius: 10px;
     max-width: 70%;
 }
@@ -100,6 +109,10 @@ img {
 }
 
 textarea {
+    font-family: var(--text-font-family);
+    font-optical-sizing: var(--text-font-optical-sizing);
+    font-weight: var(--text-font-weight);
+    font-style: var(--text-font-style);
     resize: none;
     width: 250px;
     padding: 4px;
