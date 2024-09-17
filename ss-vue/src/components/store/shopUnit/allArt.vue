@@ -11,7 +11,7 @@
         :subtitle="image.subtitle"
         :btn="`${image.price} €`"
         :showT="false"
-        :showI="true"
+        :showI="true" 
         @click="handleCardClick(image)"
       />
       <UiBaner 
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { addToCart } from '@/services/activeContext';
+import { addToCart } from '@/services/activeContext'; 
 import SearchBar from './searchBar.vue';
 import UiBaner from '@/ui/baner.vue';
 import UiCard from '@/ui/card.vue';
@@ -38,9 +38,14 @@ export default {
     UiBaner,
     SearchBar
   },
+  props: {
+    images: {
+      type: Array,
+      required: true
+    }
+  },
   data() {
     return {
-      images: [],
       filteredImages: [],
       showBanner: false,
       selectedImageSrc: '',
@@ -49,24 +54,17 @@ export default {
       bannerTimeout: null,
     };
   },
-  created() {
-    this.fetchImages();
+  watch: {
+    images: {
+      handler(newImages) {
+        this.filteredImages = newImages;
+      },
+      immediate: true
+    }
   },
   methods: {
-    async fetchImages() {
-      try {
-        const response = await fetch('http://localhost:3000/api/images');
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        this.images = data;
-        this.filteredImages = data; 
-      } catch (error) {
-        console.error('Error fetching images:', error);
-      }
-    },
     filterImages(query) {
+      if (!this.images) return;
       this.filteredImages = this.images.filter(image => {
         const title = image.title ? image.title.toLowerCase() : ''; 
         const titleAnime = image.titleAnime ? image.titleAnime.toLowerCase() : ''; 
@@ -74,10 +72,7 @@ export default {
       });
     },
     handleCardClick(image) {
-      addToCart(image); 
-      this.showBannerForImage(image);
-    },
-    showBannerForImage(image) {
+      this.addToCart(image);
       this.selectedImageSrc = `/art/${image.image}`; 
       this.selectedImageAlt = image.title; 
       this.selectedImageTitle = image.title; 
@@ -90,8 +85,11 @@ export default {
         this.showBanner = false; 
       }, 5000);
     },
-  },
-};
+    addToCart(image) {
+      addToCart(image); 
+    },
+  }
+}
 </script>
 
 <style >

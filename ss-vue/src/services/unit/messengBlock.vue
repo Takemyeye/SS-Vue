@@ -60,7 +60,7 @@ export default {
 
 .container {
     width: 95%;
-    height: 295px;
+    height: 265px;
     overflow-y: auto;
     scrollbar-width: 12px;
     scrollbar-color: rgb(255, 237, 237) rgb(199, 199, 199);

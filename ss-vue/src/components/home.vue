@@ -2,7 +2,7 @@
 
   <SiteHeader/> 
   <main>
-    <ContactUs/>
+    <ContactUs v-if="tokenExists"/>
     <TopBar/>
     <FeaturedPanel/>
     <EmailPanel/>
@@ -12,12 +12,14 @@
 </template>
 
 <script>
-  import EmailPanel from './homeUnit/emailPanel.vue';
+  import { isTokenAvailable } from '@/utils/authUtils';
   import FeaturedPanel from './homeUnit/featured.vue';
+  import EmailPanel from './homeUnit/emailPanel.vue';
   import ContactUs from '@/services/contact.vue';
   import SiteHeader from './header/header.vue';
   import SiteFooter from './footer/footer.vue';
   import TopBar from './homeUnit/topBar.vue';
+  import { ref } from 'vue';
 
   export default {
     name: 'HomePage',
@@ -28,6 +30,13 @@
       EmailPanel,
       ContactUs,
       TopBar,
+    },
+    setup() {
+      const tokenExists = ref(isTokenAvailable());
+
+      return {
+        tokenExists
+      }
     }
   };
 

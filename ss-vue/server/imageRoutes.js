@@ -3,21 +3,9 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/images', (req, res) => {
-const category = req.query.category;
   
   try {
     let images;
-
-    if (category && artData[category]) {
-      images = artData[category].map(item => ({
-        id: item.id,
-        title: item.title,
-        image: item.image,
-        price: item.price,
-        subtitle: item.subtitle,
-        titleAnime: item.titleAnime
-      }));
-    } else {
       images = artData.all.map(item => ({
         id: item.id,
         title: item.title,
@@ -26,7 +14,7 @@ const category = req.query.category;
         subtitle: item.subtitle,
         titleAnime: item.titleAnime
       }));
-    }
+    
     
     res.json(images);
   } catch (error) {

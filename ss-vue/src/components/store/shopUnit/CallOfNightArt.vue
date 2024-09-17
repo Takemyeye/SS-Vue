@@ -12,15 +12,17 @@
         :btn="`${image.price} €`"
         :showT="false"
         :showI="true" 
-        @click="handleCardClick(image)"/>
+        @click="handleCardClick(image)"
+      />
       <UiBaner 
         v-if="showBanner"
         :src="selectedImageSrc"
         :alt="selectedImageAlt"
         :title="selectedImageTitle"
-        :text="`Added To Cart`"/> 
+        :text="`Added To Cart`"
+      /> 
     </div>
-  </div> 
+  </div>
 </template>
 
 <script>
@@ -36,9 +38,14 @@ export default {
     UiCard,
     UiBaner
   },
+  props: {
+    images: {
+      type: Array,
+      required: true
+    }
+  },
   data() {
     return {
-      images: [],
       filteredImages: [],
       showBanner: false,
       selectedImageSrc: '',
@@ -47,24 +54,17 @@ export default {
       bannerTimeout: null,
     };
   },
-  created() {
-    this.fetchImages();
+  watch: {
+    images: {
+      handler(newImages) {
+        this.filteredImages = newImages;
+      },
+      immediate: true
+    }
   },
   methods: {
-    async fetchImages() {
-      try {
-        const response = await fetch('http://localhost:3000/api/images?category=callOfNight');
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        this.images = data;
-        this.filteredImages = data; 
-      } catch (error) {
-        console.error('Error fetching images:', error);
-      }
-    },
     filterImages(query) {
+      if (!this.images) return;
       this.filteredImages = this.images.filter(image => {
         const title = image.title ? image.title.toLowerCase() : ''; 
         const titleAnime = image.titleAnime ? image.titleAnime.toLowerCase() : ''; 
@@ -77,7 +77,7 @@ export default {
       this.selectedImageAlt = image.title; 
       this.selectedImageTitle = image.title; 
 
-      this.showBanner = true
+      this.showBanner = true;
       if (this.bannerTimeout) {
         clearTimeout(this.bannerTimeout); 
       }
@@ -88,7 +88,7 @@ export default {
     addToCart(image) {
       addToCart(image); 
     },
-  },
+  }
 }
 </script>
 
