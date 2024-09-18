@@ -10,8 +10,8 @@ const userCart = require('./userCart');
 const authRoutes = require('./auth');
 const passport = require('passport');
 const express = require('express');
-const cors = require('cors');
 require('./redis/redisClient');
+const cors = require('cors');
 require('./passport-setup');
 require('dotenv').config();
 

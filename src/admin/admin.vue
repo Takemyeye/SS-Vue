@@ -27,7 +27,11 @@
           :styleBadge="'badge3'" />
       </div>
       <DataUser/>
-      <SelectedUserPanel v-if="selectedUser" :user="selectedUser" />
+      <SelectedUserPanel 
+      v-if="selectedUser" 
+      :user="selectedUser" 
+      @close="handleClosePanel"
+      />
     </div>
   </div>
 </template>
@@ -46,6 +50,11 @@ export default {
     UserCard,
     DataUser,
     UiBlock,
+  },
+  methods: {
+    handleClosePanel() {
+      this.selectedUser = null;
+    },
   },
   setup() {
     const users = ref([]);
