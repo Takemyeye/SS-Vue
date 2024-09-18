@@ -7,9 +7,10 @@
         :userName="user.username"
         :userAvatar="user.avatar"
         :userId="user.id"
-        @click="handleUserClick"
+        @click="handleUserClick(user.id)"
       />
     </div>
+    
     <div class="admin-panel">
       <div class="container">
         <UiBlock 
@@ -26,11 +27,13 @@
           :styleBadge="'badge3'" />
       </div>
       <DataUser/>
+      <SelectedUserPanel v-if="selectedUser" :user="selectedUser" />
     </div>
   </div>
 </template>
 
 <script>
+import SelectedUserPanel from './component/selectedUserPanel.vue';
 import DataUser from './component/data.vue';
 import UserCard from '@/ui/userCard.vue';
 import UiBlock from '@/ui/block.vue';
@@ -39,8 +42,9 @@ import { ref, onMounted } from 'vue';
 export default {
   name: 'AdminPanel',
   components: {
-    DataUser,
+    SelectedUserPanel,
     UserCard,
+    DataUser,
     UiBlock,
   },
   setup() {
@@ -66,7 +70,6 @@ export default {
 
     const fetchOrdersCount = async () => {
       try {
-
         const response = await fetch('http://localhost:3000/api/orders/count');
         if (response.ok) {
           const data = await response.json();
@@ -94,7 +97,7 @@ export default {
       users,
       totalUsers,
       activeOrders, 
-      selectedUser,
+      selectedUser, 
       handleUserClick,
     };
   },

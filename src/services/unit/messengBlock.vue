@@ -1,53 +1,104 @@
 <template>
     <div class="messenger">
-        <div class="container">
-            <div class="message-item" v-for="(msg, index) in messages" :key="index">
-                <div class="message-text">{{ msg }}</div>
-                <img :src="avatarUrl" alt="User Avatar" class="user-avatar" v-if="avatarUrl" />
-            </div>
+      <div class="container">
+        <div class="message-item" v-for="(msg, index) in messages" :key="index">
+          <div class="message-text">{{ msg.text }}</div>
+          <img :src="avatarUrl" alt="User Avatar" class="user-avatar" v-if="avatarUrl" />
         </div>
-        <div class="write">
-            <img :src="avatarUrl" alt="User Avatar" v-if="avatarUrl" />
-            <textarea v-model="message" placeholder="Message..." rows="3"></textarea>
-            <button class="send-btn" @click="sendMessage">
-                <font-awesome-icon icon="paper-plane" />
-            </button>
-        </div>
+      </div>
+      <div class="write">
+        <img :src="avatarUrl" alt="User Avatar" v-if="avatarUrl" />
+        <textarea v-model="message" placeholder="Message..." rows="3"></textarea>
+        <button class="send-btn" @click="sendMessage">
+          <font-awesome-icon icon="paper-plane" />
+        </button>
+      </div>
     </div>
-</template>
-
-<script>
-import { ref, computed } from 'vue';
-import useUserStore from '@/stores/userStore';
-
-export default {
+  </template>
+  
+  <script>
+  import { ref, computed } from 'vue';
+  import useUserStore from '@/stores/userStore';
+  
+  export default {
     name: 'MessengerBlock',
-
+  
     setup() {
-        const { user } = useUserStore();
-        const message = ref('');
-        const messages = ref([]);
+      const { user } = useUserStore();
+      const message = ref('');
+      const messages = ref([]);
+  
+      const avatarUrl = computed(() => {
+        return user.value && user.value.avatar ? user.value.avatar : '';
+      });
+  
+      const fetchMessages = async () => {
+        const token = localStorage.getItem('token');
+        try {
+          const response = await fetch('http://localhost:3000/api/messages', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+          });
+  
+          if (!response.ok) {
+            throw new Error('Ошибка при загрузке сообщений');
+          }
+  
+          const data = await response.json();
+          messages.value = data.messages;
+        } catch (error) {
+          console.error('Ошибка при загрузке сообщений с сервера:', error);
+        }
+      };
+  
+      const sendMessageToServer = async (messageText) => {
+        const token = localStorage.getItem('token');
 
-        const avatarUrl = computed(() => {
-            return user.value && user.value.avatar ? user.value.avatar : '';
-        });
+        try {
+            const response = await fetch('http://localhost:3000/api/messages/send', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({ message: messageText }),
+            });
 
-        const sendMessage = () => {
-            if (message.value.trim()) {
-                messages.value.push(message.value);
-                message.value = '';
+            if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`Ошибка при отправке сообщения: ${errorText}`);
             }
+
+        } catch (error) {
+            console.error('Ошибка при отправке сообщения на сервер:', error);
+        }
         };
 
-        return {
-            avatarUrl,
-            message,
-            messages,
-            sendMessage,
-        };
+
+  
+      const sendMessage = async () => {
+        if (message.value.trim()) {
+          const msg = { text: message.value, user: avatarUrl.value };
+          messages.value.push(msg);
+          await sendMessageToServer(message.value);
+          message.value = '';
+        }
+      };
+  
+      fetchMessages();
+  
+      return {
+        avatarUrl,
+        message,
+        messages,
+        sendMessage,
+      };
     },
-};
-</script>
+  };
+  </script>  
 
 <style scoped>
 .messenger {

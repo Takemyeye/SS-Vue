@@ -2,6 +2,7 @@ const processOrder = require('./process/processOrder');
 const discordAuthRoutes = require('./auth/discordAuth');
 const googleAuthRoutes = require('./auth/googleAuth');
 const githubAuthRoutes = require('./auth/githubAuth');
+const messangRoutes = require('./routes/messang');
 const imageRoutes = require('./imageRoutes');
 const usersRouter = require('./routes/user');
 const cartRoutes = require('./cartRoutes');
@@ -10,6 +11,7 @@ const authRoutes = require('./auth');
 const passport = require('passport');
 const express = require('express');
 const cors = require('cors');
+require('./redis/redisClient');
 require('./passport-setup');
 require('dotenv').config();
 
@@ -18,6 +20,9 @@ connectDB();
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }))
 
 app.use(cors({
   origin: 'http://localhost:8080',
@@ -31,6 +36,7 @@ app.use('/', googleAuthRoutes);
 app.use('/', githubAuthRoutes);
 app.use('/', discordAuthRoutes);
 
+app.use('/api', messangRoutes); 
 app.use('/api', processOrder);
 app.use('/api', imageRoutes);
 app.use('/api', usersRouter);
