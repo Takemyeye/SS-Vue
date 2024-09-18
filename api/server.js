@@ -9,7 +9,6 @@ const userCart = require('./userCart');
 const authRoutes = require('./auth');
 const passport = require('passport');
 const express = require('express');
-const path = require('path');
 const cors = require('cors');
 require('./passport-setup');
 require('dotenv').config();
@@ -26,10 +25,6 @@ app.use(cors({
   allowedHeaders: ['*'],
 }));
 
-app.use(express.json());
-app.use(express.static(path.join(__dirname, '../dist')));
-app.use('/art', express.static(path.join(__dirname, '../dist/art')));
-
 app.use(passport.initialize());
 
 app.use('/', googleAuthRoutes);
@@ -43,8 +38,8 @@ app.use('/api', authRoutes);
 app.use('/api', cartRoutes);
 app.use('/api', userCart);
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../dist/index.html'));
+app.get('/', (req, res) => {
+  res.send('<h1>Server is running on http://localhost:3000</h1>');
 });
 
 app.listen(port, () => {
