@@ -10,7 +10,6 @@
         @click="handleUserClick(user.id)"
       />
     </div>
-    
     <div class="admin-panel">
       <div class="container">
         <UiBlock 

@@ -5,12 +5,12 @@
       <ContactUs v-if="tokenExists"/>
       <TopBar />
       <CatalogBlock @category-selected="handleCategorySelected" />
-      <AllArt v-show="activeCategory === 'All'" :images="filteredImages['All']"/>
-      <JjkArt v-show="activeCategory === 'JJK'" :images="filteredImages['Jujutsu Kaisen']"/>
-      <FfArt v-show="activeCategory === 'FF'" :images="filteredImages['Fire Force']"/>
-      <CallOfNightArt v-show="activeCategory === 'CON'" :images="filteredImages['Call of Night']"/>
-      <MhaArt v-show="activeCategory === 'MHA'" :images="filteredImages['My Hero Academia']"/>
-      <SdArt v-show="activeCategory === 'SD'" :images="filteredImages['Sakamoto Days']"/>
+      <AllArt v-if="activeCategory === 'All'" :images="filteredImages['All']"/>
+      <JjkArt v-if="activeCategory === 'JJK'" :images="filteredImages['Jujutsu Kaisen']"/>
+      <FfArt v-if="activeCategory === 'FF'" :images="filteredImages['Fire Force']"/>
+      <CallOfNightArt v-if="activeCategory === 'CON'" :images="filteredImages['Call of Night']"/>
+      <MhaArt v-if="activeCategory === 'MHA'" :images="filteredImages['My Hero Academia']"/>
+      <SdArt v-if="activeCategory === 'SD'" :images="filteredImages['Sakamoto Days']"/>
     </div>
     <SiteFooter />
   </div>
