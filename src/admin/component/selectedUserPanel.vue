@@ -1,6 +1,6 @@
 <template>
   <div class="selected-user-panel">
-    <AdminTopPanel :user="user"/>
+    <AdminTopPanel :user="user" @click="closePanel"/>
     <AdminMessageBlock :user="user"/>
   </div>
 </template>
@@ -19,6 +19,11 @@ export default {
     user: {
       type: Object,
       required: true,
+    },
+  },
+  methods: {
+    closePanel() {
+      this.$emit('close');
     },
   },
 };

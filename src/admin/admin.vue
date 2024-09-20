@@ -15,21 +15,24 @@
         <UiBlock 
           :title="'Total Users'" 
           :number="totalUsers" 
-          :styleBadge="'badge1'" />
+          :styleBadge="'badge1'" 
+        />
         <UiBlock 
           :title="'Active Shops'" 
           :number="activeOrders" 
-          :styleBadge="'badge2'" />
+          :styleBadge="'badge2'" 
+        />
         <UiBlock 
           :title="'Total Revenue'" 
           :number="0" 
-          :styleBadge="'badge3'" />
+          :styleBadge="'badge3'" 
+        />
       </div>
-      <DataUser/>
+      <DataUser />
       <SelectedUserPanel 
-      v-if="selectedUser" 
-      :user="selectedUser" 
-      @close="handleClosePanel"
+        v-if="selectedUser" 
+        :user="selectedUser" 
+        @close="handleClosePanel"
       />
     </div>
   </div>
@@ -49,11 +52,6 @@ export default {
     UserCard,
     DataUser,
     UiBlock,
-  },
-  methods: {
-    handleClosePanel() {
-      this.selectedUser = null;
-    },
   },
   setup() {
     const users = ref([]);
@@ -91,9 +89,11 @@ export default {
     };
 
     const handleUserClick = (userId) => {
-      console.log('User ID clicked:', userId);
       selectedUser.value = users.value.find(user => user.id === userId);
-      console.log('Selected User:', selectedUser.value);
+    };
+
+    const handleClosePanel = () => {
+      selectedUser.value = null; // close panel
     };
 
     onMounted(() => {
@@ -107,6 +107,7 @@ export default {
       activeOrders, 
       selectedUser, 
       handleUserClick,
+      handleClosePanel,
     };
   },
 };

@@ -8,7 +8,9 @@
           <p><strong>Email:</strong>{{ user.email }}</p>
         </div>
       </div>
-      <div class="close-button" @click="closePanel"><font-awesome-icon icon="circle-xmark"/></div>
+      <div class="close-button" @click="closePanel">
+        <font-awesome-icon icon="circle-xmark"/>
+      </div>
     </div>
 </template>
 
@@ -26,7 +28,7 @@
         this.$emit('close');
       },
     },
-  }
+  };
 </script>
 
 <style scoped>
