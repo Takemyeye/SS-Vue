@@ -1,34 +1,24 @@
 <template>
   <div class="selected-user-panel">
-    <div class="top-panel">
-      <div class="user" v-if="user">
-        <img :src="user.avatar" alt="User Avatar" class="user-avatar" />
-        <p><strong>Username:</strong> {{ user.username }}</p>
-        <p><strong>Email:</strong> {{ user.email }}</p>
-      </div>
-      <div class="close-button" @click="closePanel">X</div>
-    </div>
+    <AdminTopPanel :user="user"/>
     <AdminMessageBlock :user="user"/>
   </div>
 </template>
 
 <script>
-import AdminMessageBlock from './unit/userMessange.vue';
+import AdminMessageBlock from './selectedUserUnit/userMessange.vue';
+import AdminTopPanel from './selectedUserUnit/userAdminPanel.vue'
 
 export default {
   name: 'SelectedUserPanel',
   components: {
     AdminMessageBlock,
+    AdminTopPanel,
   },
   props: {
     user: {
       type: Object,
       required: true,
-    },
-  },
-  methods: {
-    closePanel() {
-      this.$emit('close');
     },
   },
 };
@@ -53,43 +43,5 @@ export default {
   scrollbar-width: thin;
   scrollbar-color: initial;
   gap: 1rem;
-}
-
-.top-panel {
-  position: sticky;
-  top: 0;
-  right: 0;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: row;
-  background-color: white;
-}
-
-.user {
-  width: 100%;
-  padding: 1rem 0;
-}
-
-.user-avatar {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-p {
-  padding: 5px 0;
-}
-
-.close-button {
-  cursor: pointer;
-  border: none;
-  border-radius: 50px;
-  color: white;
-  padding: 4px 8px;
-  font-size: 1rem;
-  background-color: black;
 }
 </style>
