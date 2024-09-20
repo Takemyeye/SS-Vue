@@ -5,18 +5,28 @@
           <div class="message-text">{{ msg.text }}</div>
           <img :src="avatarUrl" alt="User Avatar" class="user-avatar" v-if="avatarUrl" />
         </div>
+        <div class="message-item-admin">
+          <img src="https://avatars.githubusercontent.com/u/151098313?v=4" alt="User Avatar" class="user-avatar"/>
+          <div class="message-text-admin">ты хуй</div>
+        </div>
       </div>
       <div class="write">
         <img :src="avatarUrl" alt="User Avatar" v-if="avatarUrl" />
-        <textarea v-model="message" placeholder="Message..." rows="3"></textarea>
+        <textarea 
+          v-model="message" 
+          placeholder="Message..." 
+          rows="3"
+          @keydown="handleKeyDown">
+        </textarea>
         <button class="send-btn" @click="sendMessage">
           <font-awesome-icon icon="paper-plane" />
         </button>
       </div>
     </div>
   </template>
-  
+
   <script>
+  import useKeyDownHandler from '@/utils/useKeyDownHandler';
   import useMessengerStore from '@/stores/messengerStore';
   
   export default {
@@ -24,12 +34,16 @@
   
     setup() {
       const { messages, message, avatarUrl, sendMessage } = useMessengerStore();
-  
+
+      //import function
+      const { handleKeyDown} = useKeyDownHandler(sendMessage);
+
       return {
+        handleKeyDown,
+        sendMessage,
+        avatarUrl,
         messages,
         message,
-        avatarUrl,
-        sendMessage,
       };
     },
   };
@@ -53,10 +67,14 @@
     flex-grow: 1;
     overflow-y: auto;
     padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: column;
 }
 
-.message-item {
-    width: 90%;
+.message-item, .message-item-admin {
+    width: 100%;
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -64,7 +82,11 @@
     gap: 1rem;
 }
 
-.message-text {
+.message-item-admin {
+  justify-content: flex-start;
+}
+
+.message-text, .message-text-admin {
     background-color: hsl(214, 59%, 15%);
     color: hsl(210, 100%, 66%);
     font-size: clamp(10px, 2vw, 14px);
@@ -72,6 +94,11 @@
     font-weight: lighter;
     border-radius: 10px;
     max-width: 70%;
+}
+
+.message-text-admin {
+  background-color: hsl(357, 46%, 16%); 
+  color: hsl(358, 100%, 69%);
 }
 
 .user-avatar {

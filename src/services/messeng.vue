@@ -3,7 +3,7 @@
     <div class="wrapper">
       <div class="container">
         <img src='img/logo.png' alt="">
-        <h3>Chat with Admin</h3>
+        <h3>Soul Swap</h3>
         <div class="exit" @click="exitMessenger">
           <font-awesome-icon icon="xmark" style="font-size: 24px;" />
         </div>
