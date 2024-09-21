@@ -1,7 +1,7 @@
 <template>
   <div class="cartBlock">
     <ClearContinue />
-    <div class="cart">
+    <div class="cartItem">
       <UiCard
         v-for="item in cartItems"
         :key="item.id"
@@ -59,7 +59,7 @@ export default {
   flex-direction: column;
 }
 
-.cart {
+.cartItem {
   width: 80%;
   min-height: 70vh;
   display: grid;

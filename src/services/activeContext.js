@@ -20,8 +20,14 @@ export function updateTotalItems() {
 }
 
 export function addToCart(item) {
-  cartState.cartItems.push(item);
-  updateTotalItems();
+  // check
+  const itemExists = cartState.cartItems.some(cartItem => cartItem.id === item.id);
+
+  // if not exist
+  if (!itemExists) {
+    cartState.cartItems.push(item);
+    updateTotalItems();
+  }
 }
 
 export function removeFromCart(id) {
@@ -32,5 +38,5 @@ export function removeFromCart(id) {
 export function clearCart() {
   cartState.cartItems = [];
   updateTotalItems();
-  localStorage.removeItem('cartItems'); // Удаляем также из localStorage
+  localStorage.removeItem('cartItems'); // dellet from loalStorage
 }

@@ -44,8 +44,8 @@ export default {
   right: 1rem;
   bottom: 1rem;
   background-color: white;
-  z-index: 1;
   cursor: pointer;
+  z-index: 1;
 }
 
 .contact:hover img {

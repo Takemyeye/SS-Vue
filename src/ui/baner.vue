@@ -37,7 +37,7 @@
 <style scoped>
   .baner {
     position: fixed;
-    right: 1%;
+    right: 70px;
     bottom: 1%;
     width: 250px;
     height: 60px;
@@ -51,6 +51,7 @@
     justify-content: space-between;
     flex-direction: row;
     animation: toTop 1s ease forwards;
+    z-index: 2;
   }
   img {
     max-width: 80px;
@@ -76,6 +77,12 @@
     100%{
       opacity: 1;
       transform: translateY(0);
+    }
+  }
+
+  @media all and (max-width:768px) {
+    .baner {
+      width: 175px;
     }
   }
 </style>
