@@ -1,11 +1,11 @@
 import ProcessingOrder from '@/components/orders/process.vue';
-import ProfileBlock from '@/components/settings/profile.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import CartShoping from '@/components/cartShop/cart.vue';
 import PrivacyPolicy from '@/policy/privacyPolicy.vue';
 import NotFound from '@/components/404/NotFound.vue';
 import RegisterPage from '@/private/register.vue';
 import ArtShop from '@/components/store/shop.vue';
+import ProfilePage from '@/profile/profile.vue';
 import HomePage from '@/components/home.vue';
 import AdminPanel from '@/admin/admin.vue';
 
@@ -24,7 +24,7 @@ const isAdmin = () => {
 const routes = [
   { path: '/register', name: 'Register', component: RegisterPage },
   { path: '/privacy', name: 'Privacy', component: PrivacyPolicy },
-  { path: '/profile', name: 'Profile', component: ProfileBlock },
+  { path: '/profile', name: 'Profile', component: ProfilePage },
   { path: '/shop', name: 'Shop', component: ArtShop },
   { path: '/', name: 'Home', component: HomePage },
   { 
