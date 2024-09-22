@@ -1,11 +1,9 @@
 <template>
   <SiteHeader/>
   <div class="profile-page">
-    <div class="profile">
-      <div class="user">
-        <img :src="avatarUrl" :alt="userName">
-        <h3> {{ userName }}</h3>
-      </div>
+    <div class="container">
+      <UserProfile/>
+      <UserInfo/>
     </div>
   </div>
   <SiteFooter/>
@@ -14,69 +12,46 @@
 <script>
 import SiteHeader from '@/components/header/header.vue';
 import SiteFooter from '@/components/footer/footer.vue';
-import useUserStore from '@/stores/userStore';
-import { computed } from 'vue';
+import UserProfile from './unit/userProfile.vue';
+import UserInfo from './unit/userInfo.vue';
 
-  export default {
-    name: 'ProfilePage',
-    components: {
-      SiteHeader,
-      SiteFooter,
-    },
-    setup() {
-      const { user } = useUserStore();
-      
-      const avatarUrl = computed(() => {
-        if (user.value && user.value.avatar) {
-          return user.value.avatar; 
-        }
-        return ''; 
-      });
-
-      const userName = 'Oleh'
-
-      return {
-        user,
-        avatarUrl,
-        userName
-      }
-    },
-  }
+export default {
+  name: 'ProfilePage',
+  components: {
+    UserProfile,
+    SiteHeader,
+    SiteFooter,
+    UserInfo,
+  },
+};
 </script>
 
 <style scoped>
   .profile-page {
+    font-family: var(--text-font-family);
+    font-optical-sizing: var(--text-font-optical-sizing);
+    font-weight: var(--text-font-weight);
+    font-style: var(--text-font-style);
     width: 100%;
-    min-height: calc(90vh - 1px);
+    min-height: calc(85vh - 1px);
     display: flex;
     align-items: center;
     justify-content: start;
     flex-direction: column;
+    padding-top: 5vh;
     gap: 1rem;
   }
 
-  .profile {
-    width: 80%;
+  .container {
+    width: 55%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: 2.5rem;
+    padding: 2rem 2.5%;
     gap: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.342);
   }
 
-  .user {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    flex-direction: row;
-    gap: 8px;
-  }
-
-  img {
-    width: 62px;
-    height: 62px;
-    border-radius: 50%;
-  }
 </style>
