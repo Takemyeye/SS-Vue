@@ -6,7 +6,10 @@ const UserSchema = new mongoose.Schema({
   avatar: { type: String },
   email: { type: String, required: true },
   token: { type: String },
-  provider: { type: String }
+  provider: { type: String },
+  bio: { type: String },
+  nickname: { type: String }
+
 });
 
 UserSchema.index({ id: 1, email: 1, username: 1 }, { unique: true });

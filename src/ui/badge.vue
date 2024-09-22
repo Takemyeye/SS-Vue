@@ -1,7 +1,7 @@
 <template>
   <div :class="styleBadge" class="badge-container">
     <slot></slot>
-    <h5>{{ title }}</h5>
+    <div>{{ title }}</div>
   </div>
 </template>
 
@@ -27,6 +27,9 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: medium;
+    color: var(--color-000);
+    font-weight: 500;
     gap: 4px;
   }
 
@@ -37,15 +40,11 @@ export default {
     align-items: center;
   }
 
-  h5 {
-    font-size: medium;
-  }
-
   .badge1 {
     background-color: hsl(214, 59%, 15%);
   }
 
-  .badge1 h5 {
+  .badge1 div {
     color: hsl(210, 100%, 66%);
   }
 
@@ -53,7 +52,7 @@ export default {
     background-color: hsl(281, 38%, 16%);
   }
 
-  .badge2 h5 {
+  .badge2 div {
     color: hsl(275, 80%, 71%);
   }
 
@@ -61,7 +60,7 @@ export default {
     background-color: hsl(135, 70%, 16%);
   }
 
-  .badge3 h5 {
+  .badge3 div {
     color: hsl(174, 90%, 41%);
   }
 
@@ -70,7 +69,7 @@ export default {
     cursor: pointer;
   }
 
-  .badge4 h5 {
+  .badge4 div {
     color: hsl(358, 100%, 69%);
   }
 </style>

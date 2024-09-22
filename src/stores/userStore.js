@@ -8,6 +8,7 @@ const useUserStore = () => {
   };
 
   const clearUser = () => {
+    window.location.href = '/';
     user.value = null;
   };
 

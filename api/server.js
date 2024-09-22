@@ -3,6 +3,7 @@ const discordAuthRoutes = require('./auth/discordAuth');
 const googleAuthRoutes = require('./auth/googleAuth');
 const githubAuthRoutes = require('./auth/githubAuth');
 const messangRoutes = require('./routes/messang');
+const userUpdate = require('./data/user-update');
 const imageRoutes = require('./imageRoutes');
 const usersRouter = require('./routes/user');
 const cartRoutes = require('./cartRoutes');
@@ -41,6 +42,7 @@ app.use('/api', processOrder);
 app.use('/api', imageRoutes);
 app.use('/api', usersRouter);
 app.use('/api', authRoutes);
+app.use('/api', userUpdate);
 app.use('/api', cartRoutes);
 app.use('/api', userCart);
 
