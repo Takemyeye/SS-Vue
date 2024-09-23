@@ -8,7 +8,7 @@ const clearUserFromServer = async () => {
   if (!state.token) return;
 
   try {
-    await fetch('https://ss-vue-vbac.onrender.com/api/current_user', {
+    await fetch('http://localhost:3000/api/current_user', {
       method: 'DELETE',
       headers: {
         Authorization: `Bearer ${state.token}`,

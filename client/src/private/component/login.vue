@@ -34,9 +34,9 @@ export default {
   name: 'LoginCard',
   data() {
     return {
-      discordAuthUrl: `https://discord.com/oauth2/authorize?client_id=1274555710423695472&response_type=code&redirect_uri=https%3A%2F%2Fss-vue-vbac.onrender.com%2F&scope=identify+email`,
-      googleAuthUrl: `https://ss-vue-vbac.onrender.com/auth/google`,
-      githubAuthUrl: `https://ss-vue-vbac.onrender.com/auth/github`,
+      discordAuthUrl: `https://discord.com/oauth2/authorize?client_id=1274555710423695472&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2F&scope=identify+email`,
+      googleAuthUrl: `http://localhost:3000/auth/google`,
+      githubAuthUrl: `http://localhost:3000/auth/github`,
     };
   },
 }

@@ -35,11 +35,11 @@ router.get('/auth/discord/callback', passport.authenticate('discord', { session:
       });
 
       await newUser.save();
-      console.log('Redirecting to:', `https://soulswap.netlify.app?token=${token}`);
-      return res.redirect(`https://soulswap.netlify.app?token=${token}`);
+      console.log('Redirecting to:', `http://localhost:8080?token=${token}`);
+      return res.redirect(`http://localhost:8080?token=${token}`);
     } else {
-      console.log('Redirecting to:', `https://soulswap.netlify.app?token=${existingUser.token}`);
-      return res.redirect(`https://soulswap.netlify.app?token=${existingUser.token}`);
+      console.log('Redirecting to:', `http://localhost:8080?token=${existingUser.token}`);
+      return res.redirect(`http://localhost:8080?token=${existingUser.token}`);
     }
   } catch (err) {
     console.error('Error during Discord callback:', err);
