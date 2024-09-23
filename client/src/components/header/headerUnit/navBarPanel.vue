@@ -46,7 +46,7 @@ export default {
 
     const fetchUser = async (token) => {
       try {
-        const response = await fetch('https://ss-vue-yf04.onrender.com/api/current_user', {
+        const response = await fetch('http://localhost:3000/api/current_user', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -145,7 +145,7 @@ h1 {
 .dropdown {
   position: absolute;
   top: 40px;
-  left: -1.5rem;
+  left: -120%;
   padding: 4px;
   min-width: 200px;
   background-color: white;

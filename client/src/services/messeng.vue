@@ -84,4 +84,9 @@ export default {
     border-radius: 8px;
   }
 
+@media all and (max-width:768px) {
+  .messeng {
+    max-width: 300px;
+  }
+}
 </style>

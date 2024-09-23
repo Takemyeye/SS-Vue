@@ -26,7 +26,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 
 app.use(cors({
-  origin: ['https://soulswap.netlify.app', 'https://soulswap.netlify.app'],
+  origin: ['http://localhost:8080', 'https://soulswap.netlify.app'],
   methods: ['*'],
   allowedHeaders: ['*'],
 }));
@@ -47,7 +47,7 @@ app.use('/api', cartRoutes);
 app.use('/api', userCart);
 
 app.get('/', (req, res) => {
-  res.send('<h1>Server is running on https://ss-vue-yf04.onrender.com</h1>');
+  res.send('<h1>Server is running on http://localhost:3000</h1>');
 });
 
 app.listen(port, () => {
