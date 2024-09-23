@@ -34,7 +34,7 @@ export default {
   name: 'LoginCard',
   data() {
     return {
-      discordAuthUrl: `https://discord.com/oauth2/authorize?client_id=1274555710423695472&response_type=code&redirect_uri=https%3A%2F%2Fss-vue-yf04.onrender.com%2F&scope=identify+email`,
+      discordAuthUrl: `https://discord.com/oauth2/authorize?client_id=1274555710423695472&response_type=code&redirect_uri=https%3A%2F%2Fss-vue-yf04.onrender.com%2Fauth%2Fdiscord%2F&scope=identify+email`,
       googleAuthUrl: `https://ss-vue-yf04.onrender.com/auth/google`,
       githubAuthUrl: `https://ss-vue-yf04.onrender.com/auth/github`,
     };
