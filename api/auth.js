@@ -34,7 +34,7 @@ const handleAuthCallback = async (req, res) => {
 
       try {
         await newUser.save();
-        res.redirect(`http://localhost:8080/?token=${token}`);
+        res.redirect(`https://soulswap.netlify.app/?token=${token}`);
       } catch (saveErr) {
         if (saveErr.code === 11000) {
           return res.status(400).send('Пользователь с такими данными уже существует.');
@@ -43,7 +43,7 @@ const handleAuthCallback = async (req, res) => {
       }
     } else {
       const token = generateToken(existingUser);
-      res.redirect(`http://localhost:8080/?token=${token}`);
+      res.redirect(`https://soulswap.netlify.app/?token=${token}`);
     }
   } catch (err) {
     console.error('Ошибка при работе с пользователями:', err);
