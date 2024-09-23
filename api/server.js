@@ -1,5 +1,5 @@
-const processOrder = require('./process/processOrder');
 const discordAuthRoutes = require('./auth/discordAuth');
+const processOrder = require('./process/processOrder');
 const googleAuthRoutes = require('./auth/googleAuth');
 const githubAuthRoutes = require('./auth/githubAuth');
 const messangRoutes = require('./routes/messang');
@@ -13,6 +13,7 @@ const passport = require('passport');
 const express = require('express');
 require('./redis/redisClient');
 const cors = require('cors');
+const https = require('https');
 require('./passport-setup');
 require('dotenv').config();
 
@@ -47,9 +48,11 @@ app.use('/api', cartRoutes);
 app.use('/api', userCart);
 
 app.get('/', (req, res) => {
-  res.send('<h1>Server is running on http://localhost:3000</h1>');
+  res.send('<h1>Server is running on https://ss-vue-yf04.onrender.com</h1>');
 });
 
-app.listen(port, () => {
+const httpsServer = https.createServer(credentials, app);
+
+httpsServer.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
