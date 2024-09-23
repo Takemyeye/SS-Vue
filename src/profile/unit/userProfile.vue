@@ -8,13 +8,13 @@
           <UiBadge 
             styleBadge="badge1" 
             :title="userNick" 
-            style="width: fit-content; cursor: pointer;" 
+            style=" width: fit-content; cursor: pointer;" 
             @click="copyText(userNick)"
           />
           <UiBadge 
             styleBadge="badge2" 
             title="Change Nick" 
-            style="width: fit-content; cursor: pointer;" 
+            style="font-size: small; width: fit-content; cursor: pointer;" 
             @click="updateNick" 
           />
           <textarea data-v-06268d9a v-model="newNick" placeholder="change your nickname..." rows="3"></textarea>

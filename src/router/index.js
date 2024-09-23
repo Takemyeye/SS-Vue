@@ -24,7 +24,12 @@ const isAdmin = () => {
 const routes = [
   { path: '/register', name: 'Register', component: RegisterPage },
   { path: '/privacy', name: 'Privacy', component: PrivacyPolicy },
-  { path: '/profile', name: 'Profile', component: ProfilePage },
+  { 
+    path: '/profile', 
+    name: 'Profile', 
+    component: ProfilePage,     
+    meta: { requiresAuth: true }, 
+},
   { path: '/shop', name: 'Shop', component: ArtShop },
   { path: '/', name: 'Home', component: HomePage },
   { 
