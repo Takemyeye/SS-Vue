@@ -14,27 +14,38 @@ const generateToken = (user) => {
 router.get('/auth/discord', passport.authenticate('discord', { scope: ['identify', 'email'] }));
 
 router.get('/auth/discord/callback', passport.authenticate('discord', { session: false }), async (req, res) => {
-  const user = req.user;
-  
-  const existingUser = await User.findOne({ id: user.id, provider: user.provider });
+  try {
+    const user = req.user;
+    
+    if (!user) {
+      return res.status(401).send('User not authenticated');
+    }
 
-  if (!existingUser) {
-    const token = generateToken(user);
+    const existingUser = await User.findOne({ id: user.id, provider: user.provider });
 
-    const newUser = new User({
-      id: user.id,
-      username: user.username,
-      avatar: user.avatar,
-      email: user.email,
-      provider: user.provider,
-      token: token
-    });
+    if (!existingUser) {
+      const token = generateToken(user);
+      const newUser = new User({
+        id: user.id,
+        username: user.username,
+        avatar: user.avatar,
+        email: user.email,
+        provider: user.provider,
+        token: token
+      });
 
-    await newUser.save();
-    res.redirect(`https://soulswap.netlify.app?token=${token}`);
-  } else {
-    res.redirect(`https://soulswap.netlify.app?token=${existingUser.token}`);
+      await newUser.save();
+      console.log('Redirecting to:', `https://soulswap.netlify.app?token=${token}`);
+      return res.redirect(`https://soulswap.netlify.app?token=${token}`);
+    } else {
+      console.log('Redirecting to:', `https://soulswap.netlify.app?token=${existingUser.token}`);
+      return res.redirect(`https://soulswap.netlify.app?token=${existingUser.token}`);
+    }
+  } catch (err) {
+    console.error('Error during Discord callback:', err);
+    return res.status(500).send('Server error');
   }
 });
+
 
 module.exports = router;
