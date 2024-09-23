@@ -13,9 +13,10 @@
 </template>
 
 <script>
-import UiBadge from '@/ui/badge.vue';
 import HoverBioPanel from './hoverBioPanel.vue';
-import { ref } from 'vue';
+import useUserStore from '@/stores/userStore';
+import UiBadge from '@/ui/badge.vue';
+import { computed, ref } from 'vue';
   
 export default {
     name: 'UserBioPanel',
@@ -24,7 +25,12 @@ export default {
         UiBadge,
     },
     setup() {
+        const { user } = useUserStore();
+
         const isBarOpen = ref(false);
+        const userBio = computed(() => {
+              return user.value?.bio || 'No bio available';
+          });
 
         const toggleBar = () => {
             isBarOpen.value = !isBarOpen.value;
@@ -32,7 +38,8 @@ export default {
 
         return {
             toggleBar,
-            isBarOpen
+            isBarOpen,
+            userBio
         }
     }
 }
