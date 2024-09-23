@@ -11,7 +11,7 @@ const fetchUserFromServer = async () => {
   if (!state.token) return;
 
   try {
-    const response = await fetch('http://localhost:3000/api/current_user', {
+    const response = await fetch('https://ss-vue-vbac.onrender.com/api/current_user', {
       headers: {
         Authorization: `Bearer ${state.token}`,
       },
@@ -39,7 +39,7 @@ const setUser = (user) => {
 
 const saveOrUpdateUserOnServer = async (user) => {
   try {
-    const response = await fetch('http://localhost:3000/api/user', {
+    const response = await fetch('https://ss-vue-vbac.onrender.com/api/user', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -63,7 +63,7 @@ const clearUserFromServer = async () => {
   if (!state.token) return;
 
   try {
-    await fetch('http://localhost:3000/api/user', {
+    await fetch('https://ss-vue-vbac.onrender.com/api/user', {
       method: 'DELETE',
       headers: {
         Authorization: `Bearer ${state.token}`,
@@ -97,7 +97,7 @@ const getUserFromCode = async (code) => {
     
     if (userResponse) {
       const { id, username, email } = userResponse;
-      const tokenResponse = await fetch('http://localhost:3000/auth/google/callback', {
+      const tokenResponse = await fetch('https://ss-vue-vbac.onrender.com/auth/google/callback', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

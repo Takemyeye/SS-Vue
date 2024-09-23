@@ -12,7 +12,7 @@ const filteredImages = ref({
 
 const fetchImages = async () => {
   try {
-    const response = await fetch('http://localhost:3000/api/images');
+    const response = await fetch('https://ss-vue-vbac.onrender.com/api/images');
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }

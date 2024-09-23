@@ -32,7 +32,7 @@
     async mounted() {
     if (this.user && this.user.token) {
       try {
-        const response = await fetch('http://localhost:3000/api/messages', {
+        const response = await fetch('https://ss-vue-vbac.onrender.com/api/messages', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${this.user.token}`,

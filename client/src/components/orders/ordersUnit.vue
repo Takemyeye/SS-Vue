@@ -28,7 +28,7 @@
           return;
         }
   
-        fetch('http://localhost:3000/api/process', {
+        fetch('https://ss-vue-vbac.onrender.com/api/process', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,
