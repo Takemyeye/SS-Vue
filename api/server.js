@@ -13,7 +13,6 @@ const passport = require('passport');
 const express = require('express');
 require('./redis/redisClient');
 const cors = require('cors');
-const https = require('https');
 require('./passport-setup');
 require('dotenv').config();
 
@@ -51,8 +50,6 @@ app.get('/', (req, res) => {
   res.send('<h1>Server is running on https://ss-vue-yf04.onrender.com</h1>');
 });
 
-const httpsServer = https.createServer(credentials, app);
-
-httpsServer.listen(port, () => {
+app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
