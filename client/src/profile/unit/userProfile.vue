@@ -16,12 +16,14 @@
             title="Change Nick" 
             style="font-size: small; width: fit-content; cursor: pointer;" 
             @click="toggleBar"
-            />
+          />
         </div>
       </div>
-      <UiButton buttonText="Logout" @click="logout"/>
+      <div class="btn">
+        <UiButton buttonText="Logout" @click="logout"/>
+      </div>
     </div>
-    <HoverInfoPanel v-if="isBarOpen" :toggleBar="toggleBar"/>
+    <HoverInfoPanel v-if="isBarOpen" :toggleBar="toggleBar" @nickUpdated="handleNickUpdate"/>
   </div>
 </template>
 
@@ -61,14 +63,19 @@ export default {
     });
 
     const userNick = computed(() => {
-        return user.value?.nickname ? `@${user.value.nickname}` : '@username';
-      });
+      return user.value?.nickname ? `@${user.value.nickname}` : '@username';
+    });
 
     const copyText = (text) => {
       navigator.clipboard.writeText(text)
         .catch(err => {
           console.error('Copy error:', err);
         });
+    };
+
+    // Handle the updated nickname from the child component
+    const handleNickUpdate = (newNickname) => {
+      user.value.nickname = newNickname; // Update the user nickname in the store
     };
 
     return {
@@ -78,9 +85,10 @@ export default {
       userName,
       userNick,
       copyText,
+      handleNickUpdate,
       logout,
     };
-  },
+  }
 }
 </script>
 
@@ -105,8 +113,9 @@ export default {
   .data {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
     flex-direction: row;
+    width: 100%;
     gap: 8px;
   }
 
@@ -121,5 +130,17 @@ export default {
     display: flex;
     flex-direction: column;
     gap: 8px;
+  }
+
+  @media all and (max-width:768px) {
+   .user {
+    flex-direction: column;
+    gap: 1rem;
+   }
+   .btn {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+   }
   }
 </style>

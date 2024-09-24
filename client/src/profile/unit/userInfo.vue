@@ -46,4 +46,13 @@ export default {
   h2 {
     font-weight: 600;
   }
+
+  .info {
+    width: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+  }
 </style>

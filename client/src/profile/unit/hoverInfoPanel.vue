@@ -4,9 +4,13 @@
       <font-awesome-icon icon="xmark" 
         style="font-size: 24px; color: black; cursor: pointer; position: absolute; right: 10px; top: 10px;" 
         @click="toggleBar"/>
-      <h2>New Nick Name</h2>
-      <textarea v-model="newNick" placeholder="change your nickname..." rows="3"></textarea>
-      <h5>{{ nickLengh }}/20 characterrs</h5>
+      <h2>Set Your Nickname</h2>
+      <h5>Choose a nickname that will be displayed to other users.</h5>
+      <div class="text">
+        <h3 style="color: black;">Nickname</h3>
+        <textarea v-model="newNick" placeholder="change your nickname..." rows="3" :maxlength="20"></textarea>
+        <h5>{{ nickLengh }}/20 characterrs</h5>
+      </div>
       <UiButton buttonText="Change" @click="updateNick"/>
     </div>
   </div>
@@ -42,7 +46,7 @@ import { computed, ref } from 'vue';
       const updateNick = async () => {
       props.toggleBar(); // Close the panel after saving
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:3000/api/update-user', {
+      const response = await fetch('https://ss-vue-yf04.onrender.com/api/update-user', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -54,7 +58,6 @@ import { computed, ref } from 'vue';
       const data = await response.json();
       if (response.ok) {
         user.value.nickname = newNick.value.replace(/^@/, ''); // refresh 
-        console.log('Nickname updated:', data.user);
       } else {
         console.error('Error updating nickname:', data.message);
       }
@@ -96,6 +99,15 @@ import { computed, ref } from 'vue';
     gap: 2rem;
   }
   
+  .text {
+    width: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+  }
+
   textarea {
     font-family: var(--text-font-family);
     font-optical-sizing: var(--text-font-optical-sizing);

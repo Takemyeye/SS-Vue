@@ -54,4 +54,9 @@ export default {
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.342);
   }
 
+@media all and (max-width:768px) {
+  .container {
+    width: 70%;
+  }
+}
 </style>
