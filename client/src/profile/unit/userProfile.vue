@@ -15,17 +15,18 @@
             styleBadge="badge2" 
             title="Change Nick" 
             style="font-size: small; width: fit-content; cursor: pointer;" 
-            @click="updateNick" 
-          />
-          <textarea data-v-06268d9a v-model="newNick" placeholder="change your nickname..." rows="3"></textarea>
+            @click="toggleBar"
+            />
         </div>
       </div>
       <UiButton buttonText="Logout" @click="logout"/>
     </div>
+    <HoverInfoPanel v-if="isBarOpen" :toggleBar="toggleBar"/>
   </div>
 </template>
 
 <script>
+import HoverInfoPanel from './hoverInfoPanel.vue';
 import useUserStore from '@/stores/userStore';
 import UiButton from '@/ui/button.vue';
 import UiBadge from '@/ui/badge.vue';
@@ -34,11 +35,17 @@ import { computed, ref } from 'vue';
 export default {
   name: 'UserProfile',
   components: {
+    HoverInfoPanel,
     UiButton,
     UiBadge,
   },
   setup() {
     const { user, clearUser } = useUserStore();
+    const isBarOpen = ref(false);
+
+    const toggleBar = () => {
+      isBarOpen.value = !isBarOpen.value;
+    };
 
     const logout = () => {
       clearUser();
@@ -54,10 +61,8 @@ export default {
     });
 
     const userNick = computed(() => {
-      return user.value?.nickname ? `@${user.value.nickname}` : '@username';
-    });
-
-    const newNick = ref('');
+        return user.value?.nickname ? `@${user.value.nickname}` : '@username';
+      });
 
     const copyText = (text) => {
       navigator.clipboard.writeText(text)
@@ -66,34 +71,14 @@ export default {
         });
     };
 
-    const updateNick = async () => {
-      const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:3000/api/update-user', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({ nickname: newNick.value ? newNick.value.replace(/^@/, '') : null }) // destroy @ if @ was added
-      });
-
-      const data = await response.json();
-      if (response.ok) {
-        user.value.nickname = newNick.value.replace(/^@/, ''); // refresh 
-        console.log('Nickname updated:', data.user);
-      } else {
-        console.error('Error updating nickname:', data.message);
-      }
-    };
-
     return {
+      toggleBar,
+      isBarOpen,
       avatarUrl,
       userName,
+      userNick,
       copyText,
       logout,
-      userNick,
-      newNick,
-      updateNick,
     };
   },
 }
