@@ -34,9 +34,9 @@ router.get('/auth/google/callback', passport.authenticate('google', { session: f
     });
 
     await newUser.save();
-    res.redirect(`https://ss-vue-yf04.onrender.com?token=${token}`);
+    res.redirect(`https://soulswap.netlify.app?token=${token}`);
   } else {
-    res.redirect(`https://ss-vue-yf04.onrender.com?token=${existingUser.token}`);
+    res.redirect(`https://soulswap.netlify.app?token=${existingUser.token}`);
   }
 });
 

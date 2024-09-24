@@ -35,9 +35,9 @@ router.get('/auth/discord/callback', passport.authenticate('discord', { session:
       });
 
       await newUser.save();
-      return res.redirect(`https://ss-vue-yf04.onrender.com?token=${token}`);
+      return res.redirect(`https://soulswap.netlify.app?token=${token}`);
     } else {
-      return res.redirect(`https://ss-vue-yf04.onrender.com?token=${existingUser.token}`);
+      return res.redirect(`https://soulswap.netlify.app?token=${existingUser.token}`);
     }
   } catch (err) {
     console.error('Error during Discord callback:', err);
