@@ -44,6 +44,11 @@ import { computed, ref } from 'vue';
       const nickLengh = computed(() => newNick.value.length);
 
       const updateNick = async () => {
+        if (!newNick.value.trim()) {
+          alert('Nickname cannot be empty!');
+          return;
+        }
+        
       props.toggleBar(); // Close the panel after saving
       const token = localStorage.getItem('token');
       const response = await fetch('https://ss-vue-yf04.onrender.com/api/update-user', {
@@ -114,7 +119,7 @@ import { computed, ref } from 'vue';
     font-weight: var(--text-font-weight);
     font-style: var(--text-font-style);
     resize: none;
-    width: 250px;
+    width: 100%;
     padding: 4px;
     height: 30px;
     border-radius: 8px;

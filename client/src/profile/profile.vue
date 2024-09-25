@@ -4,6 +4,8 @@
     <div class="container">
       <UserProfile/>
       <UserInfo/>
+      <UserCharacters/>
+      <UserReviews/>
     </div>
   </div>
   <SiteFooter/>
@@ -12,12 +14,14 @@
 <script>
 import SiteHeader from '@/components/header/header.vue';
 import SiteFooter from '@/components/footer/footer.vue';
+import UserCharacters from './unit/userCahacters.vue';
 import UserProfile from './unit/userProfile.vue';
 import UserInfo from './unit/userInfo.vue';
 
 export default {
   name: 'ProfilePage',
   components: {
+    UserCharacters,
     UserProfile,
     SiteHeader,
     SiteFooter,

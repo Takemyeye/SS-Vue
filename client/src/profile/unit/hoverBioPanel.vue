@@ -54,6 +54,11 @@
           const bioLength = computed(() => newBio.value.length);
   
           const updateBio = async () => {
+            if (!newBio.value.trim()) {
+              alert('Bio cannot be empty!');
+              return;
+            }
+
               props.toggleBar(); // Close the panel after saving
               const token = localStorage.getItem('token');
               const response = await fetch('https://ss-vue-yf04.onrender.com/api/update-user', {
