@@ -26,7 +26,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 
 app.use(cors({
-  origin: ['http://localhost:8080', 'https://soulswap.netlify.app'],
+  origin: ['http://localhost:8080', 'http://localhost:8080'],
   methods: ['*'],
   allowedHeaders: ['*'],
 }));

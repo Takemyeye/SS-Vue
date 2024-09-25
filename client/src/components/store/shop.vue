@@ -5,13 +5,16 @@
       <ContactUs v-if="tokenExists"/>
       <TopBar />
       <CatalogBlock @category-selected="handleCategorySelected" />
-      <AllArt v-if="activeCategory === 'All'" :images="filteredImages['All']"/>
-      <JjkArt v-if="activeCategory === 'JJK'" :images="filteredImages['Jujutsu Kaisen']"/>
-      <FfArt v-if="activeCategory === 'FF'" :images="filteredImages['Fire Force']"/>
-      <CallOfNightArt v-if="activeCategory === 'CON'" :images="filteredImages['Call of Night']"/>
-      <MhaArt v-if="activeCategory === 'MHA'" :images="filteredImages['My Hero Academia']"/>
-      <SdArt v-if="activeCategory === 'SD'" :images="filteredImages['Sakamoto Days']"/>
+      
+      <UiLoader v-if="loading" />
+      <component 
+        v-show="!loading"
+        :is="categoryComponents[activeCategory]" 
+        :images="filteredImages[activeCategoryName]" 
+        v-if="filteredImages[activeCategoryName]"
+      />
     </div>
+    
     <SiteFooter />
   </div>
 </template>
@@ -30,7 +33,8 @@ import MhaArt from './shopUnit/mhaArt.vue';
 import AllArt from './shopUnit/allArt.vue';
 import JjkArt from './shopUnit/jjkArt.vue';
 import SdArt from './shopUnit/sdArt.vue';
-import { ref, onMounted } from 'vue';
+import UiLoader from '@/ui/loader.vue';
+import { ref, onMounted, computed } from 'vue';
 
 export default {
   name: 'ArtShop',
@@ -46,16 +50,50 @@ export default {
     FfArt,
     MhaArt,
     SdArt,
+    UiLoader,
   },
   setup() {
     const { filteredImages, fetchImages } = useImageStore();
     const activeCategory = ref('All');
     const tokenExists = isTokenAvailable();
 
-    onMounted(() => {
-      if (filteredImages.value['All'].length === 0) {
-        fetchImages();
-      }
+    const categoryComponents = {
+      All: AllArt,
+      JJK: JjkArt,
+      FF: FfArt,
+      CON: CallOfNightArt,
+      MHA: MhaArt,
+      SD: SdArt,
+    };
+
+    // Optimized activeCategoryName using a mapping object
+    const categoryNames = {
+      'All': 'All',
+      'JJK': 'Jujutsu Kaisen',
+      'FF': 'Fire Force',
+      'CON': 'Call of Night',
+      'MHA': 'My Hero Academia',
+      'SD': 'Sakamoto Days',
+    };
+
+    const activeCategoryName = computed(() => {
+      return categoryNames[activeCategory.value] || 'All';
+    });
+
+    const loading = ref(true);
+
+    const simulateLoading = () => {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve();
+        }, 5000); 
+      });
+    };
+
+    onMounted(async () => {
+      await simulateLoading();
+      await fetchImages();
+      loading.value = false;
     });
 
     const handleCategorySelected = (category) => {
@@ -66,7 +104,10 @@ export default {
       activeCategory,
       filteredImages,
       tokenExists,
-      handleCategorySelected
+      handleCategorySelected,
+      categoryComponents,
+      activeCategoryName,
+      loading 
     };
   },
 };
@@ -75,9 +116,10 @@ export default {
 <style scoped>
 .store {
   width: 100%;
+  min-height: 90vh;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
   flex-direction: column;
   font-family: var(--text-font-family);
   font-optical-sizing: var(--text-font-optical-sizing);

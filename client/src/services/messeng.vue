@@ -8,7 +8,7 @@
           <font-awesome-icon icon="xmark" style="font-size: 24px;" />
         </div>
       </div>
-      <video src="video/video2.mp4"  muted autoplay loop></video>
+      <video src="video/video2.mp4" muted autoplay loop playsinline></video>
     </div>
     <MessengerBlock/>
   </div>

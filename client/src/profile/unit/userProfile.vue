@@ -20,7 +20,7 @@
         </div>
       </div>
       <div class="btn">
-        <UiButton buttonText="Logout" @click="logout"/>
+        <UiNewButton text="Logout" @click="logout"/>
       </div>
     </div>
     <HoverInfoPanel v-if="isBarOpen" :toggleBar="toggleBar" @nickUpdated="handleNickUpdate"/>
@@ -30,7 +30,7 @@
 <script>
 import HoverInfoPanel from './hoverInfoPanel.vue';
 import useUserStore from '@/stores/userStore';
-import UiButton from '@/ui/button.vue';
+import UiNewButton from '@/ui/newButton.vue';
 import UiBadge from '@/ui/badge.vue';
 import { computed, ref } from 'vue';
 
@@ -38,7 +38,7 @@ export default {
   name: 'UserProfile',
   components: {
     HoverInfoPanel,
-    UiButton,
+    UiNewButton,
     UiBadge,
   },
   setup() {

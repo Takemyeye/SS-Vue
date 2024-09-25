@@ -3,7 +3,7 @@
       <div class="container">
         <div class="message-item-admin">
           <img src="https://avatars.githubusercontent.com/u/151098313?v=4" alt="User Avatar" class="user-avatar"/>
-          <div class="message-text-admin">Which characters from your favorite manga and anime would you love to see come to life? Share your dreams with us and let’s create a universe of collectible figures that you can’t resist!</div>
+          <div class="message-text-admin">Which characters from your favorite manga and anime would you love to see come to life?</div>
         </div>
         <div class="message-item" v-for="(msg, index) in messages" :key="index">
           <div class="message-text">{{ msg.text }}</div>

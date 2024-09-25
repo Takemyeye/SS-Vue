@@ -1,6 +1,6 @@
 <template>
   <div class="topBar">
-    <video class="background-video" :src="video.video" muted autoplay loop></video>
+    <video class="background-video" :src="video.video" muted autoplay loop playsinline></video>
     <div class="text">
       <h1>Unleash Your Fandom</h1>
       <h2>Discover Exclusive Anime & Manga Art at Soul Swap</h2>
