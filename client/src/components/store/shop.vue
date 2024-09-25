@@ -2,10 +2,10 @@
   <div>
     <SiteHeader />
     <div class="store">
-      <ContactUs v-if="tokenExists"/>
+      <ContactUs v-if="tokenExists" />
       <TopBar />
       <CatalogBlock @category-selected="handleCategorySelected" />
-      
+
       <UiLoader v-if="loading" />
       <component 
         v-show="!loading"
@@ -14,7 +14,7 @@
         v-if="filteredImages[activeCategoryName]"
       />
     </div>
-    
+
     <SiteFooter />
   </div>
 </template>
@@ -66,7 +66,6 @@ export default {
       SD: SdArt,
     };
 
-    // Optimized activeCategoryName using a mapping object
     const categoryNames = {
       'All': 'All',
       'JJK': 'Jujutsu Kaisen',
@@ -80,24 +79,22 @@ export default {
       return categoryNames[activeCategory.value] || 'All';
     });
 
-    const loading = ref(true);
+    const loading = ref(true); // Изначально состояние загрузки - true
 
-    const simulateLoading = () => {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve();
-        }, 5000); 
-      });
+    const loadImages = async () => {
+      loading.value = true; // Активируем состояние загрузки перед фетчем
+      await fetchImages(); // Загружаем изображения
+      await new Promise((resolve) => setTimeout(resolve, 5000)); // Задержка 5 секунд для анимации
+      loading.value = false; // Деактивируем состояние загрузки
     };
 
-    onMounted(async () => {
-      await simulateLoading();
-      await fetchImages();
-      loading.value = false;
+    onMounted(() => {
+      loadImages(); // Загружаем изображения при монтировании компонента
     });
 
     const handleCategorySelected = (category) => {
-      activeCategory.value = category;
+      activeCategory.value = category; // Меняем категорию
+      // Загрузку изображений не вызываем, так как они передаются через пропсы
     };
 
     return {
@@ -107,7 +104,7 @@ export default {
       handleCategorySelected,
       categoryComponents,
       activeCategoryName,
-      loading 
+      loading
     };
   },
 };

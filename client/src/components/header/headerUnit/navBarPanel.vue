@@ -145,7 +145,6 @@ h1 {
 .dropdown {
   position: absolute;
   top: 40px;
-  right: -250%;
   padding: 4px;
   min-width: 200px;
   background-color: white;
@@ -157,6 +156,7 @@ h1 {
   align-items: start;
   justify-content: center;
   flex-direction: column;
+  animation: fadeInUp 0.3s ease forwards;
   gap: 8px;
 }
 .dropdown h5 {
@@ -213,7 +213,6 @@ h1 {
 @media all and (max-width: 768px) {
   .dropdown {
     min-width: 150px;
-    right: -170%;
   }
 }
 </style>

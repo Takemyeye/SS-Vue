@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const client = require('../redis/redisClient');
+const { client } = require('../redis/redisClient'); // Убедитесь, что вы правильно импортируете client
 const jwt = require('jsonwebtoken');
 
 router.use(express.json());
@@ -24,7 +24,7 @@ router.get('/messages', async (req, res) => {
     const messages = JSON.parse(messagesJson);
     res.status(200).json({ messages });
   } catch (error) {
-    console.error('Ошибка при обработке токена или загрузке сообщений:', error);
+    console.error('Ошибка при обработке токена или загрузке сообщений:', error.message);
     res.status(500).json({ error: 'Ошибка сервера' });
   }
 });
@@ -58,10 +58,9 @@ router.post('/messages', async (req, res) => {
 
     res.status(200).json({ success: true });
   } catch (error) {
-    console.error('Ошибка при обработке токена или сохранении сообщения:', error);
+    console.error('Ошибка при обработке токена или сохранении сообщения:', error.message);
     res.status(500).json({ error: 'Ошибка сервера' });
   }
-  
 });
 
 module.exports = router;
