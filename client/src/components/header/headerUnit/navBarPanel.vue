@@ -145,6 +145,7 @@ h1 {
 .dropdown {
   position: absolute;
   top: 40px;
+  left: -150%;
   padding: 4px;
   min-width: 200px;
   background-color: white;

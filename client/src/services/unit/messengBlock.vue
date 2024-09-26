@@ -96,6 +96,11 @@
     max-width: 70%;
 }
 
+.message-text {
+  text-wrap: balance;
+  overflow: hidden;
+}
+
 .message-text-admin {
   background-color: hsl(357, 46%, 16%); 
   color: hsl(358, 100%, 69%);
