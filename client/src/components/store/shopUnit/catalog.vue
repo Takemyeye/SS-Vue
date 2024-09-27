@@ -67,7 +67,8 @@ h5 {
 }
 
 .active {
-  color: hsl(210, 100%, 66%);
+  color: white;
+  background-color: black;
 }
 
 @media all and (max-width: 900px) {

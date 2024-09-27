@@ -2,7 +2,7 @@
   <div>
     <div class="shop">
       <UiCard
-        v-for="image in filteredImages"
+        v-for="image in paginatedImages"
         :key="image.id"
         :src="`/art/${image.image}`"
         :alt="image.title"
@@ -21,6 +21,13 @@
         :text="`Added To Cart`"
       /> 
     </div>
+
+    <UiPagination 
+      v-if="filteredImages.length > itemsPerPage"
+      :totalItems="filteredImages.length"
+      @page-changed="onPageChanged"
+      @items-per-page-changed="setItemsPerPage"
+    />
   </div>
 </template>
 
@@ -28,12 +35,14 @@
 import { addToCart } from '@/services/activeContext';
 import UiBaner from '@/ui/baner.vue';
 import UiCard from '@/ui/card.vue';
+import UiPagination from '@/ui/pagination.vue';
 
 export default {
   name: 'CallOfNightArt',
   components: {
     UiCard,
-    UiBaner
+    UiBaner,
+    UiPagination
   },
   props: {
     images: {
@@ -44,6 +53,8 @@ export default {
   data() {
     return {
       filteredImages: [],
+      currentPage: 1,
+      itemsPerPage: 8, 
       showBanner: false,
       selectedImageSrc: '',
       selectedImageAlt: '', 
@@ -51,10 +62,18 @@ export default {
       bannerTimeout: null,
     };
   },
+  computed: {
+    paginatedImages() {
+      const start = (this.currentPage - 1) * this.itemsPerPage;
+      const end = start + this.itemsPerPage;
+      return this.filteredImages.slice(start, end);
+    }
+  },
   watch: {
     images: {
       handler(newImages) {
         this.filteredImages = newImages;
+        this.currentPage = 1;
       },
       immediate: true
     }
@@ -67,6 +86,7 @@ export default {
         const titleAnime = image.titleAnime ? image.titleAnime.toLowerCase() : ''; 
         return title.includes(query.toLowerCase()) || titleAnime.includes(query.toLowerCase());
       });
+      this.currentPage = 1;
     },
     handleCardClick(image) {
       this.addToCart(image);
@@ -85,12 +105,14 @@ export default {
     addToCart(image) {
       addToCart(image); 
     },
+    onPageChanged(newPage) {
+      this.currentPage = newPage;
+    },
+    setItemsPerPage(items) {
+      this.itemsPerPage = items; 
+      this.currentPage = 1;
+    }
   }
 }
 </script>
 
-<style scoped>
-  .shop {
-    animation: opacity 0.7s ease forwards;
-  }
-</style>

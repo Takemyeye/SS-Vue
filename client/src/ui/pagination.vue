@@ -5,13 +5,33 @@
     </button>
 
     <button
-      v-for="page in totalPages"
+      @click="goToPage(1)"
+      :class="{ active: currentPage === 1 }"
+      class="page-number"
+    >
+      1
+    </button>
+
+    <span v-if="currentPage > 3">...</span>
+
+    <button
+      v-for="page in middlePages"
       :key="page"
       @click="goToPage(page)"
       :class="{ active: currentPage === page }"
       class="page-number"
     >
       {{ page }}
+    </button>
+
+    <span v-if="currentPage < totalPages - 2">...</span>
+
+    <button
+      @click="goToPage(totalPages)"
+      :class="{ active: currentPage === totalPages }"
+      class="page-number"
+    >
+      {{ totalPages }}
     </button>
 
     <button @click="nextPage" :disabled="currentPage === totalPages">
@@ -45,6 +65,19 @@ export default {
   computed: {
     totalPages() {
       return Math.ceil(this.totalItems / this.itemsPerPage);
+    },
+    middlePages() {
+      if (this.totalPages <= 5) {
+        return Array.from({ length: this.totalPages }, (_, i) => i + 1).slice(1, -1);
+      }
+
+      if (this.currentPage <= 3) {
+        return [2, 3, 4];
+      } else if (this.currentPage >= this.totalPages - 2) {
+        return [this.totalPages - 3, this.totalPages - 2, this.totalPages - 1];
+      } else {
+        return [this.currentPage - 1, this.currentPage, this.currentPage + 1];
+      }
     }
   },
   watch: {
@@ -65,7 +98,6 @@ export default {
         this.scrollToTop();
       }
     },
-    // to top
     goToPage(page) {
       this.currentPage = page;
       this.scrollToTop();
@@ -73,6 +105,7 @@ export default {
     scrollToTop() {
       window.scrollTo({
         top: 0,
+        behavior: 'smooth'
       });
     }
   }

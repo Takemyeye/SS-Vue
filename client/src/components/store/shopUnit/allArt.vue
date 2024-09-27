@@ -24,9 +24,10 @@
     </div>
 
     <UiPagination
+      v-if="filteredImages.length > itemsPerPage"
       :totalItems="filteredImages.length"
-      :itemsPerPage="itemsPerPage"
       @page-changed="onPageChanged"
+      @items-per-page-changed="setItemsPerPage"
     />
   </div>
 </template>
@@ -55,8 +56,8 @@ export default {
   data() {
     return {
       filteredImages: [],
-      itemsPerPage: 8,
       currentPage: 1,
+      itemsPerPage: 8, 
       showBanner: false,
       selectedImageSrc: '',
       selectedImageAlt: '', 
@@ -109,6 +110,9 @@ export default {
     },
     onPageChanged(newPage) {
       this.currentPage = newPage;
+    },
+    setItemsPerPage(items) {
+      this.itemsPerPage = items; 
     }
   }
 }
@@ -117,7 +121,7 @@ export default {
 <style >
 .shop {
   width: 100%;
-  min-height: 40vh;
+  min-height: 80vh;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto;
