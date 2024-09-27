@@ -18,7 +18,6 @@ export default {
 <style scoped>
 footer {
   width: 100%;
-  height: 25vh;
   display: grid;
   justify-items: center;
   align-items: start;
@@ -27,6 +26,7 @@ footer {
   font-family: var(--text-font-family);
   font-weight: var(--text-font-weight);
   font-style: var(--text-font-style);
+  padding-bottom: 1rem;
 }
 
 @media all and (max-width: 768px) {

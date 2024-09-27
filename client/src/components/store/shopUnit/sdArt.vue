@@ -23,7 +23,7 @@
     </div>
 
     <UiPagination
-      v-if="filteredImages.length > itemsPerPage"
+      v-if="filteredImages && filteredImages.length > itemsPerPage"
       :totalItems="filteredImages.length"
       @page-changed="onPageChanged"
       @items-per-page-changed="setItemsPerPage"
@@ -33,16 +33,18 @@
 
 <script>
 import { addToCart } from '@/services/activeContext'; 
+import usePagination from '@/mixins/PaginationMixin';
+import UiPagination from '@/ui/pagination.vue';
 import UiBaner from '@/ui/baner.vue';
 import UiCard from '@/ui/card.vue';
-import UiPagination from '@/ui/pagination.vue';
+import { ref } from 'vue'; 
 
 export default {
   name: 'SdArt',
   components: {
+    UiPagination,
     UiBaner,
     UiCard,
-    UiPagination
   },
   props: {
     images: {
@@ -50,68 +52,60 @@ export default {
       required: true
     }
   },
-  data() {
-    return {
-      filteredImages: [], 
-      currentPage: 1,
-      itemsPerPage: 8, 
-      showBanner: false,
-      selectedImageSrc: '',
-      selectedImageAlt: '', 
-      selectedImageTitle: '', 
-      bannerTimeout: null,
-    };
-  },
-  computed: {
-    paginatedImages() {
-      const start = (this.currentPage - 1) * this.itemsPerPage;
-      const end = start + this.itemsPerPage;
-      return this.filteredImages.slice(start, end);
-    }
-  },
-  watch: {
-    images: {
-      handler(newImages) {
-        this.filteredImages = newImages;
-        this.currentPage = 1;
-      },
-      immediate: true
-    }
-  },
-  methods: {
-    filterImages(query) {
-      if (!this.images) return;
-      this.filteredImages = this.images.filter(image => {
+  setup(props) {
+    const itemsPerPage = ref(8); 
+    const showBanner = ref(false);
+    const selectedImageSrc = ref('');
+    const selectedImageAlt = ref(''); 
+    const selectedImageTitle = ref(''); 
+    const bannerTimeout = ref(null);
+
+    const filteredImages = ref(props.images);
+
+    const {
+      paginatedImages,
+      onPageChanged,
+      setItemsPerPage,
+      currentPage,
+    } = usePagination(filteredImages, itemsPerPage); 
+
+    function filterImages(query) {
+      if (!props.images) return;
+      filteredImages.value = props.images.filter(image => {
         const title = image.title ? image.title.toLowerCase() : ''; 
         const titleAnime = image.titleAnime ? image.titleAnime.toLowerCase() : ''; 
         return title.includes(query.toLowerCase()) || titleAnime.includes(query.toLowerCase());
       });
-      this.currentPage = 1;
-    },
-    handleCardClick(image) {
-      this.addToCart(image);
-      this.selectedImageSrc = `/art/${image.image}`; 
-      this.selectedImageAlt = image.title; 
-      this.selectedImageTitle = image.title; 
-
-      this.showBanner = true;
-      if (this.bannerTimeout) {
-        clearTimeout(this.bannerTimeout); 
-      }
-      this.bannerTimeout = setTimeout(() => {
-        this.showBanner = false; 
-      }, 5000);
-    },
-    addToCart(image) {
-      addToCart(image); 
-    },
-    onPageChanged(newPage) {
-      this.currentPage = newPage;
-    },
-    setItemsPerPage(items) {
-      this.itemsPerPage = items; 
-      this.currentPage = 1; 
+      currentPage.value = 1;
     }
+
+    function handleCardClick(image) {
+      addToCart(image); 
+      selectedImageSrc.value = `/art/${image.image}`; 
+      selectedImageAlt.value = image.title; 
+      selectedImageTitle.value = image.title; 
+
+      showBanner.value = true;
+      if (bannerTimeout.value) {
+        clearTimeout(bannerTimeout.value); 
+      }
+      bannerTimeout.value = setTimeout(() => {
+        showBanner.value = false; 
+      }, 5000);
+    }
+
+    return {
+      paginatedImages,
+      onPageChanged,
+      setItemsPerPage,
+      handleCardClick,
+      showBanner,
+      selectedImageSrc,
+      selectedImageAlt,
+      selectedImageTitle,
+      currentPage,
+      filterImages 
+    };
   }
 }
 </script>

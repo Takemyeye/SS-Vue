@@ -23,7 +23,6 @@
     </div>
 
     <UiPagination
-      v-if="filteredImages.length > itemsPerPage"
       :totalItems="filteredImages.length"
       @page-changed="onPageChanged"
       @items-per-page-changed="setItemsPerPage"

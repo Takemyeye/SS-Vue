@@ -15,14 +15,12 @@
       />
     </div>
 
-    <SiteFooter />
   </div>
 </template>
 
 <script>
 import CallOfNightArt from './shopUnit/CallOfNightArt.vue';
 import SiteHeader from '@/components/header/header.vue';
-import SiteFooter from '@/components/footer/footer.vue';
 import TopBar from '@/components/homeUnit/topBar.vue';
 import { isTokenAvailable } from '@/utils/authUtils';
 import CatalogBlock from './shopUnit/catalog.vue';
@@ -42,7 +40,6 @@ export default {
     CallOfNightArt,
     CatalogBlock,
     SiteHeader,
-    SiteFooter,
     ContactUs,
     TopBar,
     AllArt,

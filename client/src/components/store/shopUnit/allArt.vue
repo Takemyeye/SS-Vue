@@ -1,5 +1,4 @@
 <template>
-  <div>
     <SearchBar @search="filterImages" />
     <div class="shop">
       <UiCard
@@ -24,12 +23,10 @@
     </div>
 
     <UiPagination
-      v-if="filteredImages.length > itemsPerPage"
       :totalItems="filteredImages.length"
       @page-changed="onPageChanged"
       @items-per-page-changed="setItemsPerPage"
     />
-  </div>
 </template>
 
 <script>
@@ -85,8 +82,8 @@ export default {
     filterImages(query) {
       if (!this.images) return;
       this.filteredImages = this.images.filter(image => {
-        const title = image.title ? image.title.toLowerCase() : ''; 
-        const titleAnime = image.titleAnime ? image.titleAnime.toLowerCase() : ''; 
+        const title = image.title?.toLowerCase() || ''; 
+        const titleAnime = image.titleAnime?.toLowerCase() || ''; 
         return title.includes(query.toLowerCase()) || titleAnime.includes(query.toLowerCase());
       });
       this.currentPage = 1;
@@ -113,20 +110,21 @@ export default {
     },
     setItemsPerPage(items) {
       this.itemsPerPage = items; 
+      this.currentPage = 1;
     }
   }
 }
 </script>
-
 <style >
 .shop {
-  width: 100%;
+  width: 80%;
   min-height: 80vh;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto;
   justify-items: center;
   gap: 1.5rem; 
+  padding-bottom: 2rem;
   animation: opacity 0.7s ease forwards;
 }
 

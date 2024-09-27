@@ -114,11 +114,13 @@ export default {
 
 <style scoped>
 .pagination {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 1rem;
   padding: 2rem 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.349);
 }
 
 button {

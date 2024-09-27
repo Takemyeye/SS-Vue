@@ -8,7 +8,9 @@
       <router-link to="/shop">
         <h3>Store</h3>
       </router-link>
-      <h3>Contact Us</h3>
+      <router-link to="/orders">
+        <h3>Orders</h3>
+      </router-link>
       <router-link to="/privacy">
         <h3>Privacy Policy</h3>
       </router-link>
@@ -20,17 +22,6 @@
         <h4><font-awesome-icon icon="fa-brands fa-tiktok" /></h4>
         <h4><font-awesome-icon icon="fa-brands fa-telegram" /></h4>
       </div>
-    </FooterContainer>
-    <FooterContainer>
-      <a href="https://www.donationalerts.com/r/mellovan">
-        <h5>Support author</h5>
-      </a>  
-    </FooterContainer>
-    <FooterContainer>
-      <h5>© 2024 Soul Swap. All rights reserved.</h5>
-    </FooterContainer>
-    <FooterContainer>
-      <h3 @click="scrollToTop">Back to top</h3>
     </FooterContainer>
 </template>
 
