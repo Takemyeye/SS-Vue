@@ -36,7 +36,6 @@ export default {
 .catalog {
   width: 100%;
   height: 5vh;
-  padding: 8px 0;
   display: flex;
   align-items: center;
   justify-content: center;

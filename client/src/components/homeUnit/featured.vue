@@ -22,7 +22,6 @@ export default {
 <style scoped>
   .featured {
     width: 100%;
-    min-height: 70vh;
     display: flex;
     align-items: center;
     justify-content: center;

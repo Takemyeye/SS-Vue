@@ -2,33 +2,41 @@ import { createApp } from 'vue';
 import router from './router';
 import App from './App.vue';
 
-import { faHouse, faCartShopping, faHeart, faUser, faCartPlus, faMoneyBill, faCircleXmark, faClock, faCity, faImage, faTrash, faComment, faXmark, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { 
+  faHouse, faCartShopping, faHeart, faUser, 
+  faCartPlus, faMoneyBill, faCircleXmark, faClock, 
+  faCity, faImage, faTrash, faComment, faXmark, 
+  faPaperPlane, faChevronLeft, faChevronRight 
+} from '@fortawesome/free-solid-svg-icons';
+
 import { faInstagram, faTelegram, faTiktok, faGoogle, faGithub, faDiscord, faPaypal } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 
 library.add(
-  faHouse,
   faCartShopping,
-  faHeart,
-  faUser,
-  faCartPlus,
+  faChevronRight,
+  faChevronLeft,
+  faCircleXmark,
+  faPaperPlane,
   faInstagram,
-  faTiktok,
+  faMoneyBill,
+  faCartPlus,
   faTelegram,
+  faDiscord,
+  faComment,
+  faTiktok,
   faGoogle,
   faGithub,
-  faDiscord,
-  faMoneyBill,
   faPaypal,
-  faCircleXmark,
+  faHouse,
+  faHeart,
   faClock,
-  faCity,
   faImage,
   faTrash,
-  faComment,
   faXmark,
-  faPaperPlane,
+  faCity,
+  faUser,
 );
 
 const app = createApp(App);

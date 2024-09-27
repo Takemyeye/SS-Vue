@@ -3,7 +3,7 @@
     <SearchBar @search="filterImages" />
     <div class="shop">
       <UiCard
-        v-for="image in filteredImages"
+        v-for="image in paginatedImages"
         :key="image.id"
         :src="`/art/${image.image}`"
         :alt="image.title"
@@ -20,13 +20,20 @@
         :alt="selectedImageAlt"
         :title="selectedImageTitle"
         :text="`Added To Cart`"
-      /> 
+      />
     </div>
+
+    <UiPagination
+      :totalItems="filteredImages.length"
+      :itemsPerPage="itemsPerPage"
+      @page-changed="onPageChanged"
+    />
   </div>
 </template>
 
 <script>
 import { addToCart } from '@/services/activeContext'; 
+import UiPagination from '@/ui/pagination.vue'; 
 import SearchBar from './searchBar.vue';
 import UiBaner from '@/ui/baner.vue';
 import UiCard from '@/ui/card.vue';
@@ -36,7 +43,8 @@ export default {
   components: {
     UiCard,
     UiBaner,
-    SearchBar
+    SearchBar,
+    UiPagination
   },
   props: {
     images: {
@@ -47,6 +55,8 @@ export default {
   data() {
     return {
       filteredImages: [],
+      itemsPerPage: 8,
+      currentPage: 1,
       showBanner: false,
       selectedImageSrc: '',
       selectedImageAlt: '', 
@@ -54,10 +64,18 @@ export default {
       bannerTimeout: null,
     };
   },
+  computed: {
+    paginatedImages() {
+      const start = (this.currentPage - 1) * this.itemsPerPage;
+      const end = start + this.itemsPerPage;
+      return this.filteredImages.slice(start, end);
+    }
+  },
   watch: {
     images: {
       handler(newImages) {
         this.filteredImages = newImages;
+        this.currentPage = 1;
       },
       immediate: true
     }
@@ -70,6 +88,7 @@ export default {
         const titleAnime = image.titleAnime ? image.titleAnime.toLowerCase() : ''; 
         return title.includes(query.toLowerCase()) || titleAnime.includes(query.toLowerCase());
       });
+      this.currentPage = 1;
     },
     handleCardClick(image) {
       this.addToCart(image);
@@ -88,6 +107,9 @@ export default {
     addToCart(image) {
       addToCart(image); 
     },
+    onPageChanged(newPage) {
+      this.currentPage = newPage;
+    }
   }
 }
 </script>
@@ -95,13 +117,12 @@ export default {
 <style >
 .shop {
   width: 100%;
-  min-height: 90vh;
+  min-height: 40vh;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto;
   justify-items: center;
-  padding-bottom: 5rem;
-  gap: 1rem; 
+  gap: 1.5rem; 
   animation: opacity 0.7s ease forwards;
 }
 
@@ -122,4 +143,3 @@ export default {
   }
 }
 </style>
-

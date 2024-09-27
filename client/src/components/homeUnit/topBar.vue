@@ -24,7 +24,7 @@ export default {
 <style scoped>
 .topBar {
   width: 80%;
-  height: 35vh;
+  height: 30vh;
   position: relative; 
   margin-top: 1.5rem;
   border-radius: 1.5rem;

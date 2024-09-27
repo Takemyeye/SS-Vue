@@ -79,22 +79,21 @@ export default {
       return categoryNames[activeCategory.value] || 'All';
     });
 
-    const loading = ref(true); // Изначально состояние загрузки - true
+    const loading = ref(true); // loading true deffault
 
     const loadImages = async () => {
-      loading.value = true; // Активируем состояние загрузки перед фетчем
-      await fetchImages(); // Загружаем изображения
-      await new Promise((resolve) => setTimeout(resolve, 5000)); // Задержка 5 секунд для анимации
-      loading.value = false; // Деактивируем состояние загрузки
+      loading.value = true; // first of fetch make loading true
+      await fetchImages();
+      await new Promise((resolve) => setTimeout(resolve, 2000)); // delay 2s
+      loading.value = false;
     };
 
     onMounted(() => {
-      loadImages(); // Загружаем изображения при монтировании компонента
+      loadImages();
     });
 
     const handleCategorySelected = (category) => {
-      activeCategory.value = category; // Меняем категорию
-      // Загрузку изображений не вызываем, так как они передаются через пропсы
+      activeCategory.value = category;
     };
 
     return {
