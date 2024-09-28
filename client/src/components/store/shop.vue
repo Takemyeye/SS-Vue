@@ -7,18 +7,19 @@
       <CatalogBlock @category-selected="handleCategorySelected" />
 
       <UiLoader v-if="loading" />
+
       <component 
-        v-show="!loading"
         :is="categoryComponents[activeCategory]" 
-        :images="filteredImages[activeCategoryName]" 
-        v-if="filteredImages[activeCategoryName]"
+        v-if="filteredImages[activeCategoryName]" 
+        :images="loading ? [] : filteredImages[activeCategoryName]"
       />
     </div>
-
   </div>
 </template>
 
+
 <script>
+import { ref, onMounted, computed } from 'vue';
 import CallOfNightArt from './shopUnit/CallOfNightArt.vue';
 import SiteHeader from '@/components/header/header.vue';
 import TopBar from '@/components/homeUnit/topBar.vue';
@@ -32,7 +33,6 @@ import AllArt from './shopUnit/allArt.vue';
 import JjkArt from './shopUnit/jjkArt.vue';
 import SdArt from './shopUnit/sdArt.vue';
 import UiLoader from '@/ui/loader.vue';
-import { ref, onMounted, computed } from 'vue';
 
 export default {
   name: 'ArtShop',
@@ -76,17 +76,17 @@ export default {
       return categoryNames[activeCategory.value] || 'All';
     });
 
-    const loading = ref(true); // loading true deffault
+    const loading = ref(true);
 
     const loadImages = async () => {
-      loading.value = true; // first of fetch make loading true
+      loading.value = true; // start loading
       await fetchImages();
-      await new Promise((resolve) => setTimeout(resolve, 2000)); // delay 2s
-      loading.value = false;
+      await new Promise((resolve) => setTimeout(resolve, 2000)); // dellay 2s
+      loading.value = false; //loading finish
     };
 
     onMounted(() => {
-      loadImages();
+      loadImages(); 
     });
 
     const handleCategorySelected = (category) => {
@@ -100,11 +100,12 @@ export default {
       handleCategorySelected,
       categoryComponents,
       activeCategoryName,
-      loading
+      loading,
     };
   },
 };
 </script>
+
 
 <style scoped>
 .store {

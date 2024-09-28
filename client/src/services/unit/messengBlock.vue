@@ -56,6 +56,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    animation: opacity 1s ease forwards;
 }
 
 .container {

@@ -54,8 +54,8 @@
   }
 
   .honeycomb {
-    position: relative;
-    top: 100px;
+    position: absolute;
+    top: 70%;
     height: 24px;
     width: 24px;
   }

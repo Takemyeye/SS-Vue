@@ -75,6 +75,7 @@ export default {
     justify-content: start;
     flex-direction: column;
     gap: 8px;
+    animation: fadeInUp 1s ease forwards;
   }
 
   video {

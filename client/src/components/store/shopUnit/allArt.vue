@@ -115,6 +115,7 @@ export default {
   }
 }
 </script>
+
 <style >
 .shop {
   width: 80%;
