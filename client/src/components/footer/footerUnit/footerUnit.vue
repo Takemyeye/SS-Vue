@@ -6,14 +6,17 @@
     <FooterContainer>
       <h2>Quick Links</h2>
       <router-link to="/shop">
-        <h3>Store</h3>
+        <h5>Store</h5>
       </router-link>
       <router-link to="/orders">
-        <h3>Orders</h3>
+        <h5>Orders</h5>
       </router-link>
       <router-link to="/privacy">
-        <h3>Privacy Policy</h3>
+        <h5>Privacy Policy</h5>
       </router-link>
+      <a href="#">
+        <h5>Donat</h5>
+      </a>
     </FooterContainer>
     <FooterContainer>
       <h2>Follow Us</h2>

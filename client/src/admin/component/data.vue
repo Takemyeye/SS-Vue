@@ -15,13 +15,13 @@
         <UiBadge 
           :styleBadge="`badge3`"
           :title="`Checked`"
-          @click="updateOrderStatus(order._id, 'checked')">
+          @click="updateOrderStatus(order._id, 'Checked')">
           <font-awesome-icon icon="check" style="color: hsl(174, 90%, 41%); font-size: small;" />
         </UiBadge>
         <UiBadge 
           :styleBadge="`badge5`"
           :title="`In Process`"
-          @click="updateOrderStatus(order._id, 'processing')">
+          @click="updateOrderStatus(order._id, 'Processing')">
           <font-awesome-icon icon="microchip" style="color: hsl(39, 90%, 50%); font-size: small;" />
         </UiBadge>
         <UiBadge 
@@ -87,25 +87,21 @@ export default {
       }
     };
 
-    const updateOrderStatus = async (orderId, status) => {
+    const updateOrderStatus = async (orderId, newStatus) => {
       try {
         const response = await fetch(`http://localhost:3000/api/orders/${orderId}`, {
           method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ process: status }),
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status: newStatus }),
         });
 
         if (response.ok) {
-          const updatedOrder = await response.json();
-          orders.value = orders.value.map(order => order._id === updatedOrder._id ? updatedOrder : order);
-          console.log('Order status updated successfully');
+          await fetchOrders();
         } else {
-          console.error('Error updating order status');
+          console.error('Ошибка при обновлении статуса заказа');
         }
       } catch (error) {
-        console.error('Error updating order status:', error);
+        console.error('Ошибка при обновлении статуса заказа:', error);
       }
     };
 

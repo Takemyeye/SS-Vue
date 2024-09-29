@@ -65,27 +65,27 @@ router.delete('/orders/:token/:createdAt', async (req, res) => {
 
 router.put('/orders/:id', async (req, res) => {
   const { id } = req.params;
-  const { process } = req.body;
+  const { status } = req.body;
 
-  if (!process) {
-    return res.status(400).json({ message: 'Process status is required' });
+  if (!status) {
+    return res.status(400).json({ message: 'Status is required' });
   }
 
   try {
-    const updatedOrder = await Order.findByIdAndUpdate(
+    const order = await Order.findByIdAndUpdate(
       id,
-      { process },
-      { new: true } 
+      { process: status },
+      { new: true }
     );
 
-    if (!updatedOrder) {
+    if (!order) {
       return res.status(404).json({ message: 'Order not found' });
     }
 
-    res.status(200).json(updatedOrder);
+    res.status(200).json(order);
   } catch (err) {
-    console.error('Error updating order process status:', err);
-    res.status(500).json({ error: 'Server error while updating order status' });
+    console.error('Ошибка при обновлении заказа:', err);
+    res.status(500).json({ error: 'Ошибка сервера при обновлении заказа' });
   }
 });
 

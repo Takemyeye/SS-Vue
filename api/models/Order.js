@@ -6,7 +6,7 @@ const OrderSchema = new mongoose.Schema({
   cartItems: { type: Array, required: true },
   totalPrice: { type: Number, required: true },
   createdAt: { type: Date, default: Date.now },
-  process: { type: String, default: 'processing' }
+  process: { type: String, default: 'Processing' }
 });
 
 const Order = mongoose.model('Order', OrderSchema);

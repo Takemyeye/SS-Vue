@@ -1,7 +1,14 @@
 <template>
   <div class="container">
     <div v-for="(order, index) in orders" :key="order._id" class="order-item">
-      <h2 style="padding: 2.5rem">Order #{{ index + 1 }}</h2>
+      <div class="information">
+        <h2 style="padding: 2.5rem">Order {{ index + 1 }}</h2>
+        <h3>Total Price: {{ getTotalPrice(order.cartItems).toFixed(2) }} $</h3>
+        <UiBadge 
+          style="white-space: nowrap; position: absolute; right: 0;" 
+          :styleBadge="order.process === 'Checked' ? 'badge3' : 'badge5'"
+          :title="order.process"/>
+      </div>
       <div class="wrapper">
         <div v-for="item in order.cartItems" :key="item.id" class="data">
           <div class="image">
@@ -10,7 +17,7 @@
           <div class="description">
             <UiBadge style="white-space: nowrap;" :styleBadge="'badge1'" :title="item.title" />
             <h5>{{ item.subtitle }}</h5>
-            <h3>Price: ${{ item.price.toFixed(2) }}</h3> <!-- Форматирование цены -->
+            <h3>Price: ${{ item.price.toFixed(2) }}</h3>
           </div>
         </div>
       </div>
@@ -32,8 +39,14 @@ export default {
       required: true,
     },
   },
+  methods: {
+    getTotalPrice(cartItems) {
+      return cartItems.reduce((total, item) => total + item.price, 0);
+    },
+  },
 };
 </script>
+
 <style scoped>
 
 .container {
@@ -95,6 +108,15 @@ h3 {
     color: black;
 }
 
+.information {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  flex-direction: row;
+}
+
 @media all and ( max-width: 1900px) {
    .wrapper {
         grid-template-columns: repeat(3, 1fr);
@@ -123,6 +145,11 @@ h3 {
    }
    .description {
         width: 300px;
+   }
+   .information {
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
    }
 }
 
