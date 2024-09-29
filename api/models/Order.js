@@ -5,7 +5,8 @@ const OrderSchema = new mongoose.Schema({
   country: { type: String, required: true },
   cartItems: { type: Array, required: true },
   totalPrice: { type: Number, required: true },
-  createdAt: { type: Date, default: Date.now }
+  createdAt: { type: Date, default: Date.now },
+  process: { type: String, default: 'processing' }
 });
 
 const Order = mongoose.model('Order', OrderSchema);

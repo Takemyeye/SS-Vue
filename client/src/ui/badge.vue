@@ -33,7 +33,7 @@ export default {
     gap: 4px;
   }
 
-  .badge1, .badge2, .badge3, .badge4 {
+  .badge1, .badge2, .badge3, .badge4, .badge5 {
     padding: 4px 6px;
     border-radius: 12px;
     display: flex;
@@ -71,5 +71,11 @@ export default {
 
   .badge4 div {
     color: hsl(358, 100%, 69%);
+  }
+  .badge5 {
+    background-color: hsl(32, 100%, 10%);
+  }
+  .badge5 div {
+    color: hsl(39, 90%, 50%);
   }
 </style>

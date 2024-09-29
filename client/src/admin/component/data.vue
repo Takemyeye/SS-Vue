@@ -11,12 +11,26 @@
         :userAvatar="order.userAvatar" 
         :userName="order.userName" 
         :userEmail="order.userEmail" />
-      <UiBadge 
-        :styleBadge="`badge4`"
-        :title="`Delete`"
-        @click="deleteOrder(order.token, order.createdAt)">
-        <font-awesome-icon icon="trash" style="color: hsl(358, 100%, 69%); font-size: small;" />
-      </UiBadge>
+      <div class="badge-block">
+        <UiBadge 
+          :styleBadge="`badge3`"
+          :title="`Checked`"
+          @click="updateOrderStatus(order._id, 'checked')">
+          <font-awesome-icon icon="check" style="color: hsl(174, 90%, 41%); font-size: small;" />
+        </UiBadge>
+        <UiBadge 
+          :styleBadge="`badge5`"
+          :title="`In Process`"
+          @click="updateOrderStatus(order._id, 'processing')">
+          <font-awesome-icon icon="microchip" style="color: hsl(39, 90%, 50%); font-size: small;" />
+        </UiBadge>
+        <UiBadge 
+          :styleBadge="`badge4`"
+          :title="`Delete`"
+          @click="deleteOrder(order.token, order.createdAt)">
+          <font-awesome-icon icon="trash" style="color: hsl(358, 100%, 69%); font-size: small;" />
+        </UiBadge>
+      </div>
     </div>
   </div>
 </template>
@@ -73,11 +87,34 @@ export default {
       }
     };
 
+    const updateOrderStatus = async (orderId, status) => {
+      try {
+        const response = await fetch(`http://localhost:3000/api/orders/${orderId}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ process: status }),
+        });
+
+        if (response.ok) {
+          const updatedOrder = await response.json();
+          orders.value = orders.value.map(order => order._id === updatedOrder._id ? updatedOrder : order);
+          console.log('Order status updated successfully');
+        } else {
+          console.error('Error updating order status');
+        }
+      } catch (error) {
+        console.error('Error updating order status:', error);
+      }
+    };
+
     onMounted(fetchOrders);
 
     return {
       orders,
       deleteOrder,
+      updateOrderStatus,
     };
   }
 };
@@ -110,6 +147,13 @@ export default {
   justify-content: space-between;
   flex-direction: row;
   padding: 0 2.5%;
+}
+.badge-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
 }
 .Price, .createdAt, .country, .orderImg, .userData {
   height: 90%;
