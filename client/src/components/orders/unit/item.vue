@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-    <div v-for="(order, index) in orders" :key="order._id" class="order-item">
+    <div v-for="(order) in sortedOrders" :key="order._id" class="order-item">
       <div class="information">
-        <h2 style="padding: 2.5rem">Order {{ index + 1 }}</h2>
+        <h2 style="padding: 2.5rem 0">Order - {{ formatDate(order.createdAt) }}</h2>
         <h3>Total Price: {{ getTotalPrice(order.cartItems).toFixed(2) }} $</h3>
         <UiBadge 
           style="white-space: nowrap; position: absolute; right: 0;" 
@@ -39,9 +39,21 @@ export default {
       required: true,
     },
   },
+  computed: {
+    sortedOrders() {
+      return [...this.orders].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    },
+  },
   methods: {
     getTotalPrice(cartItems) {
       return cartItems.reduce((total, item) => total + item.price, 0);
+    },
+    formatDate(date) {
+      const d = new Date(date);
+      const day = String(d.getDate()).padStart(2, '0');
+      const month = String(d.getMonth() + 1).padStart(2, '0');
+      const year = d.getFullYear();
+      return `${day}/${month}/${year}`;
     },
   },
 };

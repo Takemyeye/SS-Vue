@@ -38,7 +38,6 @@ export default {
     border-radius: 12px;
     display: flex;
     align-items: center;
-    cursor: pointer;
   }
 
   .badge1 {

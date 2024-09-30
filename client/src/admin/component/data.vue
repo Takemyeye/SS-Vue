@@ -13,18 +13,21 @@
         :userEmail="order.userEmail" />
       <div class="badge-block">
         <UiBadge 
+          style="cursor: pointer;"
           :styleBadge="`badge3`"
           :title="`Checked`"
           @click="updateOrderStatus(order._id, 'Checked')">
           <font-awesome-icon icon="check" style="color: hsl(174, 90%, 41%); font-size: small;" />
         </UiBadge>
         <UiBadge 
+          style="cursor: pointer;"
           :styleBadge="`badge5`"
           :title="`In Process`"
           @click="updateOrderStatus(order._id, 'Processing')">
           <font-awesome-icon icon="microchip" style="color: hsl(39, 90%, 50%); font-size: small;" />
         </UiBadge>
         <UiBadge 
+          style="cursor: pointer;"
           :styleBadge="`badge4`"
           :title="`Delete`"
           @click="deleteOrder(order.token, order.createdAt)">
