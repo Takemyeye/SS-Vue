@@ -64,7 +64,7 @@ async (accessToken, refreshToken, profile, done) => {
 passport.use(new DiscordStrategy({
   clientID: process.env.DISCORD_CLIENT_ID,
   clientSecret: process.env.DISCORD_CLIENT_SECRET,
-  callbackURL: 'http://localhost:3000/auth/discord/callback',
+  callbackURL: 'https://ss-vue-yf04.onrender.com/auth/discord/callback',
   scope: ['identify', 'email', 'guilds']
 },
 async (accessToken, refreshToken, profile, done) => {
