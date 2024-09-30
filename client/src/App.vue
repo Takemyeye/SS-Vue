@@ -23,6 +23,9 @@ html, body {
   background-color: #fff;
 }
 
+::selection {
+  background: transparent;
+}
 ::-webkit-scrollbar {
   width: 16px;
 }

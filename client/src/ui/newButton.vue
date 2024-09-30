@@ -19,6 +19,10 @@
 
 <style scoped>
 button {
+font-family: var(--text-font-family);
+font-optical-sizing: var(--text-font-optical-sizing);
+font-weight: var(--text-font-weight);
+font-style: var(--text-font-style);
  padding: 8px 14px;
  border: unset;
  border-radius: 15px;
@@ -47,7 +51,7 @@ button::before {
  z-index: -1;
  -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
  box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
- transition: all 250ms
+ transition: all 0.5s
 }
 
 button:hover h3 {

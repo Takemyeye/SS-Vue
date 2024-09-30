@@ -1,5 +1,7 @@
 <template>
   <div class="container">
+    <h1> Orders</h1>
+    <CatalogOrders @sort-orders="sortOrders" />
     <div v-for="(order) in sortedOrders" :key="order._id" class="order-item">
       <div class="information">
         <h2 style="padding: 2.5rem 0">Order - {{ formatDate(order.createdAt) }}</h2>
@@ -7,7 +9,7 @@
         <UiBadge 
           style="white-space: nowrap; position: absolute; right: 0;" 
           :styleBadge="order.process === 'Checked' ? 'badge3' : 'badge5'"
-          :title="order.process"/>
+          :title="order.process" />
       </div>
       <div class="wrapper">
         <div v-for="item in order.cartItems" :key="item.id" class="data">
@@ -26,11 +28,13 @@
 </template>
 
 <script>
+import CatalogOrders from './catalogOrder.vue';
 import UiBadge from '@/ui/badge.vue';
 
 export default {
   name: 'OrdersItem',
   components: {
+    CatalogOrders,
     UiBadge,
   },
   props: {
@@ -39,12 +43,34 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      sortByTime: 'newest',
+      sortByStatus: 'all',
+    };
+  },
   computed: {
     sortedOrders() {
-      return [...this.orders].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      const ordersCopy = [...this.orders];
+
+      if (this.sortByTime === 'newest') {
+        ordersCopy.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      } else {
+        ordersCopy.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+      }
+
+      if (this.sortByStatus !== 'all') {
+        return ordersCopy.filter(order => order.process.toLowerCase() === this.sortByStatus);
+      }
+
+      return ordersCopy;
     },
   },
   methods: {
+    sortOrders({ sortByTime, sortByStatus }) {
+      this.sortByTime = sortByTime;
+      this.sortByStatus = sortByStatus;
+    },
     getTotalPrice(cartItems) {
       return cartItems.reduce((total, item) => total + item.price, 0);
     },
@@ -64,9 +90,10 @@ export default {
 .container {
     width: 80%;
     display: flex;
-    align-items: center;
+    align-items: start;
     justify-content: center;
     flex-direction: column;
+    padding-top: 1rem;
     gap: 1rem;
     animation: fadeInUp 0.5s ease-in-out forwards;
 }
@@ -124,9 +151,9 @@ h3 {
   position: relative;
   width: 100%;
   display: flex;
-  align-items: center;
-  justify-content: start;
-  flex-direction: row;
+  align-items: start;
+  justify-content: center;
+  flex-direction: column;
 }
 
 @media all and ( max-width: 1900px) {
