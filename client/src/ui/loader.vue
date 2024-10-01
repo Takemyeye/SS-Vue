@@ -55,14 +55,14 @@
 
   .honeycomb {
     position: absolute;
-    top: 70%;
+    bottom: 20%;
     height: 24px;
     width: 24px;
   }
 
   .honeycomb div {
-    -webkit-animation: honeycomb 2.1s infinite backwards;
-    animation: honeycomb 2.1s infinite backwards;
+    -webkit-animation: honeycomb 2s infinite backwards;
+    animation: honeycomb 2s infinite backwards;
     background: black;
     height: 12px;
     margin-top: 6px;

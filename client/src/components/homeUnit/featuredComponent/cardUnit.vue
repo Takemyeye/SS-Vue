@@ -1,70 +1,49 @@
 <template>
   <div class="cardUnit">
-    <router-link :to="{ name: 'Shop' }">
-      <UiCard 
-      style="animation: none"
-      src="art/MHA1.JPG" 
-      alt="Pencil Drawings" 
-      title="Pencil Drawings" 
-      subtitle="Beauty of pencil sketches"
-      btn="Shop"
-      :show="false" />
-    </router-link>
-
-    <router-link :to="{ name: 'Shop' }">
-      <UiCard 
-        style="animation: none"
-        v-if="isDesktop"
-        src="art/JJK12.JPG" 
-        alt="Ink and Marker Art" 
-        title="Ink and Marker Art" 
-        subtitle="Detailed illustrations with ink and markers"
-        btn="Shop"
-        :show="false" />
-    </router-link>
-
-    <router-link :to="{ name: 'Shop' }">
-      <UiCard 
-        style="animation: none"
-        v-if="isDesktop"
-        src="art/CON2.JPG" 
-        alt="Colored Artwork" 
-        title="Colored Artwork" 
-        subtitle="Vibrant and colorful creations"
-        btn="Shop"
-        :show="false" />
-    </router-link>
+    <FeaturedCard
+      titleH3="To 10 €"
+      titleH1="Pencil"
+      description="Elegant black-and-white drawings that capture simplicity and depth, perfect for clean, refined style."
+      info1="Classic charm"
+      info2="Affordable beauty"
+      info3="Timeless appeal"
+      cardBgColor="#f0f0f0"
+      buttonColor="#3498db"
+      svgColor="#2980b9"
+      :badgeStyles="`badge1`"
+    />
+    <FeaturedCard
+      titleH3="To 18 €"
+      titleH1="Ink"
+      description="Detailed ink works emphasizing sharp lines and bold contrasts for a striking visual experience."
+      info1="Bold precision"
+      info2="Sharp contrasts"
+      info3="Collector's choice"
+      buttonColor="hsl(275, 80%, 71%)"
+      svgColor="hsl(275, 80%, 71%)"
+      :badgeStyles="`badge2`"
+    />
+    <FeaturedCard
+      titleH3="To 18 €"
+      titleH1="Colored"
+      description="Vibrant artworks that burst with color, bringing dynamic energy to characters and scenes."
+      info1="Vivid tones"
+      info2="Energetic designs"
+      info3="Full of life"
+      buttonColor="hsl(39, 90%, 50%)"
+      svgColor="hsl(39, 90%, 50%)"
+      :badgeStyles="`badge5`"
+    />
   </div>
 </template>
 
-<script> 
-import UiCard from '@/ui/card.vue';
+<script>
+import FeaturedCard from './featuredCard.vue';
 
 export default {
   name: 'CardUnit',
   components: {
-    UiCard
-  },
-  data() {
-    return {
-      windowWidth: window.innerWidth
-    };
-  },
-  computed: {
-    isDesktop() {
-      return this.windowWidth > 600;
-    }
-  },
-  mounted() {
-    window.addEventListener('resize', this.handleResize);
-  },
-  beforeUnmount() {
-    window.removeEventListener('resize', this.handleResize);
-  },
-  methods: {
-    handleResize() {
-      this.windowWidth = window.innerWidth;
-    }
+    FeaturedCard
   }
 }
 </script>
