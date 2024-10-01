@@ -101,6 +101,7 @@ import { computed, ref } from 'vue';
     background-color: white;
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.342);
     border-radius: 8px;
+    animation: fadeInUp 0.5s ease forwards;
     gap: 2rem;
   }
   

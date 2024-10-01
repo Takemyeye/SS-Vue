@@ -51,9 +51,11 @@
         </div>
       </div>
     </div>
-    <div class="btn" :style="buttonStyles">
-      To Cart
+    <router-link to="/shop">
+      <div class="btn" :style="buttonStyles">
+      To Shop
     </div>
+    </router-link>
   </div>
 </template>
 
@@ -134,6 +136,7 @@ export default {
     gap: 1.5rem;
     width: 300px;
     background-color: rgba(17, 24, 39, 1);
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.473);
   }
 
   .text, .container, .information {

@@ -34,6 +34,7 @@ export default {
   justify-content: center;
   flex-direction: column;
   animation: opacity 1s ease-in-out forwards;
+  z-index: 1;
 }
 
 .background-video {
