@@ -1,6 +1,6 @@
 <template>
   <div class="topBar">
-    <video class="background-video" :src="video.video" muted autoplay loop playsinline></video>
+    <div class="background"></div>
     <div class="text">
       <h1>Unleash Your Fandom</h1>
       <h2>Discover Exclusive Anime & Manga Art at Soul Swap</h2>
@@ -37,13 +37,13 @@ export default {
   z-index: 1;
 }
 
-.background-video {
+.background {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  background: linear-gradient(0deg, hsl(214, 59%, 15%) 0%, hsl(210, 100%, 66%) 100%);
   z-index: -1;
   pointer-events: none;
 }

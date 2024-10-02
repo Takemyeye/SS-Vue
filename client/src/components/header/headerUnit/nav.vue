@@ -62,7 +62,7 @@
   bottom: 0;
   width: 0;
   height: 1px;
-  background-color: var(--color-001);
+  background-color: white;
   transition: width 0.3s ease;
 }
 

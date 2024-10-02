@@ -37,7 +37,7 @@ header {
   font-family: var(--text-font-family);
   font-weight: var(--text-font-weight);
   font-style: var(--text-font-style);
-  background-color: rgb(255, 255, 255);
+  background-color: white;
   border-bottom: 1px solid rgba(0, 0, 0, 0.315);
   z-index: 10;
 }
@@ -50,5 +50,4 @@ header {
   justify-content: space-between;
   flex-direction: row;
 }
-
 </style>

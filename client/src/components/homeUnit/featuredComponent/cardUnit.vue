@@ -54,6 +54,18 @@ export default {
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: auto;
   gap: 2rem;
+  position: relative; 
+}
+
+.cardUnit:hover .card:not(:hover) {
+  filter: blur(3px);
+  transform: scale(0.9);
+  z-index: 0; 
+}
+
+.card:hover {
+  transform: scale(1.08);
+  z-index: 10; 
 }
 
 @media all and (max-width: 1440px) {
@@ -67,4 +79,5 @@ export default {
     grid-template-columns: repeat(1, 1fr);
   }
 }
+
 </style>
