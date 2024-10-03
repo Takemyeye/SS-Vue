@@ -56,14 +56,14 @@
 }
 
 .navigation h3::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   bottom: 0;
   width: 0;
   height: 1px;
-  background-color: white;
-  transition: width 0.3s ease;
+  background-color: var(--color-001);
+  transition: width .3s ease;
 }
 
 .navigation h3:hover::after {

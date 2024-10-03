@@ -3,15 +3,15 @@
         <h1>Our Process</h1>
         <div class="process-unit">
             <ProcessUnit 
-                step=1
+                :step="1"
                 title="Browse" 
                 description="Explore our vast collection of anime and manga inspired artwork."/>
             <ProcessUnit 
-                step=2
+                :step="2"
                 title="Select" 
                 description="Choose your favorite pieces and customize options if available."/>
             <ProcessUnit 
-                step=3
+                :step="3"
                 title="Enjoy" 
                 description="Receive your high-quality prints and display your fandom proudly."/>
         </div>
