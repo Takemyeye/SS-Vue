@@ -27,6 +27,7 @@ footer {
   font-weight: var(--text-font-weight);
   font-style: var(--text-font-style);
   padding-bottom: 1rem;
+  padding-top: 2.5rem;
 }
 
 @media all and (max-width: 768px) {

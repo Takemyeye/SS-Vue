@@ -73,12 +73,12 @@ export default {
   justify-content: center;
   flex-direction: column;
   border-radius: 1rem;
-  box-shadow: 10px 35px 30px rgba(0, 0, 0, 0.144);
   padding: 8px 1rem;
   gap: 1rem;
   animation: apper linear;
   animation-timeline: view();
   animation-range: entry 0;
+  box-shadow: 10px 35px 30px rgba(0, 0, 0, 0.144);
 }
 img {
   width: 100%;
@@ -103,11 +103,11 @@ h4 {
 
 @keyframes apper {
   from {
-    opacity: 0;
+    opacity: 0.1;
     scale: 0.5;
   }
   20% {
-    opacity: 0;
+    opacity: 0.1;
   }
   to {
     opacity: 1;

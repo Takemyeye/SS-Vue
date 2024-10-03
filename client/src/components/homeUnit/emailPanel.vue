@@ -21,7 +21,7 @@ export default {
 <style scoped>
 .emailPanel {
   width: 100%;
-  height: 90vh;
+  padding: 2.5rem 0;
   display: flex;
   align-items: center;
   justify-content: space-evenly;

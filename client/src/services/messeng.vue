@@ -8,7 +8,6 @@
           <font-awesome-icon icon="xmark" style="font-size: 24px;" />
         </div>
       </div>
-      <video src="video/video2.mp4" muted autoplay loop playsinline></video>
     </div>
     <MessengerBlock/>
   </div>
@@ -76,13 +75,6 @@ export default {
     flex-direction: column;
     gap: 8px;
     animation: fadeInUp 1s ease forwards;
-  }
-
-  video {
-    width: 100%;
-    max-height: 150px;
-    object-fit: cover;
-    border-radius: 8px;
   }
 
 @media all and (max-width:768px) {

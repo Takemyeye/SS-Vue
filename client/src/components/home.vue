@@ -6,6 +6,7 @@
     <TopBar/>
     <FeaturedPanel/>
     <EmailPanel/>
+    <OurProcess/>
   </main>
   <SiteFooter/>
   
@@ -15,6 +16,7 @@
   import { isTokenAvailable } from '@/utils/authUtils';
   import FeaturedPanel from './homeUnit/featured.vue';
   import EmailPanel from './homeUnit/emailPanel.vue';
+  import OurProcess from './homeUnit/ourPeocess.vue';
   import ContactUs from '@/services/contact.vue';
   import SiteHeader from './header/header.vue';
   import SiteFooter from './footer/footer.vue';
@@ -25,6 +27,7 @@
     name: 'HomePage',
     components: {
       FeaturedPanel,
+      OurProcess,
       SiteHeader,
       SiteFooter,
       EmailPanel,

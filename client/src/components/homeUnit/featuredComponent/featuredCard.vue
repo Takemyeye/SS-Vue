@@ -97,6 +97,7 @@ export default {
     gap: 1.5rem;
     width: 300px;
     box-shadow: 30px 30px 30px rgba(0, 0, 0, 0.253);
+    background-color: white;
     transition: 0.3s ease;
   }
 

@@ -26,6 +26,7 @@ export default {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    padding: 2.5rem 0;
     gap: 4rem;
     animation: toBottom 2s ease forwards;
   }

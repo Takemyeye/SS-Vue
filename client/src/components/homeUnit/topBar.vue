@@ -11,14 +11,7 @@
 <script>
 export default {
   name: 'TopBar',
-  data() {
-    return {
-      video: {
-        video: 'video/video.mp4'
-      }
-    };
-  }
-}
+};
 </script>
 
 <style scoped>
@@ -26,26 +19,26 @@ export default {
   width: 80%;
   height: 30vh;
   position: relative; 
-  margin-top: 1.5rem;
-  border-radius: 1.5rem;
+  padding: 2rem 0;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  animation: opacity 1s ease-in-out forwards;
   z-index: 1;
 }
 
 .background {
   position: absolute;
-  top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-  background: linear-gradient(0deg, hsl(214, 59%, 15%) 0%, hsl(210, 100%, 66%) 100%);
-  z-index: -1;
+  height: calc(100% - 4rem);
+  z-index: 0;
   pointer-events: none;
+  background: linear-gradient(-45deg, hsl(214, 59%, 15%), hsl(281, 38%, 16%), hsl(275, 80%, 71%), hsl(210, 100%, 66%));
+	animation: gradient 15s ease-in-out infinite;
+	background-size: 400% 400%;
+  border-radius: 1.5rem;
 }
 
 .text {
@@ -76,6 +69,20 @@ export default {
   font-weight: lighter;
   text-align: center;
 }
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+
 @media all and (max-width: 768px) {
   .text {
     width: 80%;
