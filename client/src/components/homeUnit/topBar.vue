@@ -12,7 +12,7 @@
           buttonText="Shop"
         />
       </router-link>
-      <button class="btn">
+      <button class="btn" @click="scrollToFeatured">
         <h3>More</h3>
       </button>
     </div>
@@ -24,13 +24,30 @@ import UiButton from '@/ui/button.vue';
 
 export default {
   name: 'TopBar',
-  components: {
-    UiButton
-  },
+  components: { UiButton },
   props: {
     showContainer: {
       type: Boolean,
       default: true
+    }
+  },
+  methods: {
+    scrollToFeatured() {
+      const targetPosition = window.scrollY + window.innerHeight * 0.4; // 40vh
+      const start = window.scrollY;
+      const duration = 500;
+
+      const animateScroll = (currentTime) => {
+        const timeElapsed = currentTime - startTime;
+        const progress = Math.min(timeElapsed / duration, 1);
+        const ease = progress < 0.5 ? 2 * progress * progress : -1 + (4 - 2 * progress) * progress;
+
+        window.scrollTo(0, start + (targetPosition - start) * ease);
+        if (progress < 1) requestAnimationFrame(animateScroll);
+      };
+
+      const startTime = performance.now();
+      requestAnimationFrame(animateScroll);
     }
   }
 };
