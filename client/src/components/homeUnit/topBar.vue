@@ -5,19 +5,41 @@
       <h1>Unleash Your Fandom</h1>
       <h2>Discover Exclusive Anime & Manga Art at Soul Swap</h2>
     </div>
+    <div v-if="showContainer" class="container">
+      <router-link to="/shop">
+        <UiButton 
+          style="min-width: 90px;"
+          buttonText="Shop"
+        />
+      </router-link>
+      <button class="btn">
+        <h3>More</h3>
+      </button>
+    </div>
   </div>
 </template>
 
 <script>
+import UiButton from '@/ui/button.vue';
+
 export default {
   name: 'TopBar',
+  components: {
+    UiButton
+  },
+  props: {
+    showContainer: {
+      type: Boolean,
+      default: true
+    }
+  }
 };
 </script>
 
 <style scoped>
 .topBar {
   width: 80%;
-  height: 30vh;
+  min-height: 30vh;
   position: relative; 
   padding: 2rem 0;
   overflow: hidden;
@@ -25,6 +47,7 @@ export default {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  gap: 2rem;
   z-index: 1;
 }
 
@@ -68,6 +91,37 @@ export default {
   color: white;
   font-weight: lighter;
   text-align: center;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  z-index: 1;
+  gap: 1rem;
+}
+
+.btn {
+  min-width: 90px;
+  border: 1px solid white;
+  border-radius: 8px;
+  background-color: white;
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: 0.5s ease;
+  text-align: center;
+}
+
+.btn:hover {
+  background-color: rgba(216, 216, 216, 0.349);
+  border-color: rgba(216, 216, 216, 0.349);
+}
+
+.btn h3 {
+  color: black;
+  font-weight: lighter;
 }
 
 @keyframes gradient {

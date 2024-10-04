@@ -67,6 +67,7 @@ export default {
 .leftPanel {
   position: relative;
   width: 25%;
+  
   height: 60vh;
   overflow: hidden;
   display: flex;

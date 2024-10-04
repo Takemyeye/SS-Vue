@@ -3,7 +3,7 @@
     <SiteHeader />
     <div class="store">
       <ContactUs v-if="tokenExists" />
-      <TopBar />
+      <TopBar :showContainer="false" />
       <CatalogBlock @category-selected="handleCategorySelected" />
 
       <UiLoader v-if="loading" />
@@ -16,7 +16,6 @@
     </div>
   </div>
 </template>
-
 
 <script>
 import { ref, onMounted, computed } from 'vue';

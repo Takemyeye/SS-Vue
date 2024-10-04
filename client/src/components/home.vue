@@ -3,7 +3,7 @@
   <SiteHeader/> 
   <main>
     <ContactUs v-if="tokenExists"/>
-    <TopBar/>
+    <TopBar />
     <FeaturedPanel/>
     <EmailPanel/>
     <OurProcess/>
