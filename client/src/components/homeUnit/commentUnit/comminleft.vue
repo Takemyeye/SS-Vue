@@ -5,7 +5,7 @@
       <h5>Your feedback is important to us.</h5>
     </div>
     <div class="container">
-      <h5>Review</h5>
+      <UiBadge title="Review" styleBadge="badge3"/>
       <textarea class="textarea" placeholder="Share your thoughts about our platform" style="width: 1447px; height: 92px;"></textarea>
     </div>
     <div class="commit">
@@ -16,11 +16,13 @@
 
 <script>
 import UiNewButton from '@/ui/newButton.vue';
+import UiBadge from '@/ui/badge.vue';
 
   export default {
     name: 'CommitLeft',
     components: {
       UiNewButton,
+      UiBadge
     }
   }
 </script>
@@ -72,4 +74,15 @@ import UiNewButton from '@/ui/newButton.vue';
   h2 {
     font-weight: 700;
   }
+
+  @media all and ( max-width: 768px ) {
+    .commit-panel {
+      width: 100%;
+    }
+    textarea {
+      max-width: 95%;
+      min-width: 95%;
+    }
+  }
+
 </style>

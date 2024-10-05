@@ -181,9 +181,6 @@ export default {
 </script>
 
 <style scoped>
-h2 {
-  font-weight: 700;
-}
 .experience {
   width: 50%;
   display: flex;
@@ -191,6 +188,9 @@ h2 {
   justify-content: start;
   flex-direction: column;
   gap: 2rem;
+}
+h2 {
+  font-weight: 700;
 }
 .mood {
   width: 100%;
@@ -228,4 +228,11 @@ h2 {
   border-radius: 20px;
   transition: width 0.5s ease-in-out;
 }
+
+@media all and ( max-width: 768px ) {
+    .experience {
+      width: 100%;
+    }
+  }
+
 </style>

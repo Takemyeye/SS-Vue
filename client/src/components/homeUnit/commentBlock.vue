@@ -57,4 +57,18 @@ import CommentUnit from './commentUnit/comment.vue';
     justify-items: center;
     gap: 2rem;
   }
+
+  @media all and ( max-width: 1024px ) {
+    .container {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 4rem;
+    }
+  }
+
+  @media all and ( max-width: 500px ) {
+    .container {
+      grid-template-columns: repeat(1, 1fr);
+      gap: 4rem;
+    }
+  }
 </style>

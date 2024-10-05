@@ -32,7 +32,7 @@ export default {
 @media all and (max-width: 768px) {
   .emailPanel {
     flex-direction: column;
-    height: 100vh;
+    gap: 4rem
   }
 }
 </style>

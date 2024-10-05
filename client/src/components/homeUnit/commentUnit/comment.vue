@@ -2,7 +2,7 @@
   <div class="comment">
     <div class="user">
       <img :src="avatar" alt="">
-      <h3>{{ name }}</h3>
+      <UiBadge :title="name" styleBadge="badge1"/>
     </div>
     <div class="messeng">
       <h5>{{ messeng }}</h5>
@@ -11,8 +11,13 @@
 </template>
 
 <script>
+import UiBadge from '@/ui/badge.vue';
+
   export default {
     name: 'CommentUnit',
+    components : {
+      UiBadge
+    },
     props: {
       avatar: {
         type: Object,

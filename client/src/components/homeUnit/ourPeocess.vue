@@ -45,7 +45,7 @@
         justify-items: center;
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: auto;
-        gap: 8px;
+        gap: 1rem;
     }
 
     @media all and ( max-width: 1260px) {
@@ -56,6 +56,7 @@
     @media all and ( max-width: 786px ) {
         .process-unit {
             grid-template-columns: repeat(1, 1fr);
+            gap: 2rem;
         }
     } 
 </style>
