@@ -1,17 +1,21 @@
 <template>
   <div class="absolut">
       <div class="panel">
+
         <font-awesome-icon icon="xmark" 
           style="font-size: 24px; color: black; cursor: pointer; position: absolute; right: 10px; top: 10px;" 
           @click="toggleBar"/>
+
         <div class="text">
           <h2>Write New Bio</h2>
           <h5>Tell us about yourself in a few words</h5>
         </div>
+
         <div class="example">
           <h2>Example:</h2>
           <h5>Coffee enthusiast ☕ | World traveler 🌍 | Nature lover 🌿 | Passionate about photography 📸 and exploring hidden gems around the globe.</h5>
         </div>
+
         <div class="text">
           <textarea 
             v-model="newBio" 
@@ -22,7 +26,9 @@
           ></textarea>
           <h5>{{ bioLength }}/160 characters</h5>
         </div>
+
         <UiButton buttonText="Save Bio" @click="updateBio" />
+        
       </div>
   </div>
   </template>
@@ -99,6 +105,7 @@
     align-items: center;
     justify-content: center;
     backdrop-filter: blur(8px);
+    z-index: 1;
   }
   .panel {
     position: relative;

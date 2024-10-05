@@ -2,6 +2,7 @@
   <div class="comment-block">
     <h1>Customer Reviews</h1>
     <div class="container">
+
       <CommentUnit 
         avatar=""
         name="Samantha Lee"
@@ -14,18 +15,28 @@
         avatar=""
         name="Mike Chen"
         messeng="The customer service is top-notch. They helped me find the perfect piece for my collection. Highly recommended!"/>
+        <CommentUnit 
+        avatar=""
+        name="Mike Chen"
+        messeng="The customer service is top-notch. They helped me find the perfect piece for my collection. Highly recommended!"/>
+
     </div>
+
+    <CommitPanel/>
   </div>
 </template>
 
 <script>
-import CommentUnit from './commentUnit/comment.vue'
+import CommitPanel from './commentUnit/commitPanel.vue';
+import CommentUnit from './commentUnit/comment.vue';
+
 
   export default {
     name: 'CommentBlock',
     components: {
       CommentUnit,
-    }
+      CommitPanel,
+    },
   }
 </script>
 
@@ -41,9 +52,9 @@ import CommentUnit from './commentUnit/comment.vue'
   }
   .container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-template-rows: auto;
     justify-items: center;
-    gap: 6rem;
+    gap: 2rem;
   }
 </style>

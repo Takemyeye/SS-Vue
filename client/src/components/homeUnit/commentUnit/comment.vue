@@ -41,7 +41,7 @@
     border: 1px solid rgba(0, 0, 0, 0.158);
     padding: 1rem;
     gap: 2rem;
-    }
+  }
   .user {
     width: 100%;
     display: flex;

@@ -89,6 +89,7 @@ import { computed, ref } from 'vue';
     align-items: center;
     justify-content: center;
     backdrop-filter: blur(8px);
+    z-index: 1;
   }
   .panel {
     position: relative;
