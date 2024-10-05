@@ -28,7 +28,7 @@ export default {
     flex-direction: column;
     padding: 2.5rem 0;
     gap: 4rem;
-    animation: toBottom 2s ease forwards;
+    animation: toBottom 1s ease forwards;
   }
   .text {
     width: 40%;

@@ -11,7 +11,7 @@
       <component 
         :is="categoryComponents[activeCategory]" 
         :key="activeCategory" 
-        v-if="filteredImages[activeCategoryName]?.length" 
+        v-if="filteredImages[activeCategoryName] && filteredImages[activeCategoryName]?.length" 
         :images="loading ? [] : filteredImages[activeCategoryName]"
       />
     </div>
@@ -81,12 +81,13 @@ export default {
     const loadImages = async () => {
       loading.value = true; 
       if (!hasImagesInCache()) { 
-        await fetchImages();
+        await fetchImages(); 
       } else {
-        filteredImages.value = filterImagesByCategory();
+        filterImagesByCategory(); 
       }
-      await new Promise(resolve => setTimeout(resolve, 2000)); // dellay 2s
-      loading.value = false;
+
+      await new Promise(resolve => setTimeout(resolve, 2000)); 
+      loading.value = false; 
     };
 
     onMounted(() => {

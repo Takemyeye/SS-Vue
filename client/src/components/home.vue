@@ -5,6 +5,7 @@
     <ContactUs v-if="tokenExists"/>
     <TopBar />
     <FeaturedPanel/>
+    <CommentBlock/>
     <EmailPanel/>
     <OurProcess/>
   </main>
@@ -13,6 +14,7 @@
 </template>
 
 <script>
+  import CommentBlock from './homeUnit/commentBlock.vue';
   import { isTokenAvailable } from '@/utils/authUtils';
   import FeaturedPanel from './homeUnit/featured.vue';
   import EmailPanel from './homeUnit/emailPanel.vue';
@@ -27,6 +29,7 @@
     name: 'HomePage',
     components: {
       FeaturedPanel,
+      CommentBlock,
       OurProcess,
       SiteHeader,
       SiteFooter,
