@@ -10,7 +10,8 @@
 
       <component 
         :is="categoryComponents[activeCategory]" 
-        v-if="filteredImages[activeCategoryName]" 
+        :key="activeCategory" 
+        v-if="filteredImages[activeCategoryName]?.length" 
         :images="loading ? [] : filteredImages[activeCategoryName]"
       />
     </div>
@@ -49,9 +50,9 @@ export default {
     UiLoader,
   },
   setup() {
-    const { filteredImages, fetchImages } = useImageStore();
-    const activeCategory = ref('All');
+    const { filteredImages, fetchImages, hasImagesInCache, filterImagesByCategory } = useImageStore();
     const tokenExists = isTokenAvailable();
+    const activeCategory = ref('All');
 
     const categoryComponents = {
       All: AllArt,
@@ -78,10 +79,14 @@ export default {
     const loading = ref(true);
 
     const loadImages = async () => {
-      loading.value = true; // start loading
-      await fetchImages();
-      await new Promise((resolve) => setTimeout(resolve, 2000)); // dellay 2s
-      loading.value = false; //loading finish
+      loading.value = true; 
+      if (!hasImagesInCache()) { 
+        await fetchImages();
+      } else {
+        filteredImages.value = filterImagesByCategory();
+      }
+      await new Promise(resolve => setTimeout(resolve, 2000)); // dellay 2s
+      loading.value = false;
     };
 
     onMounted(() => {
@@ -104,7 +109,6 @@ export default {
   },
 };
 </script>
-
 
 <style scoped>
 .store {

@@ -34,20 +34,10 @@ export default {
   methods: {
     scrollToFeatured() {
       const targetPosition = window.scrollY + window.innerHeight * 0.4; // 40vh
-      const start = window.scrollY;
-      const duration = 500;
-
-      const animateScroll = (currentTime) => {
-        const timeElapsed = currentTime - startTime;
-        const progress = Math.min(timeElapsed / duration, 1);
-        const ease = progress < 0.5 ? 2 * progress * progress : -1 + (4 - 2 * progress) * progress;
-
-        window.scrollTo(0, start + (targetPosition - start) * ease);
-        if (progress < 1) requestAnimationFrame(animateScroll);
-      };
-
-      const startTime = performance.now();
-      requestAnimationFrame(animateScroll);
+      window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+      });
     }
   }
 };

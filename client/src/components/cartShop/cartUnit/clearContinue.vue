@@ -36,7 +36,7 @@
         </div>
       </div>
     </div>
-    <UiBaner 
+    <UiBanner 
       style="position: absolute;"
       v-if="showBanner"
       :src="`img/verified.png`"
@@ -48,7 +48,7 @@
 
 <script>
 import UiButton from '@/ui/button.vue';
-import UiBaner from '@/ui/baner.vue';
+import UiBanner from '@/ui/banner.vue';
 import { clearCart } from '@/services/activeContext';
 
 const getTokenFromLocalStorage = () => {
@@ -59,7 +59,7 @@ export default {
   name: 'ClearContinue',
   components: {
     UiButton,
-    UiBaner
+    UiBanner
   },
   data() {
     return {

@@ -13,7 +13,7 @@
         :showI="true" 
         @click="handleCardClick(image)"
       />
-      <UiBaner 
+      <UiBanner 
         v-if="showBanner"
         :src="selectedImageSrc"
         :alt="selectedImageAlt"
@@ -35,7 +35,7 @@
 import { addToCart } from '@/services/activeContext'; 
 import usePagination from '@/mixins/PaginationMixin';
 import UiPagination from '@/ui/pagination.vue';
-import UiBaner from '@/ui/baner.vue';
+import UiBanner from '@/ui/banner.vue';
 import UiCard from '@/ui/card.vue';
 import { ref } from 'vue'; 
 
@@ -43,7 +43,7 @@ export default {
   name: 'SdArt',
   components: {
     UiPagination,
-    UiBaner,
+    UiBanner,
     UiCard,
   },
   props: {

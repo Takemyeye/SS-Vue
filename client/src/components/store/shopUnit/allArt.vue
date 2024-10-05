@@ -13,7 +13,7 @@
         :showI="true" 
         @click="handleCardClick(image)"
       />
-      <UiBaner 
+      <UiBanner 
         v-if="showBanner"
         :src="selectedImageSrc"
         :alt="selectedImageAlt"
@@ -33,14 +33,14 @@
 import { addToCart } from '@/services/activeContext'; 
 import UiPagination from '@/ui/pagination.vue'; 
 import SearchBar from './searchBar.vue';
-import UiBaner from '@/ui/baner.vue';
+import UiBanner from '@/ui/banner.vue';
 import UiCard from '@/ui/card.vue';
 
 export default {
   name: 'AllArt',
   components: {
     UiCard,
-    UiBaner,
+    UiBanner,
     SearchBar,
     UiPagination
   },

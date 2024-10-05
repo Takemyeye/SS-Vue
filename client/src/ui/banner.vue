@@ -12,7 +12,7 @@
 
 <script>
   export default {
-    name: 'UiBaner',
+    name: 'UiBanner',
     props: {
     src: {
       type: String,

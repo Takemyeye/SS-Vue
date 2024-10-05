@@ -10,14 +10,20 @@ const filteredImages = ref({
   'Sakamoto Days': []
 });
 
+const hasImagesInCache = () => {
+  return images.value.length > 0; 
+};
+
 const fetchImages = async () => {
+  if (hasImagesInCache()) return;
+
   try {
     const response = await fetch('http://localhost:3000/api/images');
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
     const data = await response.json();
-    images.value = data;
+    images.value = data; 
     filterImagesByCategory();
   } catch (error) {
     console.error('Error fetching images:', error);
@@ -27,7 +33,9 @@ const fetchImages = async () => {
 const filterImagesByCategory = () => {
   const categories = Object.keys(filteredImages.value);
   filteredImages.value = categories.reduce((acc, category) => {
-    acc[category] = images.value.filter(image => image.titleAnime === category || category === 'All');
+    acc[category] = images.value.filter(image => 
+      image.titleAnime === category || category === 'All'
+    );
     return acc;
   }, {});
 };
@@ -38,5 +46,6 @@ export default function useImageStore() {
     filteredImages,
     fetchImages,
     filterImagesByCategory,
+    hasImagesInCache, 
   };
 }

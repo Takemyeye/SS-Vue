@@ -13,7 +13,7 @@
         :showI="true" 
         @click="handleCardClick(image)"
       />
-      <UiBaner 
+      <UiBanner
         v-if="showBanner"
         :src="selectedImageSrc"
         :alt="selectedImageAlt"
@@ -23,7 +23,7 @@
     </div>
 
     <UiPagination 
-      v-if="filteredImages.length > itemsPerPage"
+      v-if="filteredImages && filteredImages.length > itemsPerPage"
       :totalItems="filteredImages.length"
       @page-changed="onPageChanged"
       @items-per-page-changed="setItemsPerPage"
@@ -34,15 +34,15 @@
 <script>
 import { ref, computed, watch } from 'vue';
 import { addToCart } from '@/services/activeContext'; 
-import UiBaner from '@/ui/baner.vue';
-import UiCard from '@/ui/card.vue';
 import UiPagination from '@/ui/pagination.vue';
+import UiBanner from '@/ui/banner.vue'; 
+import UiCard from '@/ui/card.vue';
 
 export default {
   name: 'CallOfNightArt',
   components: {
     UiCard,
-    UiBaner,
+    UiBanner, 
     UiPagination
   },
   props: {
@@ -52,7 +52,7 @@ export default {
     }
   },
   setup(props) {
-    const filteredImages = ref([]);
+    const filteredImages = ref([]); // Инициализация как пустого массива
     const currentPage = ref(1);
     const itemsPerPage = ref(8); 
     const showBanner = ref(false);
@@ -61,27 +61,36 @@ export default {
     const selectedImageTitle = ref(''); 
     const bannerTimeout = ref(null);
 
+    // Отслеживание изменений в props.images
     watch(() => props.images, (newImages) => {
-      filteredImages.value = newImages;
-      currentPage.value = 1;
+      if (Array.isArray(newImages)) {
+        filteredImages.value = newImages; // Проверка на массив
+      } else {
+        console.error("Expected images to be an array, got:", newImages);
+        filteredImages.value = []; // Сброс на пустой массив в случае ошибки
+      }
+      currentPage.value = 1; // Сброс текущей страницы
     }, { immediate: true });
 
+    // Пагинация изображений
     const paginatedImages = computed(() => {
       const start = (currentPage.value - 1) * itemsPerPage.value;
       const end = start + itemsPerPage.value;
       return filteredImages.value.slice(start, end);
     });
 
+    // Фильтрация изображений по запросу
     function filterImages(query) {
-      if (!props.images) return;
+      if (!props.images) return; // Защита от неопределенных данных
       filteredImages.value = props.images.filter(image => {
         const title = image.title ? image.title.toLowerCase() : ''; 
         const titleAnime = image.titleAnime ? image.titleAnime.toLowerCase() : ''; 
         return title.includes(query.toLowerCase()) || titleAnime.includes(query.toLowerCase());
       });
-      currentPage.value = 1;
+      currentPage.value = 1; // Сброс на первую страницу
     }
 
+    // Обработка клика на карточке
     function handleCardClick(image) {
       addToCart(image); 
       selectedImageSrc.value = `/art/${image.image}`; 
@@ -97,10 +106,12 @@ export default {
       }, 5000);
     }
 
+    // Изменение текущей страницы
     function onPageChanged(newPage) {
       currentPage.value = newPage;
     }
 
+    // Установка количества элементов на странице
     function setItemsPerPage(items) {
       itemsPerPage.value = items; 
       currentPage.value = 1;
@@ -117,6 +128,7 @@ export default {
       selectedImageTitle,
       currentPage,
       filterImages,
+      filteredImages, // Возвращаем filteredImages
     };
   }
 }
