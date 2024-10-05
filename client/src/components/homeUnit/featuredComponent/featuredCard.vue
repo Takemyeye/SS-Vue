@@ -96,7 +96,7 @@ export default {
     flex-direction: column;
     gap: 1.5rem;
     width: 300px;
-    box-shadow: 30px 30px 30px rgba(0, 0, 0, 0.253);
+    box-shadow: 30px 30px 30px rgba(0, 0, 0, 0.151);
     background-color: white;
     transition: 0.3s ease;
   }

@@ -50,11 +50,11 @@ export default {
 
 <style scoped>
 .cardUnit {
+  position: relative; 
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: auto;
   gap: 2rem;
-  position: relative; 
 }
 
 .cardUnit:hover .card:not(:hover) {

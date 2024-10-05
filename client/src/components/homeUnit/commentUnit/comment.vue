@@ -38,8 +38,8 @@
     justify-content: start;
     flex-direction: column;
     border-radius: 4px;
-    border: 1px solid rgba(0, 0, 0, 0.158);
-    padding: 1rem;
+    box-shadow: 0px 30px 30px rgba(0, 0, 0, 0.151);
+    padding: 2rem 1rem ;
     gap: 2rem;
   }
   .user {

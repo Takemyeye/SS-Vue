@@ -22,7 +22,7 @@
 
     </div>
 
-    <CommitPanel/>
+    <CommitPanel style="margin-top: 2rem"/>
   </div>
 </template>
 

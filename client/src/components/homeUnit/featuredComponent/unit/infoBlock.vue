@@ -41,7 +41,7 @@ export default {
 </script>
 
 <style scoped>
-    .block {
+  .block {
     display: flex;
     align-items: center;
     flex-direction: row;
