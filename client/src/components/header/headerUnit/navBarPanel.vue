@@ -25,8 +25,8 @@
 </template>
 
 <script>
-import { ref, computed, onMounted } from 'vue';
 import { cartState } from '@/services/activeContext';
+import { ref, computed, onMounted } from 'vue';
 import useUserStore from '@/stores/userStore';
 
 export default {
@@ -56,6 +56,10 @@ export default {
         if (response.ok) {
           const data = await response.json();
           setUser(data);
+
+          if (data.status === 'banned') {
+            window.location.href = '/banned';
+          }
         } else {
           console.error('Ошибка получения данных пользователя:', response.statusText);
         }
@@ -87,7 +91,6 @@ export default {
 
     const logout = () => {
       clearUser();
-      localStorage.removeItem('token');
     };
 
     return {

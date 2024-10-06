@@ -20,7 +20,7 @@ import UiBadge from '@/ui/badge.vue';
     },
     props: {
       avatar: {
-        type: Object,
+        type: String,
         required: true
       },
       name: {

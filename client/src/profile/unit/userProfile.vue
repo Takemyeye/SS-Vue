@@ -51,7 +51,6 @@ export default {
 
     const logout = () => {
       clearUser();
-      localStorage.removeItem('token');
     };
 
     const avatarUrl = computed(() => {
