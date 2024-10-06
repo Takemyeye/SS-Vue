@@ -8,7 +8,8 @@ const UserSchema = new mongoose.Schema({
   token: { type: String },
   provider: { type: String },
   bio: { type: String },
-  nickname: { type: String }
+  nickname: { type: String },
+  status: { type: String },
 
 });
 

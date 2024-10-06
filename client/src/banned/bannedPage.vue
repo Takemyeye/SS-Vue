@@ -1,4 +1,5 @@
 <template> 
+  <SiteHeader/>
   <div class="banned-page">
     <div class="container">
       <font-awesome-icon icon="lock" style="font-size: 60px;"/>
@@ -15,12 +16,14 @@
 </template>
 
 <script>
+import SiteHeader from '@/components/header/header.vue';
 import UiButton from '@/ui/button.vue';
 
   export default {
     name: 'BannedPage',
     components: {
-      UiButton
+      SiteHeader,
+      UiButton,
     },
   }
 </script>
@@ -32,7 +35,7 @@ import UiButton from '@/ui/button.vue';
     font-weight: var(--text-font-weight);
     font-style: var(--text-font-style);
     width: 100%;
-    height: 100vh;
+    height: calc(90vh - 1px);
     display: flex;
     align-items: center;
     justify-content: center;
