@@ -57,6 +57,8 @@ export default {
           const data = await response.json();
           setUser(data);
 
+          localStorage.setItem('userStatus', data.status)
+          
           if (data.status === 'banned') {
             window.location.href = '/banned';
           }

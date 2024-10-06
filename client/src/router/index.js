@@ -26,6 +26,7 @@ const isBanned = () => {
   const userStatus = localStorage.getItem('userStatus');
   return userStatus === 'banned';
 }
+
 const routes = [
   { path: '/register', name: 'Register', component: RegisterPage },
   { path: '/privacy', name: 'Privacy', component: PrivacyPolicy },

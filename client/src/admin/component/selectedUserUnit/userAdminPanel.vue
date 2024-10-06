@@ -3,7 +3,10 @@
     <div class="user" v-if="localUser">
       <img :src="localUser.avatar" alt="User Avatar" class="user-avatar" />
       <div class="info">
-        <UiBadge styleBadge="badge4" title="block" @click="banUser"/>
+        <div class="container-btn">
+          <UiBadge styleBadge="badge4" title="block" @click="banUser"/>
+          <UiBadge styleBadge="badge3" title="unBan" @click="unBanUser" style="cursor: pointer;"/>
+        </div>
         <p><strong>Id:</strong>{{ localUser.id }}</p>
         <p><strong>Name:</strong>{{ localUser.username }}</p>
         <p><strong>Email:</strong>{{ localUser.email }}</p>
@@ -69,6 +72,36 @@ export default {
         console.error('Error banning user:', error);
       }
     },
+    async unBanUser() {
+      try {
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+          console.error('No auth token found');
+          return;
+        }
+
+        const response = await fetch(`http://localhost:3000/api/update-status-active/${this.localUser.id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`, 
+          },
+          body: JSON.stringify({
+            status: 'active',
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to unBan user');
+        }
+
+        this.localUser.status = 'active';
+
+      } catch (error) {
+        console.error('Error banning user:', error);
+      }
+    },
   },
 };
 </script>
@@ -105,6 +138,12 @@ export default {
 
 p {
   padding: 5px 0;
+}
+
+.container-btn {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
 }
 
 .close-button {
