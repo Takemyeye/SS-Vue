@@ -8,7 +8,8 @@ import {
   faCity, faImage, faTrash, faComment, faXmark, 
   faPaperPlane, faChevronLeft, faChevronRight, 
   faCheck,
-  faMicrochip
+  faMicrochip,
+  faLock
 } from '@fortawesome/free-solid-svg-icons';
 
 import { faInstagram, faTelegram, faTiktok, faGoogle, faGithub, faDiscord, faPaypal } from '@fortawesome/free-brands-svg-icons';
@@ -39,6 +40,7 @@ library.add(
   faImage,
   faTrash,
   faXmark,
+  faLock,
   faCity,
   faUser,
 );

@@ -5,13 +5,14 @@ import PrivacyPolicy from '@/policy/privacyPolicy.vue';
 import NotFound from '@/components/404/NotFound.vue';
 import RegisterPage from '@/private/register.vue';
 import ArtShop from '@/components/store/shop.vue';
+import BannedPage from '@/banned/bannedPage.vue';
 import ProfilePage from '@/profile/profile.vue';
 import HomePage from '@/components/home.vue';
 import AdminPanel from '@/admin/admin.vue';
 
-const ADMIN_TOKEN_GIT = process.env.VUE_APP_ADMIN_TOKEN_GIT;
-const ADMIN_TOKEN_GOOGLE = process.env.VUE_APP_ADMIN_TOKEN_GOOGLE;
 const ADMIN_TOKEN_DISCORD = process.env.VUE_APP_ADMIN_TOKEN_DISCORD;
+const ADMIN_TOKEN_GOOGLE = process.env.VUE_APP_ADMIN_TOKEN_GOOGLE;
+const ADMIN_TOKEN_GIT = process.env.VUE_APP_ADMIN_TOKEN_GIT;
 const isAuthenticated = () => {
   return !!localStorage.getItem('token'); 
 };
@@ -51,7 +52,12 @@ const routes = [
     name: 'Admin', 
     component: AdminPanel,
     meta: { requiresAdmin: true }
-  }
+  },
+  {
+    path: '/banned',
+    name: 'Banned',
+    component: BannedPage,
+  },
 ];
 
 const router = createRouter({
