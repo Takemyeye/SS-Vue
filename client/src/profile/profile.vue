@@ -104,6 +104,7 @@ export default {
     padding: 8px 1rem;
     border: 1px solid rgba(0, 0, 0, 0.199);
     display: flex;
+    gap: 1rem;
     align-items: center;
     justify-content: space-between;
     flex-direction: row;

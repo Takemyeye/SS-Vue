@@ -9,6 +9,8 @@ const UserSchema = new mongoose.Schema({
   provider: { type: String },
   bio: { type: String },
   nickname: { type: String },
+  lastBioUpdate: { type: Date }, 
+  lastNicknameUpdate: { type: Date },
   status: { type: String, default: 'active' },
 });
 

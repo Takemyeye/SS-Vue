@@ -17,7 +17,21 @@ router.post('/reviews', async (req, res) => {
             return res.status(403).json({ message: 'Please create a nickname.' });
         }
 
-        const newReview = new Review({ token, comment });
+        const lastReview = await Review.findOne({ token }).sort({ createdAt: -1 });
+
+        if (lastReview) {
+            const currentDate = new Date();
+            const lastReviewDate = new Date(lastReview.createdAt);
+            
+            const timeDifference = currentDate - lastReviewDate;
+            const oneDayInMilliseconds = 24 * 60 * 60 * 1000; 
+
+            if (timeDifference < oneDayInMilliseconds) {
+                return res.status(403).json({ message: 'You can only submit one review per day.' });
+            }
+        }
+
+        const newReview = new Review({ token, comment, createdAt: new Date() });
         await newReview.save();
 
         return res.status(201).json({ message: 'Review submitted successfully.' });
@@ -37,7 +51,8 @@ router.get('/reviews', async (req, res) => {
         user: {
           username: user ? user.nickname : 'Unknown', 
           avatar: user ? user.avatar : '',
-        }
+        },
+        date: review.createdAt 
       };
     }));
 

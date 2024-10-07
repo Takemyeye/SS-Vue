@@ -1,6 +1,6 @@
+const { client } = require('./redis/redisClient');
 const express = require('express');
 const router = express.Router();
-const { client } = require('./redis/redisClient');
 
 router.get('/images', async (req, res) => {
   try {
