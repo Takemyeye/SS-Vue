@@ -6,10 +6,16 @@
     </div>
     <div class="container">
       <UiBadge title="Review" styleBadge="badge3"/>
-      <textarea class="textarea" placeholder="Share your thoughts about our platform" style="width: 1447px; height: 92px;"></textarea>
+      <textarea 
+        v-model="comment" 
+        class="textarea" 
+        placeholder="Share your thoughts about our platform" 
+        style="width: 1447px; height: 92px;"
+        maxlength="250"  
+      ></textarea>
     </div>
     <div class="commit">
-      <UiNewButton text="Commit"/>
+      <UiNewButton text="Commit" @click="submitReview"/>
     </div>
   </div>
 </template>
@@ -18,13 +24,53 @@
 import UiNewButton from '@/ui/newButton.vue';
 import UiBadge from '@/ui/badge.vue';
 
-  export default {
-    name: 'CommitLeft',
-    components: {
-      UiNewButton,
-      UiBadge
+export default {
+  name: 'CommitLeft',
+  components: {
+    UiNewButton,
+    UiBadge
+  },
+  data() {
+    return {
+      comment: ''
+    };
+  },
+  methods: {
+    async submitReview() {
+      const token = localStorage.getItem('token');
+
+      if (!token || !this.comment) {
+        alert('Please provide a token and a comment.');
+        return;
+      }
+
+      try {
+        const response = await fetch('http://localhost:3000/api/reviews', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            token,
+            comment: this.comment
+          }),
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || 'An error occurred while submitting the review.');
+        }
+
+        const data = await response.json();
+        alert(data.message); 
+        
+        this.comment = '';
+      } catch (error) {
+        alert(error.message); 
+      }
     }
   }
+}
 </script>
 
 <style scoped>

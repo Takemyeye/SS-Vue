@@ -5,7 +5,7 @@
       <UiBadge :title="name" styleBadge="badge1"/>
     </div>
     <div class="messeng">
-      <h5>{{ messeng }}</h5>
+      <h5>{{ comment }}</h5>
     </div>
   </div>
 </template>
@@ -27,7 +27,7 @@ import UiBadge from '@/ui/badge.vue';
         type: String,
         required: true
       },
-      messeng: {
+      comment: {
         type: String,
         required: true
       }
@@ -37,6 +37,7 @@ import UiBadge from '@/ui/badge.vue';
 
 <style scoped>
   .comment {
+    width: 100%;
     max-width: 300px;
     display: flex;
     align-items: start;

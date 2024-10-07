@@ -55,6 +55,10 @@ export default {
     defaultPage: {
       type: Number,
       default: 1
+    },
+    scrollToTop: {
+      type: Boolean,
+      default: true
     }
   },
   data() {
@@ -89,20 +93,20 @@ export default {
     prevPage() {
       if (this.currentPage > 1) {
         this.currentPage--;
-        this.scrollToTop();
+        this.scrollToTop && this.scrollToTopFn();
       }
     },
     nextPage() {
       if (this.currentPage < this.totalPages) {
         this.currentPage++;
-        this.scrollToTop();
+        this.scrollToTop && this.scrollToTopFn();
       }
     },
     goToPage(page) {
       this.currentPage = page;
-      this.scrollToTop();
+      this.scrollToTop && this.scrollToTopFn();
     },
-    scrollToTop() {
+    scrollToTopFn() {
       window.scrollTo({
         top: 0,
         behavior: 'smooth'

@@ -3,6 +3,7 @@ const processOrder = require('./process/processOrder');
 const googleAuthRoutes = require('./auth/googleAuth');
 const githubAuthRoutes = require('./auth/githubAuth');
 const orderChange = require('./process/ordersChange');
+const reviewRoutes = require('./routes/reviewRoutes');
 const { client } = require('./redis/redisClient'); 
 const messangRoutes = require('./routes/messang');
 const userUpdate = require('./data/user-update');
@@ -51,11 +52,12 @@ app.use(cors({
 
 app.use(passport.initialize());
 
-app.use('/', googleAuthRoutes);
-app.use('/', githubAuthRoutes);
 app.use('/', discordAuthRoutes);
 app.use('/api', messangRoutes); 
+app.use('/', googleAuthRoutes);
+app.use('/', githubAuthRoutes);
 app.use('/api', processOrder);
+app.use('/api', reviewRoutes);
 app.use('/api', orderChange);
 app.use('/api', imageRoutes);
 app.use('/api', usersRouter);
