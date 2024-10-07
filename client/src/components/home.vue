@@ -6,8 +6,8 @@
     <TopBar />
     <FeaturedPanel/>
     <CommentBlock/>
-    <EmailPanel/>
     <OurProcess/>
+    <EmailPanel/>
   </main>
   <SiteFooter/>
   

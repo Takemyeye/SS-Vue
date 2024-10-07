@@ -8,9 +8,11 @@ const useUserStore = () => {
   };
 
   const clearUser = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('userStatus');
+    // remove Item from Local Storage
     localStorage.removeItem('selectedMood');
+    localStorage.removeItem('userStatus');
+    localStorage.removeItem('token');
+
     window.location.href = '/';
     user.value = null;
   };

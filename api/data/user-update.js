@@ -15,11 +15,16 @@ router.post('/update-user', async (req, res) => {
 
     const { bio, nickname } = req.body;
 
-    // find user thx id
+    // Check if the nickname already exists for another user
+    const existingUser = await User.findOne({ nickname, id: { $ne: userId } });
+    if (existingUser) {
+      return res.status(409).json({ message: 'Nickname already exists' });
+    }
+
     const user = await User.findOneAndUpdate(
       { id: userId },
       { bio, nickname },
-      { new: true } //return new doc
+      { new: true }
     );
 
     if (!user) {
@@ -28,7 +33,7 @@ router.post('/update-user', async (req, res) => {
 
     return res.status(200).json({ user });
   } catch (error) {
-    res.status(500).json({ message: 'Server error', error });
+    return res.status(500).json({ message: 'Server error', error });
   }
 });
 

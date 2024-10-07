@@ -8,7 +8,7 @@
           <UiBadge 
             styleBadge="badge1" 
             :title="userNick" 
-            style=" width: fit-content; cursor: pointer;" 
+            style="width: fit-content; cursor: pointer;" 
             @click="copyText(userNick)"
           />
           <UiBadge 
@@ -23,7 +23,12 @@
         <UiNewButton text="Logout" @click="logout"/>
       </div>
     </div>
-    <HoverInfoPanel v-if="isBarOpen" :toggleBar="toggleBar" @nickUpdated="handleNickUpdate"/>
+    <HoverInfoPanel 
+      v-if="isBarOpen" 
+      :toggleBar="toggleBar" 
+      @nickUpdated="handleNickUpdate"  
+      @error="handleError"
+    />
   </div>
 </template>
 
@@ -41,9 +46,14 @@ export default {
     UiNewButton,
     UiBadge,
   },
-  setup() {
+  emits: ['error', 'nickUpdated'],
+  setup(props, { emit }) {
     const { user, clearUser } = useUserStore();
     const isBarOpen = ref(false);
+
+    const handleError = (errorMessage) => {
+      emit('error', errorMessage);
+    };
 
     const toggleBar = () => {
       isBarOpen.value = !isBarOpen.value;
@@ -74,10 +84,12 @@ export default {
 
     // Handle the updated nickname from the child component
     const handleNickUpdate = (newNickname) => {
-      user.value.nickname = newNickname; // Update the user nickname in the store
+      user.value.nickname = newNickname; 
+      emit('nickUpdated', newNickname);
     };
 
     return {
+      handleError,
       toggleBar,
       isBarOpen,
       avatarUrl,

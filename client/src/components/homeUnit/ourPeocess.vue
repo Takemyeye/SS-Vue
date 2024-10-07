@@ -31,16 +31,17 @@
 
 <style scoped>
     .our-process {
-        width: 80%;
+        width: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
         flex-direction: column;
+        background-color: rgba(197, 191, 180, 0.445);
         padding: 2.5rem 0;
         gap: 1rem
     }
     .process-unit {
-        width: 100%;
+        width: 80%;
         display: grid;
         justify-items: center;
         grid-template-columns: repeat(3, 1fr);

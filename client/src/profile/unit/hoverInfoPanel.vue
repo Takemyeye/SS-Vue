@@ -4,13 +4,16 @@
       <font-awesome-icon icon="xmark" 
         style="font-size: 24px; color: black; cursor: pointer; position: absolute; right: 10px; top: 10px;" 
         @click="toggleBar"/>
+
       <h2>Set Your Nickname</h2>
       <h5>Choose a nickname that will be displayed to other users.</h5>
+
       <div class="text">
         <h3 style="color: black;">Nickname</h3>
         <textarea v-model="newNick" placeholder="change your nickname..." rows="3" :maxlength="20"></textarea>
-        <h5>{{ nickLengh }}/20 characterrs</h5>
+        <h5>{{ nickLengh }}/20 characters</h5>
       </div>
+
       <UiButton buttonText="Change" @click="updateNick"/>
     </div>
   </div>
@@ -21,61 +24,66 @@ import useUserStore from '@/stores/userStore';
 import UiButton from '@/ui/button.vue';
 import { computed, ref } from 'vue';
 
-  export default {
-    name: 'HoverInfoPanel',
+export default {
+  name: 'HoverInfoPanel',
+  components: {
+    UiButton
+  },
+  props: {
+    toggleBar: {
+      type: Function,
+      required: true
+    }
+  },
+  emits: ['nickUpdated', 'error'], 
+  setup(props, { emit }) {
+    const { user } = useUserStore();
+    const newNick = ref('');
 
-    components: {
-      UiButton
-    },
-    props: {
-      toggleBar: {
-        type: Function,
-        required: true
+    const nickLengh = computed(() => newNick.value.length);
+
+    const updateNick = async () => {
+      if (!newNick.value.trim()) {
+        alert('Nickname cannot be empty!');
+        return;
       }
-    },
-    setup(props) {
-      const { user } = useUserStore();
-      const newNick = ref('');
 
-      const userNick = computed(() => {
-        return user.value?.nick || 'No bio available';
-      });
-
-      const nickLengh = computed(() => newNick.value.length);
-
-      const updateNick = async () => {
-        if (!newNick.value.trim()) {
-          alert('Nickname cannot be empty!');
-          return;
-        }
-
-      props.toggleBar(); // Close the panel after saving
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:3000/api/update-user', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({ nickname: newNick.value ? newNick.value.replace(/^@/, '') : null }) // destroy @ if @ was added
-      });
+      try {
+        const response = await fetch('http://localhost:3000/api/update-user', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({ nickname: newNick.value ? newNick.value.replace(/^@/, '') : null }) 
+        });
 
-      const data = await response.json();
-      if (response.ok) {
-        user.value.nickname = newNick.value.replace(/^@/, ''); // refresh 
-      } else {
-        console.error('Error updating nickname:', data.message);
+        const data = await response.json();
+        if (response.ok) {
+          user.value.nickname = newNick.value.replace(/^@/, ''); 
+          emit('nickUpdated', user.value.nickname); 
+          props.toggleBar(); 
+        } else if (response.status === 409) {
+          emit('error', 'Nickname already exists'); 
+        } else {
+          console.error('Error updating nickname:', data.message);
+          emit('error', data.message);
+        }
+      } catch (error) {
+        console.error('Fetch error:', error);
+        emit('error', 'An error occurred while updating the nickname');
       }
-
     };
+
+
     return {
-      userNick,
       newNick,
       updateNick,
       nickLengh,
-    }
-    }
+    };
   }
+}
 </script>
 
 <style scoped>
