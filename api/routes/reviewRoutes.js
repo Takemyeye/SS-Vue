@@ -3,6 +3,8 @@ const Review = require('../models/Reviews');
 const User = require('../models/User');
 const router = express.Router();
 
+// post Reviews
+
 router.post('/reviews', async (req, res) => {
     const { token, comment } = req.body;
 
@@ -41,6 +43,8 @@ router.post('/reviews', async (req, res) => {
     }
 });
 
+// get Reviews
+
 router.get('/reviews', async (req, res) => {
   try {
     const reviews = await Review.find(); 
@@ -60,6 +64,39 @@ router.get('/reviews', async (req, res) => {
   } catch (error) {
     console.error('Error occurred while fetching reviews:', error);
     return res.status(500).json({ message: 'Server error.', error: error.message });
+  }
+});
+
+// get by Token Reviews
+
+router.get('/reviews/:token', async (req, res) => {
+  const { token } = req.params;
+
+  if (!token) {
+      return res.status(400).json({ message: 'Token is required.' });
+  }
+
+  try {
+      const reviews = await Review.find({ token });
+
+      if (!reviews || reviews.length === 0) {
+          return res.status(404).json({ message: 'No reviews found for this token.' });
+      }
+
+      const user = await User.findOne({ token });
+      const reviewsWithUser = reviews.map(review => ({
+          comment: review.comment,
+          user: {
+              username: user ? user.nickname : 'Unknown',
+              avatar: user ? user.avatar : '',
+          },
+          date: review.createdAt
+      }));
+
+      return res.status(200).json(reviewsWithUser);
+  } catch (error) {
+      console.error('Error occurred while fetching reviews by token:', error);
+      return res.status(500).json({ message: 'Server error.', error: error.message });
   }
 });
 

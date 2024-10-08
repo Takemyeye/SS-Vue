@@ -4,7 +4,7 @@
       v-for="(comment, index) in paginatedReviews" 
       :key="index" 
       :avatar="comment.user.avatar" 
-      :name="comment.user.username" 
+      :name="`@${comment.user.username}`" 
       :comment="comment.comment"
     />
 
@@ -21,9 +21,9 @@
 </template>
 
 <script>
+import { ref, onMounted, computed } from 'vue';
 import UiPagination from '@/ui/pagination.vue';
 import CommentUnit from './comment.vue';
-import { ref, onMounted, computed } from 'vue';
 
 export default {
   name: 'CommentPanel',

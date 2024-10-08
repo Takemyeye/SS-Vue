@@ -33,7 +33,7 @@
   </div>
   </template>
   
-  <script>
+<script>
   import useUserStore from '@/stores/userStore';
   import UiButton from '@/ui/button.vue';
   import { computed, ref } from 'vue';
@@ -92,7 +92,7 @@
           }
       }
   }
-  </script>
+</script>
 
 <style scoped>
    .absolut {
