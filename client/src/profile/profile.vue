@@ -14,11 +14,11 @@
 </template>
 
 <script>
+import UserProfile from './unit/components/userProfile.vue';
 import SiteHeader from '@/components/header/header.vue';
 import SiteFooter from '@/components/footer/footer.vue';
+import UserInfo from './unit/components/userInfo.vue';
 import NickError from './unit/error/nickError.vue';
-import UserProfile from './unit/userProfile.vue';
-import UserInfo from './unit/userInfo.vue';
 
 export default {
   name: 'ProfilePage',
