@@ -14,7 +14,6 @@
 
     <div class="container">
       <UserReviews/>
-      <HoverCircle/>
     </div>
     <NickError :message="nickErrorMessage" :visible="nickErrorVisible" />
   </div>
@@ -72,7 +71,6 @@ export default {
     font-optical-sizing: var(--text-font-optical-sizing);
     font-weight: var(--text-font-weight);
     font-style: var(--text-font-style);
-    position: relative;
     width: 100%;
     min-height: calc(85vh - 1px);
     display: flex;
@@ -90,12 +88,11 @@ export default {
     align-items: start;
     justify-content: center;
     flex-direction: column;
+    overflow: hidden;
     padding: 2rem 2.5%;
     border-radius: 8px;
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.342);
-    opacity: 0;
     gap: 1rem;
-    animation: fadeInUp 0.5s ease-in-out forwards;
   }
 
   .text {
@@ -108,9 +105,10 @@ export default {
     padding: 8px 0;
     gap: 8px;
   }
-@media all and (max-width:768px) {
-  .container {
-    width: 70%;
+
+  @media all and (max-width:768px) {
+    .container {
+      width: 70%;
+    }
   }
-}
 </style>

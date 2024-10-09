@@ -95,7 +95,7 @@
 </script>
 
 <style scoped>
-   .absolut {
+  .absolut {
     position: fixed;
     width: 100%;
     height: 100%;
@@ -105,7 +105,8 @@
     align-items: center;
     justify-content: center;
     backdrop-filter: blur(8px);
-    z-index: 3;
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 1000 !important;
   }
   .panel {
     position: relative;
