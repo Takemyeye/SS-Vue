@@ -9,16 +9,12 @@
       </div>
       <UserProfile @nickUpdated="updateUserNick" @error="showNickError" />
       <UserInfo />
-      <div class="circle">
-        <font-awesome-icon icon="fa-solid fa-comment" style="transform: translateX(-1rem) translateY(-1rem)"/>
-      </div>
-
+      <HoverCircle/>
     </div>
+
     <div class="container">
       <UserReviews/>
-      <div class="circle">
-        <font-awesome-icon icon="fa-solid fa-user" style="transform: translateX(-1rem) translateY(-1rem)"/>
-      </div>
+      <HoverCircle/>
     </div>
     <NickError :message="nickErrorMessage" :visible="nickErrorVisible" />
   </div>
@@ -27,6 +23,7 @@
 </template>
 
 <script>
+import HoverCircle from './unit/informationUnit/hoverCircle.vue';
 import UserProfile from './unit/components/userProfile.vue';
 import UserReviews from './unit/components/userReviews.vue';
 import SiteHeader from '@/components/header/header.vue';
@@ -37,6 +34,7 @@ import NickError from './unit/error/nickError.vue';
 export default {
   name: 'ProfilePage',
   components: {
+    HoverCircle,
     UserReviews,
     UserProfile,
     SiteFooter,
@@ -95,28 +93,9 @@ export default {
     padding: 2rem 2.5%;
     border-radius: 8px;
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.342);
-    overflow: hidden;
     opacity: 0;
     gap: 1rem;
     animation: fadeInUp 0.5s ease-in-out forwards;
-  }
-
-  .circle {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 26px;
-    right: -2rem;
-    bottom: -2rem;
-    width: 100px;
-    height: 100px;
-    background-color: black;
-    color: white;
-    border-radius: 50%;
-    opacity: 0;
-    animation: fadeInUp 0.3s ease-in-out forwards;
-    animation-delay: 0.5s;
   }
 
   .text {

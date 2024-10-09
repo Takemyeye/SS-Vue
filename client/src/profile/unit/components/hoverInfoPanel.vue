@@ -97,7 +97,7 @@ export default {
     align-items: center;
     justify-content: center;
     backdrop-filter: blur(8px);
-    z-index: 1;
+    z-index: 3;
   }
   .panel {
     position: relative;
