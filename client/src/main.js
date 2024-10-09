@@ -7,9 +7,9 @@ import {
   faCartPlus, faMoneyBill, faCircleXmark, faClock, 
   faCity, faImage, faTrash, faComment, faXmark, 
   faPaperPlane, faChevronLeft, faChevronRight, 
-  faCheck,
   faMicrochip,
-  faLock
+  faCheck,
+  faLock,
 } from '@fortawesome/free-solid-svg-icons';
 
 import { faInstagram, faTelegram, faTiktok, faGoogle, faGithub, faDiscord, faPaypal } from '@fortawesome/free-brands-svg-icons';
@@ -27,8 +27,8 @@ library.add(
   faMicrochip,
   faCartPlus,
   faTelegram,
-  faDiscord,
   faComment,
+  faDiscord,
   faTiktok,
   faGoogle,
   faGithub,

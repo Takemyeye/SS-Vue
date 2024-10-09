@@ -1,6 +1,7 @@
 <template>
   <SiteHeader />
   <div class="profile-page">
+
     <div class="container">
       <div class="text">
         <h2> Profile</h2>
@@ -8,12 +9,20 @@
       </div>
       <UserProfile @nickUpdated="updateUserNick" @error="showNickError" />
       <UserInfo />
+      <div class="circle">
+        <font-awesome-icon icon="fa-solid fa-comment" style="transform: translateX(-1rem) translateY(-1rem)"/>
+      </div>
+
     </div>
     <div class="container">
       <UserReviews/>
+      <div class="circle">
+        <font-awesome-icon icon="fa-solid fa-user" style="transform: translateX(-1rem) translateY(-1rem)"/>
+      </div>
     </div>
     <NickError :message="nickErrorMessage" :visible="nickErrorVisible" />
   </div>
+  
   <SiteFooter />
 </template>
 
@@ -77,15 +86,37 @@ export default {
   }
 
   .container {
+    position: relative;
     width: 55%;
     display: flex;
     align-items: start;
     justify-content: center;
     flex-direction: column;
     padding: 2rem 2.5%;
-    gap: 1rem;
     border-radius: 8px;
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.342);
+    overflow: hidden;
+    opacity: 0;
+    gap: 1rem;
+    animation: fadeInUp 0.5s ease-in-out forwards;
+  }
+
+  .circle {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    right: -2rem;
+    bottom: -2rem;
+    width: 100px;
+    height: 100px;
+    background-color: black;
+    color: white;
+    border-radius: 50%;
+    opacity: 0;
+    animation: fadeInUp 0.3s ease-in-out forwards;
+    animation-delay: 0.5s;
   }
 
   .text {

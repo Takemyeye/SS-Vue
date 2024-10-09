@@ -46,6 +46,7 @@ import UiBadge from '@/ui/badge.vue';
     border-radius: 4px;
     box-shadow: 0px 30px 30px rgba(0, 0, 0, 0.151);
     padding: 2rem 1rem ;
+    z-index: 1;
     gap: 2rem;
   }
   .user {
