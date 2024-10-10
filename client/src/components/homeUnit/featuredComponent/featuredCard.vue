@@ -95,7 +95,7 @@ export default {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    width: 300px;
+    width: 280px;
     box-shadow: 30px 30px 30px rgba(0, 0, 0, 0.151);
     background-color: white;
     transition: 0.3s ease;
@@ -115,4 +115,16 @@ export default {
     color: rgb(39, 39, 39);
     font-weight: 300;
   }
+
+  @media all and (max-width: 1680px) {
+    .card {
+      width: 340px;
+    }
+  }
+  @media all and (max-width: 1040px) {
+    .card {
+      width: 265px;
+    }
+  }
+  
 </style>

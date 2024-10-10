@@ -50,4 +50,10 @@
         font-weight: 700;
         color: white;
     }
+
+    @media all and ( max-width: 768px ) {
+        .process {
+            width: 265px;
+        }
+    }
 </style>

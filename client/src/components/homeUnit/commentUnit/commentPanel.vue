@@ -81,17 +81,17 @@ export default {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(1, 1fr);
     justify-items: center;
-    gap: 2rem;
+    gap: 1rem;
   }
 
-  @media all and ( max-width: 1024px ) {
+  @media all and ( max-width: 1680px ) {
     .container {
       grid-template-columns: repeat(2, 1fr);
-      gap: 4rem;
+      gap: 2rem;
     }
   }
 
-  @media all and ( max-width: 500px ) {
+  @media all and ( max-width: 768px ) {
     .container {
       grid-template-columns: repeat(1, 1fr);
       gap: 4rem;

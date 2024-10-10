@@ -37,8 +37,7 @@ import UiBadge from '@/ui/badge.vue';
 
 <style scoped>
   .comment {
-    width: 100%;
-    max-width: 300px;
+    width: 280px;
     display: flex;
     align-items: start;
     justify-content: start;
@@ -65,5 +64,11 @@ import UiBadge from '@/ui/badge.vue';
   .messeng {
     width: 100%;
     text-wrap: balance;
+  }
+
+  @media all and ( max-width: 1680px ) {
+    .comment {
+      width: 90%;
+    }
   }
 </style>

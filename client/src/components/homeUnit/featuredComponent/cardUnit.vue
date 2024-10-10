@@ -7,7 +7,6 @@
       info1="Classic charm"
       info2="Affordable beauty"
       info3="Timeless appeal"
-      cardBgColor="#f0f0f0"
       buttonColor="#3498db"
       svgColor="#2980b9"
       :badgeStyles="`badge1`"
@@ -34,6 +33,17 @@
       svgColor="hsl(39, 90%, 50%)"
       :badgeStyles="`badge5`"
     />
+    <FeaturedCard
+      titleH3="To 25 €"
+      titleH1="Digital Art"
+      description="Modern creations using advanced digital tools, blending innovation with creativity for stunning visuals."
+      info1="Innovative designs"
+      info2="High-definition quality"
+      info3="Limitless possibilities"
+      buttonColor="hsl(358, 100%, 69%)"
+      svgColor="hsl(358, 100%, 69%)"
+      :badgeStyles="`badge4`"
+    />
   </div>
 </template>
 
@@ -50,11 +60,13 @@ export default {
 
 <style scoped>
 .cardUnit {
+  width: 80%;
   position: relative; 
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto;
-  gap: 2rem;
+  justify-items: center;
+  gap: 1rem;
 }
 
 .cardUnit:hover .card:not(:hover) {
@@ -68,13 +80,13 @@ export default {
   z-index: 10; 
 }
 
-@media all and (max-width: 1440px) {
+@media all and (max-width: 1680px) {
   .cardUnit {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media all and (max-width: 600px) {
+@media all and (max-width: 768px) {
   .cardUnit {
     grid-template-columns: repeat(1, 1fr);
   }
