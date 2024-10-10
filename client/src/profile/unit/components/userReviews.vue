@@ -11,6 +11,9 @@
         :avatar="comment.user.avatar" 
         :name="`@${comment.user.username}`" 
         :comment="comment.comment"
+        :showTrash="true"
+        :reviewId="comment.reviewId" 
+        @delete-review="deleteReview"
       />
     </div>
       <UiPagination
@@ -30,30 +33,50 @@ import CommentUnit from '@/components/homeUnit/commentUnit/comment.vue';
 import UiPagination from '@/ui/pagination.vue';
 import { onMounted, ref, computed } from 'vue';
 
-  export default {
-    name: 'UserReviews',
-    components: {
-      UiPagination,
-      CommentUnit,
-    },
-    setup() {
-      const reviews = ref([]);
-      const totalReviews = ref(0);
-      const currentPage = ref(1); 
-      const itemsPerPage = ref(3);
+export default {
+  name: 'UserReviews',
+  components: {
+    UiPagination,
+    CommentUnit,
+  },
+  setup() {
+    const reviews = ref([]);
+    const totalReviews = ref(0);
+    const currentPage = ref(1); 
+    const itemsPerPage = ref(3);
 
-      const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
 
-      const fetchReviews = async () => {
+    const fetchReviews = async () => {
       try {
         const response = await fetch(`http://localhost:3000/api/reviews/${token}`);
-
         const data = await response.json();
+        console.log(data)
         reviews.value = data;
         totalReviews.value = reviews.value.length;
-
       } catch (error) {
         console.error('Error fetching reviews:', error);
+      }
+    };
+
+    const deleteReview = async (reviewId) => {
+      try {
+        const response = await fetch(`http://localhost:3000/api/reviews/${reviewId}`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          reviews.value = reviews.value.filter(review => review.reviewId !== reviewId);
+          totalReviews.value = reviews.value.length;
+        } else {
+          console.error('Failed to delete review');
+        }
+      } catch (error) {
+        console.error('Error deleting review:', error);
       }
     };
 
@@ -69,16 +92,17 @@ import { onMounted, ref, computed } from 'vue';
 
     onMounted(fetchReviews); 
 
-      return {
-        reviews,
-        totalReviews,
-        currentPage,
-        itemsPerPage,
-        onPageChanged,
-        paginatedReviews,
-      };
-    }
+    return {
+      reviews,
+      totalReviews,
+      currentPage,
+      itemsPerPage,
+      onPageChanged,
+      paginatedReviews,
+      deleteReview
+    };
   }
+}
 </script>
 
 <style scoped>

@@ -1,8 +1,16 @@
 <template>
   <div class="comment">
     <div class="user">
-      <img :src="avatar" alt="">
-      <UiBadge :title="name" styleBadge="badge1"/>
+      <div class="text">
+        <img :src="avatar" alt="">
+        <UiBadge :title="name" styleBadge="badge1"/>
+      </div>
+      <font-awesome-icon 
+        v-if="showTrash" 
+        icon="trash" 
+        style="color: hsl(358, 100%, 69%); font-size: medium; cursor: pointer;" 
+        @click="deleteComment"
+      />
     </div>
     <div class="messeng">
       <h5>{{ comment }}</h5>
@@ -13,26 +21,40 @@
 <script>
 import UiBadge from '@/ui/badge.vue';
 
-  export default {
-    name: 'CommentUnit',
-    components : {
-      UiBadge
+export default {
+  name: 'CommentUnit',
+  components: {
+    UiBadge
+  },
+  props: {
+    avatar: {
+      type: String,
+      required: true
     },
-    props: {
-      avatar: {
-        type: String,
-        required: true
-      },
-      name: {
-        type: String,
-        required: true
-      },
-      comment: {
-        type: String,
-        required: true
-      }
+    name: {
+      type: String,
+      required: true
+    },
+    comment: {
+      type: String,
+      required: true
+    },
+    showTrash: {
+      type: Boolean,
+      default: false
+    },
+    reviewId: {
+      type: String,
+      required: true
+    }
+  },
+  emits: ['delete-review'], 
+  methods: {
+    deleteComment() {
+      this.$emit('delete-review', this.reviewId); 
     }
   }
+}
 </script>
 
 <style scoped>
@@ -52,7 +74,7 @@ import UiBadge from '@/ui/badge.vue';
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: start;
+    justify-content: space-between;
     flex-direction: row;
     gap: 8px;
   }
@@ -60,6 +82,13 @@ import UiBadge from '@/ui/badge.vue';
     width: 36px;
     height: 36px;
     border-radius: 30px;
+  }
+  .text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 8px;
   }
   .messeng {
     width: 100%;
