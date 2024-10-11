@@ -51,7 +51,6 @@ export default {
       try {
         const response = await fetch(`http://localhost:3000/api/reviews/${token}`);
         const data = await response.json();
-        console.log(data)
         reviews.value = data;
         totalReviews.value = reviews.value.length;
       } catch (error) {

@@ -78,8 +78,8 @@ router.get('/reviews', async (req, res) => {
   }
 });
 
-// get by Token Reviews
 
+// get by Token Reviews
 router.get('/reviews/:token', async (req, res) => {
   const { token } = req.params;
 
@@ -90,25 +90,21 @@ router.get('/reviews/:token', async (req, res) => {
   try {
       const reviews = await Review.find({ token });
 
-      if (!reviews || reviews.length === 0) {
-          return res.status(404).json({ message: 'No reviews found for this token.' });
-      }
-
       const user = await User.findOne({ token });
       const reviewsWithUser = reviews.map(review => ({
-          comment: review.comment, 
+          comment: review.comment,
           user: {
               username: user ? user.nickname : 'Unknown',
               avatar: user ? user.avatar : '',
           },
-          date: review.createdAt,  
-          reviewId: review.reviewId
+          date: review.createdAt,
+          reviewId: review.reviewId,
       }));
 
-      return res.status(200).json(reviewsWithUser);
+      return res.status(200).json(reviewsWithUser.length > 0 ? reviewsWithUser : []);
   } catch (error) {
       console.error('Error occurred while fetching reviews by token:', error);
-      return res.status(500).json({ message: 'Server error.', error: error.message });
+      return res.status(500).json({ message: 'Server error.', error: error.message || 'Unknown error' });
   }
 });
 

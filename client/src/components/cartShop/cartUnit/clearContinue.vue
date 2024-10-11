@@ -2,24 +2,14 @@
   <div class="choise">
     <h2>Your Cart</h2>
     <div class="container">
-      <div class="continue" @click="toggleBlock">
-        Continue
-      </div>
-      <div class="remove" @click="clearCart">
-        Remove All
-      </div>
+      <div class="continue" @click="toggleBlock">Continue</div>
+      <div class="remove" @click="clearCart">Remove All</div>
     </div>
     <div class="block" v-if="showBlock">
       <div class="block-container">
-        <h1>
-          Payments Methods 
-          <font-awesome-icon icon="circle-xmark" @click="toggleBlock" style="cursor: pointer;"/>
-        </h1>
+        <h1> Payments Methods <font-awesome-icon icon="circle-xmark" @click="toggleBlock" style="cursor: pointer;"/></h1>
         <div class="fisic">
-          <div class="title">
-            <font-awesome-icon icon="money-bill" /> 
-            Fisical Method
-          </div>
+          <div class="title"> <font-awesome-icon icon="money-bill" /> Fisical Method </div>
           <input 
             type="text" 
             class="city" 
@@ -29,10 +19,8 @@
           <UiButton buttonText="Process" @click="processOrder"/>
         </div>
         <div class="paypal">
-          <div class="title">
-            <font-awesome-icon icon="fa-brands fa-paypal" />
-            PayPal Method
-          </div>
+          <div class="title"> <font-awesome-icon icon="fa-brands fa-paypal" />PayPal Method </div>
+          <UiButton buttonText="Process" style="width: 100%;"/>
         </div>
       </div>
     </div>

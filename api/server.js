@@ -16,29 +16,14 @@ const userCart = require('./userCart');
 const authRoutes = require('./auth');
 const passport = require('passport');
 const express = require('express');
-require('dotenv').config();
+const connectDB = require('./db');
 const cors = require('cors');
 require('./passport-setup');
-const connectDB = require('./db');
+require('dotenv').config();
 connectDB();
 
 const app = express();
 const port = process.env.PORT || 3000;
-
-/* Save data to Redis
-const saveArtDataToRedis = async (artData) => {
-  try {
-    if (client.isOpen) {
-      await client.set('artData', JSON.stringify(artData));
-      console.log('Art data saved to Redis');
-    } else {
-      console.error('Redis client is not connected');
-    }
-  } catch (error) {
-    console.error('Error saving art data to Redis:', error);
-  }
-};
-*/
 
 // Middleware
 app.use(express.json());
