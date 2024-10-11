@@ -5,9 +5,10 @@
     <ContactUs v-if="tokenExists"/>
     <TopBar />
     <FeaturedPanel/>
+    <FaqBlock/>
     <CommentBlock/>
-    <OurProcess/>
     <EmailPanel/>
+    <OurProcess/>
   </main>
   <SiteFooter/>
   
@@ -19,6 +20,7 @@
   import FeaturedPanel from './homeUnit/featured.vue';
   import EmailPanel from './homeUnit/emailPanel.vue';
   import OurProcess from './homeUnit/ourPeocess.vue';
+  import FaqBlock from './homeUnit/faqBlock.vue';
   import ContactUs from '@/services/contact.vue';
   import SiteHeader from './header/header.vue';
   import SiteFooter from './footer/footer.vue';
@@ -35,6 +37,7 @@
       SiteFooter,
       EmailPanel,
       ContactUs,
+      FaqBlock,
       TopBar,
     },
     setup() {

@@ -1,0 +1,62 @@
+<template>
+  <div class="faq">
+    <div class="item">
+      <font-awesome-icon :icon="['far', icon]" />
+    </div>
+    <div class="text">
+      <h3>{{ question }}</h3>
+      <h5>{{ answer }}</h5>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'FaqUnit',
+  props: {
+    question: {
+      type: String,
+      required: true
+    },
+    answer: {
+      type: String,
+      required: true
+    },
+    icon: {
+      type: String,
+      default: ''
+    }
+  }
+}
+</script>
+
+<style scoped>
+  .faq {
+    width: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 2rem;
+  }
+
+  .item {
+    font-size: clamp(2rem, 3vw, 3rem);
+    color: black;
+  }
+
+  .text {
+    width: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  h3 {
+    color: black;
+  }
+
+</style>

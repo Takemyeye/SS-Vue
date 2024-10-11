@@ -5,7 +5,7 @@ import App from './App.vue';
 import { 
   faHouse, faCartShopping, faHeart, faUser, 
   faCartPlus, faMoneyBill, faCircleXmark, faClock, 
-  faCity, faImage, faTrash, faComment, faXmark, 
+  faCity, faImage, faTrash, faXmark, 
   faPaperPlane, faChevronLeft, faChevronRight, 
   faMicrochip,
   faCheck,
@@ -14,6 +14,7 @@ import {
 
 import { faInstagram, faTelegram, faTiktok, faGoogle, faGithub, faDiscord, faPaypal } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { far, faCreditCard, faComment, faMap, faClipboard} from '@fortawesome/free-regular-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core';
 
 library.add(
@@ -21,10 +22,12 @@ library.add(
   faChevronRight,
   faChevronLeft,
   faCircleXmark,
+  faCreditCard,
   faPaperPlane,
   faInstagram,
   faMoneyBill,
   faMicrochip,
+  faClipboard,
   faCartPlus,
   faTelegram,
   faComment,
@@ -43,6 +46,8 @@ library.add(
   faLock,
   faCity,
   faUser,
+  faMap,
+  far,
 );
 
 const app = createApp(App);
