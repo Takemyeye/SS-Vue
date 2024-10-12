@@ -1,7 +1,7 @@
 <template>
   <div class="leftPanel">
     <div class="image-container">
-      <img src="art/CON3.JPG" alt="Image 1" />
+      <img src="https://firebasestorage.googleapis.com/v0/b/soulswap-90b65.appspot.com/o/JJK1.jpg?alt=media&token=443b9dc8-f885-4984-bbb2-c4935dad6bef" alt="Image 1" />
       <div class="overlay"></div>
     </div>
     <div class="text">

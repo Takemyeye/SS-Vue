@@ -10,12 +10,13 @@ const filteredImages = ref({
   'Sakamoto Days': []
 });
 
-const hasImagesInCache = () => {
-  return images.value.length > 0; 
-};
+let isFetching = false;
+
+const hasImagesInCache = () => images.value.length > 0;
 
 const fetchImages = async () => {
-  if (hasImagesInCache()) return;
+  if (hasImagesInCache() || isFetching) return; 
+  isFetching = true;
 
   try {
     const response = await fetch('http://localhost:3000/api/images');
@@ -23,21 +24,26 @@ const fetchImages = async () => {
       throw new Error('Network response was not ok');
     }
     const data = await response.json();
-    images.value = data; 
-    filterImagesByCategory();
+    images.value = data;
+    categorizeImages(); // Сразу фильтруем изображения
   } catch (error) {
     console.error('Error fetching images:', error);
+  } finally {
+    isFetching = false;
   }
 };
 
-const filterImagesByCategory = () => {
-  const categories = Object.keys(filteredImages.value);
-  filteredImages.value = categories.reduce((acc, category) => {
-    acc[category] = images.value.filter(image => 
-      image.titleAnime === category || category === 'All'
+const categorizeImages = () => {
+  const categories = Object.keys(filteredImages.value); // Получаем категории как ключи объекта
+  const categorized = {};
+
+  categories.forEach(category => {
+    categorized[category] = images.value.filter(image =>
+      category === 'All' || image.titleAnime === category
     );
-    return acc;
-  }, {});
+  });
+
+  filteredImages.value = categorized;
 };
 
 export default function useImageStore() {
@@ -45,7 +51,6 @@ export default function useImageStore() {
     images,
     filteredImages,
     fetchImages,
-    filterImagesByCategory,
-    hasImagesInCache, 
+    hasImagesInCache,
   };
 }

@@ -19,13 +19,13 @@
 </template>
 
 <script>
-import { ref, onMounted, computed } from 'vue';
 import CallOfNightArt from './shopUnit/CallOfNightArt.vue';
 import SiteHeader from '@/components/header/header.vue';
 import TopBar from '@/components/homeUnit/topBar.vue';
 import { isTokenAvailable } from '@/utils/authUtils';
-import CatalogBlock from './shopUnit/catalog.vue';
 import useImageStore from '@/stores/useImageStore';
+import CatalogBlock from './shopUnit/catalog.vue';
+import { ref, onMounted, computed } from 'vue';
 import ContactUs from '@/services/contact.vue';
 import FfArt from './shopUnit/fireForce.vue';
 import MhaArt from './shopUnit/mhaArt.vue';

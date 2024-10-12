@@ -4,7 +4,7 @@
       <UiCard
         v-for="image in paginatedImages"
         :key="image.id"
-        :src="`/art/${image.image}`"
+        :src="image.image"
         :alt="image.title"
         :title="`${image.price} €`"
         :subtitle="image.subtitle"

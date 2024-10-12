@@ -4,14 +4,13 @@ const googleAuthRoutes = require('./auth/googleAuth');
 const githubAuthRoutes = require('./auth/githubAuth');
 const orderChange = require('./process/ordersChange');
 const reviewRoutes = require('./routes/reviewRoutes');
+const imageRoutes = require('./routes/imageRoutes');
 const { client } = require('./redis/redisClient'); 
 const messangRoutes = require('./routes/messang');
+const cartRoutes = require('./routes/cartRoutes');
 const userUpdate = require('./data/user-update');
 const userStatus = require('./routes/status');
-const imageRoutes = require('./imageRoutes');
 const usersRouter = require('./routes/user');
-const cartRoutes = require('./cartRoutes');
-const artData = require('./data/artData');
 const userCart = require('./userCart');
 const authRoutes = require('./auth');
 const passport = require('passport');
@@ -38,9 +37,9 @@ app.use(cors({
 app.use(passport.initialize());
 
 app.use('/', discordAuthRoutes);
-app.use('/api', messangRoutes); 
 app.use('/', googleAuthRoutes);
 app.use('/', githubAuthRoutes);
+app.use('/api', messangRoutes); 
 app.use('/api', processOrder);
 app.use('/api', reviewRoutes);
 app.use('/api', orderChange);
@@ -55,7 +54,6 @@ app.use('/api', userCart);
 client.connect()
   .then(() => {
     console.log('Redis connected successfully');
-    //saveArtDataToRedis(artData); 
   })
   .catch((err) => {
     console.error('Error connecting to Redis:', err);
