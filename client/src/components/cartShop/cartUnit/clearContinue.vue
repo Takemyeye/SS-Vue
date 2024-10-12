@@ -18,16 +18,12 @@
           />
           <UiButton buttonText="Process" @click="processOrder"/>
         </div>
-        <div class="paypal">
-          <div class="title"> <font-awesome-icon icon="fa-brands fa-paypal" />PayPal Method </div>
-          <UiButton buttonText="Process" style="width: 100%;"/>
-        </div>
       </div>
     </div>
     <UiBanner 
       style="position: absolute;"
       v-if="showBanner"
-      :src="`img/verified.png`"
+      :src="`https://firebasestorage.googleapis.com/v0/b/soulswap-90b65.appspot.com/o/verified.png?alt=media&token=81952d47-1863-4fb1-bd95-263277bf94fb`"
       :title="`Processing Order`"
       :text="`We will get in touch with you.`"
     />

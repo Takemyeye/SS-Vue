@@ -5,7 +5,7 @@
       <UiCard
         v-for="item in cartItems"
         :key="item.id"
-        :src="`/art/${item.image}`"
+        :src="item.image"
         :alt="item.title"
         :title="`${item.title}`"
         :price="`${item.price} €`"

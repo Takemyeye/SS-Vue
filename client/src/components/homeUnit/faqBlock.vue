@@ -9,7 +9,7 @@
       />
       <FaqUnit
         question="What payment methods do you accept?"
-        answer="We accept PayPal and physical cards."
+        answer="We accept only physical contact."
         icon="credit-card" 
       />
       

@@ -14,7 +14,7 @@
       <div class="wrapper">
         <div v-for="item in order.cartItems" :key="item.id" class="data">
           <div class="image">
-            <img :src="`/art/${item.image}`" alt="Product Image" />
+            <img :src="item.image" alt="Product Image" />
           </div>
           <div class="description">
             <UiBadge style="white-space: nowrap;" :styleBadge="'badge1'" :title="item.title" />

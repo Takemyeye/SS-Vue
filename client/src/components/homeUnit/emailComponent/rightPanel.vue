@@ -1,26 +1,39 @@
 <template>
   <div class="rightPanel">
     <h1>Stay Updated on New Arrivals</h1>
-    <h3>Sign up for our newsletter to be the first to know about our latest anime and manga inspired art collections.</h3>
+    <h3>Sign up for our newsletter to be the first to know about our latest anime and manga-inspired art collections.</h3>
     <div class="email">
-      <input type="email" placeholder="Enter your email">
-      <UiButton buttonText="Subscribe" />
+      <input type="email" v-model="email" placeholder="Enter your email"/>
+      <UiButton :buttonText="'Subscribe'" @click="sendEmail"/>
     </div>
     <h5>We'll never share your email. Read our
       <router-link to="/privacy">
-          Privacy Policy .
-      </router-link> 
+        Privacy Policy.
+      </router-link>
     </h5>
-  </div> 
+  </div>
 </template>
 
 <script>
 import UiButton from '@/ui/button.vue';
+import { ref } from 'vue';
 
   export default {
     name: 'RightPanel',
     components: {
       UiButton
+    },
+    setup() {
+      const email = ref('');
+
+      const sendEmail = () => {
+        email.value='';
+      }
+
+      return {
+        email,
+        sendEmail
+      }
     }
   }
 </script>

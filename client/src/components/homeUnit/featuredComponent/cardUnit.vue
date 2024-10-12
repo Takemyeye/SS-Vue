@@ -34,7 +34,7 @@
       :badgeStyles="`badge5`"
     />
     <FeaturedCard
-      titleH3="To 25 €"
+      titleH3="To 18 €"
       titleH1="Digital Art"
       description="Modern creations using advanced digital tools, blending innovation with creativity for stunning visuals."
       info1="Innovative designs"

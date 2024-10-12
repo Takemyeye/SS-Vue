@@ -21,7 +21,7 @@
     <UiBanner 
       routerPath=""
       v-if="showBanner"
-      :src="`img/logo.png`"
+      :src="`https://firebasestorage.googleapis.com/v0/b/soulswap-90b65.appspot.com/o/logo.png?alt=media&token=56016cc0-f211-4129-9a54-db039a817c4f`"
       :title="`Review`"
       :text="errorMessage"
       style="position: absolute;"

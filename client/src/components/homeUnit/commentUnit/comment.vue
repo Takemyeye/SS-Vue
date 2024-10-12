@@ -45,7 +45,6 @@ export default {
     },
     reviewId: {
       type: String,
-      required: true
     }
   },
   emits: ['delete-review'], 

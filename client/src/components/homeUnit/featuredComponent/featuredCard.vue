@@ -99,6 +99,9 @@ export default {
     box-shadow: 30px 30px 30px rgba(0, 0, 0, 0.151);
     background-color: white;
     transition: 0.3s ease;
+    animation: apper linear;
+    animation-timeline: view();
+    animation-range: entry 0 cover 15%;
   }
 
   .text, .container, .information {
@@ -116,6 +119,21 @@ export default {
     font-weight: 300;
   }
 
+  
+  @keyframes apper {
+    from {
+      opacity: 0.1;
+      scale: 0.5;
+    }
+    20% {
+      opacity: 0.1;
+    }
+    to {
+      opacity: 1;
+      scale: 1;
+    }
+  }
+
   @media all and (max-width: 1680px) {
     .card {
       width: 340px;
@@ -126,5 +144,4 @@ export default {
       width: 265px;
     }
   }
-  
 </style>

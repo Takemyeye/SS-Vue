@@ -37,6 +37,9 @@ export default {
     align-items: start;
     justify-content: start;
     flex-direction: column;
+    animation: apper linear;
+    animation-timeline: view();
+    animation-range: entry 0 cover 20%;
     padding: 1rem;
     gap: 2rem;
   }
@@ -57,6 +60,22 @@ export default {
 
   h3 {
     color: black;
+  }
+
+  @keyframes apper {
+    from {
+      opacity: 0.1;
+      scale: 0.5;
+      transform: translateX(-100%);
+    }
+    20% {
+      opacity: 0.1;
+    }
+
+    to {
+      opacity: 1;
+      scale: 1;
+    }
   }
 
 </style>

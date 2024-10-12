@@ -89,7 +89,7 @@ export default {
     },
     handleCardClick(image) {
       this.addToCart(image);
-      this.selectedImageSrc = `/art/${image.image}`; 
+      this.selectedImageSrc = image.image; 
       this.selectedImageAlt = image.title; 
       this.selectedImageTitle = image.title; 
 

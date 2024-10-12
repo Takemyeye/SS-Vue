@@ -34,6 +34,9 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
+        animation: apper linear;
+        animation-timeline: view();
+        animation-range: entry 0 cover 20%;
         gap: 1rem;
     }
 
@@ -49,6 +52,18 @@
     h2 {
         font-weight: 700;
         color: white;
+    }
+
+    
+    @keyframes apper {
+        from {
+            opacity: 0.1;
+            scale: 0.5;
+            transform: translateX(-100%);
+        }
+        20% {
+            opacity: 0.1;
+        }
     }
 
     @media all and ( max-width: 768px ) {

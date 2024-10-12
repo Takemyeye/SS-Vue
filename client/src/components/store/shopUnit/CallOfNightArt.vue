@@ -93,7 +93,7 @@ export default {
     // Обработка клика на карточке
     function handleCardClick(image) {
       addToCart(image); 
-      selectedImageSrc.value = `/art/${image.image}`; 
+      selectedImageSrc.value = image.image 
       selectedImageAlt.value = image.title; 
       selectedImageTitle.value = image.title; 
 
