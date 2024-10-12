@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="{ name: 'Cart' }">
+  <router-link :to="routerPath ">
     <div class="baner">
       <img :src="src" :alt="alt">
       <div class="text">
@@ -11,9 +11,9 @@
 </template>
 
 <script>
-  export default {
-    name: 'UiBanner',
-    props: {
+export default {
+  name: 'UiBanner',
+  props: {
     src: {
       type: String,
       required: true,
@@ -30,6 +30,10 @@
       type: String,
       required: true
     },
+    routerPath: {
+      type: String,
+      default: "/cart",
+    }
   }
 }
 </script>
