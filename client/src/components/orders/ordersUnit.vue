@@ -28,7 +28,7 @@
           return;
         }
   
-        fetch('http://localhost:3000/api/process', {
+        fetch('/api/process', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,

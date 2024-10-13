@@ -67,7 +67,7 @@
 
               props.toggleBar(); // Close the panel after saving
               const token = localStorage.getItem('token');
-              const response = await fetch('http://localhost:3000/api/update-user', {
+              const response = await fetch('/api/update-user', {
                   method: 'POST',
                   headers: {
                       'Content-Type': 'application/json',
