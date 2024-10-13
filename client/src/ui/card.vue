@@ -62,7 +62,7 @@ export default {
 
 <style scoped>
 .card {
-  width: 320px;
+  width: 300px;
   max-height: 370px;
   font-optical-sizing: var(--text-font-optical-sizing);
   font-family: var(--text-font-family);

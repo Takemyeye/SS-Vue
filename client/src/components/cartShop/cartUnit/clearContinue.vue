@@ -23,7 +23,7 @@
     <UiBanner 
       style="position: absolute;"
       v-if="showBanner"
-      :src="`https://firebasestorage.googleapis.com/v0/b/soulswap-90b65.appspot.com/o/verified.png?alt=media&token=81952d47-1863-4fb1-bd95-263277bf94fb`"
+      :src="`https://firebasestorage.googleapis.com/v0/b/cdnss-bb3ff.appspot.com/o/verified.png?alt=media&token=410abf10-cf0b-4258-96e8-55e496ec1989`"
       :title="`Processing Order`"
       :text="`We will get in touch with you.`"
     />

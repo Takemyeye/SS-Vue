@@ -16,7 +16,7 @@ export default {
   props: {
     imgSrc: {
       type: String,
-      default: 'https://firebasestorage.googleapis.com/v0/b/soulswap-90b65.appspot.com/o/contact.png?alt=media&token=50c746e9-c795-454c-856a-13baf925049b'
+      default: 'https://firebasestorage.googleapis.com/v0/b/cdnss-bb3ff.appspot.com/o/contact.png?alt=media&token=4718c945-1460-4de5-9e1a-6c6217a6c94d'
     },
     altText: {
       type: String,

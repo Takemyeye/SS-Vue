@@ -1,9 +1,7 @@
 <template>
   <div class="leftPanel">
-    <div class="image-container">
-      <img src="https://firebasestorage.googleapis.com/v0/b/soulswap-90b65.appspot.com/o/JJK1.jpg?alt=media&token=443b9dc8-f885-4984-bbb2-c4935dad6bef" alt="Image 1" />
+      <img src="https://firebasestorage.googleapis.com/v0/b/cdnss-bb3ff.appspot.com/o/JJK1.jpg?alt=media&token=26f2b6ac-0c85-4c0f-a4ad-fa8373d84b23" alt="Image 1" />
       <div class="overlay"></div>
-    </div>
     <div class="text">
       <h1>Discover Stunning Artworks</h1>
       <h2>Browse Through Our Collection</h2>
@@ -28,8 +26,6 @@ export default {
 <style scoped>
 .leftPanel {
   position: relative;
-  width: 25%;
-  height: 60vh;
   overflow: hidden;
   display: flex;
   align-items: center;

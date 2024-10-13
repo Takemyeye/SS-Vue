@@ -1,7 +1,7 @@
 <template>
     <div class="wrapper">
       <div class="container">
-        <img src='img/logo.png' alt="">
+        <img src='https://firebasestorage.googleapis.com/v0/b/cdnss-bb3ff.appspot.com/o/logo.png?alt=media&token=57f5b10b-3de2-4761-b191-df053de65ffa' alt="">
         <h3>Soul Swap</h3>
         <div class="exit" @click="exitMessenger">
           <font-awesome-icon icon="xmark" style="font-size: 24px;" />
