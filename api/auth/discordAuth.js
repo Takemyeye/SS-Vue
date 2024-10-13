@@ -35,9 +35,9 @@ router.get('/auth/discord/callback', passport.authenticate('discord', { session:
       });
 
       await newUser.save();
-      return res.redirect(`http://localhost:8080?token=${token}`);
+      return res.redirect(`https://ss-vue.vercel.app?token=${token}`);
     } else {
-      return res.redirect(`http://localhost:8080?token=${existingUser.token}`);
+      return res.redirect(`https://ss-vue.vercel.app?token=${existingUser.token}`);
     }
   } catch (err) {
     console.error('Error during Discord callback:', err);
