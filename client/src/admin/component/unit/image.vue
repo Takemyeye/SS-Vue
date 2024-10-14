@@ -2,7 +2,7 @@
   <div class="orderImg">
     <font-awesome-icon icon="image" />
     <div v-for="item in cartItems" :key="item.id" class="imageItem">
-      <img :src="`/art/${item.image}`" :alt="item.title" class="itemImage" />
+      <img :src="item.image" :alt="item.title" class="itemImage" />
     </div>
   </div>
 </template>

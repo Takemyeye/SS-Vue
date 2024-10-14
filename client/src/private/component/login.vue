@@ -1,10 +1,7 @@
 <template>
   <div class="register">
     <div class="login">
-      <div class="text">
-        <h2>Login to Soul Swap</h2>
-        <h5>Sign in to your account using one of the following platforms:</h5>
-      </div>
+      <TextUnit/>
       <div class="platform">
         <a :href="discordAuthUrl">
           <div class="auth auth-1">
@@ -30,8 +27,13 @@
 </template>
 
 <script>
+import TextUnit from './textUnit.vue';
+
 export default {
   name: 'LoginCard',
+  components: {
+    TextUnit
+  },
   data() {
     return {
       discordAuthUrl: `https://discord.com/oauth2/authorize?client_id=1274555710423695472&response_type=code&redirect_uri=https%3A%2F%2Fss-vue-yf04.onrender.com%2Fauth%2Fdiscord%2Fcallback&scope=identify+email`,
@@ -56,6 +58,9 @@ export default {
   }
 
   .login {
+    padding: 2rem 1rem;
+    border: 1px solid rgba(0, 0, 0, 0.200);
+    border-radius: 8px;
     position: relative;
     top: 20%;
     display: flex;
@@ -65,17 +70,12 @@ export default {
     gap: 2rem;
   }
 
-  .text, .auth {
+  .auth {
     width: 300px;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 1rem;
-  }
-
-  .text {
-    flex-direction: column;
-    text-align: center;
   }
 
   .platform {
