@@ -15,6 +15,7 @@
     <div class="container">
       <UserReviews/>
     </div>
+    
     <NickError :message="nickErrorMessage" :visible="nickErrorVisible" />
   </div>
   

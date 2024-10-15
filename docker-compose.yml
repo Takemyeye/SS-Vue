@@ -1,0 +1,21 @@
+version: '3'
+services:
+  client:
+    build: ./client
+    ports:
+      -"8080:80"
+    environment:
+      -VUE_APP_API_URL=http://localhost:3000
+    env_file:
+      - ./client/.env
+    comand: npm run serve
+    depends_on:
+      -api
+    
+
+  api:
+    ports:
+      "3000:3000"
+    env_file:
+      - ./api/.env
+    comand: npm run server
