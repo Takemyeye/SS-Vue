@@ -51,7 +51,7 @@ export default {
           return;
         }
 
-        const response = await fetch(`https://ss-vue-yf04.onrender.com/api/update-status/${this.localUser.id}`, {
+        const response = await fetch(`http://localhost:3000/api/update-status/${this.localUser.id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -81,7 +81,7 @@ export default {
           return;
         }
 
-        const response = await fetch(`https://ss-vue-yf04.onrender.com/api/update-status-active/${this.localUser.id}`, {
+        const response = await fetch(`http://localhost:3000/api/update-status-active/${this.localUser.id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',

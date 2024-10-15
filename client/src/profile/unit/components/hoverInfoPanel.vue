@@ -50,7 +50,7 @@ export default {
 
       const token = localStorage.getItem('token');
       try {
-        const response = await fetch('https://ss-vue-yf04.onrender.com/api/update-user', {
+        const response = await fetch('http://localhost:3000/api/update-user', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

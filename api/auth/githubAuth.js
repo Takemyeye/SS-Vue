@@ -30,9 +30,9 @@ router.get('/auth/github/callback', passport.authenticate('github', { session: f
     });
 
     await newUser.save();
-    res.redirect(`https://ss-vue.vercel.app?token=${token}`);
+    res.redirect(`http://localhost:8080?token=${token}`);
   } else {
-    res.redirect(`https://ss-vue.vercel.app?token=${existingUser.token}`);
+    res.redirect(`http://localhost:8080?token=${existingUser.token}`);
   }
 });
 
