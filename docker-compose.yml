@@ -4,7 +4,7 @@ services:
     build: ./client
     restart: always
     ports:
-      - "8080:80"
+      - "8080:8080"
     environment:
       - VUE_APP_API_URL=http://localhost:3000
     env_file:
