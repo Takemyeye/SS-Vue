@@ -69,7 +69,7 @@ export default {
       const token = localStorage.getItem('token');
 
       try {
-        const response = await fetch('https://ss-vue-yf04.onrender.com/api/reviews', {
+        const response = await fetch('http://localhost:3000/api/reviews', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

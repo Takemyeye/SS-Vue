@@ -95,7 +95,7 @@ export default {
       const createdAt = new Date().toISOString();
 
       try {
-        const response = await fetch('https://ss-vue-yf04.onrender.com/api/userCart', {
+        const response = await fetch('http://localhost:3000/api/userCart', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
