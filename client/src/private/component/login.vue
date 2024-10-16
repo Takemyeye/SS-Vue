@@ -37,8 +37,8 @@ export default {
   data() {
     return {
       discordAuthUrl: `https://discord.com/oauth2/authorize?client_id=1274555710423695472&response_type=code&redirect_uri=https%3A%2F%2Fss-vue-yf04.onrender.com%2Fauth%2Fdiscord%2Fcallback&scope=identify+email`,
-      googleAuthUrl: `http://localhost:3000/auth/google`,
-      githubAuthUrl: `http://localhost:3000/auth/github`,
+      googleAuthUrl: `https://ss-vue-yf04.onrender.com/auth/google`,
+      githubAuthUrl: `https://ss-vue-yf04.onrender.com/auth/github`,
     };
   },
 }

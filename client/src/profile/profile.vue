@@ -3,7 +3,7 @@
   <div class="profile-page">
 
       <UserProfile @nickUpdated="updateUserNick" @error="showNickError" />
-
+      
       <UserReviews/>
     
     <NickError :message="nickErrorMessage" :visible="nickErrorVisible" />

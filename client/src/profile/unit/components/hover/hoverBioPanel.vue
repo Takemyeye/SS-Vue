@@ -61,7 +61,7 @@ import { computed, ref } from 'vue';
 
               props.toggleBar(); // Close the panel after saving
               const token = localStorage.getItem('token');
-              const response = await fetch('http://localhost:3000/api/update-user', {
+              const response = await fetch('https://ss-vue-yf04.onrender.com/api/update-user', {
                   method: 'POST',
                   headers: {
                       'Content-Type': 'application/json',
