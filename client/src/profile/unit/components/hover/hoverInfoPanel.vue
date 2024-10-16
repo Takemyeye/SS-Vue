@@ -115,6 +115,17 @@ export default {
     gap: 2rem;
   }
   
+  .panel::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 60px;
+    height: 60px;
+    border-radius: 100% 0 8px 0;
+    background-color: black;
+  }
+
   .text {
     width: 100%;
     display: flex;

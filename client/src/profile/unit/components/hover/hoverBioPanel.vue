@@ -6,15 +6,7 @@
           style="font-size: 24px; color: black; cursor: pointer; position: absolute; right: 10px; top: 10px;" 
           @click="toggleBar"/>
 
-        <div class="text">
-          <h2>Write New Bio</h2>
-          <h5>Tell us about yourself in a few words</h5>
-        </div>
-
-        <div class="example">
-          <h2>Example:</h2>
-          <h5>Coffee enthusiast ☕ | World traveler 🌍 | Nature lover 🌿 | Passionate about photography 📸 and exploring hidden gems around the globe.</h5>
-        </div>
+        <ExampleBio/>
 
         <div class="text">
           <textarea 
@@ -34,14 +26,16 @@
   </template>
   
 <script>
-  import useUserStore from '@/stores/userStore';
-  import UiButton from '@/ui/button.vue';
-  import { computed, ref } from 'vue';
+import ExampleBio from './unit/examplebio.vue';
+import useUserStore from '@/stores/userStore';
+import UiButton from '@/ui/button.vue';
+import { computed, ref } from 'vue';
   
   export default {
       name: 'HoverBioPanel',
       components: {
-          UiButton
+        ExampleBio,
+        UiButton,
       },
       props: {
           toggleBar: {
@@ -123,10 +117,17 @@
     gap: 2rem;
   }
 
-  .example {
-    text-wrap: balance;
+  .panel::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 60px;
+    height: 60px;
+    border-radius: 100% 0 8px 0;
+    background-color: black;
   }
-
+  
   .text {
     width: 100%;
     display: flex;
@@ -135,7 +136,7 @@
     flex-direction: column;
     gap: 8px;
   }
-
+  
   textarea {
     max-width: 95%;
     min-width: 95%;

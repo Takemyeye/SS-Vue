@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import HoverBioPanel from './hoverBioPanel.vue';
+import HoverBioPanel from './hover/hoverBioPanel.vue';
 import useUserStore from '@/stores/userStore';
 import UiBadge from '@/ui/badge.vue';
 import { computed, ref } from 'vue';

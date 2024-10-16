@@ -1,5 +1,5 @@
 <template>
-  <div class="profile">
+  <div class="profile-info">
     <UserBioPanel/>
     <div class="info">
       <h2>Contact</h2>
@@ -34,7 +34,7 @@ export default {
 </script>
 
 <style scoped>
-  .profile {
+  .profile-info {
     width: 100%;
     display: flex;
     align-items: start;

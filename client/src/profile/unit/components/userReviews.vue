@@ -107,8 +107,16 @@ export default {
 <style scoped>
   .reviews {
     position: relative;
-    width: 100%;
-    padding: 2rem 0;
+    width: 55%;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 2rem 2.5%;
+    border-radius: 8px;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.342);
+    gap: 1rem;
   }
 
   .text {
@@ -139,6 +147,9 @@ export default {
   }
 
   @media all and ( max-width: 768px ) {
+    .reviews {
+      width: 80%;
+    }
     .reviews-container {
       grid-template-columns: repeat(1, 1fr);
       gap: 2rem;

@@ -1,5 +1,9 @@
 <template>
   <div class="profile">
+    <div class="text">
+      <h2> Profile</h2>
+      <h5>Manage and Update Your Information</h5>
+    </div>
     <div class="user">
       <div class="data">
         <img :src="avatarUrl" :alt="userName">
@@ -29,13 +33,17 @@
       @nickUpdated="handleNickUpdate"  
       @error="handleError"
     />
+    <UserInfo />
+    <HoverCircle/>
   </div>
 </template>
 
 <script>
-import HoverInfoPanel from './hoverInfoPanel.vue';
+import HoverCircle from '../informationUnit/hoverCircle.vue';
+import HoverInfoPanel from './hover/hoverInfoPanel.vue';
 import useUserStore from '@/stores/userStore';
 import UiNewButton from '@/ui/newButton.vue';
+import UserInfo from './userInfo.vue';
 import UiBadge from '@/ui/badge.vue';
 import { computed, ref } from 'vue';
 
@@ -43,7 +51,9 @@ export default {
   name: 'UserProfile',
   components: {
     HoverInfoPanel,
+    HoverCircle,
     UiNewButton,
+    UserInfo,
     UiBadge,
   },
   emits: ['error', 'nickUpdated'],
@@ -105,11 +115,16 @@ export default {
 
 <style scoped>
   .profile {
-    width: 100%;
+    position: relative;
+    width: 55%;
     display: flex;
-    align-items: center;
+    align-items: start;
     justify-content: center;
     flex-direction: column;
+    overflow: hidden;
+    padding: 2rem 2.5%;
+    border-radius: 8px;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.342);
     gap: 1rem;
   }
 
@@ -143,7 +158,21 @@ export default {
     gap: 8px;
   }
 
+  .text {
+    width: 100%;
+    display: flex;
+    align-items: start; 
+    justify-content: center;
+    flex-direction: column;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.205);
+    padding: 8px 0;
+    gap: 8px;
+  }
+
   @media all and (max-width:768px) {
+    .profile {
+      width: 80%;
+    }
    .user {
     flex-direction: column;
     gap: 1rem;
