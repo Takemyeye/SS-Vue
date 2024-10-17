@@ -11,6 +11,7 @@
         class="textarea" 
         placeholder="Share your thoughts about our platform" 
         style="width: 1447px; height: 92px;"
+         maxlength="250"
       ></textarea>
     </div>
     <div class="commit">

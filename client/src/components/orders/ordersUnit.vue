@@ -39,7 +39,6 @@
         .then(data => {
           if (Array.isArray(data) && data.length > 0) {
             this.orders = data;
-            console.log(data)
           } else {
             this.orders = [];
           }

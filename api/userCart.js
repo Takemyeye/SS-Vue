@@ -5,7 +5,7 @@ require('dotenv').config();
 const router = express.Router();
 
 router.post('/userCart', async (req, res) => {
-  const { token, cartItems, totalPrice, country } = req.body;
+  const { token, cartItems, totalPrice, country, digital } = req.body;
 
   if (!token) {
     return res.status(400).json({ message: 'Token is required' });
@@ -18,9 +18,10 @@ router.post('/userCart', async (req, res) => {
   try {
     const newOrder = new Order({
       token,
+      digital,
       country,
       cartItems,
-      totalPrice
+      totalPrice,
     });
 
     await newOrder.save();

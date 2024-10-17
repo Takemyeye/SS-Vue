@@ -3,7 +3,7 @@
     <h2 v-if="orders.length > 0">Orders</h2>
     <h2 v-else>No orders</h2>
     <div v-for="order in orders" :key="order.createdAt" class="container">
-      <OrderImage :cartItems="order.cartItems" />
+      <OrderImage :cartItems="order.cartItems" :digital="order.digital"/>
       <OrderPrice :totalPrice="order.totalPrice" />
       <OrderCountry :country="order.country" />
       <OrderDate :createdAt="order.createdAt" />
@@ -81,7 +81,6 @@ export default {
 
         if (response.ok) {
           orders.value = orders.value.filter(order => !(order.token === token && order.createdAt === createdAt));
-          console.log('Order deleted successfully');
         } else {
           console.error('Error deleting order');
         }

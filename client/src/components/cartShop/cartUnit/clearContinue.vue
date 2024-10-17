@@ -3,19 +3,27 @@
     <h2>Your Cart</h2>
     <div class="container">
       <div class="continue" @click="toggleBlock">Continue</div>
-      <div class="remove" @click="clearCart">Remove All</div>
+      <UiButton buttonText="Remove all" @click="clearCart"/>
     </div>
     <div class="block" v-if="showBlock">
       <div class="block-container">
-        <h1> Payments Methods <font-awesome-icon icon="circle-xmark" @click="toggleBlock" style="cursor: pointer;"/></h1>
+        <h1> Payments Methods 
+          <font-awesome-icon icon="circle-xmark" @click="toggleBlock" style="cursor: pointer;"/>
+        </h1>
         <div class="fisic">
-          <div class="title"> <font-awesome-icon icon="money-bill" /> Fisical Method </div>
+          <div class="title"> 
+            <font-awesome-icon icon="money-bill" /> Fisical Method 
+          </div>
           <input 
             type="text" 
             class="city" 
             placeholder="Select Your City"
             v-model="country"
           />
+          <div class="text">
+            <h5>Digital version</h5>
+            <input type="checkbox" v-model="digital">
+          </div>
           <UiButton buttonText="Process" @click="processOrder"/>
         </div>
       </div>
@@ -31,9 +39,9 @@
 </template>
 
 <script>
+import { clearCart } from '@/services/activeContext';
 import UiButton from '@/ui/button.vue';
 import UiBanner from '@/ui/banner.vue';
-import { clearCart } from '@/services/activeContext';
 
 const getTokenFromLocalStorage = () => {
   return localStorage.getItem('token') || null; 
@@ -47,11 +55,12 @@ export default {
   },
   data() {
     return {
-      showBlock: false,
+      bannerTimeout: null,
       showBanner: false,
+      showBlock: false,
+      digital: false,
       token: null,
       country: '',
-      bannerTimeout: null
     };
   },
   created() {
@@ -101,20 +110,18 @@ export default {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            token,
             country: this.country,
-            cartItems,
+            digital: this.digital,
             totalPrice,
+            cartItems,
             createdAt,
+            token,
           }),
         });
 
         if (!response.ok) {
           throw new Error('Failed to process order');
         }
-
-        const data = await response.json();
-        console.log('Order processed successfully:', data);
 
         this.showBanner = true;
 
@@ -177,13 +184,12 @@ export default {
   background-color: black;
 }
 
-.remove {
-  color: white;
-  background-color: black;
-}
-
-.remove:hover {
-  background-color: rgb(43, 43, 43);
+.text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 1rem;
 }
 
 .block {
@@ -247,4 +253,5 @@ export default {
 .country:focus {
   border: 1px solid rgba(0, 0, 0, 0.507);
 }
+
 </style>

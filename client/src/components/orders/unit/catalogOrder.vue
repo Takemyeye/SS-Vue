@@ -79,8 +79,6 @@ export default {
       this.sortOrders();
     },
     sortOrders() {
-      console.log('Sorting by time:', this.sortByTime);
-      console.log('Sorting by status:', this.sortByStatus);
       this.$emit('sort-orders', { sortByTime: this.sortByTime, sortByStatus: this.sortByStatus });
     },
   },

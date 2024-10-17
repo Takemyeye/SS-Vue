@@ -3,9 +3,9 @@
     <font-awesome-icon icon="user" />
     <div class="unit">
       <img :src="userAvatar" alt="AvatarUser" class="userAvatar" />
-      <h4>{{ userName }}</h4>
+      <h5>{{ userName }}</h5>
     </div>
-    <h4>{{ userEmail }}</h4>
+    <h5>{{ userEmail }}</h5>
   </div>
 </template>
 

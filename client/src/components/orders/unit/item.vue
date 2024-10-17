@@ -6,6 +6,10 @@
       <div class="information">
         <h2 style="padding: 2.5rem 0">Order - {{ formatDate(order.createdAt) }}</h2>
         <h3>Total Price: {{ getTotalPrice(order.cartItems).toFixed(2) }} $</h3>
+        <div class="version">
+          <h5 v-if="order.digital == true">Digital</h5>
+          <h5 v-else>Standard</h5>
+        </div>
         <UiBadge 
           style="white-space: nowrap; position: absolute; right: 0;" 
           :styleBadge="order.process === 'Checked' ? 'badge3' : 'badge5'"
@@ -154,6 +158,12 @@ h3 {
   align-items: start;
   justify-content: center;
   flex-direction: column;
+}
+
+.version {
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 
 @media all and ( max-width: 1900px) {

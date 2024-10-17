@@ -1,6 +1,7 @@
 <template>
   <div class="orderImg">
     <font-awesome-icon icon="image" />
+    <h5>{{ digital }}</h5>
     <div v-for="item in cartItems" :key="item.id" class="imageItem">
       <img :src="item.image" :alt="item.title" class="itemImage" />
     </div>
@@ -13,6 +14,10 @@ export default {
   props: {
     cartItems: {
       type: Array,
+      required: true,
+    },
+    digital: {
+      type: Boolean,
       required: true,
     },
   },
@@ -34,7 +39,7 @@ export default {
 }
 .itemImage {
   width: 120px;
-  height: 120px;
+  height: 100px;
   object-fit: contain;
   border-radius: 8px;
 }

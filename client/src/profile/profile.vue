@@ -3,7 +3,6 @@
   <div class="profile-page">
 
       <UserProfile @nickUpdated="updateUserNick" @error="showNickError" />
-      
       <UserReviews/>
     
     <NickError :message="nickErrorMessage" :visible="nickErrorVisible" />
@@ -46,7 +45,6 @@ export default {
     },
     updateUserNick(newNickname) {
       this.updatedNick = newNickname;
-      console.log('Nickname updated to:', newNickname);
     }
   }
 }
