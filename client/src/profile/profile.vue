@@ -1,17 +1,16 @@
 <template>
   <SiteHeader />
   <div class="profile-page">
-
       <UserProfile @nickUpdated="updateUserNick" @error="showNickError" />
       <UserReviews/>
-    
-    <NickError :message="nickErrorMessage" :visible="nickErrorVisible" />
+      <NotificationSettings/>
+      <NickError :message="nickErrorMessage" :visible="nickErrorVisible" />
   </div>
-  
   <SiteFooter />
 </template>
 
 <script>
+import NotificationSettings from './unit/components/notification.vue';
 import UserProfile from './unit/components/userProfile.vue';
 import UserReviews from './unit/components/userReviews.vue';
 import SiteHeader from '@/components/header/header.vue';
@@ -21,6 +20,7 @@ import NickError from './unit/error/nickError.vue';
 export default {
   name: 'ProfilePage',
   components: {
+    NotificationSettings,
     UserReviews,
     UserProfile,
     SiteFooter,
@@ -63,7 +63,7 @@ export default {
     justify-content: start;
     flex-direction: column;
     padding-top: 5vh;
-    gap: 1rem;
+    gap: 2rem;
   }
 
 </style>
