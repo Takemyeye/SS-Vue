@@ -8,10 +8,12 @@
       <NotificationUnit 
         title="Marketing emails"
         subtitle="Receive emails about new products and offers"
+        toggleId="toggle1"
       />
       <NotificationUnit
         title="Order notifications"
         subtitle="Receive notifications about your order status"
+        toggleId="toggle2"
       />
     </div>
   </div>
@@ -63,4 +65,10 @@ import NotificationUnit from './unit/notificationUnit.vue';
     gap: 2rem;
   }
 
+
+  @media all and (max-width:768px) {
+    .settings {
+      width: 80%;
+    }
+  }
 </style>

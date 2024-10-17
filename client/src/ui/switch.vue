@@ -1,13 +1,19 @@
 <template>
   <div class="toggle-switch">
-    <input class="toggle-input" id="toggle" type="checkbox">
-    <label class="toggle-label" for="toggle"></label>
+    <input class="toggle-input" :id="toggle" type="checkbox">
+    <label class="toggle-label" :for="toggle"></label>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'UiSwitch'
+    name: 'UiSwitch',
+    props: {
+      toggle: {
+        type: String,
+        required: true
+      }
+    }
   }
 </script>
 
@@ -27,8 +33,8 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 60px;
-  height: 34px;
+  width: 50px;
+  height: 30px;
   border-radius: 17px;
   background-color: #ccc;
   cursor: pointer;
@@ -40,8 +46,8 @@
   position: absolute;
   top: 3px;
   left: 3px;
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   background-color: #fff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -49,10 +55,10 @@
 }
 
 .toggle-input:checked + .toggle-label {
-  background-color: #86d993;
+  background-color: hsl(210, 100%, 66%);
 }
 
 .toggle-input:checked + .toggle-label:before {
-  transform: translateX(26px);
+  transform: translateX(20px);
 }
 </style>
