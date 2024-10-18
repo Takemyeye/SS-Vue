@@ -1,7 +1,7 @@
-const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const GitHubStrategy = require('passport-github2').Strategy;
 const DiscordStrategy = require('passport-discord').Strategy;
+const GitHubStrategy = require('passport-github2').Strategy;
+const passport = require('passport');
 require('dotenv').config();
 
 passport.use(new GoogleStrategy({

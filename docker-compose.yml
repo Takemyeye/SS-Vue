@@ -1,4 +1,15 @@
 services:
+  nginx:
+    container_name: nginx
+    image: nginx:latest
+    restart: always
+    ports:
+      - 80:80
+    depends_on:
+      - api
+    volumes:
+      - ./lib/.nginx:/etc/nginx
+
   client:
     container_name: client
     build: ./client
