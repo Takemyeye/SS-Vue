@@ -29,7 +29,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(cors({
-  origin: ['https://ss-vue.vercel.app', 'http://localhost:8080'],
+  origin: ['https://ss-vue.vercel.app', 'https://soulswap.store'],
   methods: ['*'],
   allowedHeaders: ['*'],
 }));
@@ -60,7 +60,7 @@ client.connect()
   });
 
 app.get('/', (req, res) => {
-  res.send('<h1>Server is running on http://localhost:3000</h1>');
+  res.send('<h1>Server is running on https://soulswap.store</h1>');
 });
 
 app.listen(port, () => {

@@ -28,7 +28,7 @@
           return;
         }
   
-        fetch('http://localhost:3000/api/process', {
+        fetch('https://soulswap.store/api/process', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,

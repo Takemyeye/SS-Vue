@@ -14,7 +14,7 @@ export default function useMessengerStore() {
   const fetchMessages = async () => {
     const token = localStorage.getItem('token');
     try {
-      const response = await fetch('http://localhost:3000/api/messages', {
+      const response = await fetch('https://soulswap.store/api/messages', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ export default function useMessengerStore() {
   const sendMessageToServer = async (messageText) => {
     const token = localStorage.getItem('token');
     try {
-      const response = await fetch('http://localhost:3000/api/messages', {
+      const response = await fetch('https://soulswap.store/api/messages', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

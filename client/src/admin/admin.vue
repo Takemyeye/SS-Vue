@@ -61,7 +61,7 @@ export default {
 
     const fetchUsers = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/users');
+        const response = await fetch('https://soulswap.store/api/users');
         if (response.ok) {
           const data = await response.json();
           users.value = data;
@@ -76,7 +76,7 @@ export default {
 
     const fetchOrdersCount = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/orders/count');
+        const response = await fetch('https://soulswap.store/api/orders/count');
         if (response.ok) {
           const data = await response.json();
           activeOrders.value = data.count; 
