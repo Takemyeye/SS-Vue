@@ -36,9 +36,9 @@ app.use(cors({
 
 app.use(passport.initialize());
 
-app.use('/', discordAuthRoutes);
-app.use('/', googleAuthRoutes);
-app.use('/', githubAuthRoutes);
+app.use('/api', discordAuthRoutes);
+app.use('/api', googleAuthRoutes);
+app.use('/api', githubAuthRoutes);
 app.use('/api', messangRoutes); 
 app.use('/api', processOrder);
 app.use('/api', reviewRoutes);
