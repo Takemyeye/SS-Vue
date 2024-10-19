@@ -17,7 +17,6 @@ const handleAuthCallback = async (req, res) => {
     let existingUser = await User.findOne({ 
       id: user.id, 
       email: user.email, 
-      username: user.username 
     });
 
     if (!existingUser) {
@@ -69,7 +68,7 @@ router.get('/auth/discord', passport.authenticate('discord', { scope: ['identify
 router.get('/auth/discord/callback', passport.authenticate('discord', { session: false }), handleAuthCallback);
 
 // Get Current User
-router.get('/api/current_user', async (req, res) => {
+router.get('/current_user', async (req, res) => {
   const token = req.headers.authorization?.split(' ')[1];
   if (!token) {
     return res.status(401).json({ error: 'Токен не предоставлен' });
@@ -77,15 +76,18 @@ router.get('/api/current_user', async (req, res) => {
 
   try {
     const decoded = jwt.verify(token, SECRET_KEY);
-    const user = await User.findOne({ id: decoded.id, email: decoded.email, username: decoded.username, token: token });
+    const user = await User.findOne({ id: decoded.id, token: token });
+
     if (!user) {
       return res.status(404).json({ error: 'Пользователь не найден или токен неверный' });
     }
 
     res.json(user);
   } catch (err) {
+    console.error('Ошибка валидации токена:', err);
     return res.status(401).json({ error: 'Неверный или истекший токен' });
   }
 });
+
 
 module.exports = router;

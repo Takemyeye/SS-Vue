@@ -12,7 +12,6 @@ const generateToken = (user) => {
 };
 
 router.get('/auth/github', passport.authenticate('github', { scope: ['user:email'] }));
-
 router.get('/auth/github/callback', passport.authenticate('github', { session: false }), async (req, res) => {
   const user = req.user;
   
