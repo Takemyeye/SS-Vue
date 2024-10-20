@@ -37,8 +37,8 @@ export default {
   data() {
     return {
       discordAuthUrl: `https://discord.com/oauth2/authorize?client_id=1274555710423695472&response_type=code&redirect_uri=https%3A%2F%2Fsoulswap.store%2Fapi%2Fauth%2Fdiscord%2Fcallback&scope=identify+email`,
-      googleAuthUrl: `https://soulswap.store/api/auth/google`,
-      githubAuthUrl: `https://soulswap.store/api/auth/github`,
+      googleAuthUrl: `http://localhost:3000/api/auth/google`,
+      githubAuthUrl: `http://localhost:3000/api/auth/github`,
     };
   },
 }

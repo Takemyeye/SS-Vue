@@ -8,12 +8,16 @@
       <NotificationUnit 
         title="Marketing emails"
         subtitle="Receive emails about new products and offers"
-        toggleId="toggle1"
+        toggleId="marketingEmails"
+        :toggleState="userNotifications.marketingEmails"
+        @switch-change="updateNotificationPreference"
       />
       <NotificationUnit
         title="Order notifications"
         subtitle="Receive notifications about your order status"
-        toggleId="toggle2"
+        toggleId="orderNotifications"
+        :toggleState="userNotifications.orderNotifications"
+        @switch-change="updateNotificationPreference"
       />
     </div>
   </div>
@@ -22,12 +26,70 @@
 <script>
 import NotificationUnit from './unit/notificationUnit.vue';
 
-  export default {
-    name: 'NotificationSettings',
-    components: {
-      NotificationUnit,
+export default {
+  name: 'NotificationSettings',
+  components: {
+    NotificationUnit,
+  },
+  data() {
+    return {
+      userNotifications: {
+        marketingEmails: false,
+        orderNotifications: false,
+      }
+    };
+  },
+  async mounted() {
+    await this.fetchNotificationSettings();
+  },
+  methods: {
+    async fetchNotificationSettings() {
+      try {
+        const token = localStorage.getItem('token');
+        const response = await fetch('http://localhost:3000/api/user/notifications', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`Ошибка: ${response.status}`);
+        }
+
+        const data = await response.json();
+        this.userNotifications = data; 
+      } catch (error) {
+        console.error('Ошибка при получении настроек уведомлений:', error);
+      }
+    },
+    async updateNotificationPreference({ id, value }) {
+      try {
+        const token = localStorage.getItem('token');
+
+        const response = await fetch('http://localhost:3000/api/user/notifications', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({
+            toggleId: id,
+            value: value,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error(`Ошибка: ${response.status}`);
+        }
+
+        this.userNotifications[id] = value; 
+      } catch (error) {
+        console.error('Ошибка при обновлении уведомлений:', error);
+      }
     }
   }
+};
 </script>
 
 <style scoped>

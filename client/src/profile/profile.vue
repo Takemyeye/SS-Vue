@@ -57,13 +57,13 @@ export default {
     font-weight: var(--text-font-weight);
     font-style: var(--text-font-style);
     width: 100%;
-    min-height: calc(85vh - 1px);
     display: flex;
     align-items: center;
     justify-content: start;
     flex-direction: column;
-    padding-top: 5vh;
+    padding: 5vh 0;
     gap: 2rem;
+    animation: fadeInUp 1s ease-in-out forwards;
   }
 
 </style>

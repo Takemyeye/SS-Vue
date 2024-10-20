@@ -46,7 +46,7 @@ export default {
 
     const fetchUser = async (token) => {
       try {
-        const response = await fetch('https://soulswap.store/api/current_user', {
+        const response = await fetch('http://localhost:3000/api/current_user', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,

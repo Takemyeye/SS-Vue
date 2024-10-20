@@ -1,20 +1,30 @@
 <template>
   <div class="toggle-switch">
-    <input class="toggle-input" :id="toggle" type="checkbox">
-    <label class="toggle-label" :for="toggle"></label>
+    <input 
+      class="toggle-input" 
+      :id="uniqueId" 
+      type="checkbox" 
+      :checked="toggle" 
+      @change="$emit('change', $event)" 
+    />
+    <label class="toggle-label" :for="uniqueId"></label>
   </div>
 </template>
 
 <script>
-  export default {
-    name: 'UiSwitch',
-    props: {
-      toggle: {
-        type: String,
-        required: true
-      }
+export default {
+  name: 'UiSwitch',
+  props: {
+    toggle: {
+      type: Boolean,
+      required: true
+    },
+    uniqueId: { 
+      type: String,
+      required: true
     }
   }
+}
 </script>
 
 <style scoped>

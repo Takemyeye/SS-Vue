@@ -62,7 +62,7 @@ export default {
 
     const fetchOrders = async () => {
       try {
-        const response = await fetch('https://soulswap.store/api/orders');
+        const response = await fetch('http://localhost:3000/api/orders');
         if (response.ok) {
           orders.value = await response.json();
         } else {
@@ -75,7 +75,7 @@ export default {
 
     const deleteOrder = async (token, createdAt) => {
       try {
-        const response = await fetch(`https://soulswap.store/api/orders/${token}/${createdAt}`, {
+        const response = await fetch(`http://localhost:3000/api/orders/${token}/${createdAt}`, {
           method: 'DELETE',
         });
 
@@ -91,7 +91,7 @@ export default {
 
     const updateOrderStatus = async (orderId, newStatus) => {
       try {
-        const response = await fetch(`https://soulswap.store/api/orders/${orderId}`, {
+        const response = await fetch(`http://localhost:3000/api/orders/${orderId}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ status: newStatus }),

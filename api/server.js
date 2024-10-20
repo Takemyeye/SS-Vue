@@ -1,3 +1,4 @@
+const notificationRoutes = require('./routes/notificationRoutes');
 const discordAuthRoutes = require('./auth/discordAuth');
 const processOrder = require('./process/processOrder');
 const googleAuthRoutes = require('./auth/googleAuth');
@@ -29,13 +30,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(cors({
-  origin: ['https://soulswap.store', 'https://soulswap.store'],
+  origin: ['http://localhost:8080', 'https://soulswap.store'],
   methods: ['*'],
   allowedHeaders: ['*'],
 }));
 
 app.use(passport.initialize());
 
+app.use('/api', notificationRoutes);
 app.use('/api', discordAuthRoutes);
 app.use('/api', googleAuthRoutes);
 app.use('/api', githubAuthRoutes);
@@ -60,7 +62,7 @@ client.connect()
   });
 
 app.get('/', (req, res) => {
-  res.send('<h1>Server is running on https://soulswap.store</h1>');
+  res.send('<h1>Server is running on http://localhost:8080</h1>');
 });
 
 app.listen(port, () => {

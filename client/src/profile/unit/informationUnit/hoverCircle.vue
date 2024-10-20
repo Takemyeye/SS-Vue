@@ -62,7 +62,7 @@ import { computed } from 'vue';
         border-radius: 100% 0 0 0;
         opacity: 0;
         animation: fadeInUp 0.3s ease-in-out forwards;
-        animation-delay: 0.5s;
+        animation-delay: 1s;
         z-index: 2;
     }
 
