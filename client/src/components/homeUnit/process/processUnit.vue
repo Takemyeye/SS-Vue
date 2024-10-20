@@ -29,7 +29,7 @@
 <style scoped>
     .process {
         width: 300px;
-        padding: 1rem;
+        padding: 1rem 10px;
         display: flex;
         align-items: center;
         justify-content: center;

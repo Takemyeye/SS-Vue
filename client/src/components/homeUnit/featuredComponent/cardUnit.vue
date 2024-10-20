@@ -88,6 +88,7 @@ export default {
 
 @media all and (max-width: 768px) {
   .cardUnit {
+    width: 100%;
     grid-template-columns: repeat(1, 1fr);
   }
 }

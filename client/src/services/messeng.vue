@@ -43,4 +43,12 @@
     max-width: 300px;
   }
 }
+@media all and ( max-width: 350px) {
+  .messeng {
+    right: 8px;
+    max-width: 290px;
+    height: 80vh;
+  }
+}
+
 </style>
