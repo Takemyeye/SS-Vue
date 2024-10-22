@@ -61,6 +61,8 @@ client.connect()
     console.error('Error connecting to Redis:', err);
   });
 
+require('./notification/autoSendEmails');
+
 app.get('/', (req, res) => {
   res.send('<h1>Server is running on http://localhost:8080</h1>');
 });
