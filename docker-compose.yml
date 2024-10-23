@@ -4,9 +4,9 @@ services:
     image: nginx:latest
     restart: always
     ports:
-      - 80:80
+      - "80:80"
     depends_on:
-      - api
+      - main
     volumes:
       - ./lib/.nginx:/etc/nginx
 
@@ -20,12 +20,22 @@ services:
       - ./client/.env
     command: npm run serve
     
-  api:
-    container_name: api
-    build: ./api
+  main:
+    container_name: main
+    build: ./api/main
     restart: always
     ports:
       - "3000:3000"
     env_file:
-      - ./api/.env
+      - ./api/main/.env
+    command: npm run server
+
+  ntt:
+    container_name: ntt
+    build: ./api/ntt 
+    restart: always
+    ports:
+      - "3001:3001"
+    env_file:
+      - ./api/ntt/.env 
     command: npm run server

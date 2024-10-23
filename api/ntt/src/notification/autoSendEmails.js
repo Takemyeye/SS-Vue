@@ -96,4 +96,4 @@ const sendEmails = async () => {
   }
 };
 
-setInterval(sendEmails, 1 * 60 * 1000); 
+setInterval(sendEmails, 24 * 60 * 60 * 1000); 
