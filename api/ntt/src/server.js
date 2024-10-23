@@ -21,7 +21,7 @@ app.use(cors({
   allowedHeaders: ['*'],
 }));
 
-app.use('/api/ntt', notificationRoutes);
+app.use('/ntt', notificationRoutes);
 
 require('./notification/autoSendEmails');
 

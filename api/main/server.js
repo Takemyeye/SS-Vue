@@ -1,4 +1,3 @@
-const notificationRoutes = require('./routes/notificationRoutes');
 const discordAuthRoutes = require('./auth/discordAuth');
 const processOrder = require('./process/processOrder');
 const googleAuthRoutes = require('./auth/googleAuth');
@@ -37,7 +36,6 @@ app.use(cors({
 
 app.use(passport.initialize());
 
-app.use('/api', notificationRoutes);
 app.use('/api', discordAuthRoutes);
 app.use('/api', googleAuthRoutes);
 app.use('/api', githubAuthRoutes);
@@ -60,8 +58,6 @@ client.connect()
   .catch((err) => {
     console.error('Error connecting to Redis:', err);
   });
-
-require('./notification/autoSendEmails');
 
 app.get('/', (req, res) => {
   res.send('<h1>Server is running on http://localhost:8080</h1>');
