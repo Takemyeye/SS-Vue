@@ -12,21 +12,9 @@
     </div>
     <div class="admin-panel">
       <div class="container">
-        <UiBlock 
-          :title="'Total Users'" 
-          :number="totalUsers" 
-          :styleBadge="'badge1'" 
-        />
-        <UiBlock 
-          :title="'Active Shops'" 
-          :number="activeOrders" 
-          :styleBadge="'badge2'" 
-        />
-        <UiBlock 
-          :title="'Total Revenue'" 
-          :number="0" 
-          :styleBadge="'badge3'" 
-        />
+        <UiBlock title="Total Users" :number="stats.totalUsers" styleBadge="badge1" />
+        <UiBlock title="Active Shops" :number="stats.activeOrders" styleBadge="badge2" />
+        <UiBlock title="Total Revenue" :number="0" styleBadge="badge3" />
       </div>
       <DataUser />
       <SelectedUserPanel 
@@ -55,37 +43,34 @@ export default {
   },
   setup() {
     const users = ref([]);
-    const totalUsers = ref(0);
-    const activeOrders = ref(0);
+    const stats = ref({ totalUsers: 0, activeOrders: 0 });
     const selectedUser = ref(null);
 
-    const fetchUsers = async () => {
+    const fetchData = async (url, onSuccess) => {
       try {
-        const response = await fetch('http://localhost:3000/api/users');
+        const response = await fetch(url);
         if (response.ok) {
           const data = await response.json();
-          users.value = data;
-          totalUsers.value = data.length;
+          onSuccess(data);
         } else {
-          console.error('Ошибка при получении данных пользователей');
+          console.error(`Ошибка при получении данных с ${url}`);
         }
       } catch (error) {
-        console.error('Ошибка при получении данных пользователей:', error);
+        console.error(`Ошибка при получении данных с ${url}:`, error);
       }
     };
 
-    const fetchOrdersCount = async () => {
-      try {
-        const response = await fetch('http://localhost:3000/api/orders/count');
-        if (response.ok) {
-          const data = await response.json();
-          activeOrders.value = data.count; 
-        } else {
-          console.error('Ошибка при получении количества заказов');
-        }
-      } catch (error) {
-        console.error('Ошибка при получении количества заказов:', error);
-      }
+    const fetchUsers = () => {
+      fetchData('http://localhost:3000/api/users', (data) => {
+        users.value = data;
+        stats.value.totalUsers = data.length;
+      });
+    };
+
+    const fetchOrdersCount = () => {
+      fetchData('http://localhost:3000/api/orders/count', (data) => {
+        stats.value.activeOrders = data.count;
+      });
     };
 
     const handleUserClick = (userId) => {
@@ -93,19 +78,18 @@ export default {
     };
 
     const handleClosePanel = () => {
-      selectedUser.value = null; // close panel
+      selectedUser.value = null;
     };
 
     onMounted(() => {
       fetchUsers();
-      fetchOrdersCount(); 
+      fetchOrdersCount();
     });
 
     return {
       users,
-      totalUsers,
-      activeOrders, 
-      selectedUser, 
+      stats,
+      selectedUser,
       handleUserClick,
       handleClosePanel,
     };
