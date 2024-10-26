@@ -79,9 +79,7 @@ export default {
       }
     };
 
-    const onPageChanged = (newPage) => {
-      currentPage.value = newPage;
-    };
+    const onPageChanged = (newPage) => ( currentPage.value = newPage );
 
     const paginatedReviews = computed(() => {
       const start = (currentPage.value - 1) * itemsPerPage.value;

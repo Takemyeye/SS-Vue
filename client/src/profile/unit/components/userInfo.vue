@@ -22,9 +22,7 @@ export default {
   setup() {
     const { user } = useUserStore();
 
-    const userEmail = computed(() => {
-      return user.value?.email || '';
-    });
+    const userEmail = computed(() => user.value?.email || '');
 
     return {
       userEmail,

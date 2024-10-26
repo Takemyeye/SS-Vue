@@ -61,17 +61,9 @@ export default {
     const { user, clearUser } = useUserStore();
     const isBarOpen = ref(false);
 
-    const handleError = (errorMessage) => {
-      emit('error', errorMessage);
-    };
-
-    const toggleBar = () => {
-      isBarOpen.value = !isBarOpen.value;
-    };
-
-    const logout = () => {
-      clearUser();
-    };
+    const handleError = (errorMessage) => emit('error', errorMessage);
+    const toggleBar = () => (isBarOpen.value = !isBarOpen.value);
+    const logout = clearUser;
 
     //User 
     const avatarUrl = computed(() => user.value?.avatar || '');

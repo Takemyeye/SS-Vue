@@ -26,11 +26,9 @@ export default {
     },
     setup() {
         const { user } = useUserStore();
-
+        
         const isBarOpen = ref(false);
-        const userBio = computed(() => {
-              return user.value?.bio || 'No bio available';
-          });
+        const userBio = computed(() => user.value?.bio || 'No bio available');
 
         const toggleBar = () => {
             isBarOpen.value = !isBarOpen.value;
