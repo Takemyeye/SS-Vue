@@ -8,7 +8,7 @@ export default function useMessengerStore() {
 
   // Получение аватара пользователя из хранилища
   const { user } = useUserStore();
-  const avatarUrl = computed(() => (user.value && user.value.avatar ? user.value.avatar : ''));
+  const avatarUrl = computed(() => user.value?.avatar || '');
 
   // Функция для получения сообщений с сервера
   const fetchMessages = async () => {

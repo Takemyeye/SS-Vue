@@ -61,29 +61,14 @@ export default {
     const { user, clearUser } = useUserStore();
     const isBarOpen = ref(false);
 
-    const handleError = (errorMessage) => {
-      emit('error', errorMessage);
-    };
+    const handleError = (errorMessage) => emit('error', errorMessage);
+    const toggleBar = () => (isBarOpen.value = !isBarOpen.value);
+    const logout = clearUser;
 
-    const toggleBar = () => {
-      isBarOpen.value = !isBarOpen.value;
-    };
-
-    const logout = () => {
-      clearUser();
-    };
-
-    const avatarUrl = computed(() => {
-      return user.value?.avatar || '';
-    });
-
-    const userName = computed(() => {
-      return user.value?.username || '';
-    });
-
-    const userNick = computed(() => {
-      return user.value?.nickname ? `@${user.value.nickname}` : '@username';
-    });
+    //User 
+    const avatarUrl = computed(() => user.value?.avatar || '');
+    const userName = computed(() => user.value?.username || '');
+    const userNick = computed(() => user.value?.nickname ? `@${user.value.nickname}` : '@username');
 
     const copyText = (text) => {
       navigator.clipboard.writeText(text)

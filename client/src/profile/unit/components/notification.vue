@@ -97,10 +97,6 @@ export default {
   .settings {
     position: relative;
     width: 55%;
-    display: flex;
-    align-items: start;
-    justify-content: center;
-    flex-direction: column;
     overflow: hidden;
     padding: 2rem 2.5%;
     border-radius: 8px;
@@ -108,12 +104,15 @@ export default {
     gap: 1rem;
   }
 
-  .text {
-    width: 100%;
+  .settings, .text {
     display: flex;
     align-items: start; 
     justify-content: center;
     flex-direction: column;
+  }
+
+  .text {
+    width: 100%;
     border-bottom: 1px solid rgba(0, 0, 0, 0.205);
     padding: 8px 0;
     gap: 8px;

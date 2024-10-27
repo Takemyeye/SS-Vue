@@ -82,10 +82,13 @@ h5 {
     width: 60%;
     gap: 8px;
   }
+  h5 {
+    padding: 4px 8px;
+  }
 }
 @media all and (max-width: 500px) {
   .settings {
-    width: 100%;
+    width: 90%;
     gap: 8px;
   }
 }

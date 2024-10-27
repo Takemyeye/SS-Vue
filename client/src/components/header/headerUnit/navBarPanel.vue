@@ -37,12 +37,7 @@ export default {
     const isDropdownOpen = ref(false);
     const token = localStorage.getItem('token');
 
-    const avatarUrl = computed(() => {
-      if (user.value && user.value.avatar) {
-        return user.value.avatar; 
-      }
-      return ''; 
-    });
+    const avatarUrl = computed(() => user.value?.avatar || '');
 
     const fetchUser = async (token) => {
       try {

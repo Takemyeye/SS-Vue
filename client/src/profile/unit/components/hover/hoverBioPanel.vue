@@ -47,9 +47,7 @@ import { computed, ref } from 'vue';
           const { user } = useUserStore();
           const newBio = ref('');
           
-          const userBio = computed(() => {
-              return user.value?.bio || 'No bio available';
-          });
+          const userBio = computed(() => user.value?.bio || 'No bio available');
   
           const bioLength = computed(() => newBio.value.length);
   
