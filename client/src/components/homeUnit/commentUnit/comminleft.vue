@@ -108,15 +108,17 @@ export default {
 </script>
 
 <style scoped>
-   .commit-panel {
-    width: 50%;
+  .commit-panel, .commit {
     display: flex;
     align-items: start;
+  }
+   .commit-panel {
+    width: 50%;
     justify-content: start;
     flex-direction: column;
     gap: 2rem;
   }
-  .text {
+  .text, .container {
     display: flex;
     align-items: start;
     justify-content: center;
@@ -125,16 +127,9 @@ export default {
   }
   .commit {
     width: 100%;
-    display: flex;
-    justify-content: start;
   }
   .container {
     width: 100%;
-    display: flex;
-    align-items: start;
-    justify-content: center;
-    flex-direction: column;
-    gap: 8px;
   }
   textarea {
     border: 1px solid rgba(0, 0, 0, 0.267);

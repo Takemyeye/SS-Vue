@@ -22,7 +22,6 @@
 import CallOfNightArt from './shopUnit/CallOfNightArt.vue';
 import SiteHeader from '@/components/header/header.vue';
 import TopBar from '@/components/homeUnit/topBar.vue';
-import { isTokenAvailable } from '@/utils/authUtils';
 import useImageStore from '@/stores/useImageStore';
 import CatalogBlock from './shopUnit/catalog.vue';
 import { ref, onMounted, computed } from 'vue';
@@ -51,7 +50,9 @@ export default {
   },
   setup() {
     const { filteredImages, fetchImages, hasImagesInCache, filterImagesByCategory } = useImageStore();
-    const tokenExists = isTokenAvailable();
+    
+    const tokenExists = ref(!!localStorage.getItem('token'));
+
     const activeCategory = ref('All');
 
     const categoryComponents = {
@@ -64,34 +65,32 @@ export default {
     };
 
     const categoryNames = {
-      'All': 'All',
-      'JJK': 'Jujutsu Kaisen',
-      'FF': 'Fire Force',
-      'CON': 'Call of Night',
-      'MHA': 'My Hero Academia',
-      'SD': 'Sakamoto Days',
+      All: 'All',
+      JJK: 'Jujutsu Kaisen',
+      FF: 'Fire Force',
+      CON: 'Call of Night',
+      MHA: 'My Hero Academia',
+      SD: 'Sakamoto Days',
     };
 
-    const activeCategoryName = computed(() => {
-      return categoryNames[activeCategory.value] || 'All';
-    });
+    const activeCategoryName = computed(() => categoryNames[activeCategory.value] || 'All');
 
     const loading = ref(true);
 
     const loadImages = async () => {
-      loading.value = true; 
-      if (!hasImagesInCache()) { 
-        await fetchImages(); 
+      loading.value = true;
+      if (!hasImagesInCache()) {
+        await fetchImages();
       } else {
-        filterImagesByCategory(); 
+        filterImagesByCategory();
       }
 
-      await new Promise(resolve => setTimeout(resolve, 2000)); 
-      loading.value = false; 
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      loading.value = false;
     };
 
     onMounted(() => {
-      loadImages(); 
+      loadImages();
     });
 
     const handleCategorySelected = (category) => {
