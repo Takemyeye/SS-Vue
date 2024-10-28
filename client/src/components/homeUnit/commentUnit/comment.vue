@@ -69,13 +69,15 @@ export default {
     z-index: 1;
     gap: 2rem;
   }
-  .user {
-    width: 100%;
+  .user, text {
     display: flex;
     align-items: center;
+    gap: 8px;
+  }
+  .user {
+    width: 100%;
     justify-content: space-between;
     flex-direction: row;
-    gap: 8px;
   }
   img {
     width: 36px;
@@ -83,11 +85,8 @@ export default {
     border-radius: 30px;
   }
   .text {
-    display: flex;
-    align-items: center;
     justify-content: center;
     flex-direction: row;
-    gap: 8px;
   }
   .messeng {
     width: 100%;

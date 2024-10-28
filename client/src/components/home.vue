@@ -1,31 +1,28 @@
 <template>
-
-  <SiteHeader/> 
+  <SiteHeader /> 
   <main>
-    <ContactUs v-if="tokenExists"/>
+    <ContactUs v-if="tokenExists" />
     <TopBar />
-    <FeaturedPanel/>
-    <FaqBlock/>
-    <CommentBlock/>
-    <EmailPanel/>
-    <OurProcess/>
+    <FeaturedPanel />
+    <FaqBlock />
+    <CommentBlock />
+    <EmailPanel />
+    <OurProcess />
   </main>
-  <SiteFooter/>
-  
+  <SiteFooter />
 </template>
 
 <script>
-  import CommentBlock from './homeUnit/commentBlock.vue';
-  import { isTokenAvailable } from '@/utils/authUtils';
-  import FeaturedPanel from './homeUnit/featured.vue';
-  import EmailPanel from './homeUnit/emailPanel.vue';
-  import OurProcess from './homeUnit/ourPeocess.vue';
-  import FaqBlock from './homeUnit/faqBlock.vue';
-  import ContactUs from '@/services/contact.vue';
-  import SiteHeader from './header/header.vue';
-  import SiteFooter from './footer/footer.vue';
-  import TopBar from './homeUnit/topBar.vue';
-  import { ref } from 'vue';
+import CommentBlock from './homeUnit/commentBlock.vue';
+import FeaturedPanel from './homeUnit/featured.vue';
+import EmailPanel from './homeUnit/emailPanel.vue';
+import OurProcess from './homeUnit/ourPeocess.vue';
+import FaqBlock from './homeUnit/faqBlock.vue';
+import ContactUs from '@/services/contact.vue';
+import SiteHeader from './header/header.vue';
+import SiteFooter from './footer/footer.vue';
+import TopBar from './homeUnit/topBar.vue';
+import { ref, onMounted } from 'vue';
 
   export default {
     name: 'HomePage',
@@ -39,16 +36,19 @@
       ContactUs,
       FaqBlock,
       TopBar,
-    },
-    setup() {
-      const tokenExists = ref(isTokenAvailable());
+  },
+  setup() {
+    const tokenExists = ref(false);
 
-      return {
-        tokenExists
-      }
-    }
-  };
+    onMounted(() => {
+      tokenExists.value = !!localStorage.getItem('token');
+    });
 
+    return {
+      tokenExists
+    };
+  }
+};
 </script>
 
 <style>
@@ -67,8 +67,3 @@
   }
 
 </style>
-
-  <!--    
-    <router-link :to="{ name: 'Home' }"> <h1>Home</h1></router-link>
-    <router-link :to="{ name: 'About' }"> <h1>About</h1></router-link>
-  -->

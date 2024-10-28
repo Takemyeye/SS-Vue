@@ -7,15 +7,13 @@
       :name="`@${comment.user.username}`" 
       :comment="comment.comment"
     />
-
     <UiPagination
       v-if="totalReviews > itemsPerPage" 
-      style="position: absolute; bottom: -6rem; right: 0; border: none;"
+      style="position: absolute; bottom: -6rem; right: 0; border:none;"
       :total-items="totalReviews" 
       :items-per-page="itemsPerPage" 
       :default-page="currentPage" 
-      :scroll-to-top="false"
-      @page-changed="onPageChanged"
+      @page-changed="page => currentPage = page"
     />
   </div>
 </template>
@@ -27,46 +25,34 @@ import CommentUnit from './comment.vue';
 
 export default {
   name: 'CommentPanel',
-  components: {
-    CommentUnit,
-    UiPagination,
-  },
+  components: { CommentUnit, UiPagination },
   setup() {
     const reviews = ref([]);
-    const totalReviews = ref(0);
-    const currentPage = ref(1); 
-    const itemsPerPage = ref(4);
+    const currentPage = ref(1);
+    const itemsPerPage = 4;
 
     const fetchReviews = async () => {
       try {
         const response = await fetch('http://localhost:3000/api/reviews');
-        const data = await response.json();
-        reviews.value = data;
-        totalReviews.value = reviews.value.length;
+        reviews.value = await response.json();
       } catch (error) {
         console.error('Error fetching reviews:', error);
       }
     };
 
-    const onPageChanged = (newPage) => {
-      currentPage.value = newPage;
-    };
-
     const paginatedReviews = computed(() => {
-      const start = (currentPage.value - 1) * itemsPerPage.value;
-      const end = start + itemsPerPage.value;
-      return reviews.value.slice(start, end);
+      const start = (currentPage.value - 1) * itemsPerPage;
+      return reviews.value.slice(start, start + itemsPerPage);
     });
 
-    onMounted(fetchReviews); 
+    onMounted(fetchReviews);
 
     return {
       reviews,
-      totalReviews,
       currentPage,
       itemsPerPage,
-      onPageChanged,
       paginatedReviews,
+      totalReviews: computed(() => reviews.value.length),
     };
   },
 };
