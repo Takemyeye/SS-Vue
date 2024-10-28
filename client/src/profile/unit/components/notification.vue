@@ -13,6 +13,7 @@
         @switch-change="updateNotificationPreference"
       />
       <NotificationUnit
+        style="display: none;"
         title="Order notifications"
         subtitle="Receive notifications about your order status"
         toggleId="orderNotifications"

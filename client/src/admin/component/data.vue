@@ -14,7 +14,7 @@
           style="cursor: pointer;"
           :styleBadge="`badge3`"
           :title="`Checked`"
-          @click="updateOrderStatus(order._id, 'Checked')">
+          @click="updateOrderStatus(order.orderId, 'Checked', order.token, order.totalPrice)">
           <font-awesome-icon icon="check" style="color: hsl(174, 90%, 41%); font-size: small;" />
         </UiBadge>
         <UiBadge 
@@ -28,7 +28,7 @@
           style="cursor: pointer;"
           :styleBadge="`badge4`"
           :title="`Delete`"
-          @click="deleteOrder(order.token, order.createdAt)">
+          @click="deleteOrder(order.orderId)">
           <font-awesome-icon icon="trash" style="color: hsl(358, 100%, 69%); font-size: small;" />
         </UiBadge>
       </div>
@@ -71,23 +71,24 @@ export default {
       }
     };
 
-    const deleteOrder = async (token, createdAt) => {
-      try {
-        const response = await fetch(`http://localhost:3000/api/orders/${token}/${createdAt}`, {
-          method: 'DELETE',
+  const deleteOrder = async (orderId) => {
+    try {
+        const response = await fetch(`http://localhost:3000/api/orders/${orderId}`, {
+            method: 'DELETE',
         });
 
         if (response.ok) {
-          orders.value = orders.value.filter(order => !(order.token === token && order.createdAt === createdAt));
+            orders.value = orders.value.filter(order => order.orderId !== orderId);
         } else {
-          console.error('Error deleting order');
+            const errorData = await response.json();
+            console.error('Error deleting order:', errorData);
         }
-      } catch (error) {
+    } catch (error) {
         console.error('Error deleting order:', error);
-      }
-    };
+    }
+  };
 
-    const updateOrderStatus = async (orderId, newStatus) => {
+    const updateOrderStatus = async (orderId, newStatus, token, totalPrice) => {
       try {
         const response = await fetch(`http://localhost:3000/api/orders/${orderId}`, {
           method: 'PUT',
@@ -97,11 +98,25 @@ export default {
 
         if (response.ok) {
           await fetchOrders();
+
+          const notifyResponse = await fetch(`http://localhost:3001/ntt/notify`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              orderId: orderId,
+              token: token, 
+              totalPrice: totalPrice,
+            }),
+          });
+
+        if (!notifyResponse.ok) {
+          console.error('хуй выпал при отправке ');
+        }
         } else {
-          console.error('Ошибка при обновлении статуса заказа');
+          console.error('хуй остался при обновлении');
         }
       } catch (error) {
-        console.error('Ошибка при обновлении статуса заказа:', error);
+        console.error('я ебу', error);
       }
     };
 

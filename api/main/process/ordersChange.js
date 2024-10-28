@@ -42,29 +42,29 @@ router.get('/orders/count', async (req, res) => {
   }
 });
 
-router.delete('/orders/:token/:createdAt', async (req, res) => {
-  const { token, createdAt } = req.params;
+router.delete('/orders/:orderId', async (req, res) => {
+  const { orderId } = req.params;
 
-  if (!token || !createdAt) {
-    return res.status(400).json({ message: 'Token and createdAt are required' });
+  if (!orderId) {
+      return res.status(400).json({ message: 'Order ID is required' });
   }
 
   try {
-    const result = await Order.deleteOne({ token, createdAt: new Date(createdAt) });
+      const result = await Order.deleteOne({ orderId });
 
-    if (result.deletedCount === 0) {
-      return res.status(404).json({ message: 'Order not found' });
-    }
+      if (result.deletedCount === 0) {
+          return res.status(404).json({ message: 'Order not found' });
+      }
 
-    res.status(200).json({ message: 'Order deleted successfully' });
+      res.status(200).json({ message: 'Order deleted successfully' });
   } catch (err) {
-    console.error('Ошибка при удалении заказа:', err);
-    res.status(500).json({ error: 'Ошибка сервера при удалении заказа' });
+      console.error('Ошибка при удалении заказа:', err);
+      res.status(500).json({ error: 'Ошибка сервера при удалении заказа' });
   }
 });
 
-router.put('/orders/:id', async (req, res) => {
-  const { id } = req.params;
+router.put('/orders/:orderId', async (req, res) => {
+  const { orderId } = req.params;
   const { status } = req.body;
 
   if (!status) {
@@ -72,8 +72,8 @@ router.put('/orders/:id', async (req, res) => {
   }
 
   try {
-    const order = await Order.findByIdAndUpdate(
-      id,
+    const order = await Order.findOneAndUpdate(
+      { orderId: orderId }, 
       { process: status },
       { new: true }
     );

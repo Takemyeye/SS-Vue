@@ -8,6 +8,7 @@ mongoose.connect(process.env.MONGO_URI, {
   useUnifiedTopology: true,
 });
 
+// Настройка nodemailer
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -18,30 +19,28 @@ const transporter = nodemailer.createTransport({
 
 const sendMarketingEmail = async (email) => {
   const mailOptions = {
-    from: 'mellovan2005@gmail.com',
+    from: process.env.EMAIL_USER,
     to: email,
     subject: 'Discover Stunning Art!',
-    text: `
-    Hello!
+    text: `Hello!
 
-    Are you a fan of manga and anime? We have something special just for you! 
+Are you a fan of manga and anime? We have something special just for you!
 
-    At SoulSwap, we offer a unique collection of beautifully crafted art pieces inspired by your favorite series. From vibrant prints to exclusive limited editions, our artwork captures the essence of the worlds you love.
+At SoulSwap, we offer a unique collection of beautifully crafted art pieces inspired by your favorite series. From vibrant prints to exclusive limited editions, our artwork captures the essence of the worlds you love.
 
-    ✨ **Why Choose Our Art?**
-    - High-quality prints on premium paper
-    - Unique designs created by talented artists
-    - Perfect for home decor, gifts, or personal collections
+✨ **Why Choose Our Art?**
+- High-quality prints on premium paper
+- Unique designs created by talented artists
+- Perfect for home decor, gifts, or personal collections
 
-    Explore our collection and find the perfect piece to elevate your space. Don't miss out on exclusive offers and new arrivals—subscribe to our newsletter!
+Explore our collection and find the perfect piece to elevate your space. Don't miss out on exclusive offers and new arrivals—subscribe to our newsletter!
 
-    Visit us at [your website link] to browse our gallery.
+Visit us at https://soulswap.store to browse our gallery.
 
-    Thank you for supporting local artists!
+Thank you for supporting local artists!
 
-    Best regards,
-    The SoulSwap Team
-    `,
+Best regards,
+The SoulSwap Team`,
   };
 
   try {
@@ -52,48 +51,27 @@ const sendMarketingEmail = async (email) => {
   }
 };
 
-/*
-const sendOrderNotification = async (email) => {
+const sendOrderNotification = async (email, orderId, totalPrice) => {
   const mailOptions = {
-    from: 'mellovan2005@gmail.com',
+    from: process.env.EMAIL_USER,
     to: email,
-    subject: 'Your Order Notification from SoulSwap',
-    text: 'Хуй и Дилдо доставленны',
+    subject: `Order Confirmation #${orderId} from SoulSwap`,
+    text: `Dear Valued Customer,
+
+We are excited to inform you that your order #${orderId} has been reviewed and approved! The total price of your order is $${totalPrice}. Thank you for choosing SoulSwap; we truly appreciate your support.
+
+If you have any questions about your order or need further assistance, please feel free to reach out to us. We're here to help!
+
+Warm regards,
+The SoulSwap Team`,
   };
 
   try {
     await transporter.sendMail(mailOptions);
+    console.log(`Order notification sent to ${email}`);
   } catch (error) {
-    console.error(`Ошибка отправки уведомления о заказе на ${email}:`, error);
-  }
-};
-*/
-
-const sendEmails = async () => {
-  try {
-    const users = await Notification.find({});
-
-    await Promise.all(users.map(async (user) => {
-      const { email, marketingEmails, orderNotifications } = user;
-
-      const tasks = [];
-
-      if (marketingEmails) {
-        tasks.push(sendMarketingEmail(email));
-      }
-
-/*
-  if (orderNotifications) {
-    tasks.push(sendOrderNotification(email));
-  }
-*/
-
-      await Promise.all(tasks);
-    }));
-    
-  } catch (error) {
-    console.error('Ошибка получения пользователей или отправки писем:', error);
+    console.error(`Error sending order notification to ${email}:`, error);
   }
 };
 
-setInterval(sendEmails, 24 * 60 * 60 * 1000); 
+module.exports = { sendMarketingEmail, sendOrderNotification };

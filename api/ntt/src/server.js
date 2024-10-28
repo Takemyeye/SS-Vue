@@ -1,3 +1,4 @@
+const notify = require('./routes/notifyRoutes');
 const connectDB = require('./data/db');
 const express = require('express');
 const cors = require('cors');
@@ -22,11 +23,12 @@ app.use(cors({
 }));
 
 app.use('/ntt', notificationRoutes);
+app.use('/ntt', notify);
 
 require('./notification/autoSendEmails');
 
 app.get('/', (req, res) => {
-  res.send('<h1>Server is running on http://localhost:3000</h1>');
+  res.send('<h1>Server is running on http://localhost:3001</h1>');
 });
 
 app.listen(port, () => {
