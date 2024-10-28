@@ -4,7 +4,10 @@
     <CatalogOrders @sort-orders="sortOrders" />
     <div v-for="(order) in sortedOrders" :key="order._id" class="order-item">
       <div class="information">
-        <h2 style="padding: 2.5rem 0">Order - {{ formatDate(order.createdAt) }}</h2>
+        <div class="order-data-id">
+          <h2>Order - {{ formatDate(order.createdAt) }}</h2> 
+          <h5> ID {{order.orderId}} </h5>
+        </div>
         <h3>Total Price: {{ getTotalPrice(order.cartItems).toFixed(2) }} $</h3>
         <div class="version">
           <h5 v-if="order.digital == true">Digital</h5>
@@ -112,6 +115,13 @@ export default {
     justify-content: start;
     flex-direction: column;
     gap: 8px;
+}
+
+.order-data-id {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2.5rem 0;
 }
 
 .wrapper {

@@ -16,8 +16,11 @@ export default {
   },
   computed: {
     formattedDate() {
-      const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
-      return new Date(this.createdAt).toLocaleDateString(undefined, options);
+      const date = new Date(this.createdAt);
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      const year = date.getFullYear();
+      return `${month}/${day}/${year}`;
     },
   },
 };

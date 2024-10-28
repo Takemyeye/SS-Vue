@@ -1,8 +1,26 @@
 const express = require('express');
+const crypto = require('crypto');
 const Order = require('./models/Order');
 require('dotenv').config();
 
 const router = express.Router();
+
+// Funcion for generate UniqueId
+function generateUniqueId() {
+  return crypto.randomBytes(4).toString('hex'); // Hex id
+}
+
+async function generateUniqueOrderId() {
+  let orderId;
+  let orderExists = true;
+
+  while (orderExists) {
+    orderId = generateUniqueId(); // generate ID
+    orderExists = await Order.findOne({ orderId }); // check ID
+  }
+
+  return orderId;
+}
 
 router.post('/userCart', async (req, res) => {
   const { token, cartItems, totalPrice, country, digital } = req.body;
@@ -16,12 +34,15 @@ router.post('/userCart', async (req, res) => {
   }
 
   try {
+    const orderId = await generateUniqueOrderId();
+
     const newOrder = new Order({
       token,
       digital,
       country,
       cartItems,
       totalPrice,
+      orderId,
     });
 
     await newOrder.save();

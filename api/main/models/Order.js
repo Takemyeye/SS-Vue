@@ -8,6 +8,7 @@ const OrderSchema = new mongoose.Schema({
   totalPrice: { type: Number, required: true },
   createdAt: { type: Date, default: Date.now },
   process: { type: String, default: 'Processing' },
+  orderId: { type: String, require: true }
 });
 
 const Order = mongoose.model('Order', OrderSchema);

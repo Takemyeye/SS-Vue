@@ -7,11 +7,9 @@
       <OrderPrice :totalPrice="order.totalPrice" />
       <OrderCountry :country="order.country" />
       <OrderDate :createdAt="order.createdAt" />
-      <OrderUser 
-        :userAvatar="order.userAvatar" 
-        :userName="order.userName" 
-        :userEmail="order.userEmail" />
+      <OrderUser :userAvatar="order.userAvatar" :userName="order.userName" :userEmail="order.userEmail" />
       <div class="badge-block">
+        <h2>{{ order.orderId }}</h2>
         <UiBadge 
           style="cursor: pointer;"
           :styleBadge="`badge3`"
