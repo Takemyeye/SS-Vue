@@ -8,7 +8,7 @@ const clearUserFromServer = async () => {
   if (!state.token) return;
 
   try {
-    await fetch('https://soulswap.store/api/current_user', {
+    await fetch('https://soulswap.store /api/current_user', {
       method: 'DELETE',
       headers: {
         Authorization: `Bearer ${state.token}`,

@@ -19,7 +19,7 @@ const fetchImages = async () => {
 
 
   try {
-    const response = await fetch('https://soulswap.store/api/images');
+    const response = await fetch('https://soulswap.store /api/images');
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }

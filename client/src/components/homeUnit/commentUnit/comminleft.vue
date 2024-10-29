@@ -70,7 +70,7 @@ export default {
       const token = localStorage.getItem('token');
 
       try {
-        const response = await fetch('https://soulswap.store/api/reviews', {
+        const response = await fetch('https://soulswap.store /api/reviews', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

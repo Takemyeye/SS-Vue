@@ -48,7 +48,7 @@ export default {
       try {
         const token = localStorage.getItem('token');
 
-        const response = await fetch('http://localhost:3001/ntt/user/notifications', {
+        const response = await fetch('https://soulswap.store/ntt/user/notifications', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`
@@ -69,7 +69,7 @@ export default {
       try {
         const token = localStorage.getItem('token');
 
-        const response = await fetch('http://localhost:3001/ntt/user/notifications', {
+        const response = await fetch('https://soulswap.store/ntt/user/notifications', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
