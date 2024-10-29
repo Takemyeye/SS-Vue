@@ -104,7 +104,7 @@ export default {
       const createdAt = new Date().toISOString();
 
       try {
-        const response = await fetch('https://soulswap.store /api/userCart', {
+        const response = await fetch('https://soulswap.store/api/userCart', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(cors({
-  origin: ['https://soulswap.store', 'https://soulswap.store '],
+  origin: ['http://localhost:8080', 'https://soulswap.store'],
   methods: ['*'],
   allowedHeaders: ['*'],
 }));

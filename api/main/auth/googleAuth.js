@@ -34,9 +34,9 @@ router.get('/auth/google/callback', passport.authenticate('google', { session: f
     });
 
     await newUser.save();
-    res.redirect(`https://soulswap.store ?token=${token}`);
+    res.redirect(`https://soulswap.store?token=${token}`);
   } else {
-    res.redirect(`https://soulswap.store ?token=${existingUser.token}`);
+    res.redirect(`https://soulswap.store?token=${existingUser.token}`);
   }
 });
 
