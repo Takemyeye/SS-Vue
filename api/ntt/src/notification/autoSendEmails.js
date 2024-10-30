@@ -56,16 +56,74 @@ const sendOrderNotification = async (email, orderId, totalPrice) => {
     from: process.env.EMAIL_USER,
     to: email,
     subject: `Order Confirmation #${orderId} from SoulSwap`,
-    text: `Dear Valued Customer,
-
-We are excited to inform you that your order #${orderId} has been reviewed and approved! The total price of your order is $${totalPrice}. Thank you for choosing SoulSwap; we truly appreciate your support.
-
-If you have any questions about your order or need further assistance, please feel free to reach out to us. We're here to help!
-
-Warm regards,
-The SoulSwap Team`,
+    html: `
+    <!DOCTYPE html>
+    <html lang="">
+      <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <title>Soul Swap</title>
+       <style>
+        body {
+            width: 100%;
+            font-family: 'Trebuchet MS', Helvetica, sans-serif;
+            margin: 0;
+        }
+        header {
+          width: 100%;
+          text-alight: center;
+          padding: 0 1rem;
+        }
+        footer {
+          width: 100%;
+          border-top: 1px solid rgba(0, 0, 0, 0.315);
+          padding: 0 1rem;
+          border-radius: 8px;
+          text-alight: center;
+        }
+        .text {
+          display: flex;
+          align-items: start;
+          justify-content: space-between;
+          flex-direction: row;
+        }
+        main {
+          width: 100%;
+          padding:0 1rem;
+          display: flex;
+          align-items: start;
+          justify-content: center;
+          flex-direction: column;
+          gap: 8px;
+        }
+       </style>
+      </head>
+      <body>
+        <main>
+          <header>
+            <h2>Order Confirmation</h2>
+          </header>
+          <div class="text">
+            <div class="badge">Order ID: </div>
+            <span>${orderId}</span>
+          </div>
+          <div class="text">
+            <div class="badge">Total Price: </div>
+            <span>$${totalPrice}</span>
+          </div>
+          <div class="container">
+            <h4>Thank you for choosing SoulSwap we truly appreciate your support.</h4>
+            <h4>If you have any questions about your order or need further assistance, please feel free to reach out to us. We're here to help!</h4>
+            <h5>Warm regards,</h5>
+            <h5>The SoulSwap Team</h5>
+            <footer>
+              &copy; ${new Date().getFullYear()} SoulSwap. All rights reserved.
+            </footer>
+          </div>
+        </main>
+      </body>
+    </html>`,
   };
-
   try {
     await transporter.sendMail(mailOptions);
     console.log(`Order notification sent to ${email}`);

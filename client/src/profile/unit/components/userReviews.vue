@@ -49,7 +49,7 @@ export default {
 
     const fetchReviews = async () => {
       try {
-        const response = await fetch(`https://soulswap.store/api/reviews/${token}`);
+        const response = await fetch(`http://localhost:3000/api/reviews/${token}`);
         const data = await response.json();
         reviews.value = data;
         totalReviews.value = reviews.value.length;
@@ -60,7 +60,7 @@ export default {
 
     const deleteReview = async (reviewId) => {
       try {
-        const response = await fetch(`https://soulswap.store/api/reviews/${reviewId}`, {
+        const response = await fetch(`http://localhost:3000/api/reviews/${reviewId}`, {
           method: 'DELETE',
           headers: {
             'Authorization': `Bearer ${token}`,

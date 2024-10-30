@@ -36,13 +36,13 @@ export default {
           buttonClass: "auth-1"
         },
         {
-          authUrl: "https://soulswap.store/api/auth/google",
+          authUrl: "http://localhost:3000/api/auth/google",
           icon: "fa-brands fa-google",
           text: "LogIn with Google",
           buttonClass: "auth-2"
         },
         {
-          authUrl: "https://soulswap.store/api/auth/github",
+          authUrl: "http://localhost:3000/api/auth/github",
           icon: "fa-brands fa-github",
           text: "LogIn with GitHub",
           buttonClass: "auth-3"
