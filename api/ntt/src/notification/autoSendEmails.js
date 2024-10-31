@@ -51,79 +51,119 @@ The SoulSwap Team`,
   }
 };
 
-const sendOrderNotification = async (email, orderId, totalPrice) => {
+const sendOrderNotification = async (email, orderId = "123456", totalPrice = "99.99") => {
   const mailOptions = {
     from: process.env.EMAIL_USER,
     to: email,
     subject: `Order Confirmation #${orderId} from SoulSwap`,
     html: `
     <!DOCTYPE html>
-    <html lang="">
+    <html lang="en">
       <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-       <title>Soul Swap</title>
-       <style>
-        body {
-            width: 100%;
-            font-family: 'Trebuchet MS', Helvetica, sans-serif;
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Soul Swap</title>
+        <style>
+          * {
+            padding: 0;
             margin: 0;
-        }
-        header {
-          width: 100%;
-          text-alight: center;
-          padding: 0 1rem;
-        }
-        footer {
-          width: 100%;
-          border-top: 1px solid rgba(0, 0, 0, 0.315);
-          padding: 0 1rem;
-          border-radius: 8px;
-          text-alight: center;
-        }
-        .text {
-          display: flex;
-          align-items: start;
-          justify-content: space-between;
-          flex-direction: row;
-        }
-        main {
-          width: 100%;
-          padding:0 1rem;
-          display: flex;
-          align-items: start;
-          justify-content: center;
-          flex-direction: column;
-          gap: 8px;
-        }
-       </style>
+          }
+          a {
+            color: inherit;
+            text-decoration: none;
+          }
+          body {
+            background-color: #e1ebff; /* Цвет фона всего письма */
+            padding: 2rem 0;
+            font-family: "Comfortaa", sans-serif;
+          }
+          .container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            background-color: #ffffff; /* Белый фон для контейнера */
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          }
+          header {
+            text-align: center;
+            margin-bottom: 24px;
+          }
+          h2 {
+            color: hsl(210, 100%, 66%);
+            font-size: 24px;
+          }
+          .badge {
+            padding: 4px 6px;
+            border-radius: 12px;
+            background-color: hsl(214, 59%, 15%);
+            color: hsl(210, 100%, 66%);
+            display: inline-block;
+            margin-right: 8px;
+          }
+          .text {
+            font-size: 18px;
+          }
+          .footer {
+            text-align: center;
+            font-size: 12px;
+            color: gray;
+            margin-top: 20px;
+          }
+          .btn {
+            display: block;
+            width: 100%;
+            background-color: rgb(33, 33, 33);
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-bottom: 12px;
+          }
+        </style>
       </head>
       <body>
-        <main>
+        <div class="container">
           <header>
+            <img src="https://firebasestorage.googleapis.com/v0/b/cdnss-bb3ff.appspot.com/o/logo.png?alt=media&token=57f5b10b-3de2-4761-b191-df053de65ffa" alt="SoulSwap Logo" style="width: 100px; height: auto; margin-bottom: 16px;" />
             <h2>Order Confirmation</h2>
           </header>
-          <div class="text">
-            <div class="badge">Order ID: </div>
-            <span>${orderId}</span>
+          
+          <h3 style="text-align: center;">Thank you for choosing SoulSwap; we truly appreciate your support.</h3>
+          
+          <table width="100%" style="margin-bottom: 24px;">
+            <tr>
+              <td style="text-align: left;">
+                <span class="badge">Order ID:</span>
+                <span>#${orderId}</span>
+              </td>
+              <td style="text-align: right;">
+                <span class="badge">Total Price:</span>
+                <span>$${totalPrice}</span>
+              </td>
+            </tr>
+          </table>
+          
+          <a href="https://soulswap.store/orders" class="btn">View Order Details</a>
+          
+          <h4 style="font-size: 16px; text-align: start; font-weight: 400;">If you have any questions about your order or need further assistance, please feel free to reach out to us. We're here to help!</h4>
+          
+          <div style="text-align: right;">
+            <h5 style="font-weight: bold;">Warm regards,</h5>
+            <h5 style="font-weight: bolder; color: rgb(67, 56, 202);">The SoulSwap Team</h5>
           </div>
-          <div class="text">
-            <div class="badge">Total Price: </div>
-            <span>$${totalPrice}</span>
+          
+          <div class="footer" style="margin-top: 1rem;">
+            &copy; ${new Date().getFullYear()} SoulSwap. All rights reserved.
           </div>
-          <div class="container">
-            <h4>Thank you for choosing SoulSwap we truly appreciate your support.</h4>
-            <h4>If you have any questions about your order or need further assistance, please feel free to reach out to us. We're here to help!</h4>
-            <h5>Warm regards,</h5>
-            <h5>The SoulSwap Team</h5>
-            <footer>
-              &copy; ${new Date().getFullYear()} SoulSwap. All rights reserved.
-            </footer>
-          </div>
-        </main>
+        </div>
       </body>
     </html>`,
   };
+
   try {
     await transporter.sendMail(mailOptions);
     console.log(`Order notification sent to ${email}`);
