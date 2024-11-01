@@ -6,7 +6,8 @@
         :key="image.id"
         :src="image.image"
         :alt="image.title"
-        :title="`${image.price} €`"
+        :title="image.title"
+        :price="`${image.price} €`"
         :subtitle="image.subtitle"
         :btn="`${image.price} €`"
         :showT="false"
@@ -136,6 +137,7 @@ export default {
 }
 @media all and (max-width: 1370px) {
   .shop {
+    width: 100%;
     grid-template-columns: repeat(2, 1fr);
   }
 }

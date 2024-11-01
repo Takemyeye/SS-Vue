@@ -8,11 +8,13 @@
     <CommentBlock />
     <EmailPanel />
     <OurProcess />
+    <FavoriteDrawings />
   </main>
   <SiteFooter />
 </template>
 
 <script>
+import FavoriteDrawings from './homeUnit/recommended.vue';
 import CommentBlock from './homeUnit/commentBlock.vue';
 import FeaturedPanel from './homeUnit/featured.vue';
 import EmailPanel from './homeUnit/emailPanel.vue';
@@ -27,6 +29,7 @@ import { ref, onMounted } from 'vue';
   export default {
     name: 'HomePage',
     components: {
+      FavoriteDrawings,
       FeaturedPanel,
       CommentBlock,
       OurProcess,

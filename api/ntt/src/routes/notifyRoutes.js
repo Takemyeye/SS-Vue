@@ -1,4 +1,3 @@
-// В бэкенде
 const  { sendOrderNotification }  = require('../notification/emails/ordersEmail');
 const Notification = require('../models/UserNotification'); 
 const express = require('express');

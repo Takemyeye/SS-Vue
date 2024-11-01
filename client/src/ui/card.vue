@@ -1,15 +1,16 @@
 <template>
   <div class="card">
-    <img :src="src" :alt="alt">
+    <img :src="src" :alt="alt" />
     <div class="container">
       <div class="cardText">
         <h4>{{ title }} {{ price }}</h4>
         <h5>{{ subtitle }}</h5>
       </div>
       <UiButton 
-      :showText="showT"
-      :buttonText="btn" 
-      :showIcon="showI" 
+        v-if="showButton"
+        :showText="showT"
+        :buttonText="btn" 
+        :showIcon="showI" 
       />
     </div>
   </div>
@@ -55,6 +56,10 @@ export default {
     showI: {
       type: Boolean,
       default: false
+    },
+    showButton: {
+      type: Boolean,
+      default: true
     }
   }
 }
