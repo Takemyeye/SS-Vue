@@ -1,5 +1,5 @@
 // В бэкенде
-const { sendOrderNotification } = require('../notification/autoSendEmails');
+const  { sendOrderNotification }  = require('../notification/emails/ordersEmail');
 const Notification = require('../models/UserNotification'); 
 const express = require('express');
 const router = express.Router(); 
