@@ -76,8 +76,7 @@ export default {
 }
 
 .card:hover {
-  transform: scale(1.08);
-  z-index: 10; 
+  transform: rotate(5deg);
 }
 
 @media all and (max-width: 1680px) {
@@ -92,5 +91,4 @@ export default {
     grid-template-columns: repeat(1, 1fr);
   }
 }
-
 </style>
