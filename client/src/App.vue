@@ -44,9 +44,9 @@ h3, h4, h5 {
   color: var(--color-000);
 }
 
-h1 { font-size: clamp(18px, 2vw, 40px); }
+h1 { font-size: clamp(20px, 2vw, 40px); }
 h2 { font-size: clamp(16px, 2vw, 22px); }
-h3 { font-size: clamp(12px, 2vw, 18px); position: relative;}
+h3 { font-size: clamp(14px, 2vw, 18px); position: relative;}
 h4 { font-size: clamp(12px, 2vw, 16px); color: var(--color-000); }
 h5 { font-size: clamp(10px, 2vw, 14px); color: var(--color-000); }
 
