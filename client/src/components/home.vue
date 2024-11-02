@@ -5,6 +5,7 @@
     <TopBar />
     <FeaturedPanel />
     <FaqBlock />
+    <ArtistBlock />
     <CommentBlock />
     <EmailPanel />
     <OurProcess />
@@ -15,6 +16,7 @@
 
 <script>
 import FavoriteDrawings from './homeUnit/recommended.vue';
+import ArtistBlock from './homeUnit/artistBlock.vue';
 import CommentBlock from './homeUnit/commentBlock.vue';
 import FeaturedPanel from './homeUnit/featured.vue';
 import EmailPanel from './homeUnit/emailPanel.vue';
@@ -32,6 +34,7 @@ import { ref, onMounted } from 'vue';
       FavoriteDrawings,
       FeaturedPanel,
       CommentBlock,
+      ArtistBlock,
       OurProcess,
       SiteHeader,
       SiteFooter,

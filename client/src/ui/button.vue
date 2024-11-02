@@ -48,6 +48,7 @@ button {
 }
 
 button h3 {
+
   color: white;
   font-weight: lighter;
 }

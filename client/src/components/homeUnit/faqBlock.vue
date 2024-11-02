@@ -46,8 +46,7 @@ import FaqUnit from './FAQ/faqUnit.vue';
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background-color: rgba(197, 191, 180, 0.445);
-    padding: 3rem 0;
+    padding: 2.5rem 0;
     gap: 1rem;
   }
   .container {
