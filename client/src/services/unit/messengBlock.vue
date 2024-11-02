@@ -87,8 +87,6 @@ export default {
 }
 
 .message-text, .message-text-admin {
-    background-color: hsl(214, 59%, 15%);
-    color: hsl(210, 100%, 66%);
     font-size: clamp(10px, 2vw, 14px);
     padding: 4px 8px;
     font-weight: lighter;
@@ -97,6 +95,8 @@ export default {
 }
 
 .message-text {
+    background-color: hsl(214, 59%, 15%);
+    color: hsl(210, 100%, 66%);
     text-wrap: balance;
     overflow: hidden;
 }

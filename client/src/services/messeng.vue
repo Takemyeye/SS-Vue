@@ -20,6 +20,10 @@
 
 <style scoped>
   .messeng {
+    font-family: var(--text-font-family);
+    font-optical-sizing: var(--text-font-optical-sizing);
+    font-weight: var(--text-font-weight);
+    font-style: var(--text-font-style);
     position: fixed;
     right: 1rem;
     bottom: 1rem;

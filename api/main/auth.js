@@ -1,7 +1,7 @@
-const express = require('express');
+const User = require('./models/User');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
-const User = require('./models/User');
+const express = require('express');
 require('dotenv').config();
 
 const router = express.Router();
@@ -14,14 +14,10 @@ const generateToken = (user) => {
 const handleAuthCallback = async (req, res) => {
   const user = req.user;
   try {
-    let existingUser = await User.findOne({ 
-      id: user.id, 
-      email: user.email, 
-    });
+    let existingUser = await User.findOne({ id: user.id, provider: user.provider });
 
     if (!existingUser) {
       const token = generateToken(user);
-
       const newUser = new User({
         id: user.id,
         username: user.username,
@@ -33,7 +29,7 @@ const handleAuthCallback = async (req, res) => {
 
       try {
         await newUser.save();
-        res.redirect(`http://localhost:8080?token=${token}`);
+        return res.redirect(`http://localhost:8080?token=${token}`);
       } catch (saveErr) {
         if (saveErr.code === 11000) {
           return res.status(400).send('Пользователь с такими данными уже существует.');
@@ -42,7 +38,7 @@ const handleAuthCallback = async (req, res) => {
       }
     } else {
       const token = generateToken(existingUser);
-      res.redirect(`http://localhost:8080?token=${token}`);
+      return res.redirect(`http://localhost:8080?token=${token}`);
     }
   } catch (err) {
     console.error('Ошибка при работе с пользователями:', err);
@@ -88,6 +84,5 @@ router.get('/current_user', async (req, res) => {
     return res.status(401).json({ error: 'Неверный или истекший токен' });
   }
 });
-
 
 module.exports = router;

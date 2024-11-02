@@ -1,5 +1,6 @@
 <template>
   <SiteHeader />
+  <ContactUs v-if="tokenExists" />
   <div class="profile-page">
       <UserProfile @nickUpdated="updateUserNick" @error="showNickError" />
       <UserReviews/>
@@ -16,6 +17,8 @@ import UserReviews from './unit/components/userReviews.vue';
 import SiteHeader from '@/components/header/header.vue';
 import SiteFooter from '@/components/footer/footer.vue';
 import NickError from './unit/error/nickError.vue';
+import ContactUs from '@/services/contact.vue';
+import { ref, onMounted } from 'vue';
 
 export default {
   name: 'ProfilePage',
@@ -26,6 +29,18 @@ export default {
     SiteFooter,
     SiteHeader,
     NickError,
+    ContactUs,
+  },
+  setup() {
+    const tokenExists = ref(false);
+
+    onMounted(() => {
+      tokenExists.value = !!localStorage.getItem('token');
+    });
+
+    return {
+      tokenExists
+    };
   },
   data() {
     return {
