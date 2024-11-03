@@ -13,7 +13,6 @@
 
 <style scoped>
   .image-container {
-    width: 30%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -37,7 +36,7 @@
 
   .img {
     position: relative;
-    width: 150px;
+    max-width: 150px;
     object-fit: contain;
     transition: 0.5s ease;
   }
@@ -51,4 +50,11 @@
     transform: rotate(10deg) translateX(-100px) translateY(20px);
     z-index: 0;
   }
+
+  @media all and (max-width: 425px) {
+    .img {
+      width: 120px;
+    }
+  }
+
 </style>

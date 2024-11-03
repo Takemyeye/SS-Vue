@@ -47,11 +47,24 @@ import ImageContainer from './artistUnit/imageContainer.vue';
   .container {
     width: 60%;
     display: flex;
-    align-items: start;
-    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
     flex-direction: row;
     padding: 2rem;
     gap: 1rem;
+  }
+
+  @media all and (max-width: 1444px) {
+    .container {
+      width: 80%;
+    }
+  }
+
+  @media all and (max-width: 768px) {
+    .container {
+      flex-direction: column;
+      gap: 4rem;
+    }
   }
 
 </style>

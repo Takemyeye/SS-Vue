@@ -39,4 +39,9 @@ import UiBadge from '@/ui/badge.vue';
     flex-direction: column;
     gap: 1rem;
   }
+
+  @media all and (max-width: 1444px) {
+
+  }
+
 </style>
