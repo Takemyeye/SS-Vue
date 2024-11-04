@@ -1,13 +1,21 @@
 <template>
   <div class="image-container">
-    <img class="img img1" src="img/jjkvol1.jpg" alt="хуйло">
-    <img class="img img2" src="img/jjkvol4.jpg" alt="хуй">
+    <img class="img img1" :src="img1" alt="хуйло">
+    <img class="img img2" :src="img2" alt="хуй">
   </div>
 </template>
 
 <script>
   export default {
-    name: 'ImageContainer'
+    name: 'ImageContainer',
+    props: {
+      img1: {
+        type: String,
+      },
+      img2: {
+        type: String,
+      }
+    }
   }
 </script>
 

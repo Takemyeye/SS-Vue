@@ -3,7 +3,7 @@
     <h2>{{ name }}</h2>
     <div class="works">
       <h5>The best works:</h5>
-      <UiBadge title="Jujutsu Kaisen" styleBadge="badge4" style=" font-size: clamp(10px, 2vw, 12px);"/>
+      <UiBadge :title="manga" styleBadge="badge4" style=" font-size: clamp(10px, 2vw, 12px);"/>
     </div>
     <h3 style="font-size: clamp(14px, 2vw, 15px);">{{ text }}</h3>
     <a :href="link">
@@ -36,6 +36,10 @@ import UiBadge from '@/ui/badge.vue';
         required: true
       },
       btn: {
+        type: String,
+        required: true
+      },
+      manga: {
         type: String,
         required: true
       },
