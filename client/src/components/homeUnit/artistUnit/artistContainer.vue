@@ -1,12 +1,14 @@
 <template>
   <div class="description">
-    <h2>Gege Akutami</h2>
+    <h2>{{ name }}</h2>
     <div class="works">
       <h5>The best works:</h5>
       <UiBadge title="Jujutsu Kaisen" styleBadge="badge4" style=" font-size: clamp(10px, 2vw, 12px);"/>
     </div>
-    <h3 style="font-size: clamp(14px, 2vw, 15px);">Gege Akutami is a rising star in the manga art world, known for her ethereal style and captivating character designs. With a passion for blending traditional Japanese art with modern manga techniques, Gege's work has garnered international acclaim.</h3>
-    <UiButton style="font-weight: 400;" :buttonText="`View Gege's Collection`"/>
+    <h3 style="font-size: clamp(14px, 2vw, 15px);">{{ text }}</h3>
+    <a :href="link">
+      <UiButton style="font-weight: 400;" :buttonText="btn"/>
+    </a>
   </div>
 </template>
 
@@ -19,6 +21,24 @@ import UiBadge from '@/ui/badge.vue';
     components: {
       UiButton,
       UiBadge
+    },
+    props: {
+      name: {
+        type: String,
+        required: true
+      },
+      text: {
+        type: String,
+        required: true
+      },
+      link: {
+        type: String,
+        required: true
+      },
+      btn: {
+        type: String,
+        required: true
+      },
     }
   }
 </script>

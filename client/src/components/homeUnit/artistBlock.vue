@@ -6,7 +6,11 @@
     </div>
     <div class="container">
       <ImageContainer />
-      <ArtistContainer />
+      <ArtistContainer 
+        :name="artist[0].name"
+        :text="artist[0].description"
+        :link="artist[0].src"
+        :btn="artist[0].btntext"/>
     </div>
   </div>
 </template>
@@ -14,13 +18,19 @@
 <script>
 import ArtistContainer from './artistUnit/artistContainer.vue';
 import ImageContainer from './artistUnit/imageContainer.vue';
+import { artist } from '@/utils/artist';
 
   export default {
     name: 'ArtistBlock',
     components: {
       ArtistContainer,
       ImageContainer,
-    }
+    },
+    data() {
+      return {
+        artist,
+      };
+    },
   }
 </script>
 
