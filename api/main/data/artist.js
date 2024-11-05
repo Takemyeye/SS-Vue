@@ -1,4 +1,4 @@
-export const artist = {
+const artist = {
     gegeAkutami: {
         name: "Gege Akutami",
         description: "Gege Akutami is a rising star in the manga art world, known for her ethereal style and captivating character designs. With a passion for blending traditional Japanese art with modern manga techniques, Gege's work has garnered international acclaim.",
@@ -45,3 +45,5 @@ export const artist = {
         secondBoock: "img/sdvol17.jpg",
     }
 };
+
+module.exports = artist;

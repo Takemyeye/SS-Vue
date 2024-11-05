@@ -17,7 +17,7 @@
         :manga="selectedArtist.manga"
         :link="selectedArtist.src"
         :btn="selectedArtist.btntext" 
-        />
+      />
     </div>
   </div>
 </template>
@@ -25,7 +25,6 @@
 <script>
 import ArtistContainer from './artistUnit/artistContainer.vue';
 import ImageContainer from './artistUnit/imageContainer.vue';
-import { artist } from '@/utils/artist';
 
 export default {
   name: 'ArtistBlock',
@@ -35,23 +34,22 @@ export default {
   },
   data() {
     return {
-      artist,
       selectedArtist: null,
     };
   },
   methods: {
-    getArtistByIndex(index) {
-      const artistKeys = Object.keys(this.artist);
-      if (index >= 0 && index < artistKeys.length) {
-        const artistKey = artistKeys[index];
-        this.selectedArtist = this.artist[artistKey];
-      } else {
-        this.selectedArtist = null;
+    async fetchArtistOfTheDay() {
+      try {
+        const response = await fetch('http://localhost:3000/api/artists');
+        const artistData = await response.json();
+        this.selectedArtist = artistData;
+      } catch (error) {
+        console.error('Error для пидора:', error);
       }
     },
   },
   mounted() {
-    this.getArtistByIndex(0);
+    this.fetchArtistOfTheDay();
   },
 };
 </script>
