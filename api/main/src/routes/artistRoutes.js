@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/artists', async (req, res) => {
-  const today = new Date().toLocaleDateString('en-GB');
+  const today = new Date().toLocaleDateString('en-US');
 
   const cacheData = await client.get('artistCache');
 
