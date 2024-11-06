@@ -36,7 +36,7 @@ const routes = [
     component: ProfilePage,     
     meta: { requiresAuth: true }, 
 },
-  { path: '/shop', name: 'Shop', component: ArtShop },
+  { path: '/shop/:category?',  name: 'Shop', component: ArtShop, props: true },
   { path: '/', name: 'Home', component: HomePage },
   { 
     path: '/orders', 

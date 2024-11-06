@@ -8,23 +8,24 @@
 
       <UiLoader v-if="loading" />
 
-      <component 
-        :is="categoryComponents[activeCategory]" 
-        :key="activeCategory" 
-        v-if="filteredImages[activeCategoryName] && filteredImages[activeCategoryName]?.length" 
-        :images="loading ? [] : filteredImages[activeCategoryName]"
+      <component
+        :is="categoryComponents[activeCategory]"
+        :key="activeCategory"
+        v-if="!loading && filteredImages[activeCategoryName] && filteredImages[activeCategoryName]?.length > 0"
+        :images="filteredImages[activeCategoryName]"
       />
     </div>
   </div>
 </template>
 
 <script>
+import { watch, ref, onMounted, computed } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 import CallOfNightArt from './shopUnit/CallOfNightArt.vue';
 import SiteHeader from '@/components/header/header.vue';
 import TopBar from '@/components/homeUnit/topBar.vue';
 import useImageStore from '@/stores/useImageStore';
 import CatalogBlock from './shopUnit/catalog.vue';
-import { ref, onMounted, computed } from 'vue';
 import ContactUs from '@/services/contact.vue';
 import FfArt from './shopUnit/fireForce.vue';
 import MhaArt from './shopUnit/mhaArt.vue';
@@ -48,29 +49,33 @@ export default {
     SdArt,
     UiLoader,
   },
-  setup() {
+  props: ['category'],
+  setup(props) {
     const { filteredImages, fetchImages, hasImagesInCache, filterImagesByCategory } = useImageStore();
     
     const tokenExists = ref(!!localStorage.getItem('token'));
 
-    const activeCategory = ref('All');
+    const route = useRoute();
+    const router = useRouter();
+
+    const activeCategory = ref(props.category || 'all');
 
     const categoryComponents = {
-      All: AllArt,
-      JJK: JjkArt,
-      FF: FfArt,
-      CON: CallOfNightArt,
-      MHA: MhaArt,
-      SD: SdArt,
+      all: AllArt,
+      jjk: JjkArt,
+      ff: FfArt,
+      con: CallOfNightArt,
+      mha: MhaArt,
+      sd: SdArt,
     };
 
     const categoryNames = {
-      All: 'All',
-      JJK: 'Jujutsu Kaisen',
-      FF: 'Fire Force',
-      CON: 'Call of Night',
-      MHA: 'My Hero Academia',
-      SD: 'Sakamoto Days',
+      all: 'All',
+      jjk: 'Jujutsu Kaisen',
+      ff: 'Fire Force',
+      con: 'Call of Night',
+      mha: 'My Hero Academia',
+      sd: 'Sakamoto Days',
     };
 
     const activeCategoryName = computed(() => categoryNames[activeCategory.value] || 'All');
@@ -93,8 +98,16 @@ export default {
       loadImages();
     });
 
+    watch(() => route.params.category, (newCategory) => {
+      console.log("Новый category из URL:", newCategory);
+      if (newCategory) {
+        activeCategory.value = newCategory.toLowerCase();
+      }
+    });
+
     const handleCategorySelected = (category) => {
-      activeCategory.value = category;
+      activeCategory.value = category.toLowerCase();
+      router.push({ name: 'Shop', params: { category: category.toLowerCase() } });
     };
 
     return {
