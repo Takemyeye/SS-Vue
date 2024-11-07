@@ -12,7 +12,7 @@ export default {
 
 <style scoped>
 .container {
-  max-width: 300px;
+  width: 300px;
   display: flex;
   align-items: start;
   justify-content: center;

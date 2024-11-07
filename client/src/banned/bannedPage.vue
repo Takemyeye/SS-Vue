@@ -11,35 +11,20 @@
         <h5>To continue, please switch accounts or contact customer support.</h5>
       </div>
       <div class="container-btn">
-        <UiNewButton text="logout" @click="logout"/>
-        <UiButton buttonText="Contact Support"/>
+        <UiButton buttonText="Contact Support" style="width: 100%;"/>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import UiNewButton from '@/ui/newButton.vue';
-import useUserStore from '@/stores/userStore';
 import UiButton from '@/ui/button.vue';
 
   export default {
     name: 'BannedPage',
     components: {
-      UiNewButton,
       UiButton,
     },
-    setup() {
-      const { clearUser } = useUserStore();
-
-      const logout = () => {
-        clearUser();
-      };
-
-      return {
-        logout
-      }
-    }
   }
 </script>
 
