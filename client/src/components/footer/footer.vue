@@ -4,7 +4,7 @@
       <FooterUnit/>
     </div>
     <div class="soulswap">
-      <h5>© 2024 Manga Art Store. All rights reserved.</h5>
+      <h5>© 2024 SoulSwap. All rights reserved.</h5>
     </div>
 </footer>
 </template>
