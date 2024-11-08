@@ -1,3 +1,4 @@
+const processingNotify = require('./routes/processingNotifyRoutes');
 const registerNotify = require('./routes/registerNttRoutes');
 const notify = require('./routes/notifyRoutes');
 const connectDB = require('./data/db');
@@ -24,6 +25,7 @@ app.use(cors({
 }));
 
 app.use('/ntt', notificationRoutes);
+app.use('/ntt', processingNotify);
 app.use('/ntt', registerNotify)
 app.use('/ntt', notify);
 

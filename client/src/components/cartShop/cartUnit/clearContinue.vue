@@ -139,6 +139,24 @@ export default {
       } catch (error) {
         console.error('Error processing order:', error);
       }
+      try {
+        const processingResponse = await fetch('http://localhost:3001/ntt/processing', {
+          method: 'POST',
+          headers: {
+            'content-type' : 'application/json',
+          },
+          body: JSON.stringify({
+            token,
+          }),
+        });
+        
+        if (!processingResponse.ok) {
+          throw new Error ('Failed do processingResponse fetch');
+        }
+
+      } catch (error) {
+        console.error( `хуй быка:`, error );
+      }
     }
   },
 };
