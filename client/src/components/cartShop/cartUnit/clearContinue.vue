@@ -32,8 +32,8 @@
       style="position: absolute;"
       v-if="showBanner"
       :src="`https://firebasestorage.googleapis.com/v0/b/cdnss-bb3ff.appspot.com/o/verified.png?alt=media&token=410abf10-cf0b-4258-96e8-55e496ec1989`"
-      :title="`Processing Order`"
-      :text="`We will get in touch with you.`"
+      :title="`Notification`"
+      :text="bannerMessage"
     />
   </div>
 </template>
@@ -57,6 +57,7 @@ export default {
     return {
       bannerTimeout: null,
       showBanner: false,
+      bannerMessage: '',
       showBlock: false,
       digital: false,
       token: null,
@@ -78,6 +79,18 @@ export default {
     toggleBlock() {
       this.showBlock = !this.showBlock;
     },
+    showBannerWithMessage(message) {
+      this.bannerMessage = message;
+      this.showBanner = true;
+
+      if (this.bannerTimeout) {
+        clearTimeout(this.bannerTimeout);
+      }
+
+      this.bannerTimeout = setTimeout(() => {
+        this.showBanner = false;
+      }, 5000);
+    },
     async processOrder() {
       const token = localStorage.getItem('token');
 
@@ -88,7 +101,7 @@ export default {
 
       if (!this.country.trim()) {
         console.error('City field is empty. Cannot process order.');
-        alert('Please select your city.');
+        this.showBannerWithMessage('Please select your city.');
         return;
       }
 
@@ -96,7 +109,7 @@ export default {
 
       if (cartItems.length === 0) {
         console.error('Cart is empty.');
-        alert('Your cart is empty.');
+        this.showBannerWithMessage('Your cart is empty.');
         return;
       }
 
@@ -123,22 +136,15 @@ export default {
           throw new Error('Failed to process order');
         }
 
-        this.showBanner = true;
-
-        if (this.bannerTimeout) {
-          clearTimeout(this.bannerTimeout);
-        }
-
-        this.bannerTimeout = setTimeout(() => {
-          this.showBanner = false;
-        }, 5000);
-
+        this.showBannerWithMessage('Order processed successfully.');
         this.country = ''; 
         this.clearCart(); 
         this.toggleBlock();
       } catch (error) {
         console.error('Error processing order:', error);
+        this.showBannerWithMessage('Error processing order.');
       }
+      
       try {
         const processingResponse = await fetch('http://localhost:3001/ntt/processing', {
           method: 'POST',
@@ -151,11 +157,11 @@ export default {
         });
         
         if (!processingResponse.ok) {
-          throw new Error ('Failed do processingResponse fetch');
+          throw new Error('Failed to process payment');
         }
-
       } catch (error) {
-        console.error( `хуй быка:`, error );
+        console.error('Error processing payment:', error);
+        this.showBannerWithMessage('Error processing payment.');
       }
     }
   },
