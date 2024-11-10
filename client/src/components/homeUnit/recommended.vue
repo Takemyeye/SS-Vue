@@ -24,7 +24,7 @@ import FavoriteUnit from './favorite/favoriteUnit.vue';
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding-bottom: 5rem;
+    padding: 2.5rem 0;
     gap: 4rem;
   }
 

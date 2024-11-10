@@ -1,9 +1,9 @@
 <template>
+  <SiteHeader/>
   <div class="cart">
-    <SiteHeader/>
     <CartBlock/>
-    <FooterPanel/>
   </div>
+  <FooterPanel/>
 </template>
 
 <script>
@@ -24,11 +24,12 @@ import CartBlock from './cartUnit/cartBlock.vue';
 <style scoped>
   .cart {
     width: 100%;
+    min-height: calc(90vh - 1px);
     font-family: var(--text-font-family);
     font-optical-sizing: var(--text-font-optical-sizing);
     font-weight: var(--text-font-weight);
     font-style: var(--text-font-style);
-    display: block;
+    display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;

@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     scrollToFeatured() {
-      const targetPosition = window.scrollY + window.innerHeight * 0.4; // 40vh
+      const targetPosition = window.scrollY + window.innerHeight * 1.25; // 40vh
       window.scrollTo({
         top: targetPosition,
         behavior: 'smooth'
@@ -48,7 +48,7 @@ export default {
   width: 80%;
   min-height: 30vh;
   position: relative; 
-  padding: 2rem 0;
+  padding: 2.5rem 0;
   overflow: hidden;
   display: flex;
   align-items: center;

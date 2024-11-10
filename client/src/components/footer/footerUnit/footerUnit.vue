@@ -14,7 +14,7 @@
       <router-link to="/privacy">
         <h5>Privacy Policy</h5>
       </router-link>
-      <a href="#">
+      <a href="https://revolut.me/bratok">
         <h5>Donat</h5>
       </a>
     </FooterContainer>
@@ -59,23 +59,8 @@ h2 {
   font-weight: 600;
 }
 
-.container h3 {
+.container h5 {
   cursor: pointer;
-}
-
-.container h3::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 0;
-  height: 1px;
-  background-color: var(--color-000);
-  transition: width 0.3s ease;
-}
-
-.container h3:hover::after {
-  width: 100%;
 }
 
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="cartBlock">
+  <div class="cartBlock" v-if="totalPrice > 0">
     <ClearContinue />
     <div class="cartItem">
       <UiCard
@@ -16,10 +16,10 @@
         @click="removeItemFromCart(item.id)"
       />
     </div>
-    <div class="total">
-      <h1 v-if="totalPrice > 0">Total: {{ totalPrice }} €</h1>
-      <h1 v-else>No items in the cart</h1>
-    </div>
+  </div>
+  <div class="total">
+    <h1 v-if="totalPrice > 0">Total: {{ totalPrice }} €</h1>
+    <h1 v-else style="position: absolute; top: 50vh;">No items in the cart</h1>
   </div>
 </template>
 
@@ -51,7 +51,7 @@ export default {
 </script>
 
 <style>
-.cartBlock {
+.cartBlock, .total {
   width: 100%;
   display: flex;
   align-items: center;
@@ -69,7 +69,6 @@ export default {
 }
 
 .total {
-  width: 100%;
   height: calc(10vh - 1px);
   text-align: center;
   font-weight: bold;

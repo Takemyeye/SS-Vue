@@ -69,7 +69,6 @@ import { ref, onMounted } from 'vue';
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 4rem;
   }
 
 </style>

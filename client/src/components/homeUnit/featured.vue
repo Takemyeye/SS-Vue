@@ -20,7 +20,7 @@ export default {
 </script>
 
 <style scoped>
-  .featured {
+  .featured, .text {
     width: 100%;
     display: flex;
     align-items: center;
@@ -32,11 +32,6 @@ export default {
   }
   .text {
     width: 40%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
     gap: 8px;
   }
 @media all and (max-width: 768px) {

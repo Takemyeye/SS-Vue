@@ -12,13 +12,11 @@
         answer="We accept only physical contact."
         icon="credit-card" 
       />
-      
       <FaqUnit
         question="Do you offer international shipping?"
         answer="Yes, but currently we can't ship to regions outside Rome."
         icon="map"
       />
-      
       <FaqUnit
         question="Can I request custom anime or manga art?"
         answer="Sometimes. Contact our admins for details."
@@ -47,7 +45,7 @@ import FaqUnit from './FAQ/faqUnit.vue';
     justify-content: center;
     flex-direction: column;
     padding: 2.5rem 0;
-    gap: 1rem;
+    gap: 4rem;
   }
   .container {
     width: 80%;

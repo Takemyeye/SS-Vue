@@ -178,7 +178,7 @@ export default {
   flex-direction: row;
 }
 
-.container {
+.container, .text {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -209,10 +209,6 @@ export default {
 }
 
 .text {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
   gap: 1rem;
 }
 
@@ -277,5 +273,4 @@ export default {
 .country:focus {
   border: 1px solid rgba(0, 0, 0, 0.507);
 }
-
 </style>
