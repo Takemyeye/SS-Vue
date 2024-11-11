@@ -78,7 +78,6 @@ router.get('/reviews', async (req, res) => {
   }
 });
 
-
 // get by Token Reviews
 router.get('/reviews/:token', async (req, res) => {
   const { token } = req.params;

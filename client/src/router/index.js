@@ -8,7 +8,7 @@ import ArtShop from '@/components/store/shop.vue';
 import BannedPage from '@/banned/bannedPage.vue';
 import ProfilePage from '@/profile/profile.vue';
 import HomePage from '@/components/home.vue';
-import AdminPanel from '@/admin/admin.vue';
+import AdminPage from '@/admin/admin.vue';
 
 const ADMIN_TOKEN_DISCORD = process.env.VUE_APP_ADMIN_TOKEN_DISCORD;
 const ADMIN_TOKEN_GOOGLE = process.env.VUE_APP_ADMIN_TOKEN_GOOGLE;
@@ -55,7 +55,7 @@ const routes = [
   { 
     path: '/admin', 
     name: 'Admin', 
-    component: AdminPanel,
+    component: AdminPage,
     meta: { requiresAdmin: true }
   },
   {
