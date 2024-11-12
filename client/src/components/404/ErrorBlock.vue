@@ -11,7 +11,6 @@
         </div>
         <router-link :to="{ name: 'Home' }" class="delaybtn delay3">
             <UiButton
-                showHouse="true"
                 buttonText="Return to Soul Swap Home"
                 />
        </router-link>

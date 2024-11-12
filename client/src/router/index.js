@@ -13,6 +13,7 @@ import AdminPage from '@/admin/admin.vue';
 const ADMIN_TOKEN_DISCORD = process.env.VUE_APP_ADMIN_TOKEN_DISCORD;
 const ADMIN_TOKEN_GOOGLE = process.env.VUE_APP_ADMIN_TOKEN_GOOGLE;
 const ADMIN_TOKEN_GIT = process.env.VUE_APP_ADMIN_TOKEN_GIT;
+
 const isAuthenticated = () => {
   return !!localStorage.getItem('token'); 
 };
