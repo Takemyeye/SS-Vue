@@ -1,18 +1,18 @@
 <template>
   <div class="admin">
     <LeftPanel/>
-    <AdminPaenl/>
+    <AdminPanel/>
   </div>
 </template>
 
 <script>
-import AdminPaenl from './components/adminPanel.vue';
+import AdminPanel from './components/adminPanel.vue';
 import LeftPanel from './components/leftPanel.vue';
 
   export default {
     name: 'AdminPage',
     components: {
-      AdminPaenl,
+      AdminPanel,
       LeftPanel,
     }
   }

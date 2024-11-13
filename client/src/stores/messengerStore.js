@@ -1,16 +1,13 @@
 import { ref, computed, onMounted } from 'vue';
-import useUserStore from '@/stores/userStore';
+import useUserStore from './userStore';
 
 export default function useMessengerStore() {
-  // Хранение сообщений и сообщения для отправки
   const messages = ref([]);
   const message = ref('');
 
-  // Получение аватара пользователя из хранилища
   const { user } = useUserStore();
   const avatarUrl = computed(() => user.value?.avatar || '');
 
-  // Функция для получения сообщений с сервера
   const fetchMessages = async () => {
     const token = localStorage.getItem('token');
     try {
@@ -33,7 +30,6 @@ export default function useMessengerStore() {
     }
   };
 
-  // Функция для отправки сообщений на сервер
   const sendMessageToServer = async (messageText) => {
     const token = localStorage.getItem('token');
     try {
@@ -59,15 +55,14 @@ export default function useMessengerStore() {
   const sendMessage = async () => {
     if (message.value.trim()) {
       const msg = { text: message.value, user: avatarUrl.value };
-      messages.value.push(msg); // Добавляем сообщение в список
-      await sendMessageToServer(message.value); // Отправляем сообщение на сервер
-      message.value = ''; // Очищаем поле ввода после отправки
+      messages.value.push(msg);
+      await sendMessageToServer(message.value);
+      message.value = '';
     }
   };
 
   onMounted(fetchMessages);
 
-  // Возвращаем доступные данные и методы
   return {
     messages,
     message,

@@ -1,16 +1,19 @@
 <template>
   <div class="main">
     <HeaderAdmin />
+    <AdminBoard />
   </div>
 </template>
 
 <script>
 import HeaderAdmin from './unit/serchAdmin.vue';
+import AdminBoard from './unit/adminBoard.vue';
 
   export default {
-    name: 'AdminPaenl',
+    name: 'AdminPanel',
     components: {
-      HeaderAdmin
+      HeaderAdmin,
+      AdminBoard,
     }
   }
 </script>
