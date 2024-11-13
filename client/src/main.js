@@ -13,6 +13,7 @@ import {
   faBoxesStacked,
   faUser,
   faUsers,
+  faMagnifyingGlass,
 } from '@fortawesome/free-solid-svg-icons';
 
 import { faInstagram, faTelegram, faTiktok, faGoogle, faGithub, faDiscord, faPaypal } from '@fortawesome/free-brands-svg-icons';
@@ -21,6 +22,7 @@ import { far, faCreditCard, faComment, faMap, faClipboard } from '@fortawesome/f
 import { library } from '@fortawesome/fontawesome-svg-core';
 
 library.add(
+  faMagnifyingGlass,
   faCartShopping,
   faChevronRight,
   faBoxesStacked,
