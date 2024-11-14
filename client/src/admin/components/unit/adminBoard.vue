@@ -1,12 +1,17 @@
 <template>
   <div class="admin-board">
-
+    <DashboardAdmin />
   </div>
 </template>
 
 <script>
+import DashboardAdmin from './components/dashboard.vue';
+
   export default {
-    name: 'AdminBoard'
+    name: 'AdminBoard',
+    components: {
+      DashboardAdmin
+    }
   }
 </script>
 
@@ -14,6 +19,8 @@
   .admin-board {
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 </style>

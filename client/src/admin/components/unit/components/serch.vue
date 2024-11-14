@@ -40,9 +40,9 @@
 
 .input:focus, input:hover {
  outline: none;
- border-color: rgba(234,76,137,0.4);
+ border-color: rgba(76, 184, 234, 0.4);
  background-color: #fff;
- box-shadow: 0 0 0 4px rgb(234 76 137 / 10%);
+ box-shadow: 0 0 0 4px rgba(76, 202, 234, 0.1);
 }
 
 .icon {

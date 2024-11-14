@@ -34,7 +34,7 @@ export default {
 
 <style scoped>
   .block {
-    width: 80%;
+    width: 100%;
     height: 100%;
     display: flex;
     align-items: start;
