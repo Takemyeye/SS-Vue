@@ -6,17 +6,21 @@
       <UiBlock title="Active Now" :number="stats.activeOrders" styleBadge="badge5" />
       <UiBlock title="Total Users" :number="stats.totalUsers" styleBadge="badge1" />
     </div>
+    <DashboardMain />
   </div>
 </template>
 
 <script>
+import DashboardMain from './unit/dashboardMain.vue';
 import UiBlock from '@/ui/block.vue';
 import { ref, onMounted } from 'vue';
 
 export default {
   name: 'DashboardAdmin',
   components: {
-    UiBlock
+
+    DashboardMain,
+    UiBlock,
   },
   setup() {
     const users = ref([]);
@@ -72,7 +76,7 @@ export default {
     align-items: start;
     justify-content: start;
     flex-direction: column;
-    gap: 1rem;
+    gap: 2rem;
   }
 
   .container {
@@ -83,4 +87,5 @@ export default {
     flex-direction: row;
     gap: 4rem;
   }
+
 </style>

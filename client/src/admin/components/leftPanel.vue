@@ -44,6 +44,7 @@ import LeftPanelUnit from './unit/leftPanelUnit.vue';
     justify-content: start;
     flex-direction: column;
     border-right: 1px solid rgba(0, 0, 0, 0.164);
+    background-color: white;
   }
 
   .admin-title {

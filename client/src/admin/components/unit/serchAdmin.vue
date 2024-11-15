@@ -69,6 +69,7 @@ export default {
     width: 95%;
     padding: 11px 2.5%;
     border-bottom: 1px solid rgba(0, 0, 0, 0.164);
+    background-color: white;
     display: flex;
     align-items: center;
     justify-content: space-between;
