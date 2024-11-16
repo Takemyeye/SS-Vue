@@ -1,58 +1,64 @@
 <template>
     <div class="main-block">
-      <div class="orders">
-        
-      </div>
+        <div class="orders">
+            <h1>Recent Orders</h1>
 
+            <OrdersAdmin
+                order="Order"
+                customer="Customer"
+                total="Total"
+                status="Status"
+            />
+            <div v-if="orders.length">
+                <OrdersAdmin
+                v-for="(order, index) in orders"
+                :key="index"
+                :order="order.orderId || 'N/A'"
+                :customer="order.userName || 'Anonymous'"
+                :total="order.totalPrice || '0.00'"
+                :status="order.process || 'Pending'"
+                />
+            </div>
+        </div>
+        <div class="graphic">
+      
+        </div>
     </div>
 </template>
-
+  
 <script>
-    export default {
-        name: 'DashboardMain',
-        components: {
-
-        },
-        setup() {
-
-            const orders = ref([]);
-
-            const fetchOrders = async () => {
-            try {
-                const response = await fetch('http://localhost:3000/api/orders');
-                if (response.ok) {
-                orders.value = await response.json();
-                } else {
-                console.error('Ошибка при получении данных заказов');
-                }
-            } catch (error) {
-                console.error('Ошибка при получении данных заказов:', error);
-            }
-            };
-
-            const deleteOrder = async (orderId) => {
-                try {
-                    const response = await fetch(`http://localhost:3000/api/orders/${orderId}`, {
-                        method: 'DELETE',
-                    });
-
-                    if (response.ok) {
-                        orders.value = orders.value.filter(order => order.orderId !== orderId);
-                    } else {
-                        const errorData = await response.json();
-                        console.error('Error deleting order:', errorData);
-                    }
-                } catch (error) {
-                    console.error('Error deleting order:', error);
-                }
-            };
-
-            return {
-
-            }
+  import OrdersAdmin from './orders.vue';
+  import { ref, onMounted } from 'vue';
+  
+  export default {
+    name: 'DashboardMain',
+    components: {
+      OrdersAdmin,
+    },
+    setup() {
+      const orders = ref([]);
+  
+      const fetchOrders = async () => {
+        try {
+          const response = await fetch('http://localhost:3000/api/orders');
+          if (response.ok) {
+            orders.value = await response.json();
+          } else {
+            console.error('Error fetching orders');
+          }
+        } catch (error) {
+          console.error('Error fetching orders:', error);
         }
-    }
-</script>
+      };
+  
+      onMounted(fetchOrders);
+  
+      return {
+        orders,
+      };
+    },
+  };
+</script>  
 
 <style scoped>
     .main-block {
@@ -61,16 +67,20 @@
         display: flex;
         flex-direction: row;
         gap: 2rem;
-  }
+    }
 
     .orders {
-        width: 55%;
-        height: 100%;
+        width: 50%;
+        height: 60vh;
         background-color: white;
         border: 1px solid rgba(0, 0, 0, 0.150);
+        padding: 2.5%;
         border-radius: 8px;
         display: flex;
         flex-direction: column;
+        overflow-y: auto;
+        scrollbar-width: 6px; 
+        scrollbar-color: #3b3b3b #ffffff; 
         gap: 1rem;
     }
 

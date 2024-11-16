@@ -40,7 +40,7 @@
 
 .input:focus, input:hover {
  outline: none;
- border-color: rgba(76, 184, 234, 0.4);
+ border-color: rgba(114, 114, 114, 0.4);
  background-color: #fff;
  box-shadow: 0 0 0 4px rgba(76, 202, 234, 0.1);
 }

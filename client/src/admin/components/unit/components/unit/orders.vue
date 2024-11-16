@@ -1,0 +1,49 @@
+<template>
+  <div class="container">
+    <div class="order">
+      <h5>{{ order }}</h5>
+      <h5>{{ customer }}</h5>
+      <h5>{{ total }}</h5>
+      <h5>{{ status }}</h5>
+    </div>
+  </div>
+</template>
+
+<script>
+  export default {
+    name: 'OrdersAdmin',
+    props: {
+      order: {
+        type: String,
+      },
+      customer: {
+        type: String,
+      },
+      total: {
+        type: String,
+      },
+      status: {
+        type: String,
+      }
+    }
+  }
+</script>
+
+<style scoped>
+  .container {
+    width: 95%;
+    padding: 1rem 2.5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.150);
+  }
+
+  .order {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+</style>

@@ -70,7 +70,7 @@ export default {
 
 <style scoped>
   .dashboard {
-    width: 95%;
+    width: 98%;
     height: 95%;
     display: flex;
     align-items: start;
