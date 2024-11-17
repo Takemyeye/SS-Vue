@@ -1,4 +1,5 @@
 <template>
+  <HeaderAdmin />
   <div class="dashboard">
     <div class="text">
       <h1>Dashboard</h1>
@@ -15,14 +16,15 @@
 
 <script>
 import DashboardMain from './unit/dashboardMain.vue';
+import HeaderAdmin from '../serchAdmin.vue';
 import UiBlock from '@/ui/block.vue';
 import { ref, onMounted } from 'vue';
 
 export default {
   name: 'DashboardAdmin',
   components: {
-
     DashboardMain,
+    HeaderAdmin,
     UiBlock,
   },
   setup() {

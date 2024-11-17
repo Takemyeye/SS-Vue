@@ -14,7 +14,7 @@
           :key="index"
           :order="order.orderId || 'N/A'"
           :customer="order.nickName || 'Anonymous'"
-          :total="order.totalPrice || '0.00'"
+          :total="`$ ${order.totalPrice}` || '0.00'"
           :status="order.process || 'Pending'"
         />
       </div>
