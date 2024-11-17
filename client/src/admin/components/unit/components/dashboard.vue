@@ -1,10 +1,13 @@
 <template>
   <div class="dashboard">
-    <h1>Dashboard</h1>
+    <div class="text">
+      <h1>Dashboard</h1>
+      <h5>Welcome! Here's an overview of your platform's performance.</h5>
+    </div>
     <div class="container">
-      <UiBlock title="Total Revenue" :number="`+ ${stats.revenue} $`" styleBadge="badge3" />
-      <UiBlock title="Active Now" :number="stats.activeOrders" styleBadge="badge5" />
-      <UiBlock title="Total Users" :number="stats.totalUsers" styleBadge="badge1" />
+      <UiBlock title="Total Revenue" :number="`+ ${stats.revenue} $`" icon="fa-solid fa-dollar-sign" />
+      <UiBlock title="Active Now" :number="`+ ${stats.activeOrders}`"  icon="fa-solid fa-credit-card"  />
+      <UiBlock title="Total Users" :number="stats.totalUsers" icon="fa-solid fa-users" />
     </div>
     <DashboardMain />
   </div>
@@ -87,5 +90,9 @@ export default {
     flex-direction: row;
     gap: 4rem;
   }
-
+  .text {
+    width: 100%;
+    gap: 8px;
+    text-align: start;
+  }
 </style>

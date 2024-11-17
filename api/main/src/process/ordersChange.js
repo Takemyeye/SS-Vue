@@ -16,7 +16,7 @@ router.get('/orders', async (req, res) => {
       if (user) {
         return {
           ...order.toObject(),
-          userName: user.username,
+          nickName: user.nickname,
           userEmail: user.email,
           userAvatar: user.avatar
         };

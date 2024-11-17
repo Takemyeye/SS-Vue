@@ -17,7 +17,7 @@
         <h5>Products</h5>
       </LeftPanelUnit>
       <LeftPanelUnit>
-        <font-awesome-icon icon="users" />
+        <font-awesome-icon icon="fa-solid fa-users" />
         <h5>Customers</h5>
       </LeftPanelUnit>
     </div>

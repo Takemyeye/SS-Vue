@@ -33,6 +33,7 @@ export default {
   .text {
     width: 40%;
     gap: 8px;
+    text-align: center;
   }
 @media all and (max-width: 768px) {
   .text {

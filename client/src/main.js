@@ -3,22 +3,24 @@ import router from './router';
 import App from './App.vue';
 
 import { 
-  faHouse, faCartShopping, faHeart,
   faCartPlus, faMoneyBill, faCircleXmark, faClock, 
-  faCity, faImage, faTrash, faXmark, 
   faPaperPlane, faChevronLeft, faChevronRight, 
+  faCity, faImage, faTrash, faXmark, 
+  faHouse, faCartShopping, faHeart,
+  faMagnifyingGlass,
+  faBoxesStacked,
+  faDollarSign,
+  faCreditCard,
   faMicrochip,
   faCheck,
-  faLock,
-  faBoxesStacked,
-  faUser,
   faUsers,
-  faMagnifyingGlass,
+  faUser,
+  faLock,
 } from '@fortawesome/free-solid-svg-icons';
 
 import { faInstagram, faTelegram, faTiktok, faGoogle, faGithub, faDiscord, faPaypal } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { far, faCreditCard, faComment, faMap, faClipboard } from '@fortawesome/free-regular-svg-icons'
+import { far, faComment, faMap, faClipboard } from '@fortawesome/free-regular-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core';
 
 library.add(
@@ -29,6 +31,7 @@ library.add(
   faChevronLeft,
   faCircleXmark,
   faCreditCard,
+  faDollarSign,
   faPaperPlane,
   faInstagram,
   faMoneyBill,
