@@ -5,20 +5,28 @@
     </div>
     <div class="navigate">
       <LeftPanelUnit>
-        <font-awesome-icon icon="fa-solid fa-house" />
-        <h5>Dashboard</h5>
+        <router-link to="/admin">
+          <font-awesome-icon icon="fa-solid fa-house" />
+          <h5>Dashboard</h5>
+        </router-link>
       </LeftPanelUnit>
       <LeftPanelUnit>
-        <font-awesome-icon icon="fa-solid fa-cart-shopping" />
-        <h5>Orders</h5>
+        <router-link to="/admin/orders">
+          <font-awesome-icon icon="fa-solid fa-cart-shopping" />
+          <h5>Orders</h5>
+        </router-link>
       </LeftPanelUnit>
       <LeftPanelUnit>
-        <font-awesome-icon icon="fa-solid fa-boxes-stacked" />
-        <h5>Products</h5>
+        <router-link to="/admin/products">
+          <font-awesome-icon icon="fa-solid fa-boxes-stacked" />
+          <h5>Products</h5>
+        </router-link>
       </LeftPanelUnit>
       <LeftPanelUnit>
-        <font-awesome-icon icon="fa-solid fa-users" />
-        <h5>Customers</h5>
+        <router-link to="/admin/customers">
+          <font-awesome-icon icon="fa-solid fa-users" />
+          <h5>Customers</h5>
+        </router-link>
       </LeftPanelUnit>
     </div>
   </nav>
@@ -27,12 +35,12 @@
 <script>
 import LeftPanelUnit from './unit/leftPanelUnit.vue';
 
-  export default {
-    name: 'LeftPanel',
-    components: {
-      LeftPanelUnit,
-    }
-  }
+export default {
+  name: 'LeftPanel',
+  components: {
+    LeftPanelUnit,
+  },
+};
 </script>
 
 <style scoped>
@@ -61,6 +69,12 @@ import LeftPanelUnit from './unit/leftPanelUnit.vue';
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    gap: 1rem;
+  }
+  a {
+    display: flex;
+    align-items: start;
+    flex-direction: row;
     gap: 1rem;
   }
 </style>

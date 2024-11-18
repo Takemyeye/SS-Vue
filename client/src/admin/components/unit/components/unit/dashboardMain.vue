@@ -60,27 +60,27 @@ export default {
 </script> 
 
 <style scoped>
-    .main-block {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: row;
-        gap: 2rem;
-    }
+  .main-block {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+  }
 
-    .orders {
-        width: 50%;
-        height: 40vh;
-        background-color: white;
-        border: 1px solid rgba(0, 0, 0, 0.150);
-        padding: 2.5%;
-        border-radius: 8px;
-        display: flex;
-        flex-direction: column;
-        overflow-y: auto;
-        scrollbar-width: 6px; 
-        scrollbar-color: #3b3b3b #ffffff; 
-        gap: 1rem;
-    }
+  .orders {
+    width: 50%;
+    height: 40vh;
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.150);
+    padding: 2.5%;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    scrollbar-width: 6px; 
+    scrollbar-color: #3b3b3b #ffffff; 
+    gap: 1rem;
+  }
 
 </style>

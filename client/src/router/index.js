@@ -54,11 +54,12 @@ const routes = [
   },
   { path: '/:pathMatch(.*)*', component: NotFound },
   { 
-    path: '/admin', 
+    path: '/admin/:section?', 
     name: 'Admin', 
-    component: AdminPage,
-    meta: { requiresAdmin: true }
-  },
+    component: AdminPage, 
+    props: true,
+    meta: { requiresAdmin: true },
+  },  
   {
     path: '/banned',
     name: 'Banned',
