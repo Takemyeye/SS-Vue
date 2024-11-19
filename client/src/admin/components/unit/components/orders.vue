@@ -3,7 +3,7 @@
   <div class="main-block">
     <div class="orders-block">
       <div class="text">
-        <h1>Orders</h1>
+        <h2>Orders</h2>
         <h5>Manage your store's orders</h5>
       </div>
       <OrdersAdmin
@@ -23,7 +23,7 @@
           :customer="order.nickName || 'Anonymous'"
           :total="`$ ${order.totalPrice}` || '0.00'"
           :status="order.process || 'Pending'"
-          :date="order.date || 'N/A'"
+          :date="order.createdAt || 'N/A'"
           :trash="true"
         >
           <UiBadge 

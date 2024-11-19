@@ -2,8 +2,7 @@
   <HeaderAdmin />
   <div class="dashboard">
     <div class="text">
-      <h1>Dashboard</h1>
-      <h5>Welcome! Here's an overview of your platform's performance.</h5>
+      <h1 style="padding-top: 1rem;">Dashboard</h1>
     </div>
     <div class="container">
       <UiBlock title="Total Revenue" :number="`+ ${stats.revenue} $`" icon="fa-solid fa-dollar-sign" />

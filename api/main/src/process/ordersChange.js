@@ -1,6 +1,6 @@
 const express = require('express');
 const Order = require('../models/Order');
-const User = require('../models/User');   
+const User = require('../models/User');
 require('dotenv').config();
 
 const router = express.Router();
@@ -13,15 +13,25 @@ router.get('/orders', async (req, res) => {
     const ordersWithUserDetails = orders.map(order => {
       const user = users.find(u => u.token === order.token);
 
+      const formattedCreatedAt = new Date(order.createdAt).toLocaleDateString('en-GB', {
+        day: '2-digit',
+        month: '2-digit',
+        year: '2-digit',
+      });
+
       if (user) {
         return {
           ...order.toObject(),
           nickName: user.nickname,
           userEmail: user.email,
-          userAvatar: user.avatar
+          userAvatar: user.avatar,
+          createdAt: formattedCreatedAt,
         };
       } else {
-        return order;
+        return {
+          ...order.toObject(),
+          createdAt: formattedCreatedAt,
+        };
       }
     });
 
@@ -29,16 +39,6 @@ router.get('/orders', async (req, res) => {
   } catch (err) {
     console.error('Ошибка при получении заказов:', err);
     res.status(500).json({ error: 'Ошибка сервера при получении заказов' });
-  }
-});
-
-router.get('/orders/count', async (req, res) => {
-  try {
-    const ordersCount = await Order.countDocuments({});
-    res.json({ count: ordersCount });
-  } catch (err) {
-    console.error('Ошибка при получении количества заказов:', err);
-    res.status(500).json({ error: 'Ошибка сервера при получении количества заказов' });
   }
 });
 

@@ -16,7 +16,7 @@
           :order="order.orderId || 'N/A'"
           :customer="order.nickName || 'Anonymous'"
           :total="`$ ${order.totalPrice}` || '0.00'"
-          :date="order.date || 'N/A'"
+          :date="order.createdAt || 'N/A'"
           :status="order.process || 'Pending'"
         />
       </div>
