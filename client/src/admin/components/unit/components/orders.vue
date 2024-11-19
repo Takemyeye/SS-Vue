@@ -6,11 +6,7 @@
         <h1>Orders</h1>
         <h5>Manage your store's orders</h5>
       </div>
-      <div class="filter">
-        <h5>хуй</h5>
-      </div>
       <OrdersAdmin
-        style="grid-template-columns: repeat(6, 1fr);"
         order="Order ID"
         customer="Customer"
         total="Total"
@@ -113,10 +109,18 @@ import { ref, onMounted } from 'vue';
 
   .orders-block {
     width: 90%;
-    height: 90%;
-    padding: 0 2.5%;
+    height: 80%;
+    padding: 2.5%;
     background-color: white;
     border: 1px solid rgba(0, 0, 0, 0.150);
     border-radius: 8px;
+  }
+
+  .text {
+    width: 100%;
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    gap: 1rem;
   }
 </style>
