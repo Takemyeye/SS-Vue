@@ -91,6 +91,7 @@ export default {
   align-items: start;
   justify-content: start;
   flex-direction: column;
+  background-color: white;
   gap: 1rem;
 }
 

@@ -6,6 +6,7 @@
         order="Order"
         customer="Customer"
         total="Total"
+        date="Date"
         status="Status"
       />
       <div v-if="orders.length">
@@ -15,6 +16,7 @@
           :order="order.orderId || 'N/A'"
           :customer="order.nickName || 'Anonymous'"
           :total="`$ ${order.totalPrice}` || '0.00'"
+          :date="order.date || 'N/A'"
           :status="order.process || 'Pending'"
         />
       </div>
