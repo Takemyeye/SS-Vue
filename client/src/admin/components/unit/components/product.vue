@@ -3,22 +3,41 @@
   <div class="main-block">
     <div class="product-block">
       <div class="text">
-        <h1>Orders</h1>
+        <h1>Products</h1>
         <h5>залупа</h5>
       </div>
+      <ProductAdmin />
     </div>
   </div>
 </template>
 
 <script>
-import HeaderAdmin from '../serchAdmin.vue'
-  export default {
-    name: 'ProductsAdmin',
-    components: {
-      HeaderAdmin
-    }
-  }
+import ProductAdmin from './unit/productAdmin.vue';
+import useImageStore from '@/stores/useImageStore';
+import HeaderAdmin from '../serchAdmin.vue';
+
+export default {
+  name: 'ProductsAdmin',
+  components: {
+    ProductAdmin,
+    HeaderAdmin,
+  },
+  setup() {
+    const { fetchImages, images } = useImageStore();
+
+    fetchImages().then(() => {
+      console.log('Fetched images in component:', images.value);
+    }).catch(error => {
+      console.error('Error fetching images in component:', error);
+    });
+
+    return {
+      images,
+    };
+  },
+};
 </script>
+
 
 <style scoped>
   .main-block {

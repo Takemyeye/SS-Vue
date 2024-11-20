@@ -4,7 +4,7 @@
     <div class="text">
       <h1 style="padding-top: 1rem;">Dashboard</h1>
     </div>
-    <div class="container">
+    <div class="container-block">
       <UiBlock title="Total Revenue" :number="`+ ${stats.revenue} $`" icon="fa-solid fa-dollar-sign" />
       <UiBlock title="Active Now" :number="`+ ${stats.activeOrders}`"  icon="fa-solid fa-credit-card"  />
       <UiBlock title="Total Users" :number="stats.totalUsers" icon="fa-solid fa-users" />
@@ -83,7 +83,7 @@ export default {
     gap: 2rem;
   }
 
-  .container {
+  .container-block {
     width: 100%;
     display: flex;
     align-items: center;

@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="wrapper">
     <slot></slot>
   </div>
 </template>
@@ -11,7 +11,7 @@
 </script>
 
 <style scoped>
-  .container { 
+  .wrapper { 
     color: rgb(24, 24, 27);
     width: 80%;
     display: flex;
