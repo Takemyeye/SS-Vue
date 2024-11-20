@@ -1,15 +1,42 @@
 <template>
-  <div class="">
-    <h1>Products</h1>
+  <HeaderAdmin />
+  <div class="main-block">
+    <div class="product-block">
+      <div class="text">
+        <h1>Orders</h1>
+        <h5>залупа</h5>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import HeaderAdmin from '../serchAdmin.vue'
   export default {
-    name: 'ProductsAdmin'
+    name: 'ProductsAdmin',
+    components: {
+      HeaderAdmin
+    }
   }
 </script>
 
 <style scoped>
-  
+  .main-block {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 2rem;
+  }
+
+  .product-block {
+    width: 90%;
+    height: 80%;
+    padding: 2.5%;
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.150);
+    border-radius: 8px;
+  }
 </style>
