@@ -2,7 +2,7 @@
     <div class="container">
         <div class="product">
             <h5>{{ id }}</h5>
-            <h5>{{ name }}</h5>
+            <img :src="src" alt="">
             <h5>{{ price }}</h5>
             <h5>{{ stock }}</h5>
             <h5>{{ category }}</h5>
@@ -19,7 +19,7 @@
                 type: String,
                 default: '',
             },
-            name: {
+            src: {
                 type: String,
                 default: '',
             },
@@ -45,7 +45,7 @@
     }
 </script>
 
-<style>
+<style scoped>
     .container {
         width: 95%;
         padding: 1rem 2.5%;
@@ -60,5 +60,13 @@
         width: 100%;
         display: grid;
         grid-template-columns: repeat(6, 1fr);
+        align-items: center;
     }
+
+    img {
+        object-fit: contain;
+        width: 90px;
+        max-height: 40px;
+    }
+
 </style>

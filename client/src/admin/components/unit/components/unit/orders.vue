@@ -55,6 +55,7 @@ export default {
 <style scoped>
   .container {
     width: 95%;
+    height: 40px;
     padding: 1rem 2.5%;
     display: flex;
     align-items: center;

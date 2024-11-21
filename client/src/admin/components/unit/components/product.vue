@@ -4,9 +4,27 @@
     <div class="product-block">
       <div class="text">
         <h1>Products</h1>
-        <h5>залупа</h5>
+        <h5>Manage your store's products</h5>
       </div>
-      <ProductAdmin />
+      <ProductAdmin
+        :id="'Id'"
+        :src="'Image'"
+        :price="`Price`"
+        :category="'Category'"
+        :stock="'Stock'"
+        :actions="'Actions'"
+      />
+
+      <ProductAdmin
+        v-for="(image, index) in images"
+        :key="index"
+        :id="image.id"
+        :src="image.image"
+        :price="`${image.price} €`"
+        :category="image.titleAnime"
+        :stock="'~~'"
+        :actions="'~~'"
+      />
     </div>
   </div>
 </template>
@@ -26,7 +44,7 @@ export default {
     const { fetchImages, images } = useImageStore();
 
     fetchImages().then(() => {
-      console.log('Fetched images in component:', images.value);
+      console.log('Fetched images:', images.value);
     }).catch(error => {
       console.error('Error fetching images in component:', error);
     });
@@ -38,7 +56,6 @@ export default {
 };
 </script>
 
-
 <style scoped>
   .main-block {
     width: 100%;
@@ -47,6 +64,7 @@ export default {
     align-items: center;
     justify-content: center;
     flex-direction: row;
+    overflow: hidden;
     gap: 2rem;
   }
 
@@ -55,7 +73,11 @@ export default {
     height: 80%;
     padding: 2.5%;
     background-color: white;
-    border: 1px solid rgba(0, 0, 0, 0.150);
+    border: 1px solid rgba(221, 221, 221, 0.15);
     border-radius: 8px;
+    overflow-y: auto;
+    scrollbar-width: 16px;
+    scrollbar-color: rgb(158, 158, 158) white;
+    scroll-behavior: smooth;
   }
 </style>
