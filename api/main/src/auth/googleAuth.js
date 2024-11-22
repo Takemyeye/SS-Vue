@@ -34,6 +34,7 @@ router.get('/auth/google/callback', passport.authenticate('google', { session: f
         email: user.email,
         verified: user.verified,
         locale: user.locale,
+        provider: 'google',
         token: token
       });
 

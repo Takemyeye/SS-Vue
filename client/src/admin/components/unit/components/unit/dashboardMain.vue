@@ -28,7 +28,7 @@
 <script>
 import OrdersAdmin from './orders.vue';
 import { ref, onMounted } from 'vue';
-import WaveAdmin from './wave.vue';
+import WaveAdmin from './waveOrders.vue';
 
 export default {
   name: 'DashboardMain',
@@ -80,8 +80,9 @@ export default {
     display: flex;
     flex-direction: column;
     overflow-y: auto;
-    scrollbar-width: 6px; 
-    scrollbar-color: #3b3b3b #ffffff; 
+    scrollbar-width: 8px;
+    scrollbar-color: rgb(158, 158, 158) white;
+    scroll-behavior: smooth;
     gap: 1rem;
   }
 

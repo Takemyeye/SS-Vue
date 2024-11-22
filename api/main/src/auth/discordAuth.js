@@ -35,7 +35,7 @@ router.get('/auth/discord/callback', passport.authenticate('discord', { session:
         username: user.username,
         avatar: user.avatar,
         email: user.email,
-        provider: user.provider,
+        provider: 'discord', // Указываем источник аутентификации
         token: token
       });
 

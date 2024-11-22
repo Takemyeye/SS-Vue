@@ -35,6 +35,7 @@ router.get('/auth/github/callback', passport.authenticate('github', { session: f
         username: user.username,
         avatar: user.avatar,
         email: user.email,
+        provider: 'github',
         token: token
       });
 

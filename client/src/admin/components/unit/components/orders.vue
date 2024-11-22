@@ -114,6 +114,10 @@ import { ref, onMounted } from 'vue';
     background-color: white;
     border: 1px solid rgba(0, 0, 0, 0.150);
     border-radius: 8px;
+    overflow-y: auto;
+    scrollbar-width: 16px;
+    scrollbar-color: rgb(158, 158, 158) white;
+    scroll-behavior: smooth;
   }
 
   .text {
