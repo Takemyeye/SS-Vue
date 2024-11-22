@@ -6,25 +6,78 @@
       <h5>Manage your store's products</h5>
     </div>
     <div class="container-block">
-      <UiBlock title="Google" :number="`+  $`" icon="fa-brands fa-google" />
-      <UiBlock title="GitHub" :number="`+ `"  icon="fa-brands fa-github"  />
-      <UiBlock title="Discord" :number="'a'" icon="fa-brands fa-discord" />
+      <UiBlock :title="'Google'" :number="providerCounts.google" icon="fa-brands fa-google" />
+      <UiBlock :title="'Discord'" :number="providerCounts.discord" icon="fa-brands fa-discord" />
+      <UiBlock :title="'GitHub'" :number="providerCounts.github" icon="fa-brands fa-github" />
     </div>
   </div>
-  
 </template>
 
 <script>
 import HeaderAdmin from '../serchAdmin.vue';
 import UiBlock from '@/ui/block.vue';
+import { ref, onMounted } from 'vue';
 
-  export default {
-    name: 'CustomersAdmin',
-    components: {
-      HeaderAdmin,
-      UiBlock
-    }
+export default {
+  name: 'CustomersAdmin',
+  components: {
+    HeaderAdmin,
+    UiBlock
+  },
+  setup() {
+    const users = ref([]);
+    const providerCounts = ref({
+      google: 0,
+      github: 0,
+      discord: 0
+    });
+
+    const fetchData = async (url, onSuccess) => {
+      try {
+        const response = await fetch(url);
+        if (response.ok) {
+          const data = await response.json();
+          onSuccess(data);
+        } else {
+          console.error(`Ошибка при получении данных с ${url}`);
+        }
+      } catch (error) {
+        console.error(`Ошибка при получении данных с ${url}:`, error);
+      }
+    };
+
+    const fetchUsers = () => {
+      fetchData('http://localhost:3000/api/users', (data) => {
+        users.value = data;
+
+        const counts = {
+          google: 0,
+          github: 0,
+          discord: 0
+        };
+
+        data.forEach(user => {
+          if (user.provider) {
+            const provider = user.provider.toLowerCase();
+            if (counts[provider] !== undefined) {
+              counts[provider]++;
+            }
+          }
+        });
+
+        providerCounts.value = counts;
+      });
+    };
+
+    onMounted(() => {
+      fetchUsers();
+    });
+
+    return {
+      providerCounts
+    };
   }
+};
 </script>
 
 <style scoped>
