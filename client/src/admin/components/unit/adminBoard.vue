@@ -1,7 +1,7 @@
 <template>
   <div class="admin-board">
     <DashboardAdmin v-if="currentRoute === '/admin'" />
-    <CustomersAdmin v-if="currentRoute === '/admin/customers'" />
+    <ProvidersAdmin v-if="currentRoute === '/admin/providers'" />
     <ProductsAdmin v-if="currentRoute === '/admin/products'" />
     <OrdersPanel v-if="currentRoute === '/admin/orders'" />
     <CommentAdmin v-if="currentRoute === '/admin/comments'"/>
@@ -12,7 +12,7 @@
 import { useRoute } from 'vue-router';
 import { computed } from 'vue';
 import DashboardAdmin from './components/dashboard.vue';
-import CustomersAdmin from './components/customers.vue';
+import ProvidersAdmin from './components/providers.vue';
 import ProductsAdmin from './components/product.vue';
 import CommentAdmin from './components/comment.vue';
 import OrdersPanel from './components/orders.vue';
@@ -21,7 +21,7 @@ export default {
   name: 'AdminBoard',
   components: {
     DashboardAdmin,
-    CustomersAdmin,
+    ProvidersAdmin,
     ProductsAdmin,
     CommentAdmin,
     OrdersPanel,

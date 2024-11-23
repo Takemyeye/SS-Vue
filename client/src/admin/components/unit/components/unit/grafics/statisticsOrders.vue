@@ -1,19 +1,19 @@
 <template>
-  <div class="wave">
+  <div class="statistics">
     <div class="text">
-      <h1>Top Selling Products</h1>
+      <h1>Top Orders</h1>
       <h5>Top orders by sales volume</h5>
     </div>
-    <canvas id="ordersChart"></canvas>
+    <canvas ref="ordersChartCanvas"></canvas>
   </div>
 </template>
 
 <script>
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted, watch, onBeforeUnmount } from 'vue';
 import Chart from 'chart.js/auto';
 
 export default {
-  name: 'WaveAdmin',
+  name: 'StatisticsAdmin',
   props: {
     orders: {
       type: Array,
@@ -22,14 +22,19 @@ export default {
   },
   setup(props) {
     const chartInstance = ref(null);
+    const ordersChartCanvas = ref(null);
 
     const createChart = () => {
+      if (!ordersChartCanvas.value || !ordersChartCanvas.value.getContext) {
+        console.error('Canvas for orders chart is not ready.');
+        return;
+      }
+
+      const ctx = ordersChartCanvas.value.getContext('2d');
       const sortedOrders = [...props.orders].sort((a, b) => b.totalPrice - a.totalPrice);
 
       const labels = sortedOrders.map(order => order.orderId || 'N/A');
       const data = sortedOrders.map(order => order.totalPrice || 0);
-
-      const ctx = document.getElementById('ordersChart').getContext('2d');
 
       if (chartInstance.value) {
         chartInstance.value.destroy();
@@ -38,11 +43,11 @@ export default {
       chartInstance.value = new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: labels,
+          labels,
           datasets: [
             {
               label: 'Revenue per Order',
-              data: data,
+              data,
               backgroundColor: 'rgb(11, 100, 0, 0.5)',
             },
           ],
@@ -75,13 +80,22 @@ export default {
       createChart();
     });
 
-    return {};
+    onBeforeUnmount(() => {
+      if (chartInstance.value) {
+        chartInstance.value.destroy();
+        chartInstance.value = null;
+      }
+    });
+
+    return {
+      ordersChartCanvas,
+    };
   },
 };
 </script>
 
 <style scoped>
-.wave {
+.statistics {
   width: 40%;
   height: 40vh;
   padding: 2.5%;

@@ -21,20 +21,20 @@
         />
       </div>
     </div>
-    <WaveAdmin :orders="orders" />
+    <StatisticsAdmin :orders="orders" />
   </div>
 </template>
 
 <script>
 import OrdersAdmin from './orders.vue';
 import { ref, onMounted } from 'vue';
-import WaveAdmin from './waveOrders.vue';
+import StatisticsAdmin from './grafics/statisticsOrders.vue';
 
 export default {
   name: 'DashboardMain',
   components: {
+    StatisticsAdmin,
     OrdersAdmin,
-    WaveAdmin,
   },
   setup() {
     const orders = ref([]);

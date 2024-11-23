@@ -2,25 +2,27 @@
   <HeaderAdmin />
   <div class="main-block">
     <div class="text">
-      <h1>Products</h1>
-      <h5>Manage your store's products</h5>
+      <h1 style="padding-top: 1rem;">Providers</h1>
     </div>
     <div class="container-block">
       <UiBlock :title="'Google'" :number="providerCounts.google" icon="fa-brands fa-google" />
       <UiBlock :title="'Discord'" :number="providerCounts.discord" icon="fa-brands fa-discord" />
       <UiBlock :title="'GitHub'" :number="providerCounts.github" icon="fa-brands fa-github" />
     </div>
+    <ProvidersPanel />
   </div>
 </template>
 
 <script>
+import ProvidersPanel from './unit/providersPanel.vue';
 import HeaderAdmin from '../serchAdmin.vue';
 import UiBlock from '@/ui/block.vue';
 import { ref, onMounted } from 'vue';
 
 export default {
-  name: 'CustomersAdmin',
+  name: 'ProvidersAdmin',
   components: {
+    ProvidersPanel,
     HeaderAdmin,
     UiBlock
   },

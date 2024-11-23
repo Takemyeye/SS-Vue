@@ -7,7 +7,7 @@
       <LeftPanelUnit url="/admin" icon="fa-solid fa-house" text="DashBoard"/>
       <LeftPanelUnit url="/admin/orders" icon="fa-solid fa-cart-shopping" text="Orders"/>
       <LeftPanelUnit url="/admin/products" icon="fa-solid fa-boxes-stacked" text="Products"/>
-      <LeftPanelUnit url="/admin/customers" icon="fa-solid fa-users" text="Customers"/>
+      <LeftPanelUnit url="/admin/providers" icon="fa-solid fa-users" text="Providers"/>
       <LeftPanelUnit url="/admin/comments" icon="fa-regular fa-comment" text="Comment"/>
     </div>
   </nav>

@@ -32,7 +32,7 @@ export default {
     },
     status: {
       type: String,
-      default: '',
+      default: null,
     },
     date: {
       type: String,
