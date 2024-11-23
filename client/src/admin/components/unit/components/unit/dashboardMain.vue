@@ -5,7 +5,7 @@
       <OrdersAdmin
         id="Order"
         name="Customer"
-        total="Total"
+        data ="Total"
         date="Date"
         status="Status"
       />
@@ -15,7 +15,7 @@
           :key="index"
           :id="order.orderId || 'N/A'"
           :name="order.nickName || 'Anonymous'"
-          :total="`$ ${order.totalPrice}` || '0.00'"
+          :data="`$ ${order.totalPrice}` || '0.00'"
           :date="order.createdAt || 'N/A'"
           :status="order.process || 'Pending'"
         />

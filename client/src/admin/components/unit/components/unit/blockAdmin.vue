@@ -3,7 +3,7 @@
     <div class="order">
       <h5>{{ id }}</h5>
       <h5>{{ name }}</h5>
-      <h5>{{ total }}</h5>
+      <h5>{{ data }}</h5>
       <h5>{{ date }}</h5>
       <h5>{{ status }}</h5>
       <h5 v-if="actions">{{ actions }}</h5>
@@ -20,13 +20,14 @@ export default {
   props: {
     id: {
       type: String,
-      default: '',
+      required: false,
+      default: null,
     },
     name: {
       type: String,
       default: '',
     },
-    total: {
+    data: {
       type: String,
       default: '',
     },

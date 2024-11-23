@@ -3,7 +3,7 @@
   <div class="main-block">
     <div class="product-block">
       <div class="text">
-        <h1>Products</h1>
+        <h2>Products</h2>
         <h5>Manage your store's products</h5>
       </div>
       <ProductAdmin
@@ -79,5 +79,12 @@ export default {
     scrollbar-width: 16px;
     scrollbar-color: rgb(158, 158, 158) white;
     scroll-behavior: smooth;
+  }
+  .text {
+    width: 100%;
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    gap: 1rem;
   }
 </style>

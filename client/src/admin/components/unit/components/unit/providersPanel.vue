@@ -2,10 +2,10 @@
     <div class="providers-block">
       <div class="providers">
         <h2>Acces with OAuth2</h2>
-        <OrdersAdmin id="Mettods" name="Type" total="Bug" date="Last Work" status="Status" actions="Actions" />
-        <OrdersAdmin id="Google" name="OAuth2" total="~~" date="20/10/2024" status="Active" actions="~~" />
-        <OrdersAdmin id="Discord" name="OAuth2" total="~~" date="20/10/2024" status="Active" actions="~~" />
-        <OrdersAdmin id="GitHub" name="OAuth2" total="~~" date="20/10/2024" status="Active" actions="~~" />
+        <OrdersAdmin id="Mettods" name="Type" data="Bug" date="Last Work" status="Status" actions="Actions" />
+        <OrdersAdmin id="Google" name="OAuth2" data="~~" date="20/10/2024" status="Active" actions="~~" />
+        <OrdersAdmin id="Discord" name="OAuth2" data="~~" date="20/10/2024" status="Active" actions="~~" />
+        <OrdersAdmin id="GitHub" name="OAuth2" data="~~" date="20/10/2024" status="Active" actions="~~" />
       </div>
       <StatProviders />
     </div>

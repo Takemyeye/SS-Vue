@@ -9,7 +9,7 @@
       <BlockAdmin
         id="Order ID"
         name="Customer"
-        total="Total"
+        data="Total"
         status="Status"
         date="Date"
         actions="Actions"
@@ -21,7 +21,7 @@
           :key="index"
           :id="order.orderId || 'N/A'"
           :name="order.nickName || 'Anonymous'"
-          :total="`$ ${order.totalPrice}` || '0.00'"
+          :data="`$ ${order.totalPrice}` || '0.00'"
           :status="order.process || 'Pending'"
           :date="order.createdAt || 'N/A'"
           :trash="true"
