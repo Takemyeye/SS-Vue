@@ -14,6 +14,7 @@ import {
   faMicrochip,
   faCheck,
   faUsers,
+  faBrain,
   faUser,
   faLock,
 } from '@fortawesome/free-solid-svg-icons';
@@ -30,6 +31,7 @@ library.add(
   faBoxesStacked,
   faChevronLeft,
   faCircleXmark,
+  faBrain,
   faCreditCard,
   faDollarSign,
   faPaperPlane,

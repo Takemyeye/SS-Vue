@@ -6,9 +6,9 @@
         <h2>Orders</h2>
         <h5>Manage your store's orders</h5>
       </div>
-      <OrdersAdmin
-        order="Order ID"
-        customer="Customer"
+      <BlockAdmin
+        id="Order ID"
+        name="Customer"
         total="Total"
         status="Status"
         date="Date"
@@ -16,11 +16,11 @@
       />
 
       <div v-if="orders.length">
-        <OrdersAdmin
+        <BlockAdmin
           v-for="(order, index) in orders"
           :key="index"
-          :order="order.orderId || 'N/A'"
-          :customer="order.nickName || 'Anonymous'"
+          :id="order.orderId || 'N/A'"
+          :name="order.nickName || 'Anonymous'"
           :total="`$ ${order.totalPrice}` || '0.00'"
           :status="order.process || 'Pending'"
           :date="order.createdAt || 'N/A'"
@@ -34,7 +34,7 @@
           >
             <font-awesome-icon icon="trash" style="color: hsl(358, 100%, 69%); font-size: small;" />
           </UiBadge>
-        </OrdersAdmin>
+        </BlockAdmin>
       </div>
     </div>
   </div>
@@ -42,7 +42,7 @@
 
 <script>
 import HeaderAdmin from '../serchAdmin.vue';
-import OrdersAdmin from './unit/orders.vue';
+import BlockAdmin from './unit/blockAdmin.vue';
 import UiBadge from '@/ui/badge.vue';
 import { ref, onMounted } from 'vue';
 
@@ -50,7 +50,7 @@ import { ref, onMounted } from 'vue';
     name: 'OrdersPanel',
     components: {
       HeaderAdmin,
-      OrdersAdmin,
+      BlockAdmin,
       UiBadge,
     },
       setup() {

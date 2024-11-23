@@ -3,8 +3,8 @@
     <div class="orders">
       <h1>Recent Orders</h1>
       <OrdersAdmin
-        order="Order"
-        customer="Customer"
+        id="Order"
+        name="Customer"
         total="Total"
         date="Date"
         status="Status"
@@ -13,8 +13,8 @@
         <OrdersAdmin
           v-for="(order, index) in orders"
           :key="index"
-          :order="order.orderId || 'N/A'"
-          :customer="order.nickName || 'Anonymous'"
+          :id="order.orderId || 'N/A'"
+          :name="order.nickName || 'Anonymous'"
           :total="`$ ${order.totalPrice}` || '0.00'"
           :date="order.createdAt || 'N/A'"
           :status="order.process || 'Pending'"
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import OrdersAdmin from './orders.vue';
+import OrdersAdmin from './blockAdmin.vue';
 import { ref, onMounted } from 'vue';
 import StatisticsAdmin from './grafics/statisticsOrders.vue';
 

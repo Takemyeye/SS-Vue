@@ -1,8 +1,8 @@
 <template>
   <div class="container">
     <div class="order">
-      <h5>{{ order }}</h5>
-      <h5>{{ customer }}</h5>
+      <h5>{{ id }}</h5>
+      <h5>{{ name }}</h5>
       <h5>{{ total }}</h5>
       <h5>{{ date }}</h5>
       <h5>{{ status }}</h5>
@@ -16,13 +16,13 @@
 
 <script>
 export default {
-  name: 'OrdersAdmin',
+  name: 'BlockAdmin',
   props: {
-    order: {
+    id: {
       type: String,
       default: '',
     },
-    customer: {
+    name: {
       type: String,
       default: '',
     },

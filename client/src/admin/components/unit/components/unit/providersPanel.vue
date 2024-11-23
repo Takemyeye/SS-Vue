@@ -2,10 +2,10 @@
     <div class="providers-block">
       <div class="providers">
         <h2>Acces with OAuth2</h2>
-        <OrdersAdmin order="Mettods" customer="Type" total="Bug" date="Last Work" status="Status" actions="Actions" />
-        <OrdersAdmin order="Google" customer="OAuth2" total="~~" date="20/10/2024" status="Active" actions="~~" />
-        <OrdersAdmin order="Discord" customer="OAuth2" total="~~" date="20/10/2024" status="Active" actions="~~" />
-        <OrdersAdmin order="GitHub" customer="OAuth2" total="~~" date="20/10/2024" status="Active" actions="~~" />
+        <OrdersAdmin id="Mettods" name="Type" total="Bug" date="Last Work" status="Status" actions="Actions" />
+        <OrdersAdmin id="Google" name="OAuth2" total="~~" date="20/10/2024" status="Active" actions="~~" />
+        <OrdersAdmin id="Discord" name="OAuth2" total="~~" date="20/10/2024" status="Active" actions="~~" />
+        <OrdersAdmin id="GitHub" name="OAuth2" total="~~" date="20/10/2024" status="Active" actions="~~" />
       </div>
       <StatProviders />
     </div>
@@ -13,7 +13,7 @@
   
 <script>
 import StatProviders from './grafics/statisticsProviders.vue';
-import OrdersAdmin from './orders.vue';
+import OrdersAdmin from './blockAdmin.vue';
   
   export default {
     name: 'ProvidersPanel',

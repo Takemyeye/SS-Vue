@@ -6,9 +6,9 @@
       </div>
       <canvas ref="chartCanvas"></canvas>
     </div>
-  </template>
+</template>
   
-  <script>
+<script>
   import { ref, onMounted } from 'vue';
   import Chart from 'chart.js/auto';
   
@@ -85,9 +85,9 @@
               {
                 label: 'Number of users',
                 data,
-                fill: false,
+                fill: true,
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
                 borderColor: 'rgba(54, 162, 235, 1)',
-                backgroundColor: 'rgba(255, 255, 255, 0)',
                 borderWidth: 3,
                 pointRadius: 6,
                 pointBackgroundColor: 'rgba(54, 162, 235, 1)',
@@ -141,9 +141,9 @@
       };
     },
   };
-  </script>
+</script>
   
-  <style scoped>
+<style scoped>
     .statistics {
       width: 40%; 
       height: 40vh;
@@ -157,5 +157,5 @@
       background-color: white;
       gap: 1rem;
     }
-  </style>
+</style>
   
