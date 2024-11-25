@@ -90,31 +90,34 @@ export default {
                 const token = localStorage.getItem('token');
 
                 if (!token) {
-                    console.error('No auth token found');
-                    return;
+                console.error('No auth token found');
+                return;
                 }
 
                 const response = await fetch(`http://localhost:3000/api/update-status/${userId}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`,
-                    },
-                    body: JSON.stringify({ status: newStatus }),
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+                body: JSON.stringify({ status: newStatus }), 
                 });
 
                 if (!response.ok) {
-                    throw new Error(`Failed to update user status: ${response.statusText}`);
+                throw new Error(`Failed to update user status: ${response.statusText}`);
                 }
+
+                const responseData = await response.json();
+                console.log(responseData);
 
                 const user = users.value.find((u) => u.id === userId);
                 if (user) {
-                    user.status = newStatus;
+                user.status = newStatus;
                 }
             } catch (error) {
                 console.error(`Error updating user status:`, error);
             }
-        };
+            };
 
         const banUser = (userId) => {
             updateUserStatus(userId, 'banned');
