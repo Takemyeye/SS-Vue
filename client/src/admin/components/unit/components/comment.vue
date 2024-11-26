@@ -5,14 +5,53 @@
         <h2>Comment</h2>
         <h5>Manage your store's products</h5>
       </div>
+        <CommentUnit 
+          src="/img/user.png"
+          name="Name"
+          date="Date"
+          data="Cooment"
+          status="status"
+          :trash="true"   
+        >
+          <h5>Action</h5>
+        </CommentUnit>
 
+        <CommentUnit 
+          v-for="comment in comment"
+          :key="index" 
+          :src="comment.user.avatar"
+          :name="`@${comment.user.username}`"
+          :date="comment.createdAt"
+          :data="comment.comment"
+          status="~~"
+          :trash="true"   
+        >
+          <div class="container-btn">
+            <UiBadge
+                styleBadge="badge4"
+                title="Delete"
+                style="cursor: pointer;"
+            />
+            <UiBadge
+                styleBadge="badge3"
+                title="Approve"
+                style="cursor: pointer;"
+            />
+          </div>
+        </CommentUnit>
     </div>
   </div>
 </template>
 
 <script>
+import CommentUnit from './unit/commentUnit.vue';
+
   export default {
-    name: 'CommentAdmin'
+    name: 'CommentAdmin',
+    components: {
+      CommentUnit
+    },
+      
   }
 </script>
 

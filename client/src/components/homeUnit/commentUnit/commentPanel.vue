@@ -25,7 +25,9 @@ import CommentUnit from './comment.vue';
 
 export default {
   name: 'CommentPanel',
-  components: { CommentUnit, UiPagination },
+  components: { 
+    CommentUnit, UiPagination 
+  },
   setup() {
     const reviews = ref([]);
     const currentPage = ref(1);
