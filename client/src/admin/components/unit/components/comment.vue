@@ -5,54 +5,78 @@
         <h2>Comment</h2>
         <h5>Manage your store's products</h5>
       </div>
-        <CommentUnit 
-          src="/img/user.png"
-          name="Name"
-          date="Date"
-          data="Cooment"
-          status="status"
-          :trash="true"   
-        >
-          <h5>Action</h5>
-        </CommentUnit>
 
-        <CommentUnit 
-          v-for="comment in comment"
-          :key="index" 
-          :src="comment.user.avatar"
-          :name="`@${comment.user.username}`"
-          :date="comment.createdAt"
-          :data="comment.comment"
-          status="~~"
-          :trash="true"   
-        >
-          <div class="container-btn">
-            <UiBadge
-                styleBadge="badge4"
-                title="Delete"
-                style="cursor: pointer;"
-            />
-            <UiBadge
-                styleBadge="badge3"
-                title="Approve"
-                style="cursor: pointer;"
-            />
-          </div>
-        </CommentUnit>
+      <CommentUnit 
+        src="/img/user.png"
+        name="Name"
+        date="Date"
+        data="Comment"
+        status="status"
+        :trash="true"
+      >
+        <h5>Action</h5>
+      </CommentUnit>
+
+      <CommentUnit 
+        v-for="(comment, index) in reviews" 
+        :key="index" 
+        :src="comment.user.avatar || '/default-avatar.png'"
+        :name="`@${comment.user.username}`"
+        :date="new Date(comment.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })"
+        :data="comment.comment"
+        status="~~"
+        :trash="true"   
+      >
+        <div class="container-btn">
+          <UiBadge
+            styleBadge="badge4"
+            title="Delete"
+            style="cursor: pointer;"
+          />
+          <UiBadge
+            styleBadge="badge3"
+            title="Approve"
+            style="cursor: pointer;"
+          />
+        </div>
+      </CommentUnit>
     </div>
   </div>
 </template>
 
 <script>
 import CommentUnit from './unit/commentUnit.vue';
+import UiBadge from '@/ui/badge.vue';
+import { ref, onMounted } from 'vue';
 
-  export default {
-    name: 'CommentAdmin',
-    components: {
-      CommentUnit
-    },
-      
+export default {
+  name: 'CommentAdmin',
+  components: {
+    CommentUnit,
+    UiBadge
+  },
+  setup() {
+    const reviews = ref([]);
+
+    const fetchReviews = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/api/reviews');
+        if (!response.ok) {
+          throw new Error('Failed to fetch reviews');
+        }
+        reviews.value = await response.json();
+      } catch (error) {
+        console.error('Error fetching reviews:', error);
+      }
+    };
+
+    onMounted(fetchReviews);
+
+    return {
+      reviews
+    };
   }
+};
 </script>
 
 <style scoped>

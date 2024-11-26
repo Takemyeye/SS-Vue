@@ -5,7 +5,7 @@
             <h5>{{ name }}</h5>
             <h5>{{ date }}</h5>
             <div class="container-data">
-                <h5>{{ data }}</h5>
+                <h5 style="font-size: 12px;">{{ data }}</h5>
             </div>
             <h5>{{ status }}</h5>
             <h5 v-if="trash">
@@ -68,13 +68,17 @@
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 1rem;
-    align-items: start;
+    align-items: center;
   }
-  
+
   img {
     width: 40px;
     height: 40px;
     border: 1px solid rgba(0, 0, 0, 0.164);
     border-radius: 50%;
+  }
+
+  .container-data {
+
   }
 </style>

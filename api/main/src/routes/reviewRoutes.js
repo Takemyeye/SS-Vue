@@ -58,25 +58,27 @@ router.post('/reviews', async (req, res) => {
 
 router.get('/reviews', async (req, res) => {
   try {
-    const reviews = await Review.find(); 
-    const reviewsWithUsers = await Promise.all(reviews.map(async (review) => {
-      const user = await User.findOne({ token: review.token }); 
-      return {
-        comment: review.comment,
-        user: {
-          username: user ? user.nickname : 'Unknown', 
-          avatar: user ? user.avatar : '',
-        },
-        date: review.createdAt 
-      };
-    }));
+    const reviews = await Review.find();
+    const reviewsWithUsers = await Promise.all(
+      reviews.map(async (review) => {
+        const user = await User.findOne({ token: review.token }); 
+        return {
+          comment: review.comment,
+            username: user ? user.nickname : 'Unknown',
+            avatar: user ? user.avatar : '',
+          },
+          date: review.createdAt,
+        };
+      })
+    );
 
     return res.status(200).json(reviewsWithUsers);
   } catch (error) {
     console.error('Error occurred while fetching reviews:', error);
-    return res.status(500).json({ message: 'Server error.', error: error.message });
+    return res.status(500).json({ message: 'Server error.', error: error.message }); 
   }
 });
+
 
 // get by Token Reviews
 router.get('/reviews/:token', async (req, res) => {
