@@ -20,11 +20,11 @@
       <CommentUnit 
         v-for="(comment, index) in reviews" 
         :key="index" 
-        :src="comment.user.avatar || '/default-avatar.png'"
+        :src="comment.user.avatar"
         :name="`@${comment.user.username}`"
-        :date="new Date(comment.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })"
+        :date="new Date(comment.date).toLocaleDateString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric' })"
         :data="comment.comment"
-        status="~~"
+        :status="comment.status || '~~'"
         :trash="true"   
       >
         <div class="container-btn">

@@ -2,7 +2,6 @@
   <div>
     <SiteHeader />
     <div class="store">
-      <ContactUs v-if="tokenExists" />
       <TopBar :showContainer="false" />
       <CatalogBlock @category-selected="handleCategorySelected" />
 
@@ -26,7 +25,6 @@ import SiteHeader from '@/components/header/header.vue';
 import TopBar from '@/components/homeUnit/topBar.vue';
 import useImageStore from '@/stores/useImageStore';
 import CatalogBlock from './shopUnit/catalog.vue';
-import ContactUs from '@/services/contact.vue';
 import FfArt from './shopUnit/fireForce.vue';
 import MhaArt from './shopUnit/mhaArt.vue';
 import AllArt from './shopUnit/allArt.vue';
@@ -40,7 +38,6 @@ export default {
     CallOfNightArt,
     CatalogBlock,
     SiteHeader,
-    ContactUs,
     TopBar,
     AllArt,
     JjkArt,
@@ -53,8 +50,6 @@ export default {
   setup(props) {
     const { filteredImages, fetchImages, hasImagesInCache, filterImagesByCategory } = useImageStore();
     
-    const tokenExists = ref(!!localStorage.getItem('token'));
-
     const route = useRoute();
     const router = useRouter();
 
@@ -113,7 +108,6 @@ export default {
     return {
       activeCategory,
       filteredImages,
-      tokenExists,
       handleCategorySelected,
       categoryComponents,
       activeCategoryName,

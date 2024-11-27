@@ -1,7 +1,6 @@
 <template>
   <SiteHeader /> 
   <main>
-    <ContactUs v-if="tokenExists" />
     <TopBar />
     <FeaturedPanel />
     <FaqBlock />
@@ -22,11 +21,9 @@ import FeaturedPanel from './homeUnit/featured.vue';
 import EmailPanel from './homeUnit/emailPanel.vue';
 import OurProcess from './homeUnit/ourPeocess.vue';
 import FaqBlock from './homeUnit/faqBlock.vue';
-import ContactUs from '@/services/contact.vue';
 import SiteHeader from './header/header.vue';
 import SiteFooter from './footer/footer.vue';
 import TopBar from './homeUnit/topBar.vue';
-import { ref, onMounted } from 'vue';
 
   export default {
     name: 'HomePage',
@@ -39,21 +36,9 @@ import { ref, onMounted } from 'vue';
       SiteHeader,
       SiteFooter,
       EmailPanel,
-      ContactUs,
       FaqBlock,
       TopBar,
   },
-  setup() {
-    const tokenExists = ref(false);
-
-    onMounted(() => {
-      tokenExists.value = !!localStorage.getItem('token');
-    });
-
-    return {
-      tokenExists
-    };
-  }
 };
 </script>
 

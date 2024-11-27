@@ -68,6 +68,7 @@ router.get('/reviews', async (req, res) => {
             username: user ? user.nickname : 'Unknown',
             avatar: user ? user.avatar : '',
           },
+          status: review.status,
           date: review.createdAt,
         };
       })
