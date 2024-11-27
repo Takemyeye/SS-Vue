@@ -64,6 +64,7 @@ router.get('/reviews', async (req, res) => {
         const user = await User.findOne({ token: review.token }); 
         return {
           comment: review.comment,
+          user: {
             username: user ? user.nickname : 'Unknown',
             avatar: user ? user.avatar : '',
           },

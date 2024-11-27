@@ -77,8 +77,4 @@
     border: 1px solid rgba(0, 0, 0, 0.164);
     border-radius: 50%;
   }
-
-  .container-data {
-
-  }
 </style>
