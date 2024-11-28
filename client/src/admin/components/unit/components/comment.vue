@@ -18,25 +18,27 @@
       </CommentUnit>
 
       <CommentUnit 
-        v-for="(comment, index) in reviews" 
-        :key="index" 
+        v-for="comment in reviews" 
+        :key="comment.reviewId"
         :src="comment.user.avatar"
-        :name="`@${comment.user.username}`"
+        :name="comment.user.username"
         :date="new Date(comment.date).toLocaleDateString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric' })"
         :data="comment.comment"
         :status="comment.status || '~~'"
-        :trash="true"   
+        :trash="true"
       >
         <div class="container-btn">
           <UiBadge
             styleBadge="badge4"
             title="Delete"
             style="cursor: pointer;"
+            @click="deleteReview(comment.reviewId)"
           />
           <UiBadge
             styleBadge="badge3"
             title="Approve"
             style="cursor: pointer;"
+            @click="approveReview(comment.reviewId)" 
           />
         </div>
       </CommentUnit>
@@ -70,10 +72,45 @@ export default {
       }
     };
 
+    const deleteReview = async (reviewId) => {
+      try {
+        const response = await fetch(`http://localhost:3000/api/reviews/${reviewId}`, {
+          method: 'DELETE',
+        });
+        if (!response.ok) {
+          throw new Error('Failed to delete review');
+        }
+        reviews.value = reviews.value.filter((review) => review.reviewId !== reviewId);
+      } catch (error) {
+        console.error('Error deleting review:', error);
+      }
+    };
+
+    const approveReview = async (reviewId) => {
+      try {
+        const response = await fetch(`http://localhost:3000/api/reviews/${reviewId}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status: 'approved' }),
+        });
+        if (!response.ok) {
+          throw new Error('Failed to approve review');
+        }
+        const index = reviews.value.findIndex((review) => review.reviewId === reviewId);
+        if (index !== -1) {
+          reviews.value[index].status = 'approved';
+        }
+      } catch (error) {
+        console.error('Error approving review:', error);
+      }
+    };
+
     onMounted(fetchReviews);
 
     return {
-      reviews
+      reviews,
+      deleteReview,
+      approveReview,
     };
   }
 };

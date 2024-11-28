@@ -70,6 +70,7 @@ router.get('/reviews', async (req, res) => {
           },
           status: review.status,
           date: review.createdAt,
+          reviewId: review.reviewId,
         };
       })
     );
@@ -111,6 +112,33 @@ router.get('/reviews/:token', async (req, res) => {
   }
 });
 
+//new method PATCH 
+
+router.patch('/reviews/:reviewId', async (req, res) => {
+  const { reviewId } = req.params;
+  const { status } = req.body;
+
+  if (!reviewId || !status) {
+    return res.status(400).json({ message: 'Review ID and status are required.' });
+  }
+
+  try {
+    const updatedReview = await Review.findOneAndUpdate(
+      { reviewId },
+      { status },
+      { new: true }
+    );
+
+    if (!updatedReview) {
+      return res.status(404).json({ message: 'Review not found.' });
+    }
+
+    return res.status(200).json(updatedReview);
+  } catch (error) {
+    console.error('Error updating review:', error);
+    return res.status(500).json({ message: 'Server error.', error: error.message });
+  }
+});
 
 // delete Review by reviewId
 router.delete('/reviews/:reviewId', async (req, res) => {
