@@ -8,9 +8,9 @@
       :comment="comment.comment"
     />
     <UiPagination
-      v-if="totalReviews > itemsPerPage" 
+      v-if="totalApprovedReviews > itemsPerPage" 
       style="position: absolute; bottom: -6rem; right: 0; border:none;"
-      :total-items="totalReviews" 
+      :total-items="totalApprovedReviews" 
       :items-per-page="itemsPerPage" 
       :default-page="currentPage" 
       @page-changed="page => currentPage = page"
@@ -42,9 +42,13 @@ export default {
       }
     };
 
+    const approvedReviews = computed(() => 
+      reviews.value.filter(review => review.status === 'approved')
+    );
+
     const paginatedReviews = computed(() => {
       const start = (currentPage.value - 1) * itemsPerPage;
-      return reviews.value.slice(start, start + itemsPerPage);
+      return approvedReviews.value.slice(start, start + itemsPerPage);
     });
 
     onMounted(fetchReviews);
@@ -54,7 +58,7 @@ export default {
       currentPage,
       itemsPerPage,
       paginatedReviews,
-      totalReviews: computed(() => reviews.value.length),
+      totalApprovedReviews: computed(() => approvedReviews.value.length),
     };
   },
 };
