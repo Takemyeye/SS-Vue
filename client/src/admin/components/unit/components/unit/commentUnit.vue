@@ -2,6 +2,7 @@
     <div class="container">
         <div class="data">
             <img :src="src" alt="Avatar">
+            <h5>{{ id }}</h5>
             <h5>{{ name }}</h5>
             <h5>{{ date }}</h5>
             <div class="container-data">
@@ -20,6 +21,11 @@
         name: 'CommentUnit',
         props: {
             src: {
+                type: String,
+                required: false,
+                default: null,
+            },
+            id: {
                 type: String,
                 required: false,
                 default: null,

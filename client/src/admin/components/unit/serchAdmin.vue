@@ -1,6 +1,6 @@
 <template>
   <div class="serch-admin">
-    <SerchAdmin />
+    <SerchAdmin @search="$emit('search', $event)" />
     <img :src="avatarUrl" :alt="userName" />
   </div>
 </template>
@@ -15,6 +15,7 @@ export default {
   components: {
     SerchAdmin,
   },
+  emits: ['search'],
   setup() {
     const { user, setUser } = useUserStore();
     const token = localStorage.getItem('token');

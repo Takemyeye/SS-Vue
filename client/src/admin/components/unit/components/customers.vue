@@ -1,4 +1,5 @@
 <template>
+    <HeaderAdmin />
     <div class="main-block">
         <div class="wrapper">
             <div class="text">
@@ -49,6 +50,7 @@
 
 <script>
 import CustomersUnit from './unit/customersUnit.vue';
+import HeaderAdmin from '../serchAdmin.vue';
 import UiBadge from '@/ui/badge.vue';
 import { ref, onMounted } from 'vue';
 
@@ -56,6 +58,7 @@ export default {
     name: 'CustomersAdmin',
     components: {
         CustomersUnit,
+        HeaderAdmin,
         UiBadge,
     },
     setup() {

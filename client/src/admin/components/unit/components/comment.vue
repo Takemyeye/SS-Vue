@@ -1,4 +1,5 @@
 <template>
+  <HeaderAdmin @search="setSearchQuery" />
   <div class="main-block">
     <div class="wrapper">
       <div class="text">
@@ -8,6 +9,7 @@
 
       <CommentUnit 
         src="/img/user.png"
+        id="Id"
         name="Name"
         date="Date"
         data="Comment"
@@ -18,9 +20,10 @@
       </CommentUnit>
 
       <CommentUnit 
-        v-for="comment in reviews" 
+        v-for="comment in filteredReviews" 
         :key="comment.reviewId"
         :src="comment.user.avatar"
+        :id="comment.reviewId"
         :name="comment.user.username"
         :date="new Date(comment.date).toLocaleDateString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric' })"
         :data="comment.comment"
@@ -48,17 +51,20 @@
 
 <script>
 import CommentUnit from './unit/commentUnit.vue';
+import HeaderAdmin from '../serchAdmin.vue';
 import UiBadge from '@/ui/badge.vue';
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 
 export default {
   name: 'CommentAdmin',
   components: {
     CommentUnit,
-    UiBadge
+    HeaderAdmin,
+    UiBadge,
   },
   setup() {
     const reviews = ref([]);
+    const searchQuery = ref('');
 
     const fetchReviews = async () => {
       try {
@@ -105,14 +111,29 @@ export default {
       }
     };
 
+    // Search funcion
+    const filteredReviews = computed(() => {
+      if (!searchQuery.value) return reviews.value;
+      return reviews.value.filter((review) => 
+        review.reviewId.toString().includes(searchQuery.value)
+      );
+    });
+
+    const setSearchQuery = (query) => {
+      searchQuery.value = query;
+    };
+
     onMounted(fetchReviews);
 
     return {
       reviews,
+      searchQuery,
+      filteredReviews,
       deleteReview,
       approveReview,
+      setSearchQuery,
     };
-  }
+  },
 };
 </script>
 

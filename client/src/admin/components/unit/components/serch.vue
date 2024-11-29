@@ -1,14 +1,19 @@
 <template>
   <div class="group">
-    <font-awesome-icon icon="fa-solid fa-magnifying-glass" class="icon"/>
-    <input placeholder="Search" type="search" class="input">
+    <font-awesome-icon icon="fa-solid fa-magnifying-glass" class="icon" />
+    <input 
+      placeholder="Search" 
+      type="search" 
+      class="input" 
+      @input="$emit('search', $event.target.value)" 
+    />
   </div>
 </template>
 
 <script>
-  export default {
-    name: 'SerchAdmin'
-  }
+export default {
+  name: 'SerchAdmin',
+};
 </script>
 
 <style scoped>
