@@ -1,11 +1,12 @@
 <template>
-    <HeaderAdmin />
+    <HeaderAdmin @search="updateSearchQuery" />
     <div class="main-block">
         <div class="wrapper">
             <div class="text">
                 <h2>Customers</h2>
                 <h5>Manage your store's products</h5>
             </div>
+
             <CustomersUnit
                 src="/img/user.png"
                 name="Name"
@@ -19,7 +20,7 @@
             </CustomersUnit>
 
             <CustomersUnit
-                v-for="user in users"
+                v-for="user in filteredUsers"
                 :key="user.id"
                 :src="user.avatar"
                 :name="user.username"
@@ -52,7 +53,7 @@
 import CustomersUnit from './unit/customersUnit.vue';
 import HeaderAdmin from '../serchAdmin.vue';
 import UiBadge from '@/ui/badge.vue';
-import { ref, onMounted } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 
 export default {
     name: 'CustomersAdmin',
@@ -63,6 +64,7 @@ export default {
     },
     setup() {
         const users = ref([]);
+        const searchQuery = ref('');
 
         const fetchData = async (url, onSuccess) => {
             try {
@@ -84,30 +86,26 @@ export default {
             });
         };
 
-        onMounted(() => {
-            fetchUsers();
-        });
-
         const updateUserStatus = async (userId, newStatus) => {
             try {
                 const token = localStorage.getItem('token');
 
                 if (!token) {
-                console.error('No auth token found');
-                return;
+                    console.error('No auth token found');
+                    return;
                 }
 
                 const response = await fetch(`http://localhost:3000/api/update-status/${userId}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
-                },
-                body: JSON.stringify({ status: newStatus }), 
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`,
+                    },
+                    body: JSON.stringify({ status: newStatus }), 
                 });
 
                 if (!response.ok) {
-                throw new Error(`Failed to update user status: ${response.statusText}`);
+                    throw new Error(`Failed to update user status: ${response.statusText}`);
                 }
 
                 const responseData = await response.json();
@@ -115,12 +113,12 @@ export default {
 
                 const user = users.value.find((u) => u.id === userId);
                 if (user) {
-                user.status = newStatus;
+                    user.status = newStatus;
                 }
             } catch (error) {
                 console.error(`Error updating user status:`, error);
             }
-            };
+        };
 
         const banUser = (userId) => {
             updateUserStatus(userId, 'banned');
@@ -130,10 +128,26 @@ export default {
             updateUserStatus(userId, 'active');
         };
 
+        const updateSearchQuery = (query) => {
+            searchQuery.value = query.toLowerCase();
+        };
+
+        const filteredUsers = computed(() =>
+            users.value.filter((user) =>
+                user.nickname?.toLowerCase().includes(searchQuery.value)
+            )
+        );
+
+        onMounted(() => {
+            fetchUsers();
+        });
+
         return {
             users,
             banUser,
             unBanUser,
+            updateSearchQuery,
+            filteredUsers,
         };
     },
 };
