@@ -1,13 +1,13 @@
 <template>
-  <p>No orders found.</p>
+  <h1>Orders</h1>
 </template>
 
 <script>
   export default {
-    name: 'OrdersElse'
+    name: 'OrderPage'
   }
 </script>
 
 <style scoped>
-
+  
 </style>

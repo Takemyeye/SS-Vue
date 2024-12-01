@@ -1,5 +1,5 @@
-import ProcessingOrder from '@/components/orders/process.vue';
 import { createRouter, createWebHistory } from 'vue-router';
+import OrderPage from '@/components/orders/orderPage.vue';
 import CartShoping from '@/components/cartShop/cart.vue';
 import PrivacyPolicy from '@/policy/privacyPolicy.vue';
 import NotFound from '@/components/404/NotFound.vue';
@@ -42,7 +42,7 @@ const routes = [
   { 
     path: '/orders', 
     name: 'Orders', 
-    component: ProcessingOrder,
+    component: OrderPage,
     meta: { requiresAuth: true }, 
 
   },
