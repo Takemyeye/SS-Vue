@@ -8,7 +8,7 @@
       </div>
       <ProductAdmin
         :id="'Id'"
-        :src="'Image'"
+        :src="'/img/brush.png'"
         :price="`Price`"
         :category="'Category'"
         :name="'Character'"

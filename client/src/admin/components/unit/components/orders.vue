@@ -1,5 +1,5 @@
 <template>
-  <HeaderAdmin />
+  <HeaderAdmin @search="setSearchQuery"/>
   <div class="main-block">
     <div class="orders-block">
       <div class="text">
@@ -7,7 +7,7 @@
         <h5>Manage your store's orders</h5>
       </div>
       <BlockAdmin
-        id="Order ID"
+        id="Id"
         name="Customer"
         data="Total"
         status="Status"
@@ -17,8 +17,8 @@
 
       <div v-if="orders.length">
         <BlockAdmin
-          v-for="(order, index) in orders"
-          :key="index"
+          v-for="order in filteredProduct"
+          :key="order.id"
           :id="order.orderId || 'N/A'"
           :name="order.nickName || 'Anonymous'"
           :data="`$ ${order.totalPrice}` || '0.00'"
@@ -44,7 +44,7 @@
 import HeaderAdmin from '../serchAdmin.vue';
 import BlockAdmin from './unit/blockAdmin.vue';
 import UiBadge from '@/ui/badge.vue';
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 
   export default {
     name: 'OrdersPanel',
@@ -54,6 +54,7 @@ import { ref, onMounted } from 'vue';
       UiBadge,
     },
       setup() {
+      const searchQuery = ref(''); // search string
       const orders = ref([]);
 
       const fetchOrders = async () => {
@@ -86,10 +87,26 @@ import { ref, onMounted } from 'vue';
         }
       };
 
+      const filteredProduct = computed(() =>
+        orders.value.filter((order) => {
+          const orderId = order.orderId?.toString() || '';
+          const nickName = order.nickName?.toString() || '';
+          const query = searchQuery.value.toLowerCase();
+
+          return orderId.toLowerCase().includes(query) || nickName.toLowerCase().includes(query);
+          })
+        );
+
+      const setSearchQuery = (query) => {
+        searchQuery.value = query.toLowerCase();
+      };
+
       onMounted(fetchOrders);
 
       return {
+        setSearchQuery,
         deleteOrder,
+        filteredProduct,
         orders,
       };
     },
