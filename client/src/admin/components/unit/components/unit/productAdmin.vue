@@ -4,7 +4,7 @@
             <h5>{{ id }}</h5>
             <img :src="src" alt="">
             <h5>{{ price }}</h5>
-            <h5>{{ stock }}</h5>
+            <h5>{{ name }}</h5>
             <h5>{{ category }}</h5>
             <h5 v-if="actions">{{ actions }}</h5>
         </div>
@@ -27,7 +27,7 @@
                 type: String,
                 default: '',
             },
-            stock: {
+            name: {
                 type: String,
                 default: '',
             },

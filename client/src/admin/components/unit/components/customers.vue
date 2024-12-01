@@ -1,5 +1,5 @@
 <template>
-    <HeaderAdmin @search="updateSearchQuery" />
+    <HeaderAdmin @search="setSearchQuery" />
     <div class="main-block">
         <div class="wrapper">
             <div class="text">
@@ -128,10 +128,11 @@ export default {
             updateUserStatus(userId, 'active');
         };
 
-        const updateSearchQuery = (query) => {
+        const setSearchQuery = (query) => {
             searchQuery.value = query.toLowerCase();
         };
 
+        //filter user search
         const filteredUsers = computed(() =>
             users.value.filter((user) =>
                 user.nickname?.toLowerCase().includes(searchQuery.value)
@@ -146,7 +147,7 @@ export default {
             users,
             banUser,
             unBanUser,
-            updateSearchQuery,
+            setSearchQuery,
             filteredUsers,
         };
     },

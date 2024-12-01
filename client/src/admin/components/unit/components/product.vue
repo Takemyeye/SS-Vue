@@ -1,5 +1,5 @@
 <template>
-  <HeaderAdmin />
+  <HeaderAdmin @search="setSearchQuery" />
   <div class="main-block">
     <div class="product-block">
       <div class="text">
@@ -11,18 +11,18 @@
         :src="'Image'"
         :price="`Price`"
         :category="'Category'"
-        :stock="'Stock'"
+        :name="'Character'"
         :actions="'Actions'"
       />
 
       <ProductAdmin
-        v-for="(image, index) in images"
-        :key="index"
+        v-for="image in filteredProduct"
+        :key="image.id"
         :id="image.id"
         :src="image.image"
         :price="`${image.price} €`"
         :category="image.titleAnime"
-        :stock="'~~'"
+        :name="image.title"
         :actions="'~~'"
       />
     </div>
@@ -33,6 +33,7 @@
 import ProductAdmin from './unit/productAdmin.vue';
 import useImageStore from '@/stores/useImageStore';
 import HeaderAdmin from '../serchAdmin.vue';
+import { ref, computed } from 'vue';
 
 export default {
   name: 'ProductsAdmin',
@@ -41,15 +42,35 @@ export default {
     HeaderAdmin,
   },
   setup() {
-    const { fetchImages, images } = useImageStore();
+    const searchQuery = ref(''); // search string
+    const { fetchImages, images } = useImageStore(); //cache
 
-    fetchImages().then(() => {
-      console.log('Fetched images:', images.value);
-    }).catch(error => {
-      console.error('Error fetching images in component:', error);
-    });
+    fetchImages()
+      .then(() => {
+      })
+      .catch((error) => {
+        console.error('Error fetching images in component:', error);
+      });
+
+    // Filtring with Id and Category
+    const filteredProduct = computed(() =>
+      images.value.filter((image) => {
+        const id = image.id?.toString() || '';
+        const category = image.titleAnime?.toString() || '';
+        const name = image.title?.toString() || '';
+        const query = searchQuery.value.toLowerCase();
+
+        return id.toLowerCase().includes(query) || category.toLowerCase().includes(query) || name.toLowerCase().includes(query);
+      })
+    );
+
+    const setSearchQuery = (query) => {
+      searchQuery.value = query.toLowerCase();
+    };
 
     return {
+      setSearchQuery,
+      filteredProduct,
       images,
     };
   },
