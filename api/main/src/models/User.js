@@ -11,7 +11,7 @@ const UserSchema = new mongoose.Schema({
   nickname: { type: String },
   lastBioUpdate: { type: Date }, 
   lastNicknameUpdate: { type: Date },
-  status: { type: String, default: 'Active' },
+  status: { type: String, default: 'active' },
 });
 
 UserSchema.index({ id: 1, email: 1, username: 1 }, { unique: true });
