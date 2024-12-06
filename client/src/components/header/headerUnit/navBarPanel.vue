@@ -4,7 +4,14 @@
       <font-awesome-icon icon="user"/>
     </router-link>
     <div v-else class="avatar" @click="toggleDropdown">
-      <img :src="avatarUrl" alt="User Avatar" />
+      <div class="users">
+        <img :src="avatarUrl" alt="User Avatar" />
+          <ProvidersUi
+            :google="hasGoogle"
+            :discord="hasDiscord"
+            :github="hasGithub"
+          />
+      </div>
       <div v-if="isDropdownOpen" class="dropdown">
         <router-link to="/profile">
           <h5>Profile</h5>
@@ -12,7 +19,7 @@
         <router-link to="/orders">
           <h5>Orders</h5>
         </router-link>
-        <h5 @click="logout">Logout</h5>
+          <h5 @click="logout">Logout</h5>
       </div>
     </div>
     <router-link :to="{ name: 'Cart' }">
@@ -28,10 +35,20 @@
 import { cartState } from '@/services/activeContext';
 import { ref, computed, onMounted } from 'vue';
 import useUserStore from '@/stores/userStore';
+import ProvidersUi from '@/ui/provider.vue';
 
 export default {
   name: 'RightPanelNavBar',
-
+  components: {
+    ProvidersUi
+  },
+  data() {
+    return {
+      google: "fa-brands fa-google",
+      discord: "fa-brands fa-discord",
+      github: "fa-brands fa-github"
+    };
+  },
   setup() {
     const { user, setUser, clearUser } = useUserStore();
     const isDropdownOpen = ref(false);
@@ -86,17 +103,24 @@ export default {
       isDropdownOpen.value = !isDropdownOpen.value;
     };
 
+    const hasGoogle = computed(() => user.value?.provider === 'google');
+    const hasDiscord = computed(() => user.value?.provider === 'discord');
+    const hasGithub = computed(() => user.value?.provider === 'github');
+    
     const logout = () => {
       clearUser();
     };
 
     return {
-      user,
-      avatarUrl,
+      cartItemsCount,
       isDropdownOpen,
       toggleDropdown,
+      hasDiscord,
+      hasGoogle,
+      hasGithub,
+      avatarUrl,
       logout,
-      cartItemsCount,
+      user,
     };
   },
 };
@@ -112,15 +136,21 @@ export default {
   gap: 2rem;
 }
 
+.users {
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+
 .rightPanel h3 {
   font-size: clamp(18px, 2vw, 24px);
 }
 
 .rightPanel img {
-  width: 34px;
-  height: 34px;
-  border-radius: 40px;
-  border: 1px solid rgba(0, 0, 0, 0.774);
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.164);
+  border-radius: 50%;
 }
 
 .user {

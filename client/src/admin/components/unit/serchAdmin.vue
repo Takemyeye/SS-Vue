@@ -3,11 +3,11 @@
     <SerchAdmin @search="$emit('search', $event)" />
     <div class="users">
       <img :src="avatarUrl" :alt="userName" />
-      <div class="providers">
-        <font-awesome-icon v-if="hasGoogle" icon="fa-brands fa-google" />
-        <font-awesome-icon v-if="hasDiscord" icon="fa-brands fa-discord" />
-        <font-awesome-icon v-if="hasGithub" icon="fa-brands fa-github" />
-      </div>
+      <ProvidersUi
+        :google="hasGoogle"
+        :discord="hasDiscord"
+        :github="hasGithub"
+      />
     </div>
   </div>
 </template>
@@ -15,11 +15,13 @@
 <script>
 import SerchAdmin from './components/serch.vue';
 import useUserStore from '@/stores/userStore';
+import ProvidersUi from '@/ui/provider.vue';
 import { computed, onMounted } from 'vue';
 
 export default {
   name: 'HeaderAdmin',
   components: {
+    ProvidersUi,
     SerchAdmin,
   },
   data() {
@@ -105,27 +107,18 @@ export default {
     border: 1px solid rgba(0, 0, 0, 0.219);
     border-radius: 8px;
   }
+
   .users {
     position: relative;
     width: 40px;
     height: 40px;
   }
+
   img {
     width: 100%;
     height: 100%;
     border: 1px solid rgba(0, 0, 0, 0.164);
     border-radius: 50%;
   }
-  .providers {
-    position: absolute;
-    padding: 0 2px;
-    z-index: 1;
-    right: -2px;
-    bottom: -2px;
-    font-size: 12px;
-    color: rgb(24, 24, 24);
-    background-color: white;
-    border-radius: 3rem;
-    border: 1px solid rgba(36, 36, 36, 0.26);
-  }
+
 </style>
