@@ -49,15 +49,6 @@ export default {
     color: black;
   }
 
-  .text {
-    width: 100%;
-    display: flex;
-    align-items: start;
-    justify-content: center;
-    flex-direction: column;
-    gap: 8px;
-  }
-
   h3 {
     color: black;
   }

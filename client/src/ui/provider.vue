@@ -27,6 +27,7 @@ export default {
 </script>
 
 <style scoped>
+
   .providers {
     position: absolute;
     text-align: center;

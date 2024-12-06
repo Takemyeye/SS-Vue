@@ -178,7 +178,7 @@ export default {
   flex-direction: row;
 }
 
-.container, .text {
+.container {
   display: flex;
   align-items: center;
   justify-content: center;

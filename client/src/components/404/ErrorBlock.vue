@@ -42,14 +42,7 @@ export default {
         font-style: var(--text-font-style);
         gap: 1rem;
     }
-    .text {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        gap: 8px;
-        font-size: clamp(20px, 2vw, 40px);
-    }
+
     .delay {
         animation: fadeInUp 2s ease-in-out forwards;
     }

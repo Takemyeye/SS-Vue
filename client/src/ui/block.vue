@@ -46,11 +46,4 @@ export default {
     border-radius: 8px;
   }
 
-  .text {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: row;
-  }
 </style>

@@ -20,13 +20,5 @@
   .example {
     text-wrap: balance;
   }
-
-  .text {
-    width: 100%;
-    display: flex;
-    align-content: start;
-    justify-content: center;
-    flex-direction: column;
-    gap: 8px;
-  }
+  
 </style>

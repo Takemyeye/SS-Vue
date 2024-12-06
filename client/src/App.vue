@@ -44,6 +44,14 @@ h3, h4, h5 {
   color: var(--color-000);
 }
 
+.text {
+  width: 100%;
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 h1 { font-size: clamp(20px, 2vw, 40px); }
 h2 { font-size: clamp(16px, 2vw, 22px); }
 h3 { font-size: clamp(14px, 2vw, 18px); position: relative;}

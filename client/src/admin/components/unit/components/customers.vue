@@ -185,11 +185,4 @@ export default {
     gap: 1rem;
   }
 
-  .text {
-    width: 100%;
-    display: flex;
-    align-items: start;
-    flex-direction: column;
-    gap: 1rem;
-  }
 </style>

@@ -126,15 +126,6 @@ import { computed, ref } from 'vue';
     background-color: black;
   }
   
-  .text {
-    width: 100%;
-    display: flex;
-    align-content: start;
-    justify-content: center;
-    flex-direction: column;
-    gap: 8px;
-  }
-  
   textarea {
     max-width: 95%;
     min-width: 95%;

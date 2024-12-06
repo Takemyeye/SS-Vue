@@ -63,12 +63,6 @@ export default {
     object-fit: cover;
     border-radius: 4px;
   }
-  .text {
-    display: flex;
-    align-items: end;
-    justify-content: center;
-    flex-direction: column;
-  }
 
   @keyframes toTop {
     0% {

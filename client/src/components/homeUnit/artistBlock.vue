@@ -55,7 +55,7 @@ export default {
 </script>
 
 <style scoped>
-  .artistSpotlight, .text {
+  .artistSpotlight {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -68,12 +68,12 @@ export default {
     width: 100%;
     gap: 3rem;
   }
-
-  .text {
-    width: 80%;
-    gap: 1rem;
-  }
   
+  .text {
+    display: flex;
+    align-items: center;
+  }
+
   .container {
     width: 60%;
     display: flex;

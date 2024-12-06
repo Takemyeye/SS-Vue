@@ -101,11 +101,5 @@ export default {
     scrollbar-color: rgb(158, 158, 158) white;
     scroll-behavior: smooth;
   }
-  .text {
-    width: 100%;
-    display: flex;
-    align-items: start;
-    flex-direction: column;
-    gap: 1rem;
-  }
+
 </style>

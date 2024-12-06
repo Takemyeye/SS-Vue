@@ -126,15 +126,6 @@ export default {
     background-color: black;
   }
 
-  .text {
-    width: 100%;
-    display: flex;
-    align-items: start;
-    justify-content: center;
-    flex-direction: column;
-    gap: 8px;
-  }
-
   textarea {
     font-family: var(--text-font-family);
     font-optical-sizing: var(--text-font-optical-sizing);

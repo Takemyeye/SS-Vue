@@ -104,7 +104,7 @@ export default {
     animation-range: entry 0 cover 15%;
   }
 
-  .text, .container, .information {
+  .container, .information {
     display: flex;
     flex-direction: column;
     gap: 1rem;

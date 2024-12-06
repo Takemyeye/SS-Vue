@@ -118,7 +118,7 @@ export default {
     flex-direction: column;
     gap: 2rem;
   }
-  .text, .container {
+    .container {
     display: flex;
     align-items: start;
     justify-content: center;

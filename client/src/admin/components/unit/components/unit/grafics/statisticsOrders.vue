@@ -109,9 +109,4 @@ export default {
   gap: 1rem;
 }
 
-.text {
-  width: 100%;
-  gap: 8px;
-  text-align: start;
-}
 </style>

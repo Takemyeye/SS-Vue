@@ -91,9 +91,4 @@ export default {
     flex-direction: row;
     gap: 4rem;
   }
-  .text {
-    width: 100%;
-    gap: 8px;
-    text-align: start;
-  }
 </style>

@@ -84,10 +84,7 @@ export default {
     height: 36px;
     border-radius: 30px;
   }
-  .text {
-    justify-content: center;
-    flex-direction: row;
-  }
+
   .messeng {
     width: 100%;
     text-wrap: balance;

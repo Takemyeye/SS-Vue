@@ -10,19 +10,3 @@
     name: 'TextUnit'
   }
 </script>
-
-<style scoped>
-
-  .text {
-    width: 300px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-  }
-
-  .text {
-    flex-direction: column;
-    text-align: center;
-  }
-</style>

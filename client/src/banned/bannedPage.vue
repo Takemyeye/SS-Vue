@@ -56,13 +56,6 @@ import UiButton from '@/ui/button.vue';
     gap: 2rem;
   }
 
-  .text {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
   .container-btn {
     width: 100%;
     display: flex;
