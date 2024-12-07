@@ -24,6 +24,9 @@ import SiteHeader from '../header/header.vue';
     display: flex;
     justify-content: center;
     align-items: center;
-    
+    font-family: var(--text-font-family);
+    font-optical-sizing: var(--text-font-optical-sizing);
+    font-weight: var(--text-font-weight);
+    font-style: var(--text-font-style);
   }
 </style>
