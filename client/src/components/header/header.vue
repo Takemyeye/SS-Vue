@@ -17,6 +17,7 @@
 import UserHeader from './headerUnit/userHeader.vue';
 import CartHeader from './headerUnit/cartHeader.vue';
 import NavHeader from './headerUnit/navHeader.vue';
+
   export default {
     name: 'SiteHeader',
     components: {
