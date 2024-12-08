@@ -1,6 +1,6 @@
 <template>
   <div class="block">
-    <div class="users">
+    <div class="users" @click="toggleDropBar">
       <img :src="avatarUrl" :alt="userName" />
       <ProvidersUi
         :google="hasGoogle"
@@ -8,18 +8,21 @@
         :github="hasGithub"
       />
     </div>
+    <DropDown v-if="isDropDownOpen"/>
   </div>
 </template>
 
 <script>
+import DropDown from './userUnit/dropDown.vue';
 import useUserStore from '@/stores/userStore';
 import ProvidersUi from '@/ui/provider.vue';
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 
   export default {
     name: 'UserHeader',
     components: {
-      ProvidersUi
+      ProvidersUi,
+      DropDown
     },
     data() {
       return {
@@ -29,8 +32,10 @@ import { computed, onMounted } from 'vue';
       };
     },
     setup() {
-      const { user, setUser } = useUserStore();
       const token = localStorage.getItem('token');
+      const { user, setUser } = useUserStore();
+
+      const isDropDownOpen = ref(false);
 
       const fetchUser = async (token) => {
         try {
@@ -59,6 +64,10 @@ import { computed, onMounted } from 'vue';
         }
       };
 
+      const toggleDropBar = () => {
+        isDropDownOpen.value = !isDropDownOpen.value;
+      };
+
       onMounted(async () => {
       const activeToken = token; 
 
@@ -75,6 +84,8 @@ import { computed, onMounted } from 'vue';
       const hasGithub = computed(() => user.value?.provider === 'github');
 
       return {
+        isDropDownOpen,
+        toggleDropBar,
         hasDiscord,
         hasGoogle,
         hasGithub,
