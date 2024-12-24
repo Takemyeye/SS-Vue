@@ -27,7 +27,7 @@
 
   h3 {
     color: var(--color-000);
-    font-size: clamp(16px, 2vw, 20px);
+    font-size: clamp(16px, 2vw, 18px);
   }
 
   h3::after {

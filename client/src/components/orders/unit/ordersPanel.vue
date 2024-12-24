@@ -1,12 +1,17 @@
 <template>
     <div class="orders">
-        <h1>ищу девушку</h1>
+        <TopPanel />
     </div>
 </template>
 
 <script>
+import TopPanel from './components/topPanel.vue';
+
     export default {
-        name: 'OrdersPanel'
+        name: 'OrdersPanel',
+        components: {
+            TopPanel
+        }
     }
 </script>
 
@@ -14,5 +19,10 @@
     .orders {
         width: 80%;
         padding: 2.5rem 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 1rem;
     }
 </style>

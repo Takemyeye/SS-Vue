@@ -3,17 +3,20 @@
   <div class="order">
     <OrdersPanel />
   </div>
+  <SiteFooter />
 </template>
 
 <script>
 import OrdersPanel from './unit/ordersPanel.vue';
 import SiteHeader from '../header/header.vue';
+import SiteFooter from '../footer/footer.vue';
 
   export default {
     name: 'OrderPage',
     components: {
       OrdersPanel,
       SiteHeader,
+      SiteFooter,
     }
   }
 </script>
