@@ -1,15 +1,18 @@
 <template>
     <div class="orders">
       <TopPanel :orders="orders" />
+      <OrdersBlock :orders="orders"/>
     </div>
   </template>
   
   <script>
+  import OrdersBlock from './components/ordersBlock.vue';
   import TopPanel from './components/topPanel.vue';
   
   export default {
     name: 'OrdersPanel',
     components: {
+      OrdersBlock,
       TopPanel,
     },
     data() {
@@ -35,7 +38,6 @@
           .then((response) => response.json())
           .then((data) => {
             this.orders = Array.isArray(data) ? data : [];
-            console.log('Fetched orders:', data);
           })
           .catch((error) => {
             console.error('Error fetching orders:', error);
