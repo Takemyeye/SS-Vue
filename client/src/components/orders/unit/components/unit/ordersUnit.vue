@@ -5,9 +5,9 @@
       <h5>{{ date }}</h5>
       <h5>{{ total }}</h5>
       <h5>{{ items }}</h5>
+      <h5>{{ type }}</h5>
       <h5>{{ payment }}</h5>
       <h5>{{ status }}</h5>
-      <h5 v-if="actions">{{ actions }}</h5>
       <h5 v-if="trash">
         <slot></slot>
       </h5>
@@ -33,10 +33,6 @@ export default {
       type: String,
       default: '',
     },
-    payment: {
-      type: String,
-      default: '',
-    },
     status: {
       type: String,
       default: null,
@@ -44,6 +40,15 @@ export default {
     date: {
       type: String,
       required: false,
+      default: '',
+    },
+    type: {
+      type: String,
+      required: false,
+      default: null,
+    },
+    payment: {
+      type: String,
       default: '',
     },
     actions: {
@@ -61,13 +66,19 @@ export default {
 
 <style scoped>
   .container {
+    width: 100%;
+    padding: 6px 4px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.150);
+  }
+  h5 {
+    width: 100%;
+    text-align: center;
+  }
+  .order {
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-direction: row;
-    width: 100%;
-    padding: 4px 2px;
-    border-radius: 4px;
-    border: 1px solid rgba(0, 0, 0, 0.150);
   }
+
 </style>
