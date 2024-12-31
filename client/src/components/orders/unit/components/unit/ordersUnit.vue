@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div :class="style">
     <div class="order">
       <h5>{{ id }}</h5>
       <h5>{{ date }}</h5>
@@ -19,6 +19,10 @@
 export default {
   name: 'OrdersUnit',
   props: {
+    style: {
+      type: String,
+      default: null,
+    },
     id: {
       type: String,
       required: false,
@@ -69,10 +73,13 @@ export default {
     width: 100%;
     padding: 6px 4px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.150);
+    border-radius: 4px;
   }
   h5 {
     width: 100%;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .order {
     display: flex;
@@ -81,4 +88,11 @@ export default {
     flex-direction: row;
   }
 
+  .container1 {
+    background-color: hsla(34, 84%, 44%, 0.178);
+  }
+  
+  .container2 {
+    background-color: hsla(96, 84%, 44%, 0.178);
+  }
 </style>
