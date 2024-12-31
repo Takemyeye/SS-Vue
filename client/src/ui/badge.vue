@@ -27,7 +27,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: medium;
+    font-size: clamp(10px, 2vw, 14px);;
     color: var(--color-000);
     font-weight: 500;
     gap: 4px;

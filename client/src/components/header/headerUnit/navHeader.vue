@@ -26,4 +26,10 @@ import NavLink from './navUnit/unit.vue';
     flex-direction: row;
     gap: 2rem;
   }
+
+  @media all and (max-width: 768px) {
+    .navigation {
+      display: none;
+    }
+  }
 </style>

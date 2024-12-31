@@ -66,17 +66,33 @@ export default {
 </script>
 
 <style scoped>
-  .orders-block {
-    width: calc(100% - 2rem - 2px);
-    height: 62vh;
-    max-height: 62vh;
-    padding: 1rem;
-    border-radius: 8px;
-    border: 1px solid rgba(0, 0, 0, 0.150);
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    flex-direction: column;
-    gap: 1rem;
-  }
+.orders-block {
+  width: calc(100% - 2rem - 2px);
+  height: 62vh;
+  max-height: 62vh;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.150);
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  flex-direction: column;
+  gap: 1rem;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+.orders-block::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.orders-block::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 4px; 
+}
+
+.orders-block::-webkit-scrollbar-track {
+  background: transparent;
+}
 </style>

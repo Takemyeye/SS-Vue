@@ -70,7 +70,8 @@ export default {
 
 <style scoped>
   .container {
-    width: 100%;
+    width: calc(100% - 8px);
+    min-width: 800px;
     padding: 6px 4px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.150);
     border-radius: 4px;

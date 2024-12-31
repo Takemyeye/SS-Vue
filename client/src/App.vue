@@ -24,14 +24,14 @@ html, body {
 }
 
 ::-webkit-scrollbar {
-  width: 16px;
-}
-::-webkit-scrollbar-track {
-  background: rgb(34, 34, 34);
+  width: 8px;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: rgb(20, 20, 20);
-  box-shadow: 0 -100vh 0 100vh var(--color-black), 0 0 15px 5px var(--color-000);
+  background-color: #888;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 h1, h2 {
