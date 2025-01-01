@@ -96,4 +96,9 @@ export default {
   .container2 {
     background-color: hsla(96, 84%, 44%, 0.178);
   }
+
+  .container3 {
+    background-color: hsla(2, 84%, 44%, 0.178);
+  }
+  
 </style>

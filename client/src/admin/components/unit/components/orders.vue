@@ -33,8 +33,8 @@
           <UiBadge
             style="cursor: pointer;"
             :styleBadge="`badge3`"
-            :title="`Approve`"
-            @click="updateOrderStatus(order.orderId, 'Approved', order.token, order.totalPrice)"
+            :title="`Completed`"
+            @click="updateOrderStatus(order.orderId, 'Completed', order.token, order.totalPrice)"
           />
           <UiBadge
             style="cursor: pointer;"

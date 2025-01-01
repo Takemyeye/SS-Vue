@@ -15,19 +15,24 @@
     </OrdersUnit>
     
     <OrdersUnit 
-      v-for="item in orders"
+      v-for="item in localOrders"
       :key="item.id"
       :id="item.orderId"
       :date="formatDate(item.createdAt)"
       :style="styleStatus(item.process)" 
       :total="item.totalPrice"
-      :items="item.cartItems.length"
+      :items="String(item.cartItems.length)"
       payment="Fisic"
       :status="item.process"
       :type="item.digital ? 'digital' : 'normal'"
       :trash="true"
     >
-      <UiBadge title="delete" styleBadge="badge4" style="width: fit-content;"/>
+      <UiBadge 
+        title="Delete" 
+        styleBadge="badge4" 
+        style="width: fit-content;" 
+        @click="deleteOrder(item.orderId)"
+      />
     </OrdersUnit>
   </div>
 </template>
@@ -38,10 +43,7 @@ import UiBadge from '@/ui/badge.vue';
 
 export default {
   name: 'OrdersBlock',
-  components: {
-    OrdersUnit,
-    UiBadge,
-  },
+  components: { OrdersUnit, UiBadge },
   props: {
     orders: {
       type: Array,
@@ -49,17 +51,45 @@ export default {
       default: () => [],
     },
   },
+  data() {
+    return { localOrders: [...this.orders] };
+  },
   methods: {
-    formatDate(dateString) {
-      if (!dateString) return 'N/A';
-      const date = new Date(dateString);
-      const day = String(date.getDate()).padStart(2, '0');
-      const month = String(date.getMonth() + 1).padStart(2, '0');
-      const year = String(date.getFullYear()).slice(-2);
-      return `${day}/${month}/${year}`;
+    formatDate(date) {
+      if (!date) return 'N/A';
+      const d = new Date(date);
+      return `${d.getDate().toString().padStart(2, '0')}/${(d.getMonth() + 1).toString().padStart(2, '0')}/${d.getFullYear().toString().slice(-2)}`;
     },
     styleStatus(status) {
-      return status === 'Processing' ? 'container container1' : 'container container2';
+      return status === 'Processing' 
+        ? 'container container1' 
+        : status === 'Completed' 
+        ? 'container container2' 
+        : 'container container3';
+    },
+    async deleteOrder(orderId) {
+      try {
+        const res = await fetch(`http://localhost:3000/api/orders/${orderId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status: 'Delete' }),
+        });
+        if (!res.ok) throw new Error('Ошибка при обновлении заказа');
+        const updatedOrder = await res.json();
+        this.localOrders = this.localOrders.map(order =>
+          order.orderId === updatedOrder.orderId ? updatedOrder : order
+        );
+      } catch (err) {
+        console.error(err);
+      }
+    },
+  },
+  watch: {
+    orders: {
+      immediate: true,
+      handler(newOrders) {
+        this.localOrders = [...newOrders];
+      },
     },
   },
 };
