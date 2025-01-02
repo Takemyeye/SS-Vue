@@ -15,14 +15,14 @@
     </OrdersUnit>
     
     <OrdersUnit 
-      v-for="item in localOrders"
+      v-for="item in filteredOrders"
       :key="item.id"
       :id="item.orderId"
       :date="formatDate(item.createdAt)"
       :style="styleStatus(item.process)" 
       :total="item.totalPrice"
       :items="String(item.cartItems.length)"
-      payment="Fisic"
+      :payment="'fisic'"
       :status="item.process"
       :type="item.digital ? 'digital' : 'normal'"
       :trash="true"
@@ -52,9 +52,18 @@ export default {
     },
   },
   data() {
-    return { localOrders: [...this.orders] };
+    return {
+      filteredOrders: [...this.orders],
+    };
   },
   methods: {
+    applyFilters(filters) {
+      this.filteredOrders = this.orders.filter(order => {
+        const matchesStatus = filters.status === 'All' || order.process === filters.status;
+        const matchesPayment = filters.payment === 'All' || String(order.payment) === filters.payment;
+        return matchesStatus && matchesPayment;
+      });
+    },
     formatDate(date) {
       if (!date) return 'N/A';
       const d = new Date(date);
@@ -76,7 +85,7 @@ export default {
         });
         if (!res.ok) throw new Error('Ошибка при обновлении заказа');
         const updatedOrder = await res.json();
-        this.localOrders = this.localOrders.map(order =>
+        this.filteredOrders = this.filteredOrders.map(order =>
           order.orderId === updatedOrder.orderId ? updatedOrder : order
         );
       } catch (err) {
@@ -88,7 +97,7 @@ export default {
     orders: {
       immediate: true,
       handler(newOrders) {
-        this.localOrders = [...newOrders];
+        this.filteredOrders = [...newOrders];
       },
     },
   },

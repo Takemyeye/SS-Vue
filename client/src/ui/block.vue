@@ -6,7 +6,7 @@
         <font-awesome-icon :icon="icon" />
       </h5>
     </div>
-    <h2>{{ number }}</h2>
+    <h3>{{ number }}</h3>
   </div>
 </template>
 
