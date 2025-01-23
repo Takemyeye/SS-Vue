@@ -20,30 +20,26 @@
       :id="item.orderId"
       :date="formatDate(item.createdAt)"
       :style="styleStatus(item.process)" 
-      :total="item.totalPrice"
+      :total="item.totalPrice + '$'"
       :items="String(item.cartItems.length)"
       :payment="'fisic'"
       :status="item.process"
       :type="item.digital ? 'digital' : 'normal'"
       :trash="true"
     >
-      <UiBadge 
-        title="Delete" 
-        styleBadge="badge4" 
-        style="width: fit-content;" 
-        @click="deleteOrder(item.orderId)"
-      />
+      <div @click="deleteOrder(item.orderId)" style="font-size: 14px; cursor: pointer;">
+        <font-awesome-icon icon="fa-solid fa-trash" />
+      </div>
     </OrdersUnit>
   </div>
 </template>
 
 <script>
 import OrdersUnit from './unit/ordersUnit.vue';
-import UiBadge from '@/ui/badge.vue';
 
 export default {
   name: 'OrdersBlock',
-  components: { OrdersUnit, UiBadge },
+  components: { OrdersUnit },
   props: {
     orders: {
       type: Array,
@@ -116,7 +112,7 @@ export default {
   align-items: center;
   justify-content: start;
   flex-direction: column;
-  gap: 1rem;
+  gap: 8px;
   overflow-x: auto;
   overflow-y: auto;
 }

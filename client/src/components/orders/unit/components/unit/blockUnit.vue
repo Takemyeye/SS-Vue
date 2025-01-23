@@ -18,7 +18,7 @@
     <UiBlock 
       title="Completed" 
       icon="fa-solid fa-check" 
-      :number="'0'"
+      :number="completedOrdersCount"
     />
   </div>
 </template>
@@ -42,10 +42,13 @@ import UiBlock from '@/ui/block.vue';
         return this.orders.length;
       },
       totalRevenue() {
-        return this.orders.reduce((total, order) => total + (order.amount || 0), 0).toFixed(2);
+        return this.orders.reduce((total, order) => total + (order.totalPrice || 0), 0).toFixed(2);
       },
       processingOrdersCount() {
         return this.orders.filter(order => order.process === 'Processing').length;
+      },
+      completedOrdersCount() {
+        return this.orders.filter(order => order.process === 'Completed').length;
       },
     },
   }

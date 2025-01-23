@@ -47,7 +47,8 @@ export default {
         .then(data => {
           this.orders = Array.isArray(data) ? data : [];
           this.applyFilters(this.filters);
-        })
+          console.log('data:', data);
+        })        
         .catch(error => {
           console.error('Error fetching orders:', error);
         });

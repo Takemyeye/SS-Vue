@@ -87,18 +87,19 @@ export default {
     align-items: center;
     justify-content: space-between;
     flex-direction: row;
+    padding: 4px;
   }
 
   .container1 {
-    background-color: hsla(34, 84%, 44%, 0.178);
+    background-color: hsla(66, 100%, 50%, 0.150);
   }
   
   .container2 {
-    background-color: hsla(96, 84%, 44%, 0.178);
+    background-color: hsla(96, 84%, 44%, 0.150);
   }
 
   .container3 {
-    background-color: hsla(2, 84%, 44%, 0.178);
+    background-color: hsla(2, 84%, 44%, 0.150);
   }
   
 </style>

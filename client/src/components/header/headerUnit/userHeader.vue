@@ -17,9 +17,9 @@
 
 <script>
 import DropDown from './userUnit/dropDown.vue';
+import { computed, onMounted, ref } from 'vue';
 import useUserStore from '@/stores/userStore';
 import ProvidersUi from '@/ui/provider.vue';
-import { computed, onMounted, ref } from 'vue';
 
   export default {
     name: 'UserHeader',
@@ -59,10 +59,10 @@ import { computed, onMounted, ref } from 'vue';
               window.location.href = '/banned';
             }
           } else {
-            console.error('Ошибка получения данных пользователя:', response.statusText);
+            console.error('Error of taken data of user:', response.statusText);
           }
         } catch (error) {
-          console.error('Ошибка при запросе пользователя:', error);
+          console.error('Error of question:', error);
         }
       };
 
