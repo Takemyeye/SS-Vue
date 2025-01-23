@@ -1,5 +1,5 @@
 <template>
-  <div class="block">
+  <div class="block" v-if="userExists">
     <div class="users" @click="toggleDropBar">
       <img :src="avatarUrl" :alt="userName" />
       <ProvidersUi
@@ -10,6 +10,9 @@
     </div>
     <DropDown v-if="isDropDownOpen"/>
   </div>
+  <router-link to="/register" v-else>
+    <h2><font-awesome-icon icon="fa-solid fa-user" /></h2>
+  </router-link>
 </template>
 
 <script>
@@ -50,8 +53,7 @@ import { computed, onMounted, ref } from 'vue';
             const data = await response.json();
 
             setUser(data);  
-
-            localStorage.setItem('userStatus', data.status);
+            localStorage.setItem('userStatus', data.status)
 
             if (data.status === 'banned') {
               window.location.href = '/banned';
@@ -63,6 +65,24 @@ import { computed, onMounted, ref } from 'vue';
           console.error('Ошибка при запросе пользователя:', error);
         }
       };
+
+      onMounted(async () => {
+        const queryParameters = new URLSearchParams(window.location.search);
+        const urlToken = queryParameters.get('token');
+
+        if (urlToken) {
+          localStorage.setItem('token', urlToken);
+        }
+
+        const activeToken = urlToken || token;
+
+        if (!user.value && activeToken) {
+          await fetchUser(activeToken);
+        }
+        if (urlToken) {
+          window.location.href = '/';
+        }
+      }); 
 
       const toggleDropBar = () => {
         isDropDownOpen.value = !isDropDownOpen.value;
@@ -83,10 +103,13 @@ import { computed, onMounted, ref } from 'vue';
       const hasDiscord = computed(() => user.value?.provider === 'discord');
       const hasGithub = computed(() => user.value?.provider === 'github');
 
+      const userExists = computed(() => !!user.value);
+
       return {
         isDropDownOpen,
         toggleDropBar,
         hasDiscord,
+        userExists,
         hasGoogle,
         hasGithub,
         avatarUrl,
@@ -110,12 +133,13 @@ import { computed, onMounted, ref } from 'vue';
     height: 40px;
     cursor: pointer;
   }
-
-  img {
+  
+  .users > img {
+    position: relative;
     width: 100%;
     height: 100%;
     border: 1px solid rgba(0, 0, 0, 0.164);
-    border-radius: 50%;
+    border-radius: 5rem;
   }
   
 </style>

@@ -16,12 +16,20 @@
       <h5>Cart</h5>
       <h5><font-awesome-icon icon="fa-solid fa-cart-shopping" /></h5>
     </router-link>
+    <h5 @click="logout">LogOut</h5>   
   </div>
 </template>
 
 <script>
+import useUserStore from '@/stores/userStore';
   export default {
-    name: 'DropDown'
+    name: 'DropDown',
+    setup() {
+      const {user, clearUser} = useUserStore();
+      const logout = clearUser;
+
+      return { user, clearUser, logout }
+    }
   }
 </script>
 

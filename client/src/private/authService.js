@@ -91,7 +91,6 @@ const logout = () => {
 
 const getUserFromCode = async (code) => {
   try {
-    // Используем OAuth клиента для получения данных пользователя
     const tokenResponse = await oauthClient.getAccessToken(code);
     const userResponse = await oauthClient.getUser(tokenResponse.accessToken);
     
