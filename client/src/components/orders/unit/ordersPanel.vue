@@ -36,7 +36,7 @@ export default {
         return;
       }
 
-      fetch('http://localhost:3000/api/process', {
+      fetch('http://soulswap.store/api/process', {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -84,5 +84,12 @@ export default {
     -webkit-text-fill-color: transparent;
     text-align: center;
   }
+
+  @media all and (max-width:1024px) {
+  .orders {
+    width: 90%;
+  }
+}
+
   </style>
   

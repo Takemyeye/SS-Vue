@@ -35,7 +35,7 @@ export default {
 
     const fetchReviews = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/reviews');
+        const response = await fetch('http://soulswap.store/api/reviews');
         reviews.value = await response.json();
       } catch (error) {
         console.error('Error fetching reviews:', error);

@@ -117,7 +117,7 @@ export default {
       const createdAt = new Date().toISOString();
 
       try {
-        const response = await fetch('http://localhost:3000/api/userCart', {
+        const response = await fetch('http://soulswap.store/api/userCart', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -146,7 +146,7 @@ export default {
       }
       
       try {
-        const processingResponse = await fetch('http://localhost:3001/ntt/processing', {
+        const processingResponse = await fetch('http://soulswap.store/ntt/processing', {
           method: 'POST',
           headers: {
             'content-type' : 'application/json',

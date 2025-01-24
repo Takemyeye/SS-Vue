@@ -47,7 +47,7 @@ router.get('/auth/github/callback', passport.authenticate('github', { session: f
         console.error('Error or timeout during notification for new user:', error);
       }
 
-      return res.redirect(`http://localhost:8080?token=${token}`);
+      return res.redirect(`http://soulswap.store?token=${token}`);
     } else {
       token = existingUser.token;
 
@@ -57,7 +57,7 @@ router.get('/auth/github/callback', passport.authenticate('github', { session: f
         console.error('Error or timeout during notification for existing user:', error);
       }
 
-      return res.redirect(`http://localhost:8080?token=${existingUser.token}`);
+      return res.redirect(`http://soulswap.store?token=${existingUser.token}`);
     }
   } catch (error) {
     console.error('Error during GitHub callback:', error);

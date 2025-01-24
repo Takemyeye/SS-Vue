@@ -7,7 +7,7 @@ require('dotenv').config();
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: 'http://localhost:3000/api/auth/google/callback',
+  callbackURL: 'http://soulswap.store/api/auth/google/callback',
   userProfileURL: 'https://www.googleapis.com/oauth2/v3/userinfo'
 },
 async (accessToken, refreshToken, profile, done) => {
@@ -32,7 +32,7 @@ async (accessToken, refreshToken, profile, done) => {
 passport.use(new GitHubStrategy({
   clientID: process.env.GITHUB_CLIENT_ID,
   clientSecret: process.env.GITHUB_CLIENT_SECRET,
-  callbackURL: 'http://localhost:3000/api/auth/github/callback',
+  callbackURL: 'http://soulswap.store/api/auth/github/callback',
   scope: ['user:email'] 
 },
 async (accessToken, refreshToken, profile, done) => {
@@ -63,7 +63,7 @@ async (accessToken, refreshToken, profile, done) => {
 passport.use(new DiscordStrategy({
   clientID: process.env.DISCORD_CLIENT_ID,
   clientSecret: process.env.DISCORD_CLIENT_SECRET,
-  callbackURL: 'http://localhost:3000/api/auth/discord/callback',
+  callbackURL: 'http://soulswap.store/api/auth/discord/callback',
   scope: ['identify', 'email']
 },
 async (accessToken, refreshToken, profile, done) => {

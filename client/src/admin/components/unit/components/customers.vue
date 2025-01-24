@@ -81,7 +81,7 @@ export default {
         };
 
         const fetchUsers = () => {
-            fetchData('http://localhost:3000/api/users', (data) => {
+            fetchData('http://soulswap.store/api/users', (data) => {
                 users.value = data;
             });
         };
@@ -95,7 +95,7 @@ export default {
                     return;
                 }
 
-                const response = await fetch(`http://localhost:3000/api/update-status/${userId}`, {
+                const response = await fetch(`http://soulswap.store/api/update-status/${userId}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',

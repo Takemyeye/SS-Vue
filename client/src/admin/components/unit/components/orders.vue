@@ -67,7 +67,7 @@ export default {
 
     const fetchOrders = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/orders");
+        const response = await fetch("http://soulswap.store/api/orders");
         if (response.ok) {
           orders.value = await response.json();
         } else {
@@ -81,7 +81,7 @@ export default {
     // delete Order
     const deleteOrder = async (orderId) => {
       try {
-        const response = await fetch(`http://localhost:3000/api/orders/${orderId}`, {
+        const response = await fetch(`http://soulswap.store/api/orders/${orderId}`, {
           method: "DELETE",
         });
 
@@ -99,7 +99,7 @@ export default {
     // approve order
     const updateOrderStatus = async (orderId, newStatus) => {
       try {
-        const response = await fetch(`http://localhost:3000/api/orders/${orderId}`, {
+        const response = await fetch(`http://soulswap.store/api/orders/${orderId}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ status: newStatus }),

@@ -29,7 +29,7 @@ const handleAuthCallback = async (req, res) => {
 
       try {
         await newUser.save();
-        return res.redirect(`http://localhost:8080?token=${token}`);
+        return res.redirect(`http://soulswap.store?token=${token}`);
       } catch (saveErr) {
         if (saveErr.code === 11000) {
           return res.status(400).send('Пользователь с такими данными уже существует.');
@@ -38,7 +38,7 @@ const handleAuthCallback = async (req, res) => {
       }
     } else {
       const token = generateToken(existingUser);
-      return res.redirect(`http://localhost:8080?token=${token}`);
+      return res.redirect(`http://soulswap.store?token=${token}`);
     }
   } catch (err) {
     console.error('Ошибка при работе с пользователями:', err);

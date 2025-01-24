@@ -24,7 +24,7 @@
       });
   
       const fetchUsers = () => {
-        fetch('http://localhost:3000/api/users')
+        fetch('http://soulswap.store/api/users')
           .then((response) => response.json())
           .then((data) => {
             const counts = {

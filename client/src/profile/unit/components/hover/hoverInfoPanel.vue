@@ -50,7 +50,7 @@ export default {
 
       const token = localStorage.getItem('token');
       try {
-        const response = await fetch('http://localhost:3000/api/update-user', {
+        const response = await fetch('http://soulswap.store/api/update-user', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

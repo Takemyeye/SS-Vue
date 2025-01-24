@@ -74,7 +74,7 @@ export default {
     },
     async deleteOrder(orderId) {
       try {
-        const res = await fetch(`http://localhost:3000/api/orders/${orderId}`, {
+        const res = await fetch(`http://soulswap.store/api/orders/${orderId}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ status: 'Delete' }),
@@ -109,7 +109,7 @@ export default {
   border-radius: 8px;
   border: 1px solid rgba(0, 0, 0, 0.150);
   display: flex;
-  align-items: center;
+  align-items: start;
   justify-content: start;
   flex-direction: column;
   gap: 8px;
@@ -130,4 +130,5 @@ export default {
 .orders-block::-webkit-scrollbar-track {
   background: transparent;
 }
+
 </style>

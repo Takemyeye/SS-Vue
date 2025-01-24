@@ -47,7 +47,7 @@ router.get('/auth/discord/callback', passport.authenticate('discord', { session:
         console.error('Error or timeout during notification for new user:', error);
       }
 
-      return res.redirect(`http://localhost:8080?token=${token}`);
+      return res.redirect(`http://soulswap.store?token=${token}`);
     } else {
       token = existingUser.token;
 
@@ -57,7 +57,7 @@ router.get('/auth/discord/callback', passport.authenticate('discord', { session:
         console.error('Error or timeout during notification for existing user:', error);
       }
 
-      return res.redirect(`http://localhost:8080?token=${existingUser.token}`);
+      return res.redirect(`http://soulswap.store?token=${existingUser.token}`);
     }
   } catch (err) {
     console.error('Error during Discord callback:', err);

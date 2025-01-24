@@ -68,7 +68,7 @@ export default {
 
     const fetchReviews = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/reviews');
+        const response = await fetch('http://soulswap.store/api/reviews');
         if (!response.ok) {
           throw new Error('Failed to fetch reviews');
         }
@@ -80,7 +80,7 @@ export default {
 
     const deleteReview = async (reviewId) => {
       try {
-        const response = await fetch(`http://localhost:3000/api/reviews/${reviewId}`, {
+        const response = await fetch(`http://soulswap.store/api/reviews/${reviewId}`, {
           method: 'DELETE',
         });
         if (!response.ok) {
@@ -94,7 +94,7 @@ export default {
 
     const approveReview = async (reviewId) => {
       try {
-        const response = await fetch(`http://localhost:3000/api/reviews/${reviewId}`, {
+        const response = await fetch(`http://soulswap.store/api/reviews/${reviewId}`, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ status: 'approved' }),

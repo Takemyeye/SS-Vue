@@ -56,8 +56,35 @@ import UiBlock from '@/ui/block.vue';
 
 <style scoped>
 
+  .container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-content: space-between;
+    gap: 2rem;
+    padding-bottom: 1rem;
+  }
+
   .container > .block {
     min-height: 100px;
   }
   
+  @media all and (max-width: 768px) {
+    .container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media all and (max-width: 425px) {
+    .container {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+    }
+
+    .container > .block {
+      min-height: 60px;
+    }
+  }
+
 </style>

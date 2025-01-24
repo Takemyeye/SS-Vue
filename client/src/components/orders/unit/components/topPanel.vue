@@ -1,6 +1,6 @@
 <template>
   <div class="top-panel">
-    <div class="container">
+    <div class="container-status">
       <div class="status">
         <div class="dropdown-status" @click="toggleDropdown">
           <h5>{{selectedStatus}}</h5>
@@ -69,7 +69,7 @@ export default {
   gap: 1rem;
 }
 
-.container {
+.container-status {
   width: 100%;
   display: flex;
   align-items: center;
