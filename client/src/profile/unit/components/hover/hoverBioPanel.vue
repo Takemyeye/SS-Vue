@@ -59,7 +59,7 @@ import { computed, ref } from 'vue';
 
               props.toggleBar(); // Close the panel after saving
               const token = localStorage.getItem('token');
-              const response = await fetch('http://soulswap.store/api/update-user', {
+              const response = await fetch('https://soulswap.store/api/update-user', {
                   method: 'POST',
                   headers: {
                       'Content-Type': 'application/json',

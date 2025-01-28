@@ -42,7 +42,7 @@ import ProvidersUi from '@/ui/provider.vue';
 
       const fetchUser = async (token) => {
         try {
-          const response = await fetch('http://soulswap.store/api/current_user', {
+          const response = await fetch('https://soulswap.store/api/current_user', {
             method: 'GET',
             headers: {
               'Authorization': `Bearer ${token}`,

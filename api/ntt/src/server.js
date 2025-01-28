@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(cors({
-  origin: ['http://soulswap.store', 'https://soulswap.store'],
+  origin: ['https://soulswap.store', 'http://localhost:3000'],
   methods: ['*'],
   allowedHeaders: ['*'],
 }));
@@ -32,7 +32,7 @@ app.use('/ntt', notify);
 require('./notification/autoSendEmails');
 
 app.get('/', (req, res) => {
-  res.send('<h1>Server is running on http://soulswap.store</h1>');
+  res.send('<h1>Server is running on https://soulswap.store</h1>');
 });
 
 app.listen(port, () => {

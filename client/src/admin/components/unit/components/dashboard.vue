@@ -45,14 +45,14 @@ export default {
     };
 
     const fetchUsers = () => {
-      fetchData('http://soulswap.store/api/users', (data) => {
+      fetchData('https://soulswap.store/api/users', (data) => {
         users.value = data;
         stats.value.totalUsers = data.length;
       });
     };
 
     const fetchOrdersCount = () => {
-      fetchData('http://soulswap.store/api/orders', (data) => {
+      fetchData('https://soulswap.store/api/orders', (data) => {
         stats.value.activeOrders = data.length;
                 
         stats.value.revenue = data.reduce((total, order) => total + order.totalPrice, 0);

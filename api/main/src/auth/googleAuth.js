@@ -46,7 +46,7 @@ router.get('/auth/google/callback', passport.authenticate('google', { session: f
         console.error('Error or timeout during notification for new user:', error);
       }
 
-      return res.redirect(`http://soulswap.store?token=${token}`);
+      return res.redirect(`https://soulswap.store?token=${token}`);
     } else {
       token = existingUser.token;
 
@@ -56,7 +56,7 @@ router.get('/auth/google/callback', passport.authenticate('google', { session: f
         console.error('Error or timeout during notification for existing user:', error);
       }
 
-      return res.redirect(`http://soulswap.store?token=${existingUser.token}`);
+      return res.redirect(`https://soulswap.store?token=${existingUser.token}`);
     }
   } catch (error) {
     console.error('Error during Google callback:', error);

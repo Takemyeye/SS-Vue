@@ -49,7 +49,7 @@ export default {
     };
 
     const fetchUsers = () => {
-      fetchData('http://soulswap.store/api/users', (data) => {
+      fetchData('https://soulswap.store/api/users', (data) => {
         users.value = data;
 
         const counts = {

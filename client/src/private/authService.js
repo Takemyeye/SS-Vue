@@ -11,7 +11,7 @@ const fetchUserFromServer = async () => {
   if (!state.token) return;
 
   try {
-    const response = await fetch('http://soulswap.store/api/current_user', {
+    const response = await fetch('https://soulswap.store/api/current_user', {
       headers: {
         Authorization: `Bearer ${state.token}`,
       },
@@ -39,7 +39,7 @@ const setUser = (user) => {
 
 const saveOrUpdateUserOnServer = async (user) => {
   try {
-    const response = await fetch('http://soulswap.store/api/user', {
+    const response = await fetch('https://soulswap.store/api/user', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -63,7 +63,7 @@ const clearUserFromServer = async () => {
   if (!state.token) return;
 
   try {
-    await fetch('http://soulswap.store/api/user', {
+    await fetch('https://soulswap.store/api/user', {
       method: 'DELETE',
       headers: {
         Authorization: `Bearer ${state.token}`,

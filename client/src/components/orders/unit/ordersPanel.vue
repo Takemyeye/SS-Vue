@@ -36,7 +36,7 @@ export default {
         return;
       }
 
-      fetch('http://soulswap.store/api/process', {
+      fetch('https://soulswap.store/api/process', {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,

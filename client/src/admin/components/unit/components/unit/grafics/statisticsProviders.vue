@@ -24,7 +24,7 @@
       });
   
       const fetchUsers = () => {
-        fetch('http://soulswap.store/api/users')
+        fetch('https://soulswap.store/api/users')
           .then((response) => response.json())
           .then((data) => {
             const counts = {

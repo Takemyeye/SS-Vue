@@ -40,7 +40,7 @@ export default {
   methods: {
     async fetchArtistOfTheDay() {
       try {
-        const response = await fetch('http://soulswap.store/api/artists');
+        const response = await fetch('https://soulswap.store/api/artists');
         const artistData = await response.json();
         this.selectedArtist = artistData;
       } catch (error) {

@@ -74,7 +74,7 @@ export default {
     },
     async deleteOrder(orderId) {
       try {
-        const res = await fetch(`http://soulswap.store/api/orders/${orderId}`, {
+        const res = await fetch(`https://soulswap.store/api/orders/${orderId}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ status: 'Delete' }),
